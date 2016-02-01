@@ -33,7 +33,7 @@ metalsmith(__dirname)
     articles: {
       pattern: 'b/**/*.md',
       sortBy: 'date',
-      reverse: true      
+      reverse: true
     }
   }))
   .use(partials({
@@ -46,7 +46,7 @@ metalsmith(__dirname)
       gfm: true,
       tables: true
     }))
-  )    
+  )
   .use(branch('**/*.scss')
     .use(sass({
       outputStyle: 'expanded'
@@ -56,19 +56,19 @@ metalsmith(__dirname)
   .use(branch('b/**/*')
     .use(permalinks({
         pattern: 'b/:year/:month/:title',
-        date: 'YYYY/MM'  
-      }))  
+        date: 'YYYY/MM'
+      }))
     )
   .use(layouts({
     directory: 'layouts',
     engine: 'handlebars',
     pattern: '**/*.html',
     default: 'post.html'
-  }))  
-  .use(browserSync({
-    server: 'build',
-    files : ['src/**/*', 'layouts/**/*', 'partials/**/*']
   }))
+  // .use(browserSync({
+  //   server: 'build',
+  //   files : ['src/**/*', 'layouts/**/*', 'partials/**/*']
+  // }))
   .build(function(err) {
     if (err) throw err
   });
