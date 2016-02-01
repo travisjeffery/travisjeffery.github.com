@@ -65,7 +65,6 @@ metalsmith(__dirname)
     pattern: '**/*.html',
     default: 'post.html'
   }))  
-  .use(debug())
   .use(browserSync({
     server: 'build',
     files : ['src/**/*', 'layouts/**/*', 'partials/**/*']
