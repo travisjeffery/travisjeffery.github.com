@@ -10,7 +10,6 @@ $pink_flamingo: #ff66ff;
 //fonts
 $font_0: Verlag A;
 $font_1: Verlag B;
-$font_2: Verlag;
 $font_3: Helvetica Neue;
 $font_4: Helvetica;
 $font_5: Arial;
@@ -28,7 +27,7 @@ html {
 	font-size: 20px;
 }
 body {
-	font-family: $font_0, $font_1, $font_2, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8;
+	font-family: $font_0, $font_1, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8 !important;
 	font-weight: 300;
 }
 pre, code {

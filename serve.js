@@ -65,10 +65,10 @@ metalsmith(__dirname)
     pattern: '**/*.html',
     default: 'post.html'
   }))
-  // .use(browserSync({
-  //   server: 'build',
-  //   files : ['src/**/*', 'layouts/**/*', 'partials/**/*']
-  // }))
+  .use(browserSync({
+    server: 'build',
+    files : ['src/**/*', 'layouts/**/*', 'partials/**/*']
+  }))
   .build(function(err) {
     if (err) throw err
   });
