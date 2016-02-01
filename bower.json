@@ -1,0 +1,24 @@
+{
+  "name": "homesite",
+  "authors": [
+    "Travis Jeffery <tj@travisjeffery.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "travisjeffery.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "*",
+    "bootstrap": "v4.0.0-alpha.2",
+    "judy": "*"
+  }
+}

@@ -1,0 +1,151 @@
+@import "bower_components/bootstrap/scss/bootstrap";
+
+html {
+    font-size: 20px;
+}
+
+body {
+    font-family: "Verlag A", "Verlag B", "Verlag", "Helvetica Neue", "Helvetica", Arial, "pragmatica-web-1", "pragmatica-web-2", sans-serif;
+    font-weight: 300;
+}
+
+pre {
+    font-size: .8em;
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+
+a {
+    color: blue;
+    text-decoration: none !important;
+    border-bottom: 1px solid blue;
+}
+
+a.js-judy {
+    font-weight: bold;
+}
+
+p, ul {
+    margin-bottom: 1.5em;
+}
+
+hr {
+    border-style: dashed;
+    border-width: 1px 0 0;
+    border-color: darkorange;
+    clear: both;
+    margin: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 1.5em;
+    height: 0;
+    width: auto;
+}
+
+#header {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5em;
+    margin-bottom: .5em;
+    font-size: 1.5em;
+}
+
+#header h1 {
+    font-weight: bold;
+}
+
+#header a {
+    color: red;
+    text-decoration: none;
+    border: none;
+}
+
+#header a:after {
+    content: "travis jeffery";
+    color: blue;
+    position: absolute;
+    left: 3px;
+    top: 2px;
+    z-index: -1;
+}
+
+#header .logo {
+    font-size: 1.5em;
+    padding-left: 0;
+}
+
+#header .social {
+    display: inline;
+    text-align: right;
+    padding-right: 0;
+}
+
+.section-header {
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
+
+.section-header a {
+    border: none;
+}
+
+.section-header .on-the-web {
+    background-color: yellow;
+}
+
+.section-header .open-source {
+    background-color: cyan;
+}
+
+.section-header .work {
+    background-color: lime;
+}
+
+.section-header .tech-writing {
+    background-color: #ff66ff;
+}
+
+h2.article-title {
+    font-weight: 300;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    font-size: 1.5em;
+}
+
+ul.plain {
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+ul li {
+    list-style-type: none;
+    margin-bottom: 1.5em;
+}
+
+ul li .article-title {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+ul li .article-date {
+    text-align: right;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+ul li:after {
+    content: " ";
+    display: block;
+    clear: both;
+}
+
+article footer {
+    margin-top: 1.5em;
+}
+
+.footer {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
