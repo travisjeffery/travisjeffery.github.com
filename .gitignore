@@ -1,2 +1,9 @@
-build
-node_modules
+*
+
+!index.html
+!CNAME
+!b
+!css
+!js
+
+!*/
