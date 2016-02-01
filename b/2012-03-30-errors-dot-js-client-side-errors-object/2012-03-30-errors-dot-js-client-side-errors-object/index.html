@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>errors.js - client side errors object</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">errors.js - client side errors object</h2>
+        </header>
+          
+        <p>Despite my opinions of ActiveModel::Validations (a post/patch for another day),
+I like ActiveModel’s Errors object. Errors’s simplicity, ubiquity, and
+consistency is a great boon for handling error messages of varying entities.</p>
+<p>The future of the web is asynchronous and client side computation is steadily becoming more
+sophisticated and well practiced.</p>
+<p>errors.js provides an Errors object similar to ActiveModel’s Errors object to
+provide a simple, ubiquitous, consistent interface to handle and use error
+messages on the client side.</p>
+<p><a href="http://github.com/travisjeffery/errors.js">errors.js is on GitHub</a>, here is the source,</p>
+<pre><code class="hljs js">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($, _)</span></span>{
+  $.widget(<span class="hljs-string">"travisjeffery.errors"</span>, {
+    _create: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+      _.bindAll(<span class="hljs-keyword">this</span>)
+      <span class="hljs-keyword">this</span>.container = <span class="hljs-keyword">this</span>.element
+      <span class="hljs-keyword">this</span>.list = <span class="hljs-keyword">this</span>.element.find(<span class="hljs-string">"ul"</span>)
+    }
+  })
+
+  $.extend($.travisjeffery.errors.prototype, {
+    add: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error)</span></span>{
+      <span class="hljs-keyword">var</span> errors = <span class="hljs-keyword">this</span>._buildErrorList(error)
+
+      <span class="hljs-keyword">this</span>.reset()
+      <span class="hljs-keyword">this</span>.show()
+
+      <span class="hljs-keyword">this</span>.list.append(errors)
+    },
+
+    show: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+      <span class="hljs-keyword">this</span>.container.show()
+    },
+
+    hide: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+      <span class="hljs-keyword">this</span>.container.hide()
+    },
+
+    reset: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+      <span class="hljs-keyword">this</span>.hide()
+      <span class="hljs-keyword">this</span>.list.empty()
+    },
+
+    handle: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(xhr, status, error)</span></span>{
+      <span class="hljs-keyword">var</span> errors = $.parseJSON(xhr.responseText).errors
+      <span class="hljs-keyword">this</span>.add(errors)
+    },
+
+    _buildErrorList: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(errors)</span></span>{
+      <span class="hljs-keyword">var</span> errorArray = $.makeArray(errors),
+      stringToItem = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(message)</span></span>{<span class="hljs-keyword">return</span> <span class="hljs-string">"&lt;li&gt;"</span>+ message +<span class="hljs-string">"&lt;/li&gt;"</span>},
+      errorList = $.map(errorArray, stringToItem).join(<span class="hljs-string">"\n"</span>)
+
+      <span class="hljs-keyword">return</span> errorList
+    }
+  })
+}(jQuery, _));</code></pre>
+
+
+<p>It’s small and really simple, and only depends on jQuery/UI and Underscorejs. Using it looks
+like this,</p>
+<h2 id="controller">Controller</h2>
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PeopleController</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ApplicationController</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>show
+    <span class="hljs-variable">@person</span> = <span class="hljs-constant">Person</span>.find params[<span class="hljs-symbol">:id</span>]
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>update
+    <span class="hljs-variable">@person</span> = <span class="hljs-constant">Person</span>.find params[<span class="hljs-symbol">:id</span>]
+    <span class="hljs-variable">@person</span>.update_attributes params[<span class="hljs-symbol">:person</span>]
+
+    <span class="hljs-keyword">if</span> <span class="hljs-variable">@person</span>.valid?
+      render <span class="hljs-symbol">:json</span> =&gt; <span class="hljs-variable">@person</span>, <span class="hljs-symbol">:status</span> =&gt; <span class="hljs-number">200</span>
+    <span class="hljs-keyword">else</span>
+      render <span class="hljs-symbol">:json</span> =&gt; {<span class="hljs-symbol">:errors</span> =&gt; <span class="hljs-variable">@person</span>.errors.full_messages}, <span class="hljs-symbol">:status</span> =&gt; <span class="hljs-number">422</span>
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre>
+
+<h2 id="javascript-asset">Javascript asset</h2>
+<pre><code class="hljs js">jQuery(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($)</span></span>{
+  App = <span class="hljs-built_in">window</span>.App || (<span class="hljs-built_in">window</span>.App = {})
+  App.Errors =
+    $(<span class="hljs-string">"div#js-errors"</span>)
+      .errors()
+      .data(<span class="hljs-string">"errors"</span>)
+
+  $(<span class="hljs-string">"a.js-person"</span>)
+    .on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span>{
+      event.preventDefault()
+
+      <span class="hljs-keyword">var</span> personId = $(<span class="hljs-string">"[data-person-id]"</span>).data(<span class="hljs-string">"person-id"</span>),
+      personURL = <span class="hljs-string">"/people/"</span> + personId
+
+      $.ajax({
+        url: personURL,
+        <span class="hljs-comment">// =&gt; ["Name can't be blank"]</span>
+        data: {id: personId, person: {name: <span class="hljs-string">""</span>}},
+        type: <span class="hljs-string">"put"</span>,
+        error: App.Errors.handle
+      })
+    })
+})</code></pre>
+
+<h2 id="view">View</h2>
+<pre><code class="hljs erb"><span class="xml"></span>&lt;%=<span class="ruby"> link_to <span class="hljs-variable">@person</span>.name, person_path(<span class="hljs-variable">@person</span>),
+  <span class="hljs-symbol">:method</span> =&gt; <span class="hljs-string">"put"</span>,
+  <span class="hljs-symbol">:remote</span> =&gt; <span class="hljs-keyword">true</span>,
+  <span class="hljs-symbol">:<span class="hljs-string">"data-person-id"</span></span> =&gt; <span class="hljs-variable">@person</span>.id,
+  <span class="hljs-symbol">:class</span> =&gt; <span class="hljs-string">"js-person"</span>
+</span>%&gt;<span class="xml">
+
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"js-errors"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></span></code></pre>
+
+<h2 id="api-usable-without-handle-callback-">Api (usable without #handle callback)</h2>
+<pre><code class="hljs js"><span class="hljs-keyword">var</span> Errors = $(<span class="hljs-string">"div#errors"</span>).errors().data(<span class="hljs-string">"errors"</span>)
+
+Errors.add(<span class="hljs-string">"You shall not pass!"</span>)
+
+Errors.show()
+
+Errors.hide()
+
+Errors.reset()</code></pre>  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: March 30th, 2012<br>
+            Categories: javascript, errors, rails, client, errors.js, jquery.errors.js
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

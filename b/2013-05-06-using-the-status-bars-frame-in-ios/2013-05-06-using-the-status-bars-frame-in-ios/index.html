@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>Getting the status bar's height in ios</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">Getting the status bar's height in ios</h2>
+        </header>
+          
+        <p>I had someone ask me for the best way to get the status bar’s height. Their problem was they were using UIApplication-statusBarFrame.size.height which will usually be 20.0f when in portrait (<strong><em>but</em></strong> would be bigger if the user is on the phone, etc.) but when the phone was oriented in landscape the height was 480.0f.</p>
+<p>The trick to the status bar’s frame and height is to make sure you’ve converted it to the coordinate space of the view that you care about, this will probably be a UIViewController’s view or subview.</p>
+<pre><code class="hljs objc"><span class="hljs-built_in">CGRect</span> statusBarFrame = [yourView<span class="hljs-variable">.window</span> convertRect:<span class="hljs-built_in">UIApplication</span><span class="hljs-variable">.sharedApplication</span><span class="hljs-variable">.statusBarFrame</span> toView:yourView];
+<span class="hljs-built_in">CGFloat</span> statusBarHeight = statusBarFrame<span class="hljs-variable">.size</span><span class="hljs-variable">.height</span>;</code></pre>
+
+<p>Now you’ve got a height you’d expect—usually 20.0f.</p>
+<p>I made a <a href="https://github.com/travisjeffery/StatusBarDemo">demo app</a> that may make this concrete for you. Build &amp; Run, switch your device’s orientation and watch the output in the Debug Area.</p>
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: May 6th, 2013<br>
+            Categories: ios, status-bar, orientation
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

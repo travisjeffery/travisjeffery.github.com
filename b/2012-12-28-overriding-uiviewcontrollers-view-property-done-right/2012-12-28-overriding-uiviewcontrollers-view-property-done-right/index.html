@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>Overriding uiviewcontroller's view property, done right</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">Overriding uiviewcontroller's view property, done right</h2>
+        </header>
+          
+        <p>I read <strong><em>a lot</em></strong> of code, and some of the most common mistakes I see is how people override <code>UIViewController</code>‘s view property.</p>
+<p>Here’s how it <strong><em>should</em></strong> be done, in this example we’re replacing <code>UIViewController</code>‘s view property (a <code>UIView</code>) with a <code>UIScrollView</code>:</p>
+<pre><code><span class="hljs-comment">// ViewController.h</span>
+<span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">ViewController</span> : <span class="hljs-title">UIViewController</span></span>
+
+<span class="hljs-keyword">@property</span> (<span class="hljs-keyword">strong</span>, <span class="hljs-keyword">nonatomic</span>) <span class="hljs-built_in">UIScrollView</span> *view;
+
+<span class="hljs-keyword">@end</span>
+
+<span class="hljs-comment">// ViewController.m</span>
+<span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">ViewController</span></span>
+
+<span class="hljs-keyword">@dynamic</span> view;
+
+- (<span class="hljs-keyword">void</span>)loadView {
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.view</span> = [[<span class="hljs-built_in">UIScrollView</span> alloc] initWithFrame:UIScreen<span class="hljs-variable">.mainScreen</span><span class="hljs-variable">.applicationFrame</span>];
+}
+
+<span class="hljs-keyword">@end</span></code></pre>
+
+<p>Common mistakes include:</p>
+<ul>
+<li>Calling <code>[super loadView]</code>, which just wastes resources and Apple’s documentation says not to do.</li>
+<li>Setting the view in <code>-viewDidLoad:</code>, which wastes resources again.</li>
+<li>Not providing both the implementation <strong>and</strong> type for the view property, and having to cast self.view everywhere</li>
+</ul>
+<p>Note, if you use Interface Builder and have an associated XIB file then by default <code>-loadView</code> will take view from the XIB and load it as the <code>UIViewController</code>‘s view. So think of <code>-loadView</code> as doing the job that a XIB would do, e.g. setting up your initial view hierarchy. Any code that wouldn’t change if you were to switch from using <code>-loadView</code> to a XIB should go in <code>-viewDidLoad:</code>.</p>
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: December 28th, 2012<br>
+            Categories: uiviewcontroller, ios, view, loadview
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

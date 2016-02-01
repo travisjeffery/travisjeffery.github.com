@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>Find rails partial references in vim</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">Find rails partial references in vim</h2>
+        </header>
+          
+        <p>Every so often when I’m about to change a partial I need to know how this change
+may affect other parts of the application by seeing where and how the partial
+is called and used. I’ve written a Vim command to do this (put in your .vimrc):</p>
+<pre><code class="hljs vim"><span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">GrepPartial</span><span class="hljs-params">(partial)</span></span>
+  <span class="hljs-keyword">if</span> (<span class="hljs-variable">a:partial</span>)
+    <span class="hljs-keyword">let</span> pattern = <span class="hljs-string">"partial.*"</span> . partial
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-keyword">let</span> path = <span class="hljs-built_in">substitute</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">"%:h"</span>), <span class="hljs-string">"app/views/"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">""</span>)
+    <span class="hljs-keyword">let</span> action = <span class="hljs-built_in">substitute</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">"%:t:r:r"</span>), <span class="hljs-string">"^_"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">""</span>)
+    <span class="hljs-keyword">let</span> pattern = <span class="hljs-string">"partial.*"</span> . path . <span class="hljs-string">"/"</span> . action
+  <span class="hljs-keyword">endif</span>
+
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">exists</span>(<span class="hljs-string">'g:loaded_fugitive'</span>))
+    <span class="hljs-keyword">execute</span> <span class="hljs-string">"Ggrep -P "</span> . <span class="hljs-string">'"'</span> . pattern . <span class="hljs-string">'\b" app/views'</span>
+  <span class="hljs-keyword">elseif</span> (<span class="hljs-built_in">exists</span>(<span class="hljs-string">'g:ackprg'</span>))
+    <span class="hljs-keyword">execute</span> <span class="hljs-string">"Ack "</span> . <span class="hljs-string">'"'</span> . pattern . <span class="hljs-string">'\b" app/views'</span>
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-string">" seriously? use git grep or ack!
+</span>    <span class="hljs-keyword">execute</span> <span class="hljs-string">"vimgrep "</span> . <span class="hljs-string">'"'</span> . pattern . <span class="hljs-string">'\&gt;" app/views/*/**'</span>
+  <span class="hljs-keyword">endif</span>
+<span class="hljs-keyword">endfunction</span>
+command! -nargs=? GrepPartial
+      \ <span class="hljs-built_in">call</span> GrepPartial(&lt;<span class="hljs-keyword">q</span>-<span class="hljs-keyword">args</span>&gt;)</code></pre>
+
+<p>Now while editing a partial just use <code>:GrepPartial</code>.</p>
+<p>You can also pass in a partial:</p>
+<p><code>:GrepPartial accounts/show</code></p>
+<p>Note that if you have Fugitive installed then you’ll want to compile git with
+the PCRE library, easy for Homebrew users:</p>
+<p><code>brew install git --with-pcre</code></p>
+<p>If you don’t install PCRE then you’ll need to get rid of the <code>\b</code>, though your
+results may be less accurate.</p>
+<h2 id="improvements">Improvements</h2>
+<p>Right now the function is good-enough for how I use it, though at some point I
+may automatically scope partial references when given a non-scoped partial
+pattern.</p>
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: February 23rd, 2012<br>
+            Categories: rails, grep, vim
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

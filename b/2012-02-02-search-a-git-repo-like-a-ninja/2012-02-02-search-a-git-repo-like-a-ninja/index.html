@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>Search a git repo like a ninja</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">Search a git repo like a ninja</h2>
+        </header>
+          
+        <p><code>git grep &lt;regexp&gt;</code></p>
+<p>Try it out on a project, then try the same search with ack and grep and you see
+that we have speed that’s better than either grep or ack. First, we’ll make some
+improvements:</p>
+<p><strong>Allow extended regular expressions</strong></p>
+<p><code>git config --global grep.extendRegexp true</code></p>
+<p>git can also support full blown Perl regular expressions as well, by compiling
+git with libpcre. Easy for <a href="https://github.com/mxcl/homebrew">homebrew</a>
+users: </p>
+<p><code>brew install git --with-pcre</code></p>
+<p><strong>Always include line numbers</strong></p>
+<p><code>git config --global grep.lineNumber true</code></p>
+<p><strong>Group output like ack!</strong></p>
+<p><code>git config --global alias.g &quot;grep --break --heading --line-number&quot;</code></p>
+<p>As far as I know there is no non-trivial way to add default arguments/override
+git commands, plus g is nice and short.</p>
+<p>Compare this output, without grouping:</p>
+<p><img src="https://img.skitch.com/20120209-t7ryiksqb3xr1bi72s3u2b1gbg.jpg" alt="without grouping"></p>
+<p>To this much more readable output, with grouping:</p>
+<p><img src="https://img.skitch.com/20120209-1k6cxr7k4g6j7jq72gi14d5267.jpg" alt="with grouping"></p>
+<p>The speed of git grep, which is basically a product of it being implemented in
+C and only searching your project files, i.e. not files in .git, is
+alone very compelling, but where git grep becomes really interesting and
+powerful is allowing you to interface with your repo’s git database…</p>
+<h2 id="practical-examples">Practical examples</h2>
+<p>Here’s a list of commands made up of different arguments and concepts of git
+grep and git log that you will be able to reuse/use as instruction to
+reformulate later:</p>
+<p><strong>Search for our regexp in JavaScript files from another branch</strong></p>
+<p><code>git grep -e &lt;regexp&gt; my_other_branch -- &#39;*.js&#39;</code></p>
+<p>The <code>--</code> signals the end of options, that the rest of the paramaters are</p>
+<p><pathspec> limiters.</p>
+<p><strong>Search files registered in the index, rather than the working tree</strong></p>
+<p><code>git grep --cached -e &lt;regexp&gt;</code></p>
+<p>Note that we’re searching what’s registered in the index rather than what is staged…</p>
+<p><strong>Search for staged files containing a regexp that was either added or removed</strong></p>
+<p><code>git diff-index --cached -G&lt;regexp&gt; HEAD | cut -f2</code></p>
+<p><strong>Search through previous revisions whose contents contain a given regexp</strong></p>
+<p><code>git grep &lt;regexp&gt; $(git rev-list --all)</code></p>
+<p>I tried the above on one project large enough that git complained about the
+argument size, so if you run into this problem, do something like:</p>
+<p><code>git rev-list --all | (while read rev; do git grep -e &lt;regexp&gt; $rev; done)</code></p>
+<p><strong>Search for commits whose changes include your regexp</strong></p>
+<p><code>git log -G &lt;regexp&gt;</code></p>
+<p><strong>Combine regexps and filter results via boolean logic</strong></p>
+<p><code>git grep -e &#39;include&#39; --or &#39;extend&#39; --and \( -e &#39;Specification&#39; -e &#39;Factory&#39; \)</code></p>
+<p>Here we search for places that we extend <em>or</em> include, either specifications <em>or</em> factories.</p>
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">UserSpecification</span>;</span> <span class="hljs-keyword">end</span>
+<span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">UserFactory</span>;</span> <span class="hljs-keyword">end</span>
+<span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Bad</span>;</span> <span class="hljs-keyword">end</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>
+  extend <span class="hljs-constant">UserSpecification</span>
+  <span class="hljs-keyword">include</span> <span class="hljs-constant">UserFactory</span>
+  <span class="hljs-keyword">include</span> <span class="hljs-constant">Bad</span>
+<span class="hljs-keyword">end</span></code></pre>
+
+<p>Given this file, after running the command above we get:</p>
+<p><img src="https://img.skitch.com/20120205-b8jup1dswieqp4rhqucjrgck15.jpg" alt="git grep example"></p>
+<p><strong>Find files that contain some terms, not necessarily on the same line</strong></p>
+<p><code>git grep -e &lt;regexp&gt; --and -e &lt;regexp&gt;</code></p>
+<p>…is not what you want, as it will search for <em>lines</em> that contain both those
+regular expressions, this is what we want to search for all matches occurring
+<em>somewhere in the file</em>:</p>
+<p><code>git grep --all-matches -e &lt;regexp&gt; -e &lt;regexp&gt;</code></p>
+<p><strong>Find commits whose message mention login and were authored by Travis in the last month</strong></p>
+<p><code>git log --grep=login --author=travis --since=1.month</code></p>
+<h2 id="text-editor-integration">Text editor integration</h2>
+<p>Inevitably we will want to be able to search and use these programs from within
+our text editors.</p>
+<p>Vim users have it pretty good, with both
+<a href="https://github.com/mileszs/ack.vim">ack.vim</a> and Tim Pope’s
+<a href="https://github.com/tpope/vim-fugitive">Fugitive</a> which includes <code>:Ggrep</code> to
+interface with git grep by being to search and have your results listed and
+linked in the quickfix window. By listing the results in the quickfix window
+this mean you have the usual quickfix navigation keybindings, if you’re
+unfamiliar, see <code>:h quickfix</code></p>
+<p><img src="https://img.skitch.com/20120206-8asb2rfheqi167ptex9jt5sf5u.jpg" alt="Using :Ggrep in Vim"></p>
+<p>If your project is not under git version control than you can use ack.vim in a
+similar manner:</p>
+<p><code>:Ack &lt;args&gt;</code></p>
+<p>Emacs user’s have had <code>vc-git-grep</code> built-in since v22.1 and it’s very similar
+to <code>:Ggrep</code>. And for acking there is <a href="http://www.emacswiki.org/emacs/FullAck">full-ack</a>.
+See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Compilation-Mode.html">this</a> page (or <code>C-h f compliation-mode</code>) for info on navigating in compilation-mode (the mode that both vc-git-grep and full-ack output into).</p>
+<p>By now you are comfortable with git grep and git log, and can get more
+details on each of these commands via <code>git help &lt;command&gt;</code>, and have some useful tools in your repertoire, now have fun!</p>
+<h2 id="sources-and-further-reading">Sources and further reading</h2>
+<ul>
+<li><a href="http://book.git-scm.com/4_finding_with_git_grep.html">Finding with Git Grep</a></li>
+<li><a href="http://gitster.livejournal.com/27674.html">Junio C Hamano, current maintainer of git: Fun with “git grep”</a></li>
+<li><a href="http://gitster.livejournal.com/30195.html">Junio C Hamano: Fun with “git log –grep”</a></li>
+<li><a href="http://stackoverflow.com/questions/2928584/how-to-grep-in-the-git-history">How to grep in the git history?</a></li>
+</ul>
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: February 2nd, 2012<br>
+            Categories: git, vim, grep, ack
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

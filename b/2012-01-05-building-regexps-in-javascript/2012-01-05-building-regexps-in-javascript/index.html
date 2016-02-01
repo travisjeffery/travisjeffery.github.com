@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>Building regexps in javascript</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">Building regexps in javascript</h2>
+        </header>
+          
+        <p>Let’s say you want to put together a JavaScript RegExp wherein you want, or
+need, to put together multiple strings or regexps then here’s the short version
+to get you on your way:</p>
+<pre><code class="hljs js"><span class="hljs-keyword">var</span> re = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">"some string"</span> + <span class="hljs-regexp">/some.*(re)/</span>.source);
+<span class="hljs-string">"some string some        re"</span>.match(re);</code></pre>
+
+<p>Here’s a longer example showing a more in-depth and possibly practical example:</p>
+<p>In this example let’s say you have something like an HTML table whose rows
+contain some information that you need to parse out, like ids,</p>
+<pre><code class="hljs js"><span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Table</span><span class="hljs-params">(rows, options)</span></span>{
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Table)){
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Table(rows, options);
+    }
+
+    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+
+    self.rows = rows;
+    self.options = options;
+
+    self._id_for_row = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(row)</span></span>{
+        <span class="hljs-keyword">var</span> re = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(self.options.field_name + <span class="hljs-regexp">/_(\d+)/</span>.source);
+        <span class="hljs-keyword">return</span> row.match(re)[<span class="hljs-number">1</span>];
+    }
+
+    self.row_ids = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">return</span> _.map(self.rows, self._id_for_row);
+    };
+}
+
+<span class="hljs-keyword">var</span> table = <span class="hljs-keyword">new</span> Table(
+    [<span class="hljs-string">"user_name_field_1"</span>, <span class="hljs-string">"user_name_field_22"</span>, <span class="hljs-string">"user_name_field_23"</span>],
+    {<span class="hljs-string">"field_name"</span>:<span class="hljs-string">"user_name_field"</span>}
+);
+
+###
+#
+# &gt; <span class="hljs-built_in">console</span>.log(table.row_ids());
+# =&gt; [ <span class="hljs-string">'1'</span>, <span class="hljs-string">'22'</span>, <span class="hljs-string">'23'</span> ]</code></pre>
+
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: January 5th, 2012<br>
+            Categories: javascript, regexp, regular-expressions
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

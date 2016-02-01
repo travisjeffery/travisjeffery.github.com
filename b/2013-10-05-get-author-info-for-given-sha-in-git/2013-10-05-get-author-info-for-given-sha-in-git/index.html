@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>`git author sha` - get author info for a given sha in git</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">`git author sha` - get author info for a given sha in git</h2>
+        </header>
+          
+        <p>When i’m hacking on open source libs i maintain, i often have to clean up the
+commits of people’s prs. I wanna give attribution for good contributions and
+not have my name associated with nasty hacks, so when i interactively rebase
+commits i want to make sure the new commit(s) has the right author.</p>
+<p>By default when you interactively rebase, git will say you’re the author. So
+you need to explicitly set this otherwise.</p>
+<p><code>git commit -a -m &#39;some shit (fixes #99) --author=&quot;rza &lt;rza@wu-tang.xxx&gt;&quot;&#39;</code></p>
+<p>But getting that author info is a little annoying, involving logging the old
+commit(s), then copying and pasting the author info. So I wrote <code>git author sha</code>.</p>
+<p><code>git author HEAD</code> writes <code>rza &lt;rza@wu-tang.xxx&gt;</code>.</p>
+<p>Now I can do:</p>
+<p><code>git commit -a -m &#39;some shit (fixes #99) --author=&quot;``git author sha``&quot;</code></p>
+<p>Here’s <code>git author</code> in my <a href="https://github.com/travisjeffery/dotfiles/blob/master/.gitconfig">.gitconfig</a>:</p>
+<pre><code class="hljs">[alias]
+  author = <span class="hljs-string">"!sh -c 'echo $(git log -1 --format=\"%an &lt;%ae&gt;\" $@) | tr -d \"\\n\"'"</span> -<span class="hljs-string">"'"</span></code></pre>
+
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: October 5th, 2013<br>
+            Categories: git, sha, author, open-source
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

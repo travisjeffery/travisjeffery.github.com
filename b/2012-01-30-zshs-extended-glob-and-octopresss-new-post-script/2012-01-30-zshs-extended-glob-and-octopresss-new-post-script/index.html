@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>Zsh's extended glob, and octopress's new_post script</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">Zsh's extended glob, and octopress's new_post script</h2>
+        </header>
+          
+        <p>If you’re here it’s because you’re a Zsh user, maybe you use Octopress and have
+come across the following error (or something similar):</p>
+<p><code>zsh: no matches found: new_post[...]</code></p>
+<p>Octopress’s documentation is Bash oriented, and so in the example above; the
+user would have likely read the documentation and tried something like this:</p>
+<p><code>$ rake new_post[&quot;...&quot;]</code></p>
+<p>So here’s the problem, …other than you throwing junk into your Zsh configuration
+that before understanding what it all meant! …the problem is that you have
+something like this in your <code>~/.zshrc</code>, or equivalent file:</p>
+<p><code>setopt extended_glob</code></p>
+<p>By setting this option you is turn on all kinds of globbing patterns that Zsh will
+expand and match against your files.</p>
+<p>For some more in-depth info on Zsh’s expansion and globbing, I’d start
+<a href="http://www.refining-linux.org/archives/37/ZSH-Gem-2-Extended-globbing-and-expansion/">here</a>,
+and then later check out <a href="http://zsh.sourceforge.net/Doc/Release/Expansion.html">this</a>.</p>
+<p>So, here are a couple of solutions:</p>
+<p>Alias <code>rake</code> such that globbing is disabled with:</p>
+<p><code>alias rake=&quot;noglob rake&quot;</code></p>
+<p>Or always quote arguments given to <code>rake</code>:</p>
+<p><code>rake &quot;new_post[...]&quot;</code> </p>
+<p>Note that I do not have quotes inside my square brackets. This was intentional.</p>
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: January 30th, 2012<br>
+            Categories: zsh, octopress, shell
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

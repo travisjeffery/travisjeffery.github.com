@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>Error responses on Node.js with Koa</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">Error responses on Node.js with Koa</h2>
+        </header>
+          
+        <p>Koa is a web framework that’s the next generation Express in that it’s built by
+the same team, and aims to be smaller, more expressive, and more robust for
+building web applications and APIs. It accomplishes this in large part by
+using generators which enables writing asynchronous JS without callbacks and
+greatly simplifies flow control and handling errors.</p>
+<p>In this article I’m gonna show how you can use Koa to simplify sending error
+responses. If you get lost with the
+terminology here I recommend skimming over the Koa <a href="http://koajs.com/">docs</a> or
+<a href="https://twitter.com/travisjeffery">asking me a question</a>.</p>
+<p>A Koa application is an object containing an array of middleware generator
+functions that are composed and ran in a stack-like manner upon request. The
+most basic error response middleware would look something like this:</p>
+<pre><code class="hljs js">app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *<span class="hljs-params">(next)</span> </span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// yield downstream</span>
+    <span class="hljs-keyword">yield</span> next;
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">this</span>.status = err.status || <span class="hljs-number">500</span>;
+    <span class="hljs-keyword">this</span>.body = err.message;
+  }
+});</code></pre>
+
+<p>Somewhere downstream you’d have a call to a generator like <code>findByEmail</code> below that would
+throw. For example, we’re throwing an error here when the given user isn’t found.</p>
+<pre><code class="hljs js">Users.prototype.findByEmail = <span class="hljs-function"><span class="hljs-keyword">function</span>*<span class="hljs-params">(email)</span> </span>{
+  <span class="hljs-keyword">let</span> user = <span class="hljs-keyword">yield</span> <span class="hljs-keyword">this</span>.db.findOne({ email: email });
+  <span class="hljs-keyword">if</span> (!user) {
+    <span class="hljs-keyword">let</span> err = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'User not found'</span>);
+    err.status = <span class="hljs-number">404</span>;
+    err.message = `User not found <span class="hljs-keyword">with</span> email: ${email}`;
+    <span class="hljs-keyword">throw</span> err;
+  }
+  <span class="hljs-keyword">return</span> user;
+}</code></pre>
+
+<p>With this implementation, you’d have to do something similar for each of your
+APIs and error responses. E.g. 401 for when the user isn’t logged-in, 403 for
+bad attributes, etc.</p>
+<p>Let’s find another way to have a well contained and clean way to send back those
+error responses and even share those responses between code bases with different
+languages.</p>
+<p>First we put our error response schema in YAML. This makes for a very clean and
+nicely structured schema, and also means that you could use the same error
+schema in another language.</p>
+<pre><code>user_not_found:
+  message: User <span class="hljs-keyword">not</span> found <span class="hljs-keyword">with</span> <span class="hljs-string">":email"</span>
+  status: <span class="hljs-number">404</span></code></pre>
+
+<p>Our <code>findByEmail</code> implementation looks like this now:</p>
+<pre><code class="hljs js">Users.prototype.findByEmail = <span class="hljs-function"><span class="hljs-keyword">function</span>*<span class="hljs-params">(email)</span> </span>{
+  <span class="hljs-keyword">let</span> query = { email: email };
+  <span class="hljs-keyword">let</span> user = <span class="hljs-keyword">yield</span> <span class="hljs-keyword">this</span>.db.findOne(query);
+  <span class="hljs-keyword">if</span> (!user) {
+    <span class="hljs-keyword">this</span>.thrower.throw(<span class="hljs-string">'user_not_found'</span>, query);
+  }
+  <span class="hljs-keyword">return</span> user;
+}</code></pre>
+
+<p>Here’s <code>thrower.throw</code>, which is used to add the key/values from <code>extra</code> onto
+the error which will then be used to fill in the user’s email into the error
+message.</p>
+<pre><code class="hljs js">Thrower.prototype.throw = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(msg, extra)</span> </span>{
+  <span class="hljs-keyword">let</span> err = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(msg);
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> k <span class="hljs-keyword">in</span> extra) {
+    err[k] = extra[k];
+  }
+  <span class="hljs-keyword">throw</span> err;
+}</code></pre>
+
+<p>And for our error middleware we have:</p>
+<pre><code class="hljs js"><span class="hljs-keyword">let</span> fmt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'format-string'</span>);
+
+app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *<span class="hljs-params">(next)</span> </span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">yield</span> next;
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">let</span> schema = schemas[err.message];
+    <span class="hljs-keyword">if</span> (schema) {
+      <span class="hljs-keyword">this</span>.status = schema.status;
+      <span class="hljs-keyword">this</span>.body = fmt(schema.message, err);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">this</span>.status = err.status || <span class="hljs-number">500</span>;
+      <span class="hljs-keyword">this</span>.body = err.message;
+    }
+  }
+});</code></pre>
+
+<p>And voila you have a scalable and simple system for sending back error responses.</p>
+<p>This is also makes adding error tracking very easy too, since you have a single
+point of contact where all errors with go through. So you can make a single call
+to Sentry, or some other JS error tracker here.</p>
+<pre><code class="hljs js"><span class="hljs-keyword">let</span> fmt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'format-string'</span>);
+
+app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *<span class="hljs-params">(next)</span> </span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">yield</span> next;
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">let</span> schema = schemas[err.message];
+    <span class="hljs-keyword">this</span>.errorTracker.track(err); <span class="hljs-comment">// Send error to sentry or wherever</span>
+    <span class="hljs-keyword">if</span> (schema) {
+      <span class="hljs-keyword">this</span>.status = schema.status;
+      <span class="hljs-keyword">this</span>.body = fmt(schema.message, err);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">this</span>.status = err.status || <span class="hljs-number">500</span>;
+      <span class="hljs-keyword">this</span>.body = err.message;
+    }
+  }
+});</code></pre>
+
+<p>I’ll be open sourcing a lib to help bootstrap this setup shortly.</p>
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: October 21st, 2015<br>
+            Categories: node, koa, errors
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

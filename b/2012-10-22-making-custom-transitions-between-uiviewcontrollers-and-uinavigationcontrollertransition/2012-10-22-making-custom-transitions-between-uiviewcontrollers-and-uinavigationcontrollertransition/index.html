@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>Making custom transitions between uiviewcontrollers</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">Making custom transitions between uiviewcontrollers</h2>
+        </header>
+          
+        <p><strong>Note: iOS 7 has awesome APIs that make this sort of thing a lot funner, easier and powerful. When the SDK’s NDA is over I’ll be releasing some open source code and blog posts about them.</strong></p>
+<p>I just released a project called <a href="https://github.com/travisjeffery/TRVSNavigationControllerTransition">TRVSNavigationControllerTransition</a> that adds convenience methods to
+UINavigationControllers to push/pop UIViewControllers that translate the entire
+UINavigationController’s view rather than its viewController’s view (which is
+how UINavigationController’s pushViewController:animated: behaves).</p>
+<h2 id="example">Example</h2>
+<p>In the top example of the images below, only the view controller’s view is translated so if the
+pushed view controller hide’s the navigation bar then the navigation bar in the
+current view will suddenly disappear. In the bottom example using TRVSNavigationControllerTransition, the whole
+navigation controller’s view is translated in, and the navigation bar remains
+correctly in the current view until the animation completes.</p>
+<p><img src="https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Bad.gif" alt="Bad"> <img src="https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Good.gif" alt="Good"></p>
+<h2 id="development-and-alternatives">Development and alternatives</h2>
+<p>Before, I tried and saw others using a CATransition, like so:</p>
+<pre><code>CATransition* <span class="hljs-variable">animation =</span> [CATransition animation];
+animation.<span class="hljs-variable">duration =</span> <span class="hljs-number">0.3</span>f;
+animation.<span class="hljs-variable">type =</span> kCATransitionPush;
+animation.<span class="hljs-variable">subtype =</span> kCATransitionFromRight;</code></pre>
+
+<p>The problem is that kCATransitionPush not only animates the
+translations like you’d expect, but also the opacities of the views so the
+transition looks differently from UINavigationController’s pushViewController:animated:.</p>
+<h2 id="basic-idea">Basic idea</h2>
+<p>The basic idea on how to make your own is pretty simple though,</p>
+<ol>
+<li>take a snapshot of the current view in the form of a CALayer and add it as a sublayer
+of the current view</li>
+<li>push/pop the next view without animation</li>
+<li>take a
+snapshot of the new view in the form of a CALayer</li>
+<li>add whatever animations you want to those layers to form their transition</li>
+<li>remove the layers from their superlayer once the transition animation is complete</li>
+</ol>
+<p>See
+<a href="https://github.com/travisjeffery/TRVSNavigationControllerTransition/blob/master/UINavigationController%2BTRVSNavigationControllerTransition.m">UINavigationController+TRVSNavigationControllerTransition.m</a> for more
+details.</p>
+<h2 id="installing">Installing</h2>
+<p>You can grab the project via the <a href="http://github.com/travisjeffery/TRVSNavigationControllerTransition">GitHub
+repo</a>, or
+just via the <a href="https://github.com/travisjeffery/TRVSNavigationControllerTransition/blob/master/TRVSNavigationControllerTransition.podspec">CocoaPod spec</a> with the name: <code>TRVSNavigationControllerTransition</code>,
+but make sure you check for what the latest version is.</p>
+<h2 id="usage">Usage</h2>
+<p>To use TRVSNavigationControllerTransition just make sure your binary is linked
+with the QuartzCore.framework library, and then to use:</p>
+<pre><code># <span class="hljs-keyword">to</span> push, called just <span class="hljs-keyword">as</span> you would <span class="hljs-keyword">with</span> pushviewcontroller:animated:
+[<span class="hljs-keyword">self</span>.navigationController pushViewControllerWithNavigationControllerTransition:viewController];
+
+# <span class="hljs-keyword">to</span> pop called just <span class="hljs-keyword">as</span> you would <span class="hljs-keyword">with</span> popviewcontrolleranimated:
+[<span class="hljs-keyword">self</span>.navigationController popViewControllerWithNavigationControllerTransition];</code></pre>  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: October 22nd, 2012<br>
+            Categories: ios, objective-c, uiviewcontroller, uinavigationcontroller, core-animation, animations, transitions
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

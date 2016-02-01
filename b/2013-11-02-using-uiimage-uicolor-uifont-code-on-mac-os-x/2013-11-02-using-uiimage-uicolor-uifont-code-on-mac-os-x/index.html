@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>Using UIImage, UIColor, UIFont code on mac os x</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">Using UIImage, UIColor, UIFont code on mac os x</h2>
+        </header>
+          
+        <p>This week I switched from working on iOS apps at 37signals to working on a similar mac app. I wanted to shared code between the ios and mac app, this is easy to do with foundation classes - my model and networking code. But doesn’t work right out of the box for stuff like images, colors, fonts, since they’re either in UIKit or AppKit. Thankfully you can adapt code for images, colors, and bezier paths using #define. Like so:</p>
+<pre><code class="hljs objc"><span class="hljs-preprocessor">#if TARGET_OS_IPHONE</span>
+
+<span class="hljs-preprocessor">#define TRVSColor UIColor</span>
+<span class="hljs-preprocessor">#define TRVSImage UIImage</span>
+<span class="hljs-preprocessor">#define TRVSFont UIFont</span>
+<span class="hljs-preprocessor">#define TRVSBezierPath UIBezierPath</span>
+
+<span class="hljs-preprocessor">#elif TARGET_OS_MAC &amp;&amp; !TARGET_OS_IPHONE</span>
+
+<span class="hljs-preprocessor">#define TRVSColor NSColor</span>
+<span class="hljs-preprocessor">#define TRVSImage NSImage</span>
+<span class="hljs-preprocessor">#define TRVSFont NSFont</span>
+<span class="hljs-preprocessor">#define TRVSBezierPath NSBezierPath</span>
+
+<span class="hljs-preprocessor">#endif</span></code></pre>
+
+<p>Those are the only classes you can do this with.</p>
+<p>Throw that code in something like <code>TRVSPlatformAdapter.h</code>.</p>
+<p>Often in apps I write, I’ll put category methods UIColor/NSColor for colors often used in the app’s design.</p>
+<p>This is how this is done while still being platform independent.</p>
+<p>Have <code>Color+TRVSKit.{h, m}</code> like so:</p>
+<pre><code class="hljs objc"><span class="hljs-preprocessor">#import <span class="hljs-title">"TRVSPlatformAdapter.h"</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">TRVSColor</span> (<span class="hljs-title">TRVSKit</span>)</span>
+
++ (TRVSColor *)trvs_colorWithHexString:(<span class="hljs-built_in">NSString</span> *)hexString;
+
+<span class="hljs-keyword">@end</span>
+
+<span class="hljs-comment">//</span>
+
+<span class="hljs-preprocessor">#import <span class="hljs-title">"Color+TRVSKit.h"</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">TRVSColor</span> (<span class="hljs-title">TRVSKit</span>)</span>
+
++ (TRVSColor *)trvs_colorWithHexString:(<span class="hljs-built_in">NSString</span> *)hexString {
+  <span class="hljs-comment">// ...</span>
+  <span class="hljs-keyword">return</span> [TRVSColor colorWithRed:red green:green blue:blue alpha:alpha];
+}</code></pre>
+
+<p>When this code is compiled for ios, TRVSColor will be compiled as UIColor, on os x: NSColor.</p>
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: November 2nd, 2013<br>
+            Categories: ios, mac, uikit, appkit
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

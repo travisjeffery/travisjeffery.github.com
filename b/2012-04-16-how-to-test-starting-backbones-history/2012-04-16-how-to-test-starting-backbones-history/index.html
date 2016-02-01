@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>How-to test starting backbone's history</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">How-to test starting backbone's history</h2>
+        </header>
+          
+        <p><code>Backbone.history.start()</code> can be only be called once, doing otherwise will
+<a href="http://documentcloud.github.com/backbone/docs/backbone.html#section-127">cause</a> an Error to be thrown with the message “Backbone.history has already been started”.</p>
+<p>This can be annoying when testing because it’s common practice to have an App
+namespace that contains a initializer method to setup your application,
+including starting Backbone’s history.</p>
+<pre><code class="hljs coffeescript">App =
+  <span class="hljs-attribute">initialize</span>: <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span>
+    <span class="hljs-comment"># ...</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> Backbone.history.started?
+      Backbone.history.start({<span class="hljs-attribute">pushState</span>: <span class="hljs-literal">true</span>})
+      Backbone.history.started = <span class="hljs-literal">true</span></code></pre>
+
+<p>But each test case you write that calls this initializer method will also call
+<code>Backbone.history.start()</code>. The solution is use <code>Backbone.history.stop()</code> which
+will disable history temporarily.</p>
+<pre><code class="hljs coffeescript">describe <span class="hljs-string">"App"</span>, <span class="hljs-function">-&gt;</span>
+  describe <span class="hljs-string">"#initialize"</span>, <span class="hljs-function">-&gt;</span>
+    it <span class="hljs-string">"starts Backbone.history"</span>, <span class="hljs-function">-&gt;</span>
+      Backbone.history.started = <span class="hljs-literal">null</span>
+      Backbone.history.stop()
+      sinon.spy(Backbone.history, <span class="hljs-string">"start"</span>)
+      App.initialize {}
+
+      expect(Backbone.history.start).toHaveBeenCalled()
+
+      Backbone.history.start.restore()</code></pre>
+
+<h2 id="source">Source</h2>
+<p><a href="https://github.com/documentcloud/backbone/pull/538">Addition of Backbone.history.stop()</a></p>
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: April 16th, 2012<br>
+            Categories: backbone, backbonejs, history, start, testing
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

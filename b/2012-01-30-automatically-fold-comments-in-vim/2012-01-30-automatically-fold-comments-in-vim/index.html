@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>Comments, and automatically folding them in vim</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">Comments, and automatically folding them in vim</h2>
+        </header>
+          
+        <p>In general, I tend to side with Robert Martin when it comes to comments, as he puts:</p>
+<blockquote>
+<p>Nothing can be quite so helpful as a well-placed comment. Nothing can clutter up a module more than frivolous dogmatic comments. Nothing can be quite so damaging as an old crufty comment that propagates lies and misinformation.</p>
+<p>Comments are not like Schindler’s List. They are not “pure good.” Indeed, comments are, at best, a necessary evil. If our programming languages were expressive enough, or if we had the talent to subtly wield those languages to express our intent, we would not need
+comments very much—perhaps not at all.</p>
+</blockquote>
+<p>— Robert Martin (Clean Code, p. 53)</p>
+<p>Obviously, no matter how expressive you code is, when is comes to public APIs they need to properly documented. Most documentation systems today, such as rdoc; TomDoc; Docco; etc., are implemented such that you need to have many, many lines of comments in your source code. This can cause clutter and difficulty traversing the source code during the times when that’s all you care about.</p>
+<p>Here’s what you can do when editing Ruby with Vim, add this to your .vimrc:</p>
+<pre><code class="hljs vim"><span class="hljs-keyword">autocmd</span> FileType <span class="hljs-keyword">ruby</span>,eruby
+      \ <span class="hljs-keyword">set</span> foldmethod=expr |
+      \ <span class="hljs-keyword">set</span> foldexpr=<span class="hljs-built_in">getline</span>(<span class="hljs-variable">v:lnum</span>)=~<span class="hljs-string">'^\\s*#'</span></code></pre>
+
+<p>Then when you want to tidy up the comments, fold them away and get out your sight hit <code>zM</code>, this will close <em>all</em> the folds, your comments, in the file.</p>
+<p>Boom! All the comments are neatly tucked away and you can resume programming.</p>
+<p>The reason why I don’t automatically run the <code>zM</code> is because it’s possible that Vim may become unresponsive for a short time; each time you open a Ruby file, but you can try for yourself with:</p>
+<pre><code class="hljs vim"><span class="hljs-keyword">autocmd</span> FileType <span class="hljs-keyword">ruby</span>,eruby
+      \ <span class="hljs-keyword">set</span> foldmethod=expr |
+      \ <span class="hljs-keyword">set</span> foldexpr=<span class="hljs-built_in">getline</span>(<span class="hljs-variable">v:lnum</span>)=~<span class="hljs-string">'^\\s*#'</span> |
+      \ <span class="hljs-keyword">exe</span> <span class="hljs-string">"normal zM``"</span></code></pre>
+
+<p>For more details on Vim’s folding, see the Vim Reference Manual’s entry with <code>:h folding</code>.</p>
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: January 17th, 2012<br>
+            Categories: vim, ruby, comments, documentation, automation
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>

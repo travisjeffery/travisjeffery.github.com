@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <title>Server-sent event event source api client in objc for ios and mac using nsurlsession</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="col-xs-8 col-xs-offset-2">
+      <hgroup id="header">
+        <h1 class="logo col-xs-6">
+          <a class="" href="/">travis jeffery</a>
+        </h1>
+        
+        <div class="social col-xs-6 pull-xs-right">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </div>
+      </hgroup>
+      
+      <hr>
+      
+      <article>
+        <header>
+          <h2 class="article-title">Server-sent event event source api client in objc for ios and mac using nsurlsession</h2>
+        </header>
+          
+        <p><a href="https://github.com/travisjeffery/TRVSEventSource">TRVSEventSource</a> provides an api for opening an http connection for receiving push notifications from a server in the form of <a href="http://dev.w3.org/html5/eventsource/">server-sent events</a>. Mozilla Developer Network has a <a href="https://developer.mozilla.org/en-US/docs/Server-sent_events/Using_server-sent_events">good page</a> on server-sent events and event source usage too.</p>
+<h3 id="usage">usage</h3>
+<pre><code class="hljs objc">TRVSEventSource *eventSource = [[TRVSEventSource alloc] initWithURL:[<span class="hljs-built_in">NSURL</span> URLWithString:<span class="hljs-string">@"http://127.0.0.1:8000"</span>]];
+
+[eventSource addListenerForEvent:<span class="hljs-string">@"message"</span> usingEventHandler:^(TRVSServerSentEvent *event, <span class="hljs-built_in">NSError</span> *error) {
+    <span class="hljs-built_in">NSDictionary</span> *JSON = [NSJSONSerialization JSONObjectWithData:event<span class="hljs-variable">.data</span> options:<span class="hljs-number">0</span> error:<span class="hljs-literal">NULL</span>];
+    Message *message = [Message messageWithJSON:JSON];
+    <span class="hljs-built_in">NSArray</span> *messages = [<span class="hljs-keyword">self</span><span class="hljs-variable">.messages</span> arrayByAddingObject:message];
+    <span class="hljs-built_in">NSIndexPath</span> *indexPath = [<span class="hljs-built_in">NSIndexPath</span> indexPathForItem:messages<span class="hljs-variable">.count</span> inSection:<span class="hljs-number">0</span>];
+
+    <span class="hljs-built_in">dispatch_async</span>(dispatch_get_main_queue(), ^{
+        <span class="hljs-keyword">self</span><span class="hljs-variable">.messages</span> = messages;
+        [<span class="hljs-keyword">self</span><span class="hljs-variable">.collectionView</span> insertItemsAtIndexPaths:@[indexPath]];
+    });
+}];</code></pre>
+
+<p>I wrote a <a href="https://github.com/travisjeffery/TRVSEventSource/blob/master/TRVSEventSourceExample/server.js">test server</a> that you can run during development too.</p>
+<p><code>node ./TRVSEventSourceExample/server.js</code></p>
+<pre><code class="hljs">❯ curl <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">8000</span>
+<span class="hljs-label">event:</span> message
+<span class="hljs-label">data:</span> {<span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"body"</span>:<span class="hljs-string">"1381466575460"</span>, <span class="hljs-string">"author_id"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"conversation_id"</span>: <span class="hljs-number">1</span>}
+
+<span class="hljs-label">event:</span> message
+<span class="hljs-label">data:</span> {<span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>, <span class="hljs-string">"body"</span>:<span class="hljs-string">"1381466577463"</span>, <span class="hljs-string">"author_id"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"conversation_id"</span>: <span class="hljs-number">1</span>}</code></pre>
+
+  
+        
+        <footer>
+          <div>
+            <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <p>
+            <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+            Written: October 12th, 2013<br>
+            Categories: ios, mac, objc, server-sent-event, eventsource, api, client, nsurlsession, html5, http
+          </p>
+        </footer>
+      </article>                
+      
+      <hr>
+      
+      <footer class="footer">
+        <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+      </footer>
+    </div>    
+  </div>
+</body>
+</html>
