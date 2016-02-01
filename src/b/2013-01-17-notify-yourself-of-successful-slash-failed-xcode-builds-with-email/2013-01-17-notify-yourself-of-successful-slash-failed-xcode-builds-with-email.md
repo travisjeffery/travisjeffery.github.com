@@ -1,5 +1,5 @@
 ---
-
+layout: post.html
 title: "Notify yourself of successful/failed xcode builds by email"
 date: 2013-01-17 23:24
 categories: ios mac xcode email
@@ -53,3 +53,4 @@ Now when I'm sitting there drinking my tea with my co-workers, I get my notifica
 How compiling feels now:
 
 <img src="images/bill-cosby-yes.gif">
+

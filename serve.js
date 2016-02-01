@@ -16,6 +16,7 @@ var permalinks = require('metalsmith-permalinks')
 var drafts = require('metalsmith-drafts')
 var metallic = require('metalsmith-metallic')
 var categories = require('./lib/metalsmith-categories')
+var debug = require('./lib/metalsmith-debug')
 
 metalsmith(__dirname)
   .source('src')
@@ -63,7 +64,8 @@ metalsmith(__dirname)
     engine: 'handlebars',
     pattern: '**/*.html',
     default: 'post.html'
-  }))
+  }))  
+  .use(debug())
   .use(browserSync({
     server: 'build',
     files : ['src/**/*', 'layouts/**/*', 'partials/**/*']

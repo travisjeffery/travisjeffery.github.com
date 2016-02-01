@@ -120,18 +120,16 @@
           <h3 class="section-header" id="tech-writing"><span class="tech-writing">technical writing:</span></h3>
     
           <ul class="plain col-xs-12">
-          {{#each collections}}
-            {{#each this}}
-              <li>
-                <span class="article-title col-xs-10 pull-xs-left">
-                  <strong><a href="{{path}}">{{title}}</a></strong>
-                </span>
-                <span class="article-date  pull-xs-right">
-                  {{dateShort}}
-                </span>
-              </li>
+            {{#each collections.articles}}
+            <li>
+              <span class="article-title col-xs-10 pull-xs-left">
+                <strong><a href="{{path}}">{{title}}</a></strong>
+              </span>
+              <span class="article-date  pull-xs-right">
+                {{dateShort}}
+              </span>
+            </li>
             {{/each}}
-          {{/each}}            
           </ul>
           
           {{> footer}}

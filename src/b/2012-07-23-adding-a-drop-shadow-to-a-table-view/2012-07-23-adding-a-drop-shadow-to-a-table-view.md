@@ -1,5 +1,5 @@
 ---
-
+layout: post.html
 title: "Adding a drop shadow to a table view"
 date: 2012-07-23 04:51
 comments: false
