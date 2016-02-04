@@ -34,6 +34,9 @@ pre, code {
 	font-size: .8em;
 	font-family: $font_9, $font_10, $font_11, $font_12, $font_13;
 }
+pre {
+  white-space:pre-wrap;
+}
 a {
 	color: $blue;
 	text-decoration: none !important;
