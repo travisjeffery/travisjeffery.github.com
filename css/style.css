@@ -6111,6 +6111,10 @@ pre, code {
   font-family: Monaco, Menlo, Consolas, Courier New, monospace;
 }
 
+pre {
+  white-space: pre-wrap;
+}
+
 a {
   color: blue;
   text-decoration: none !important;
