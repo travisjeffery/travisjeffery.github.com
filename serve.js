@@ -55,8 +55,7 @@ metalsmith(__dirname)
   .use(bower())
   .use(branch('b/**/*')
     .use(permalinks({
-        pattern: 'b/:year/:month/:title',
-        date: 'YYYY/MM'
+        pattern: 'b/:year/:month/:title'
       }))
     )
   .use(layouts({
