@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-8462120-1', 'travisjeffery.com');
+    ga('send', 'pageview');
+  </script>
+  <title>Rendering errors in json with rails</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="row">
+      <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+        <hgroup id="header">
+          <h1 class="logo col-xs-6">
+            <a class="" href="/">travis jeffery</a>
+          </h1>
+          
+          <div class="social col-xs-6 pull-xs-right">
+                <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+        </hgroup>
+      
+        <hr>
+      
+        <article>
+          <header>
+            <h2 class="article-title">Rendering errors in json with rails</h2>
+          </header>
+          
+          <p>Having seen a lot of bad practices when it comes to handling and rendering
+errors in JSON, bad practices such as misusing HTTP statuses, success/error
+callbacks, and making building error messages harder than necessary, here are
+bad and good practices.</p>
+<p>Here’s an example that is bad,</p>
+<p>JavaScript,</p>
+<pre><code class="hljs js">$.ajax(
+  <span class="hljs-comment">// ...</span>
+    dataType: <span class="hljs-string">"json"</span>
+  , success: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span></span>{
+    <span class="hljs-keyword">if</span> (data.errors) {
+      <span class="hljs-comment">// do something with errors</span>
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// do something with successful data</span>
+    }
+  }
+)</code></pre>
+
+<p>Controller,</p>
+<pre><code class="hljs ruby"><span class="hljs-function"><span class="hljs-keyword">def</span> </span>create
+  <span class="hljs-variable">@model</span> = <span class="hljs-constant">Model</span>.new(params[<span class="hljs-symbol">:model</span>])
+  <span class="hljs-keyword">if</span> <span class="hljs-variable">@model</span>.save
+    render <span class="hljs-symbol">:json</span> =&gt; <span class="hljs-variable">@model</span>.to_json
+  <span class="hljs-keyword">else</span>
+    render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; <span class="hljs-variable">@model</span>.errors.full_messages }
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre>
+
+<p>The biggest concern in the example above is that we’re not using HTTP statuses
+as they were intended which is bad both practically and semantically.</p>
+<p>Semantically in the sense that with this implementation we have to mix error
+handling in a success callback. Practically since our browser and libraries can
+work together to extract the switch logic.</p>
+<p>This is a good example,</p>
+<p>JavaScript,</p>
+<pre><code class="hljs js">$.ajax({
+  <span class="hljs-comment">// ...</span>
+    dataType: <span class="hljs-string">"json"</span>
+  , success: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span></span>{
+      <span class="hljs-comment">// do something with successful data</span>
+  }
+  , error: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(xhr)</span></span>{
+      <span class="hljs-keyword">var</span> errors = $.parseJSON(xhr.responseText).errors
+      <span class="hljs-comment">// do something with errors</span>
+  }
+})</code></pre>
+
+<p>Controller:</p>
+<pre><code class="hljs ruby"><span class="hljs-function"><span class="hljs-keyword">def</span> </span>create
+  <span class="hljs-variable">@model</span> = <span class="hljs-constant">Model</span>.create(params[<span class="hljs-symbol">:model</span>])
+  <span class="hljs-keyword">if</span> <span class="hljs-variable">@model</span>.save
+    render <span class="hljs-symbol">:json</span> =&gt; <span class="hljs-variable">@model</span>
+  <span class="hljs-keyword">else</span>
+    render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; <span class="hljs-variable">@model</span>.errors.full_messages }, <span class="hljs-symbol">:status</span> =&gt; <span class="hljs-number">422</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre>
+
+<p>With an HTTP error status (e.g. 422 unprocessable entity) our error callback
+is called for us, our code is more declarative and without unnecessary logic.</p>
+<p>Another small nit-pick is that we’re now letting Rails serialize our data according
+to our response type, i.e. it will call to_json for us.</p>
+<p>Another tip is to use full_messages rather than serializing the errors object
+as it is,</p>
+<pre><code class="hljs ruby">render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; <span class="hljs-variable">@model</span>.errors }</code></pre>
+
+<p>The above will present the errors in a hash where the keys are attributes and the
+values are errors,</p>
+<pre><code class="hljs ruby"><span class="hljs-comment"># =&gt; { name: ["is blank"], age: ["is not greater than 0"]}</span></code></pre>
+
+<pre><code class="hljs ruby">render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; <span class="hljs-variable">@model</span>.errors.full_messages }</code></pre>
+
+
+<p>full_messages on the other hand will return an array of full messages,</p>
+<pre><code class="hljs ruby"><span class="hljs-comment"># =&gt; ["Name is blank", "Age is not greater than 0"]</span></code></pre>
+
+<p>I once watched a Rails/Backbone screencast where the author serialized the
+errors object as is and spent ~30 mins manipulating the data client-side into exactly what
+full_messages returned.</p>
+<p>This is much easier to work with and I have never once needed the data given by
+serializing model.errors.</p>
+  
+        
+          <footer>
+            <div>
+              <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+
+            <p>
+              <a href="http://eepurl.com/bOIJlj">Learn more about technology and business</a> by subscribing to my mailing list<br>
+              <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+              Written: April 27th, 2012<br>
+              Categories: rails, json, errors, javascript
+            </p>
+          </footer>
+        </article>                
+      
+        <hr>
+        
+        <footer class="footer">
+          <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+        </footer>
+      </div>
+    </div>    
+  </div>
+</body>
+</html>

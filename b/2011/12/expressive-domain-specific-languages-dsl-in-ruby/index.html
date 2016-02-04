@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-8462120-1', 'travisjeffery.com');
+    ga('send', 'pageview');
+  </script>
+  <title>Expressive domain specific languages (dsl) in ruby</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="row">
+      <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+        <hgroup id="header">
+          <h1 class="logo col-xs-6">
+            <a class="" href="/">travis jeffery</a>
+          </h1>
+          
+          <div class="social col-xs-6 pull-xs-right">
+                <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+        </hgroup>
+      
+        <hr>
+      
+        <article>
+          <header>
+            <h2 class="article-title">Expressive domain specific languages (dsl) in ruby</h2>
+          </header>
+          
+          <p>In this example, I’m creating a User object such that I can set the name using
+my own DSL:</p>
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>initialize &amp;block
+    <span class="hljs-keyword">if</span> block.arity == <span class="hljs-number">1</span>
+      block[<span class="hljs-keyword">self</span>]
+    <span class="hljs-keyword">else</span>
+      instance_eval &amp;block
+    <span class="hljs-keyword">end</span>
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>name new_name = <span class="hljs-keyword">nil</span>
+    <span class="hljs-variable">@name</span> ||= new_name
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>location new_location = <span class="hljs-keyword">nil</span>
+    <span class="hljs-variable">@location</span> ||= new_location
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>occupation new_occupation = <span class="hljs-keyword">nil</span>
+    <span class="hljs-variable">@occupation</span> ||= new_occupation
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+
+u = <span class="hljs-constant">User</span>.new <span class="hljs-keyword">do</span>
+  name       <span class="hljs-string">"Travis Jeffery"</span>
+  location   <span class="hljs-string">"Toronto, Ontario"</span>
+  occupation <span class="hljs-string">"Mathematician, Software Engineer"</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-comment">###</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># &gt; u.name</span>
+<span class="hljs-comment"># =&gt; "Travis Jeffery"</span>
+<span class="hljs-comment"># &gt; u.location</span>
+<span class="hljs-comment"># =&gt; "Toronto, Ontario"</span>
+<span class="hljs-comment"># &gt; u.occupation</span>
+<span class="hljs-comment"># =&gt; "Mathematician, Software Engineer"</span></code></pre>
+
+<p>The reason for checking the arity of the block given is so you can support the case when a user of our API would use it like so:</p>
+<pre><code class="hljs ruby">u = <span class="hljs-constant">User</span>.new <span class="hljs-keyword">do</span> |u|
+  u.name <span class="hljs-string">"Travis Jeffery"</span>
+<span class="hljs-keyword">end</span></code></pre>
+
+<p>Personally, I’d be inclined to support only one interface—my preference being the first one.</p>
+  
+        
+          <footer>
+            <div>
+              <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+
+            <p>
+              <a href="http://eepurl.com/bOIJlj">Learn more about technology and business</a> by subscribing to my mailing list<br>
+              <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+              Written: December 28th, 2011<br>
+              Categories: ruby, domain-specific-languages, dsl
+            </p>
+          </footer>
+        </article>                
+      
+        <hr>
+        
+        <footer class="footer">
+          <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+        </footer>
+      </div>
+    </div>    
+  </div>
+</body>
+</html>

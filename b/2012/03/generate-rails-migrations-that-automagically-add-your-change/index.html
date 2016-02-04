@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-8462120-1', 'travisjeffery.com');
+    ga('send', 'pageview');
+  </script>
+  <title>Generate rails migrations that automagically add your change</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="row">
+      <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+        <hgroup id="header">
+          <h1 class="logo col-xs-6">
+            <a class="" href="/">travis jeffery</a>
+          </h1>
+          
+          <div class="social col-xs-6 pull-xs-right">
+                <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+        </hgroup>
+      
+        <hr>
+      
+        <article>
+          <header>
+            <h2 class="article-title">Generate rails migrations that automagically add your change</h2>
+          </header>
+          
+          <p>Rails’s generators can be pretty cool, and by knowing some simple tricks
+you can save yourself from tedious work:</p>
+<p><code>rails g model person name:string age:integer</code></p>
+<p>Rails developers should probably know that this will generate a model
+containing name and age fields, with string and integer data types
+respectively.</p>
+<p>You can even specify attribute options, let’s make a new book model with
+an indexed price field that needs the given precision 1 and scale 2:</p>
+<p><code>rails g model book price:decimal{1,2}:index</code></p>
+<p>This has slightly more magic since it’s not apparent what the command does just
+by looking at it, e.g. you have to know the precision/scale order.</p>
+<p>Things can get even more magical. By naming your migrations in the form of:</p>
+<p><code>add/remove column [and ...] to/from table</code></p>
+<p>Rails will generate your migration and add in the change you intend to make.</p>
+<p>So let’s say we want to add an indexed body and unique person id to the people
+table:</p>
+<p><code>rails g migration add_body_and_pid_to_people body:string:index pid:integer:uniq</code></p>
+<p>Will generate this migration:</p>
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddBodyAndPidToPersons</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Migration</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>change
+    add_column <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:body</span>, <span class="hljs-symbol">:string</span>
+    add_index <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:body</span>
+
+    add_column <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:pid</span>, <span class="hljs-symbol">:integer</span>
+    add_index <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:pid</span>, <span class="hljs-symbol">:unique</span> =&gt; <span class="hljs-keyword">true</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre>
+
+<p>Pretty cool, huh?</p>
+<p>You should always check the generated migration though, it’s not perfect.</p>
+<p><code>rails g migration add_body_to_people body:string:index</code></p>
+<p>Generates the migration we expect, however,</p>
+<p><code>rails g migration remove_body_from_people body:string:index</code></p>
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RemoveBodyFromPeople</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Migration</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>up
+    remove_column <span class="hljs-symbol">:people</span>, <span class="hljs-symbol">:body</span>
+  <span class="hljs-keyword">end</span>
+
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>down
+    add_column <span class="hljs-symbol">:people</span>, <span class="hljs-symbol">:body</span>, <span class="hljs-symbol">:string</span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span></code></pre>
+
+<p>Notice that the specified index will not be added or removed.</p>
+<p>Edit: I fixed this issue and it’s <a href="https://github.com/rails/rails/commit/b2a59388b2ad281ccce1f72dd5fda09ca746dc32">merged in Rails</a>.</p>
+  
+        
+          <footer>
+            <div>
+              <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+
+            <p>
+              <a href="http://eepurl.com/bOIJlj">Learn more about technology and business</a> by subscribing to my mailing list<br>
+              <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+              Written: March 16th, 2012<br>
+              Categories: rails, migrations, generators
+            </p>
+          </footer>
+        </article>                
+      
+        <hr>
+        
+        <footer class="footer">
+          <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+        </footer>
+      </div>
+    </div>    
+  </div>
+</body>
+</html>

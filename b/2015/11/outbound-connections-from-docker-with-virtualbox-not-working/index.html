@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-8462120-1', 'travisjeffery.com');
+    ga('send', 'pageview');
+  </script>
+  <title>Outbound connections from Docker with VirtualBox not working?</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="row">
+      <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+        <hgroup id="header">
+          <h1 class="logo col-xs-6">
+            <a class="" href="/">travis jeffery</a>
+          </h1>
+          
+          <div class="social col-xs-6 pull-xs-right">
+                <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+        </hgroup>
+      
+        <hr>
+      
+        <article>
+          <header>
+            <h2 class="article-title">Outbound connections from Docker with VirtualBox not working?</h2>
+          </header>
+          
+          <p>Using Docker and VirtualBox and having trouble making outbound
+connections? For instance, you might be getting errors like:</p>
+<pre><code class="hljs">curl: (<span class="hljs-number">7</span>) Failed connect <span class="hljs-keyword">to</span> <span class="hljs-number">10.0</span><span class="hljs-number">.2</span><span class="hljs-number">.224</span>:<span class="hljs-number">8000</span>; No route <span class="hljs-keyword">to</span> host</code></pre>
+
+<p>Or:</p>
+<pre><code class="hljs"><span class="hljs-string">Error:</span> Redis connection to <span class="hljs-string">redis:</span><span class="hljs-number">6379</span> failed - connect EHOSTUNREACH</code></pre>
+
+<p>Here’s what I did to fix it. First I ssh’d into the Docker machine:</p>
+<pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine ssh dev</code></pre>
+
+<p>And took a look at the network config:</p>
+<pre><code class="hljs">$ ifconfig eth0
+eth0      Link <span class="hljs-string">encap:</span>Ethernet  HWaddr <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:<span class="hljs-string">C8:</span><span class="hljs-string">C7:</span><span class="hljs-number">50</span>
+inet <span class="hljs-string">addr:</span><span class="hljs-number">10.254</span><span class="hljs-number">.0</span><span class="hljs-number">.15</span>  <span class="hljs-string">Bcast:</span><span class="hljs-number">10.254</span><span class="hljs-number">.0</span><span class="hljs-number">.255</span>  <span class="hljs-string">Mask:</span><span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span>
+inet6 <span class="hljs-string">addr:</span> <span class="hljs-string">fe80:</span>:<span class="hljs-string">a00:</span><span class="hljs-number">27</span><span class="hljs-string">ff:</span><span class="hljs-string">fec8:</span>c750/<span class="hljs-number">64</span> <span class="hljs-string">Scope:</span>Link
+UP BROADCAST RUNNING MULTICAST  <span class="hljs-string">MTU:</span><span class="hljs-number">1500</span>  <span class="hljs-string">Metric:</span><span class="hljs-number">1</span>
+RX <span class="hljs-string">packets:</span><span class="hljs-number">230796</span> <span class="hljs-string">errors:</span><span class="hljs-number">0</span> <span class="hljs-string">dropped:</span><span class="hljs-number">0</span> <span class="hljs-string">overruns:</span><span class="hljs-number">0</span> <span class="hljs-string">frame:</span><span class="hljs-number">0</span>
+TX <span class="hljs-string">packets:</span><span class="hljs-number">62400</span> <span class="hljs-string">errors:</span><span class="hljs-number">0</span> <span class="hljs-string">dropped:</span><span class="hljs-number">0</span> <span class="hljs-string">overruns:</span><span class="hljs-number">0</span> <span class="hljs-string">carrier:</span><span class="hljs-number">0</span>
+<span class="hljs-string">collisions:</span><span class="hljs-number">0</span> <span class="hljs-string">txqueuelen:</span><span class="hljs-number">1000</span>
+RX <span class="hljs-string">bytes:</span><span class="hljs-number">238029328</span> (<span class="hljs-number">227.0</span> MiB)  TX <span class="hljs-string">bytes:</span><span class="hljs-number">4768029</span> (<span class="hljs-number">4.5</span> MiB)</code></pre>
+
+<p>Where I see eth0 is configured on this subnet and doesn’t seem to be
+modifiable. So I fixed this via:</p>
+<pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine stop dev
+<span class="hljs-variable">$ </span><span class="hljs-constant">VBoxManage </span>modifyvm dev --natnet1 <span class="hljs-string">"10.254.0.0/24"</span>
+<span class="hljs-variable">$ </span>docker-machine restart dev</code></pre>
+
+<p>And boom, just like that it works:</p>
+<pre><code class="hljs">$ docker<span class="hljs-annotation">@dev</span>:~$ curl <span class="hljs-string">http:</span><span class="hljs-comment">//10.0.2.224:8000</span>
+HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> OK</code></pre>
+
+  
+        
+          <footer>
+            <div>
+              <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+
+            <p>
+              <a href="http://eepurl.com/bOIJlj">Learn more about technology and business</a> by subscribing to my mailing list<br>
+              <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+              Written: November 17th, 2015<br>
+              Categories: docker, virtualbox
+            </p>
+          </footer>
+        </article>                
+      
+        <hr>
+        
+        <footer class="footer">
+          <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+        </footer>
+      </div>
+    </div>    
+  </div>
+</body>
+</html>

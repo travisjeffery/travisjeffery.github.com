@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-8462120-1', 'travisjeffery.com');
+    ga('send', 'pageview');
+  </script>
+  <title>NSURLSession and NSOperationQueue working together = TRVSURLSessionOperation</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="row">
+      <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+        <hgroup id="header">
+          <h1 class="logo col-xs-6">
+            <a class="" href="/">travis jeffery</a>
+          </h1>
+          
+          <div class="social col-xs-6 pull-xs-right">
+                <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+        </hgroup>
+      
+        <hr>
+      
+        <article>
+          <header>
+            <h2 class="article-title">NSURLSession and NSOperationQueue working together = TRVSURLSessionOperation</h2>
+          </header>
+          
+          <p>Been meaning on shipping this project for a while now.</p>
+<p><code>TRVSURLSessionOperation</code> is an <code>NSOperation</code> subclass that wraps <code>NSURLSessionTask</code> so you can use them in a <code>NSOperationQueue</code>.</p>
+<p>Check it out on <a href="https://github.com/travisjeffery/TRVSURLSessionOperation">GitHub</a>.</p>
+<p>With this you can:</p>
+<ul>
+<li>Schedule network requests (i.e. run request A then request B, and give requests priority)</li>
+<li>Limit the number of concurrent network requests (e.g. have 5 network requests running at any given time)</li>
+<li>Control these network operations the same as other <code>NSOperation</code> objects (e.g. you have an <code>NSOperation</code> that creates an image, then an <code>TRVSURLSessionOperation</code> that uploads that image to a web service)</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<pre><code>NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+
+[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"https://twitter.com/travisjeffery"</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }]];</code></pre>
+
+<h3 id="run-a-request-on-the-completion-of-another-specific-request">Run a request on the completion of another, specific request</h3>
+<p>For example, you have an initial request to log a user in or fetch their settings, and you want subsequent requests to wait for that initial request to finish and then they run.</p>
+<pre><code>NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+
+TRVSURLSessionOperation *settingsOperation = [[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"..."</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }];
+
+TRVSURLSessionOperation *anotherOperation = [[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"..."</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }];
+
+// get some settings <span class="hljs-keyword">for</span> your app from your server, and queue subsequent requests that depend on those settings.
+[anotherOperation addDependency:settingsOperation];
+
+[queue addOperations:@[ loginOperation, settingsOperation ] waitUntilAllOperationsAreFinished:NO];</code></pre>
+
+<h3 id="pause-and-resume-suspend-requests-from-executing">Pause and resume/suspend requests from executing</h3>
+<pre><code>NSOperationQueue *queue = [[NSOperation alloc] init];
+queue.suspended = YES;
+
+<span class="hljs-comment">// these request/operations won't run</span>
+[queue <span class="hljs-string">addOperation:</span>[[TRVSURLSessionOperation alloc] <span class="hljs-string">initWithSession:</span>session <span class="hljs-string">request:</span>[NSURLRequest <span class="hljs-string">requestWithURL:</span>@<span class="hljs-string">"https://twitter.com/travisjeffery"</span>] <span class="hljs-string">completionHandler:</span>^(NSData *data, NSURLResponse *response, NSError *error) { ... }]];
+
+[queue <span class="hljs-string">addOperation:</span>[[TRVSURLSessionOperation alloc] <span class="hljs-string">initWithSession:</span>session <span class="hljs-string">request:</span>[NSURLRequest <span class="hljs-string">requestWithURL:</span>@<span class="hljs-string">"https://github.com/travisjeffery"</span>] <span class="hljs-string">completionHandler:</span>^(NSData *data, NSURLResponse *response, NSError *error) { ... }]];
+
+queue.suspended = NO;
+<span class="hljs-comment">// until now</span></code></pre>
+
+<h3 id="limit-the-number-of-concurrent-requests">Limit the number of concurrent requests</h3>
+<pre><code>NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+queue.maxConcurrentOperationCount = <span class="hljs-number">1</span>; // only one request will run at once
+
+NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+
+[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"https://twitter.com/travisjeffery"</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }]];
+
+[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"https://github.com/travisjeffery"</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }]];</code></pre>
+
+<h3 id="wait-until-all-requests-are-finished">Wait until all requests are finished</h3>
+<pre><code>NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+
+NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+
+[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"https://twitter.com/travisjeffery"</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }]];
+
+[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"https://github.com/travisjeffery"</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }]];
+
+[queue waitUntilAllOperationsAreFinished];
+
+NSLog(@<span class="hljs-string">"All requests are done!"</span>);</code></pre>
+
+<h2 id="install">Install</h2>
+<p>Use Cocoapods, and put the following in your Podfile:</p>
+<pre><code class="hljs ruby"><span class="hljs-prompt">pod `TRVSURLSessionOperation`, '~&gt;</span> <span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span><span class="hljs-string">'</span></code></pre>
+
+<p>Or manually drag the TRVSURLSessionOperation folder into your Xcode project.</p>
+<p>Check it out on <a href="https://github.com/travisjeffery/TRVSURLSessionOperation">GitHub</a>.</p>
+  
+        
+          <footer>
+            <div>
+              <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+
+            <p>
+              <a href="http://eepurl.com/bOIJlj">Learn more about technology and business</a> by subscribing to my mailing list<br>
+              <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+              Written: June 17th, 2014<br>
+              Categories: ios, mac, nsurlsession, nsoperationqueue
+            </p>
+          </footer>
+        </article>                
+      
+        <hr>
+        
+        <footer class="footer">
+          <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+        </footer>
+      </div>
+    </div>    
+  </div>
+</body>
+</html>

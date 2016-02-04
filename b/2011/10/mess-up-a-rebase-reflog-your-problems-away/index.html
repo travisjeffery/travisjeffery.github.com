@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6124432/723002/css/fonts.css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-8462120-1', 'travisjeffery.com');
+    ga('send', 'pageview');
+  </script>
+  <title>Mess up a rebase? reflog your problems away</title>
+</head><body>
+  <div class="container-fluid container">      
+    <div class="row">
+      <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+        <hgroup id="header">
+          <h1 class="logo col-xs-6">
+            <a class="" href="/">travis jeffery</a>
+          </h1>
+          
+          <div class="social col-xs-6 pull-xs-right">
+                <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+        </hgroup>
+      
+        <hr>
+      
+        <article>
+          <header>
+            <h2 class="article-title">Mess up a rebase? reflog your problems away</h2>
+          </header>
+          
+          <p>There is no reason not to rebase your topic branches onto the mainline
+branches, i.e. dev/ master, if you follow the git flow model.  The reason to
+rebase is to have a neat, simple and tidy history.</p>
+<p>If you’re afraid of doing a bad, here’s why it’s just as easy to get yourself
+out of a bad rebase as it is a bad merge, thanks to the mythical <em>reflog</em>.</p>
+<h2 id="monday-morning-meltdown-an-example">Monday morning meltdown, an example</h2>
+<p>So, let’s say it’s Monday morning you come into finish up working on release
+ticket, and you do what I would call: “a bad”, and rebase your topic branch onto dev when you
+actually intended to rebase your topic branch onto release, so it goes…</p>
+<p>Keep calm and carry on. We can easily solve this by looking at the reflog,
+finding the commit you made before you rebased and the resetting hard back to
+that commit.</p>
+<p>Here’s a example to make things crystal clear:</p>
+<p>This is an example of the output caused by invoking <code>git reflog</code>. Reading from
+the bottom to the top you can follow the history of actions I made.</p>
+<p><a href="http://i.imgur.com/4763S.png"><img src="http://media.tumblr.com/tumblr_ltynbgl5vG1qck115.png" alt="Reflog"></a></p>
+<ol>
+<li>I made a new repo and initial commit with the message: “Initial commit in master.” (@{10})</li>
+<li>I make a couple of branches, dev and my_topic_branch (@{9}-@{6})</li>
+<li>I make a commit in my dev branch with the message: “Making a newer commit in dev.” (@{5})</li>
+<li>I goto my topic branch and make a commit that I know will cause a conflict
+with the commit I just made in dev, the commit in my topic branch has the message: “Making the newest commit in my_topic_branch.” (@{3})</li>
+<li>I then rebase my topic branch onto dev, fix the conflict I constructed and finish
+the rebase. (@{3}-@{0})</li>
+</ol>
+<p>So this is what the history looks like in my topic branch after rebasing my
+topic branch onto dev:</p>
+<p><a href="http://i.imgur.com/5TLp5.png"><img src="http://media.tumblr.com/tumblr_ltynbxR4Mt1qck115.png" alt="After rebasing"></a></p>
+<p>This brings us to the present. I realize that I made a mistake by rebasing my
+topic branch onto dev and want to go back to the commit I made in my topic
+branch prior to rebasing:</p>
+<p><code>git reset --hard HEAD@{5}</code></p>
+<p>And my topic branch is once again in the state in which it was before I rebased:</p>
+<p><a href="http://i.imgur.com/ptL10.png"><img src="http://media.tumblr.com/tumblr_ltyncagHDc1qck115.png" alt="Before rebasing"></a></p>
+<p>Crisis averted.</p>
+  
+        
+          <footer>
+            <div>
+              <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+
+            <p>
+              <a href="http://eepurl.com/bOIJlj">Learn more about technology and business</a> by subscribing to my mailing list<br>
+              <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+              Written: October 31st, 2011<br>
+              Categories: git, rebase, reflog
+            </p>
+          </footer>
+        </article>                
+      
+        <hr>
+        
+        <footer class="footer">
+          <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+        </footer>
+      </div>
+    </div>    
+  </div>
+</body>
+</html>
