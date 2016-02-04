@@ -17,6 +17,7 @@ var drafts = require('metalsmith-drafts')
 var metallic = require('metalsmith-metallic')
 var categories = require('./lib/metalsmith-categories')
 var debug = require('./lib/metalsmith-debug')
+var redirect = require('metalsmith-redirect')
 
 metalsmith(__dirname)
   .source('src')
@@ -58,6 +59,9 @@ metalsmith(__dirname)
         pattern: 'b/:year/:month/:title'
       }))
     )
+  .use(redirect({
+    '/b/2012/12/overriding-uiviewcontrollers-view-property-done-right': '/b/2012/12/overriding-uiviewcontroller-s-view-property-done-right/'
+  }))
   .use(layouts({
     directory: 'layouts',
     engine: 'handlebars',

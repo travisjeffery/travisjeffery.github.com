@@ -17,6 +17,7 @@
     "metalsmith-permalinks": "0.4.x",
     "metalsmith-drafts": "0.0.x",
     "metalsmith-metallic": "0.3.x",
+    "metalsmith-redirect": "1.1.x",
     "bower-files": "3.11.x",
     "handlebars": "4.0.x"
   },
