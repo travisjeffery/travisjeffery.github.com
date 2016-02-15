@@ -138,16 +138,23 @@ hr {
 		background-color: $pink_flamingo;
 	}
 }
+
 .footer {
 	margin-top: 1.5em;
 	margin-bottom: 1.5em;
 }
+
 h2.article-title {
 	font-weight: 300;
 	margin-bottom: 1em;
 	margin-top: 1em;
 	font-size: 1.5em;
 }
+
 article footer {
 	margin-top: 1.5em;
+}
+
+.mc-field-group {
+  padding: 0;
 }
