@@ -22,7 +22,7 @@
   </script>
   <title>`git author sha` - get author info for a given sha in git</title>
 </head><body>
-  <div class="container-fluid container">      
+  <div class="container-fluid container">
     <div class="row">
       <div class="col-xs-12 col-lg-8 col-lg-offset-2">
         <hgroup id="header">
@@ -35,14 +35,14 @@
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           </div>
         </hgroup>
-      
+
         <hr>
-      
+
         <article>
           <header>
             <h2 class="article-title">`git author sha` - get author info for a given sha in git</h2>
           </header>
-          
+
           <p>When i’m hacking on open source libs i maintain, i often have to clean up the
 commits of people’s prs. I wanna give attribution for good contributions and
 not have my name associated with nasty hacks, so when i interactively rebase
@@ -59,8 +59,8 @@ commit(s), then copying and pasting the author info. So I wrote <code>git author
 <pre><code class="hljs">[alias]
   author = <span class="hljs-string">"!sh -c 'echo $(git log -1 --format=\"%an &lt;%ae&gt;\" $@) | tr -d \"\\n\"'"</span> -<span class="hljs-string">"'"</span></code></pre>
 
-  
-        
+
+
           <footer>
             <div>
               <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
@@ -68,14 +68,32 @@ commit(s), then copying and pasting the author info. So I wrote <code>git author
             </div>
 
             <p>
-              <a href="http://eepurl.com/bOIJlj">Learn more about technology and business</a> by subscribing to my mailing list<br>
+              <p>
+                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
+              
+                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                  <fieldset class="form-group">
+                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
+              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
+                    <small class="text-muted">Your email will never be shared anyone else.</small>
+                  </fieldset>
+              
+                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
+              
+              	  <div id="mce-responses" class="clear">
+              		  <div class="response" id="mce-error-response" style="display:none"></div>
+              		  <div class="response" id="mce-success-response" style="display:none"></div>
+              	  </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
+                </form>
+              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: October 5th, 2013<br>
               Categories: git, sha, author, open-source
             </p>
           </footer>
-        </article>                
-      
+        </article>
+
         <hr>
         
         <footer class="footer">
@@ -83,7 +101,7 @@ commit(s), then copying and pasting the author info. So I wrote <code>git author
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
         </footer>
       </div>
-    </div>    
+    </div>
   </div>
 </body>
 </html>

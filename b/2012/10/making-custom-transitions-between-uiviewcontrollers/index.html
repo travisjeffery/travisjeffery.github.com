@@ -22,7 +22,7 @@
   </script>
   <title>Making custom transitions between uiviewcontrollers</title>
 </head><body>
-  <div class="container-fluid container">      
+  <div class="container-fluid container">
     <div class="row">
       <div class="col-xs-12 col-lg-8 col-lg-offset-2">
         <hgroup id="header">
@@ -35,14 +35,14 @@
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           </div>
         </hgroup>
-      
+
         <hr>
-      
+
         <article>
           <header>
             <h2 class="article-title">Making custom transitions between uiviewcontrollers</h2>
           </header>
-          
+
           <p><strong>Note: iOS 7 has awesome APIs that make this sort of thing a lot funner, easier and powerful. When the SDK’s NDA is over I’ll be releasing some open source code and blog posts about them.</strong></p>
 <p>I just released a project called <a href="https://github.com/travisjeffery/TRVSNavigationControllerTransition">TRVSNavigationControllerTransition</a> that adds convenience methods to
 UINavigationControllers to push/pop UIViewControllers that translate the entire
@@ -91,8 +91,8 @@ with the QuartzCore.framework library, and then to use:</p>
 [<span class="hljs-keyword">self</span>.navigationController pushViewControllerWithNavigationControllerTransition:viewController];
 
 # <span class="hljs-keyword">to</span> pop called just <span class="hljs-keyword">as</span> you would <span class="hljs-keyword">with</span> popviewcontrolleranimated:
-[<span class="hljs-keyword">self</span>.navigationController popViewControllerWithNavigationControllerTransition];</code></pre>  
-        
+[<span class="hljs-keyword">self</span>.navigationController popViewControllerWithNavigationControllerTransition];</code></pre>
+
           <footer>
             <div>
               <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
@@ -100,14 +100,32 @@ with the QuartzCore.framework library, and then to use:</p>
             </div>
 
             <p>
-              <a href="http://eepurl.com/bOIJlj">Learn more about technology and business</a> by subscribing to my mailing list<br>
+              <p>
+                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
+              
+                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                  <fieldset class="form-group">
+                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
+              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
+                    <small class="text-muted">Your email will never be shared anyone else.</small>
+                  </fieldset>
+              
+                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
+              
+              	  <div id="mce-responses" class="clear">
+              		  <div class="response" id="mce-error-response" style="display:none"></div>
+              		  <div class="response" id="mce-success-response" style="display:none"></div>
+              	  </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
+                </form>
+              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: October 22nd, 2012<br>
               Categories: ios, objective-c, uiviewcontroller, uinavigationcontroller, core-animation, animations, transitions
             </p>
           </footer>
-        </article>                
-      
+        </article>
+
         <hr>
         
         <footer class="footer">
@@ -115,7 +133,7 @@ with the QuartzCore.framework library, and then to use:</p>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
         </footer>
       </div>
-    </div>    
+    </div>
   </div>
 </body>
 </html>

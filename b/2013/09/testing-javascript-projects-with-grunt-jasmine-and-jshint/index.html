@@ -22,7 +22,7 @@
   </script>
   <title>Testing javascript projects with grunt, jasmine, and jshint</title>
 </head><body>
-  <div class="container-fluid container">      
+  <div class="container-fluid container">
     <div class="row">
       <div class="col-xs-12 col-lg-8 col-lg-offset-2">
         <hgroup id="header">
@@ -35,14 +35,14 @@
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           </div>
         </hgroup>
-      
+
         <hr>
-      
+
         <article>
           <header>
             <h2 class="article-title">Testing javascript projects with grunt, jasmine, and jshint</h2>
           </header>
-          
+
           <p>I maintain jasmine-jquery, a library providing jquery matchers and fixture loading for jasmine. Recently, I setup jasmine-jquery with <a href="http://gruntjs.com/">grunt</a>, a javascript task runner. This way, I can run the test suite from the command-line, and have continuous integration with travis-ci — so collaborators know when they broke something. In the process of setting all this up, I learned about grunt, and using grunt with jshint and jasmine.</p>
 <p>To use grunt with jamine, jshint, and travis-ci, you need four files: package.json, Gruntfile.js, .jshintrc, and .travis.yml.</p>
 <p>First, you need a package.json file in the root of your project. <a href="https://github.com/velesin/jasmine-jquery/blob/master/package.json">That’ll look like</a>:</p>
@@ -103,8 +103,8 @@
 
 <p><a href="http://about.travis-ci.org/docs/user/getting-started/#Step-one%3A-Sign-in">Integrate travis-ci with your project on GitHub.</a></p>
 <p>Fin.</p>
-  
-        
+
+
           <footer>
             <div>
               <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
@@ -112,14 +112,32 @@
             </div>
 
             <p>
-              <a href="http://eepurl.com/bOIJlj">Learn more about technology and business</a> by subscribing to my mailing list<br>
+              <p>
+                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
+              
+                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                  <fieldset class="form-group">
+                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
+              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
+                    <small class="text-muted">Your email will never be shared anyone else.</small>
+                  </fieldset>
+              
+                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
+              
+              	  <div id="mce-responses" class="clear">
+              		  <div class="response" id="mce-error-response" style="display:none"></div>
+              		  <div class="response" id="mce-success-response" style="display:none"></div>
+              	  </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
+                </form>
+              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: September 3rd, 2013<br>
               Categories: javascript, jshint, grunt, jasmine, jasmine-jquery, travis-ci, github, ci, npm, node
             </p>
           </footer>
-        </article>                
-      
+        </article>
+
         <hr>
         
         <footer class="footer">
@@ -127,7 +145,7 @@
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
         </footer>
       </div>
-    </div>    
+    </div>
   </div>
 </body>
 </html>

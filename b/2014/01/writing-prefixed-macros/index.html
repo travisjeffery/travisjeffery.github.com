@@ -22,7 +22,7 @@
   </script>
   <title>Writing @ prefixed macros</title>
 </head><body>
-  <div class="container-fluid container">      
+  <div class="container-fluid container">
     <div class="row">
       <div class="col-xs-12 col-lg-8 col-lg-offset-2">
         <hgroup id="header">
@@ -35,14 +35,14 @@
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           </div>
         </hgroup>
-      
+
         <hr>
-      
+
         <article>
           <header>
             <h2 class="article-title">Writing @ prefixed macros</h2>
           </header>
-          
+
           <p>While writing my own debugging lib, an idea I was toying with was having a debug macro look like one of the built-in @ compiler directives, e.g. @selector, @encode, etc.</p>
 <p>Since macro names must be identifiers, and identifiers <a href="http://msdn.microsoft.com/en-us/library/e7f8y25b.aspx">can’t have @s in them</a>. You can’t do this:</p>
 <pre><code class="hljs objc"><span class="hljs-preprocessor">#define @debug(fmt, ...) \</span>
@@ -62,8 +62,8 @@
 <span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"My name is Travis."</span>);</code></pre>
 
 <p>Neat. It’s possible you could clash with directives that are added in the future, so namespacing your macros is probably best (e.g. <code>TRVSDebug</code>), especially in shared libraries. However, I have seen this techniqued used in <a href="https://github.com/jspahrsummers/libextobjc">libextobjc</a> — providing macros such as @weakify and @strongify.</p>
-  
-        
+
+
           <footer>
             <div>
               <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
@@ -71,14 +71,32 @@
             </div>
 
             <p>
-              <a href="http://eepurl.com/bOIJlj">Learn more about technology and business</a> by subscribing to my mailing list<br>
+              <p>
+                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
+              
+                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                  <fieldset class="form-group">
+                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
+              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
+                    <small class="text-muted">Your email will never be shared anyone else.</small>
+                  </fieldset>
+              
+                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
+              
+              	  <div id="mce-responses" class="clear">
+              		  <div class="response" id="mce-error-response" style="display:none"></div>
+              		  <div class="response" id="mce-success-response" style="display:none"></div>
+              	  </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
+                </form>
+              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: January 10th, 2014<br>
               Categories: objc, c, macros
             </p>
           </footer>
-        </article>                
-      
+        </article>
+
         <hr>
         
         <footer class="footer">
@@ -86,7 +104,7 @@
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
         </footer>
       </div>
-    </div>    
+    </div>
   </div>
 </body>
 </html>

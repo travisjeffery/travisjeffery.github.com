@@ -6253,3 +6253,7 @@ h2.article-title {
 article footer {
   margin-top: 1.5em;
 }
+
+.mc-field-group {
+  padding: 0;
+}
