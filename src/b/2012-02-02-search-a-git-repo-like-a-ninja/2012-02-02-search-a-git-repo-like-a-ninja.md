@@ -18,7 +18,7 @@ improvements:
 
 git can also support full blown Perl regular expressions as well, by compiling
 git with libpcre. Easy for [homebrew](https://github.com/mxcl/homebrew)
-users: 
+users:
 
 `brew install git --with-pcre`
 
@@ -35,11 +35,11 @@ git commands, plus g is nice and short.
 
 Compare this output, without grouping:
 
-![without grouping](https://img.skitch.com/20120209-t7ryiksqb3xr1bi72s3u2b1gbg.jpg)
+<img class="img-fluid" alt="Without grouping" src="images/without-grouping.jpg" />
 
 To this much more readable output, with grouping:
 
-![with grouping](https://img.skitch.com/20120209-1k6cxr7k4g6j7jq72gi14d5267.jpg)
+<img class="img-fluid" alt="With grouping" src="images/grouping.jpg" />
 
 The speed of git grep, which is basically a product of it being implemented in
 C and only searching your project files, i.e. not files in .git, is
@@ -102,7 +102,7 @@ end
 
 Given this file, after running the command above we get:
 
-![git grep example](https://img.skitch.com/20120205-b8jup1dswieqp4rhqucjrgck15.jpg)
+<img class="img-fluid" alt="git grep example" src="images/combination.jpg" />
 
 **Find files that contain some terms, not necessarily on the same line**
 
@@ -131,7 +131,7 @@ linked in the quickfix window. By listing the results in the quickfix window
 this mean you have the usual quickfix navigation keybindings, if you're
 unfamiliar, see `:h quickfix`
 
-![Using :Ggrep in Vim](https://img.skitch.com/20120206-8asb2rfheqi167ptex9jt5sf5u.jpg)
+<img class="img-fluid" alt="Using :Ggrep in Vim" src="images/editor.jpg" />
 
 If your project is not under git version control than you can use ack.vim in a
 similar manner:
