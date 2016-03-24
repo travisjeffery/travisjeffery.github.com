@@ -51,7 +51,7 @@ improvements:</p>
 <p><code>git config --global grep.extendRegexp true</code></p>
 <p>git can also support full blown Perl regular expressions as well, by compiling
 git with libpcre. Easy for <a href="https://github.com/mxcl/homebrew">homebrew</a>
-users: </p>
+users:</p>
 <p><code>brew install git --with-pcre</code></p>
 <p><strong>Always include line numbers</strong></p>
 <p><code>git config --global grep.lineNumber true</code></p>
@@ -60,9 +60,9 @@ users: </p>
 <p>As far as I know there is no non-trivial way to add default arguments/override
 git commands, plus g is nice and short.</p>
 <p>Compare this output, without grouping:</p>
-<p><img src="https://img.skitch.com/20120209-t7ryiksqb3xr1bi72s3u2b1gbg.jpg" alt="without grouping"></p>
+<p><img class="img-fluid" alt="Without grouping" src="images/without-grouping.jpg" /></p>
 <p>To this much more readable output, with grouping:</p>
-<p><img src="https://img.skitch.com/20120209-1k6cxr7k4g6j7jq72gi14d5267.jpg" alt="with grouping"></p>
+<p><img class="img-fluid" alt="With grouping" src="images/grouping.jpg" /></p>
 <p>The speed of git grep, which is basically a product of it being implemented in
 C and only searching your project files, i.e. not files in .git, is
 alone very compelling, but where git grep becomes really interesting and
@@ -101,7 +101,7 @@ argument size, so if you run into this problem, do something like:</p>
 <span class="hljs-keyword">end</span></code></pre>
 
 <p>Given this file, after running the command above we get:</p>
-<p><img src="https://img.skitch.com/20120205-b8jup1dswieqp4rhqucjrgck15.jpg" alt="git grep example"></p>
+<p><img class="img-fluid" alt="git grep example" src="images/combination.jpg" /></p>
 <p><strong>Find files that contain some terms, not necessarily on the same line</strong></p>
 <p><code>git grep -e &lt;regexp&gt; --and -e &lt;regexp&gt;</code></p>
 <p>…is not what you want, as it will search for <em>lines</em> that contain both those
@@ -120,7 +120,7 @@ interface with git grep by being to search and have your results listed and
 linked in the quickfix window. By listing the results in the quickfix window
 this mean you have the usual quickfix navigation keybindings, if you’re
 unfamiliar, see <code>:h quickfix</code></p>
-<p><img src="https://img.skitch.com/20120206-8asb2rfheqi167ptex9jt5sf5u.jpg" alt="Using :Ggrep in Vim"></p>
+<p><img class="img-fluid" alt="Using :Ggrep in Vim" src="images/editor.jpg" /></p>
 <p>If your project is not under git version control than you can use ack.vim in a
 similar manner:</p>
 <p><code>:Ack &lt;args&gt;</code></p>
