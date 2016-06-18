@@ -34,7 +34,7 @@
 
         <ul class="plain col-xs-12 col-md-6">
           <li><a id="email" class="js-judy" href="mailto:tj@travisjeffery.com">email real talk</a></li>
-          <li><a class="js-judy" href="/blog/archives">technical blog hacks</a></li>
+          <li><a class="js-judy" href="#tech-writing">biz and tech writing</a></li>
           <li><a class="js-judy" href="http://37signals.com/svn/writers/tj">posts on 37signals&#8217;s blog</a></li>
         </ul>
 
@@ -84,12 +84,6 @@
             </li>
 
             <li>
-              <a class="js-judy" href="https://github.com/travisjeffery/thr-client">The Heavy Rotation</a><span class="project-description">
-                is the JS lib that lists the albums on my website that I'm currently listening to on Rdio. Lambda/server portion of the project is <a href="https://github.com/travisjeffery/thr-lambda">here</a>.
-              </span>
-            </li>
-
-            <li>
               <a class="js-judy" href="http://github.com/thoughtbot/shoulda-context">shoulda-context</a><span class="project-description">
                 is a Test::Unit context framework extracted from thoughtbot&#8217;s Shoulda.</span>
               </li>
@@ -121,9 +115,20 @@
 
             <hr>
 
-            <h3 class="section-header" id="tech-writing"><span class="tech-writing">technical writing:</span></h3>
+            <h3 class="section-header" id="tech-writing"><span class="tech-writing">biz and tech writing:</span></h3>
 
             <ul class="plain col-xs-12">
+              {{#each collections.medium}}
+              <li>
+                <span class="article-title col-xs-9 pull-xs-left">
+                  <strong><a target="_blank" href="{{medium_link}}">{{title}}</a></strong>
+                </span>
+                <span class="article-date col-xs-3 push-xs-left pull-xs-right">
+                  {{dateShort}}
+                </span>
+              </li>
+              {{/each}}
+              
               {{#each collections.articles}}
               <li>
                 <span class="article-title col-xs-9 pull-xs-left">

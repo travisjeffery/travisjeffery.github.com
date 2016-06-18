@@ -31,6 +31,11 @@ metalsmith(__dirname)
   }))
   .use(categories())
   .use(collections({
+    medium: {
+      pattern: 'm/**/*.md',
+      sortBy: 'date',
+      reverse: true
+    },
     articles: {
       pattern: 'b/**/*.md',
       sortBy: 'date',
