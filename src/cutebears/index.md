@@ -1,5 +1,5 @@
 ---
-layout: home.html
+layout: info.html
 title: cute bears sticker pack support
 draft: false
 ---
