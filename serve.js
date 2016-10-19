@@ -19,7 +19,7 @@ var categories = require('./lib/metalsmith-categories')
 var debug = require('./lib/metalsmith-debug')
 var redirect = require('metalsmith-redirect')
 
-metalsmith(__dirname)
+var pipe = metalsmith(__dirname)
   .source('src')
   .destination('build')
   .use(drafts())
@@ -46,24 +46,24 @@ metalsmith(__dirname)
     directory: 'partials'
   }))
   .use(branch('**/*.md')
-    .use(metallic())
-    .use(markdown({
-      smartypants: true,
-      gfm: true,
-      tables: true
-    }))
-  )
-  .use(branch('**/*.scss')
-    .use(sass({
-      outputStyle: 'expanded'
-    }))
-  )
+       .use(metallic())
+       .use(markdown({
+         smartypants: true,
+         gfm: true,
+         tables: true
+       }))
+      )
+    .use(branch('**/*.scss')
+         .use(sass({
+           outputStyle: 'expanded'
+         }))
+        )
   .use(bower())
   .use(branch('b/**/*')
-    .use(permalinks({
-        pattern: 'b/:year/:month/:title'
-      }))
-    )
+       .use(permalinks({
+         pattern: 'b/:year/:month/:title'
+       }))
+      )
   .use(redirect({
     '/b/2012/12/overriding-uiviewcontrollers-view-property-done-right': '/b/2012/12/overriding-uiviewcontroller-s-view-property-done-right/'
   }))
@@ -72,11 +72,15 @@ metalsmith(__dirname)
     engine: 'handlebars',
     pattern: '**/*.html',
     default: 'post.html'
-  }))
-  .use(browserSync({
+  }));
+
+if (process.env.WATCH) {
+  pipe = pipe.use(browserSync({
     server: 'build',
     files : ['src/**/*', 'layouts/**/*', 'partials/**/*']
-  }))
-  .build(function(err) {
-    if (err) throw err
-  });
+  }));
+}
+
+pipe.build(function(err) {
+  if (err) throw err
+});
