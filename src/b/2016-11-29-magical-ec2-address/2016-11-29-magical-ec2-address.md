@@ -51,8 +51,6 @@ reservation-id
 security-groups
 ```
 
-<hr>
-
 Let me know on Twitter if you found this post useful.
 
 - [AWS’s documentation on instance metadata](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
