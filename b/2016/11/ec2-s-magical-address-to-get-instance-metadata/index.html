@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Travis Jeffery">
+  <link href="/css/style.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+   ga('create', 'UA-8462120-1', 'travisjeffery.com');
+    ga('send', 'pageview');
+  </script>
+  <title>EC2’S Magical Address to Get Instance Metadata</title>
+</head>
+<body>
+  <div class="container-fluid container">
+    <div class="row">
+      <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+        <hgroup id="header">
+          <h1 class="logo col-xs-6">
+            <a class="" href="/">travis jeffery</a>
+          </h1>
+          
+          <div class="social col-xs-6 pull-xs-right">
+                <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+        </hgroup>
+
+        <hr>
+
+        <article>
+          <header>
+            <h2 class="article-title">EC2’S Magical Address to Get Instance Metadata</h2>
+          </header>
+
+          <p>There’s a magical address in EC2 that you can query to get metadata on that instance (<code>http://169.254.169.254</code>). What’s especially awesome about it, is that you can use it inside Docker containers which makes it an easy
+way to find the host IP from inside the container without having to pass it in via an env var or equivalent.</p>
+<p>Behold! I’m curling inside a Docker container and from the host and
+getting the host’s IP address both times:</p>
+<pre><code class="hljs sh">travis@ip-<span class="hljs-number">10</span>–<span class="hljs-number">0</span>–<span class="hljs-number">8</span>–<span class="hljs-number">119</span>:~$ docker <span class="hljs-keyword">exec</span> -t <span class="hljs-number">80</span>dd8ce35ca0 curl http://<span class="hljs-number">169.254</span>.<span class="hljs-number">169.254</span>/latest/meta-data/local-ipv4; <span class="hljs-built_in">echo</span>
+<span class="hljs-number">10.0</span>.<span class="hljs-number">8.119</span>
+travis@ip-<span class="hljs-number">10</span>–<span class="hljs-number">0</span>–<span class="hljs-number">8</span>–<span class="hljs-number">119</span>:~$ curl http://<span class="hljs-number">169.254</span>.<span class="hljs-number">169.254</span>/latest/meta-data/local-ipv4; <span class="hljs-built_in">echo</span>
+<span class="hljs-number">10.0</span>.<span class="hljs-number">8.119</span>
+travis@ip-<span class="hljs-number">10</span>–<span class="hljs-number">0</span>–<span class="hljs-number">8</span>–<span class="hljs-number">119</span>:~$ <span class="hljs-built_in">echo</span> OMG!
+OMG!</code></pre>
+
+<p>This is useful for stats and monitoring. So you can track stats by the host,
+and have your alerts include the host’s IP so you know exactly where to go to fix your issue.</p>
+<p>Aside from the hostname and local IP address, there’s plenty of other metadata:</p>
+<pre><code class="hljs">travis@<span class="hljs-literal">ip</span>-<span class="hljs-number">10</span>–<span class="hljs-number">0</span>–<span class="hljs-number">8</span>–<span class="hljs-number">119</span>:~$ curl http://<span class="hljs-number">169.254</span>.<span class="hljs-number">169.254</span>/latest/meta-data/
+ami-<span class="hljs-built_in">id</span>
+ami-launch-index
+ami-<span class="hljs-literal">manifest</span>-<span class="hljs-built_in">path</span>
+block-<span class="hljs-literal">device</span>-mapping/
+<span class="hljs-built_in">hostname</span>
+iam/
+<span class="hljs-literal">instance</span>-action
+<span class="hljs-literal">instance</span>-<span class="hljs-built_in">id</span>
+<span class="hljs-literal">instance</span>-<span class="hljs-built_in">type</span>
+local-<span class="hljs-built_in">hostname</span>
+local-ipv4
+mac
+metrics/
+network/
+placement/
+profile
+public-<span class="hljs-built_in">hostname</span>
+public-ipv4
+public-<span class="hljs-literal">keys</span>/
+reservation-<span class="hljs-built_in">id</span>
+security-<span class="hljs-literal">groups</span></code></pre>
+
+<hr>
+
+<p>Let me know on Twitter if you found this post useful.</p>
+<ul>
+<li><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">AWS’s documentation on instance metadata</a></li>
+<li><a href="https://github.com/travisjeffery/go-ec2-metadata">Go lib I wrote to wrap the metadata</a></li>
+</ul>
+
+
+          <hr>
+          
+          <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
+
+          <footer>
+            <div>
+              <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+
+            <p>
+              <p>
+                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
+              
+                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                  <fieldset class="form-group">
+                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
+              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
+                    <small class="text-muted">Your email will never be shared with anyone else.</small>
+                  </fieldset>
+              
+                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
+              
+              	  <div id="mce-responses" class="clear">
+              		  <div class="response" id="mce-error-response" style="display:none"></div>
+              		  <div class="response" id="mce-success-response" style="display:none"></div>
+              	  </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
+                </form>
+              </p>
+              <a href="/#tech-writing">Read more posts &#8230;</a> <br>
+              Written: November 29th, 2016<br>
+              Categories: aws, ec2, docker
+            </p>
+          </footer>
+        </article>
+
+        <hr>
+        
+        <footer class="footer">
+          <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+        </footer>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
