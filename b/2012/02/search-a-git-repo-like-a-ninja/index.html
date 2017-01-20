@@ -96,9 +96,9 @@ argument size, so if you run into this problem, do something like:</p>
 <span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Bad</span>;</span> <span class="hljs-keyword">end</span>
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>
-  extend <span class="hljs-constant">UserSpecification</span>
-  <span class="hljs-keyword">include</span> <span class="hljs-constant">UserFactory</span>
-  <span class="hljs-keyword">include</span> <span class="hljs-constant">Bad</span>
+  extend UserSpecification
+  <span class="hljs-keyword">include</span> UserFactory
+  <span class="hljs-keyword">include</span> Bad
 <span class="hljs-keyword">end</span></code></pre>
 
 <p>Given this file, after running the command above we get:</p>

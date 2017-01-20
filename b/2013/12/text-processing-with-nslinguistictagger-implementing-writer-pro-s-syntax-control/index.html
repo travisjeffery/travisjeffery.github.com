@@ -48,21 +48,21 @@
 <p><a href="https://github.com/travisjeffery/LingusticTaggerDemo">Project</a> on GitHub.</p>
 <p><img src="https://raw.github.com/travisjeffery/LingusticTaggerDemo/master/linguistictagger.gif" alt="demo gif"></p>
 <pre><code class="hljs objc">- (<span class="hljs-keyword">void</span>)highlightLinguisticTag:(<span class="hljs-built_in">NSString</span> *)tag {
-    <span class="hljs-keyword">self</span><span class="hljs-variable">.textView</span><span class="hljs-variable">.attributedText</span> = [<span class="hljs-keyword">self</span> attributedStringHighlightedForTag:tag];
+    <span class="hljs-keyword">self</span>.textView.attributedText = [<span class="hljs-keyword">self</span> attributedStringHighlightedForTag:tag];
 }
 
-- (NSAttributedString *)attributedStringHighlightedForTag:(<span class="hljs-built_in">NSString</span> *)tag {
+- (<span class="hljs-built_in">NSAttributedString</span> *)attributedStringHighlightedForTag:(<span class="hljs-built_in">NSString</span> *)tag {
     <span class="hljs-built_in">NSString</span> *string = <span class="hljs-string">@"Some string..."</span>
-    <span class="hljs-built_in">NSRange</span> stringRange = NSMakeRange(<span class="hljs-number">0</span>, string<span class="hljs-variable">.length</span>);
+    <span class="hljs-built_in">NSRange</span> stringRange = <span class="hljs-built_in">NSMakeRange</span>(<span class="hljs-number">0</span>, string.length);
 
-    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:string attributes:<span class="hljs-literal">nil</span>];
-    [text addAttribute:NSForegroundColorAttributeName value:[<span class="hljs-built_in">UIColor</span> lightGrayColor] range:stringRange];
+    <span class="hljs-built_in">NSMutableAttributedString</span> *text = [[<span class="hljs-built_in">NSMutableAttributedString</span> alloc] initWithString:string attributes:<span class="hljs-literal">nil</span>];
+    [text addAttribute:<span class="hljs-built_in">NSForegroundColorAttributeName</span> value:[<span class="hljs-built_in">UIColor</span> lightGrayColor] range:stringRange];
 
-    NSLinguisticTagger *tagger = [[NSLinguisticTagger alloc] initWithTagSchemes:@[NSLinguisticTagSchemeLexicalClass] options:<span class="hljs-number">0</span>];
-    tagger<span class="hljs-variable">.string</span> = string;
-    [tagger enumerateTagsInRange:stringRange scheme:NSLinguisticTagSchemeLexicalClass options:<span class="hljs-number">0</span> usingBlock:^(<span class="hljs-built_in">NSString</span> *tokenTag, <span class="hljs-built_in">NSRange</span> tokenRange, <span class="hljs-built_in">NSRange</span> sentenceRange, <span class="hljs-built_in">BOOL</span> *stop) {
+    <span class="hljs-built_in">NSLinguisticTagger</span> *tagger = [[<span class="hljs-built_in">NSLinguisticTagger</span> alloc] initWithTagSchemes:@[<span class="hljs-built_in">NSLinguisticTagSchemeLexicalClass</span>] options:<span class="hljs-number">0</span>];
+    tagger.string = string;
+    [tagger enumerateTagsInRange:stringRange scheme:<span class="hljs-built_in">NSLinguisticTagSchemeLexicalClass</span> options:<span class="hljs-number">0</span> usingBlock:^(<span class="hljs-built_in">NSString</span> *tokenTag, <span class="hljs-built_in">NSRange</span> tokenRange, <span class="hljs-built_in">NSRange</span> sentenceRange, <span class="hljs-built_in">BOOL</span> *stop) {
         <span class="hljs-keyword">if</span> ([tokenTag isEqualToString:tag]) {
-            [text addAttribute:NSForegroundColorAttributeName value:[<span class="hljs-built_in">UIColor</span> blackColor] range:tokenRange];
+            [text addAttribute:<span class="hljs-built_in">NSForegroundColorAttributeName</span> value:[<span class="hljs-built_in">UIColor</span> blackColor] range:tokenRange];
         }
     }];
 

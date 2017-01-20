@@ -53,21 +53,21 @@ button of the cell for when it’s pressed, and then in that action get the inde
 path by having the table view tell us what index path is associated with
 the point that was touched.</p>
 <p>Add the target and action to the button of the cell for when it’s pressed,</p>
-<pre><code>- (UITableViewCell *)tableView:(UITableView *)tableView
-  cellForRowAtIndexPath:(NSIndexPath *)indexPath
+<pre><code>- (UITableViewCell *)<span class="hljs-string">tableView:</span>(UITableView *)tableView
+<span class="hljs-symbol">  cellForRowAtIndexPath:</span>(NSIndexPath *)indexPath
 {
-  // <span class="hljs-keyword">...</span>
-  [cell.myButton addTarget:self action:@selector(touchMyButton:event:) forControlEvents:UIControlEventTouchUpInside];
-  // <span class="hljs-keyword">...</span>
+  <span class="hljs-comment">// ...</span>
+  [cell.myButton <span class="hljs-string">addTarget:</span>self <span class="hljs-string">action:</span><span class="hljs-meta">@selector</span>(<span class="hljs-string">touchMyButton:</span><span class="hljs-string">event:</span>) <span class="hljs-string">forControlEvents:</span>UIControlEventTouchUpInside];
+  <span class="hljs-comment">// ...</span>
 }</code></pre>
 
 <p>Have the table view tell us what index path is associated with the point that was touched,</p>
-<pre><code>- (void)touchMyButton:(UIButton*)button event:(UIEvent*)event
+<pre><code>- (<span class="hljs-keyword">void</span>)<span class="hljs-string">touchMyButton:</span>(UIButton*)button <span class="hljs-string">event:</span>(UIEvent*)event
 {
-    NSIndexPath* indexPath = [_tableView indexPathForRowAtPoint:
-                                  [[[event touchesForView:button] anyObject]
-                                  locationInView:_tableView]];
-    // <span class="hljs-keyword">...</span> 
+    NSIndexPath* indexPath = [_tableView <span class="hljs-string">indexPathForRowAtPoint:</span>
+                                  [[[event <span class="hljs-string">touchesForView:</span>button] anyObject]
+<span class="hljs-symbol">                                  locationInView:</span>_tableView]];
+    <span class="hljs-comment">// ... </span>
 }</code></pre>
 
           <hr>

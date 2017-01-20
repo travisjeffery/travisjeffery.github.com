@@ -45,28 +45,28 @@
           </header>
 
           <p>This week I switched from working on iOS apps at 37signals to working on a similar mac app. I wanted to shared code between the ios and mac app, this is easy to do with foundation classes - my model and networking code. But doesn’t work right out of the box for stuff like images, colors, fonts, since they’re either in UIKit or AppKit. Thankfully you can adapt code for images, colors, and bezier paths using #define. Like so:</p>
-<pre><code class="hljs objc"><span class="hljs-preprocessor">#if TARGET_OS_IPHONE</span>
+<pre><code class="hljs objc"><span class="hljs-meta">#if TARGET_OS_IPHONE</span>
 
-<span class="hljs-preprocessor">#define TRVSColor UIColor</span>
-<span class="hljs-preprocessor">#define TRVSImage UIImage</span>
-<span class="hljs-preprocessor">#define TRVSFont UIFont</span>
-<span class="hljs-preprocessor">#define TRVSBezierPath UIBezierPath</span>
+<span class="hljs-meta">#define TRVSColor UIColor</span>
+<span class="hljs-meta">#define TRVSImage UIImage</span>
+<span class="hljs-meta">#define TRVSFont UIFont</span>
+<span class="hljs-meta">#define TRVSBezierPath UIBezierPath</span>
 
-<span class="hljs-preprocessor">#elif TARGET_OS_MAC &amp;&amp; !TARGET_OS_IPHONE</span>
+<span class="hljs-meta">#elif TARGET_OS_MAC &amp;&amp; !TARGET_OS_IPHONE</span>
 
-<span class="hljs-preprocessor">#define TRVSColor NSColor</span>
-<span class="hljs-preprocessor">#define TRVSImage NSImage</span>
-<span class="hljs-preprocessor">#define TRVSFont NSFont</span>
-<span class="hljs-preprocessor">#define TRVSBezierPath NSBezierPath</span>
+<span class="hljs-meta">#define TRVSColor NSColor</span>
+<span class="hljs-meta">#define TRVSImage NSImage</span>
+<span class="hljs-meta">#define TRVSFont NSFont</span>
+<span class="hljs-meta">#define TRVSBezierPath NSBezierPath</span>
 
-<span class="hljs-preprocessor">#endif</span></code></pre>
+<span class="hljs-meta">#endif</span></code></pre>
 
 <p>Those are the only classes you can do this with.</p>
 <p>Throw that code in something like <code>TRVSPlatformAdapter.h</code>.</p>
 <p>Often in apps I write, I’ll put category methods UIColor/NSColor for colors often used in the app’s design.</p>
 <p>This is how this is done while still being platform independent.</p>
 <p>Have <code>Color+TRVSKit.{h, m}</code> like so:</p>
-<pre><code class="hljs objc"><span class="hljs-preprocessor">#import <span class="hljs-title">"TRVSPlatformAdapter.h"</span></span>
+<pre><code class="hljs objc"><span class="hljs-meta">#import <span class="hljs-meta-string">"TRVSPlatformAdapter.h"</span></span>
 
 <span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">TRVSColor</span> (<span class="hljs-title">TRVSKit</span>)</span>
 
@@ -76,7 +76,7 @@
 
 <span class="hljs-comment">//</span>
 
-<span class="hljs-preprocessor">#import <span class="hljs-title">"Color+TRVSKit.h"</span></span>
+<span class="hljs-meta">#import <span class="hljs-meta-string">"Color+TRVSKit.h"</span></span>
 
 <span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">TRVSColor</span> (<span class="hljs-title">TRVSKit</span>)</span>
 

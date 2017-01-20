@@ -53,23 +53,23 @@
 <span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">APIClientTests</span></span>
 
 - (<span class="hljs-keyword">void</span>)setUp {
-    <span class="hljs-keyword">self</span><span class="hljs-variable">.URLSession</span> = [<span class="hljs-built_in">NSURLSession</span> sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    <span class="hljs-keyword">self</span>.URLSession = [<span class="hljs-built_in">NSURLSession</span> sessionWithConfiguration:[<span class="hljs-built_in">NSURLSessionConfiguration</span> defaultSessionConfiguration]];
 }
 
 - (<span class="hljs-keyword">void</span>)testAPIEndpoint {
     __block <span class="hljs-built_in">NSDictionary</span> *JSON = <span class="hljs-literal">nil</span>;
     __block TRVSMonitor *monitor = [TRVSMonitor monitor];
 
-    [<span class="hljs-keyword">self</span><span class="hljs-variable">.URLSession</span> dataTaskWithRequest:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:[<span class="hljs-built_in">NSURL</span> URLWithString:<span class="hljs-string">@"http://127.0.0.1:8000"</span>]] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, NSURLResponse *response, <span class="hljs-built_in">NSError</span> *error) {
-        JSON = [NSJSONSerialization JSONObjectWithData:data options:<span class="hljs-number">0</span> error:<span class="hljs-literal">NULL</span>];
+    [<span class="hljs-keyword">self</span>.URLSession dataTaskWithRequest:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:[<span class="hljs-built_in">NSURL</span> URLWithString:<span class="hljs-string">@"http://127.0.0.1:8000"</span>]] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, <span class="hljs-built_in">NSURLResponse</span> *response, <span class="hljs-built_in">NSError</span> *error) {
+        JSON = [<span class="hljs-built_in">NSJSONSerialization</span> JSONObjectWithData:data options:<span class="hljs-number">0</span> error:<span class="hljs-literal">NULL</span>];
         [monitor signal];
     }];
 
     [monitor wait];
 
-    XCTAssert(JSON);
-    XCTAssertEqualObjects(<span class="hljs-string">@"1"</span>, JSON[<span class="hljs-string">@"id"</span>]);
-    XCTAssertEqualObjects(<span class="hljs-string">@"travis jeffery"</span>, JSON[<span class="hljs-string">@"name"</span>]);
+    <span class="hljs-built_in">XCTAssert</span>(JSON);
+    <span class="hljs-built_in">XCTAssertEqualObjects</span>(<span class="hljs-string">@"1"</span>, JSON[<span class="hljs-string">@"id"</span>]);
+    <span class="hljs-built_in">XCTAssertEqualObjects</span>(<span class="hljs-string">@"travis jeffery"</span>, JSON[<span class="hljs-string">@"name"</span>]);
 }
 
 <span class="hljs-keyword">@end</span></code></pre>

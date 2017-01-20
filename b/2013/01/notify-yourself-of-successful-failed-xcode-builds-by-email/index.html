@@ -62,15 +62,15 @@ my_actual_email_address = <span class="hljs-string">"...@gmail.com"</span>
 my_sending_email_address = <span class="hljs-string">"...@gmail.com"</span>
 my_sending_email_password = <span class="hljs-string">"..."</span>
 
-email_content = &lt;&lt;<span class="hljs-constant">EOF</span>
-<span class="hljs-constant">From</span><span class="hljs-symbol">:</span> <span class="hljs-comment">#{my_sending_email_address}</span>
-<span class="hljs-constant">To</span><span class="hljs-symbol">:</span> <span class="hljs-comment">#{my_actual_email_address}</span>
-<span class="hljs-constant">Subject</span><span class="hljs-symbol">:</span> <span class="hljs-constant">Build</span> <span class="hljs-constant">Finished</span> <span class="hljs-constant">Successfully</span>! 👍
-<span class="hljs-constant">Date</span><span class="hljs-symbol">:</span> <span class="hljs-comment">#{Time.now}</span>
-<span class="hljs-constant">EOF</span>
+email_content = <span class="hljs-string">&lt;&lt;EOF
+From: <span class="hljs-subst">#{my_sending_email_address}</span>
+To: <span class="hljs-subst">#{my_actual_email_address}</span>
+Subject: Build Finished Successfully! 👍
+Date: <span class="hljs-subst">#{Time.now}</span>
+EOF</span>
 
-<span class="hljs-constant">Net::SMTP</span>.enable_tls(<span class="hljs-constant">OpenSSL::SSL::VERIFY_NONE</span>)
-<span class="hljs-constant">Net::SMTP</span>.start(<span class="hljs-string">"smtp.gmail.com"</span>, <span class="hljs-number">587</span>, <span class="hljs-string">"gmail.com"</span>, my_sending_email_address, my_sending_email_password, <span class="hljs-symbol">:login</span>) <span class="hljs-keyword">do</span> |smtp|
+Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+Net::SMTP.start(<span class="hljs-string">"smtp.gmail.com"</span>, <span class="hljs-number">587</span>, <span class="hljs-string">"gmail.com"</span>, my_sending_email_address, my_sending_email_password, <span class="hljs-symbol">:login</span>) <span class="hljs-keyword">do</span> <span class="hljs-params">|smtp|</span>
   smtp.send_message(email_content, my_sending_email_address, my_actual_email_address)
 <span class="hljs-keyword">end</span></code></pre>
 

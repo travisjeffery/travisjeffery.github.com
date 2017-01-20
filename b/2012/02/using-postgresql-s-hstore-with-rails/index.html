@@ -56,8 +56,8 @@ programming so having them as a data type in a database is massively
 powerful with many use cases, e.g. dynamic columns.</p>
 <p>Rails can actually already do this by adding a text field to a table and
 calling serialize like so:</p>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyModel</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
-  serialize <span class="hljs-symbol">:field</span>, <span class="hljs-constant">Hash</span>
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyModel</span> &lt; ActiveRecord::Base</span>
+  serialize <span class="hljs-symbol">:field</span>, Hash
 <span class="hljs-keyword">end</span></code></pre>
 
 <p>The problem with this is that a field stored and serialized in this manner will not
@@ -80,14 +80,14 @@ hstore.</p>
 for us:</p>
 <pre><code class="hljs ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">'test_helper'</span>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PersonTest</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveSupport::TestCase</span></span></span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>setup
-    <span class="hljs-variable">@travis</span> = <span class="hljs-constant">Person</span>.create <span class="hljs-symbol">:name</span> =&gt; <span class="hljs-string">"Travis Jeffery"</span>, <span class="hljs-symbol">:preferences</span> =&gt; {<span class="hljs-string">"private?"</span> =&gt; <span class="hljs-keyword">true</span>, <span class="hljs-string">"location"</span> =&gt; <span class="hljs-string">"Toronto, Ontario"</span>}
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PersonTest</span> &lt; ActiveSupport::TestCase</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setup</span></span>
+    @travis = Person.create <span class="hljs-symbol">:name</span> =&gt; <span class="hljs-string">"Travis Jeffery"</span>, <span class="hljs-symbol">:preferences</span> =&gt; {<span class="hljs-string">"private?"</span> =&gt; <span class="hljs-literal">true</span>, <span class="hljs-string">"location"</span> =&gt; <span class="hljs-string">"Toronto, Ontario"</span>}
   <span class="hljs-keyword">end</span>
 
   test <span class="hljs-string">"accessing preferences"</span> <span class="hljs-keyword">do</span>
-    assert_equal <span class="hljs-keyword">true</span>, <span class="hljs-variable">@travis</span>.preferences[<span class="hljs-string">"private?"</span>]
-    assert_equal <span class="hljs-string">"Toronto, Ontario"</span>, <span class="hljs-variable">@travis</span>.preferences[<span class="hljs-string">"location"</span>]
+    assert_equal <span class="hljs-literal">true</span>, @travis.preferences[<span class="hljs-string">"private?"</span>]
+    assert_equal <span class="hljs-string">"Toronto, Ontario"</span>, @travis.preferences[<span class="hljs-string">"location"</span>]
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre>
 
@@ -95,8 +95,8 @@ for us:</p>
 <p>This API is not very nice and has bad encapsulation, how much cooler would
 it be to be able to just use <code>@travis.private?</code> or <code>@travis.location</code>? Here’s
 how:</p>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>method_missing(id, *args, &amp;block)
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> &lt; ActiveRecord::Base</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">method_missing</span><span class="hljs-params">(id, *args, &amp;block)</span></span>
     <span class="hljs-keyword">if</span> preferences.has_key?(id.to_s)
       preferences.fetch(id.to_s)
     <span class="hljs-keyword">else</span>

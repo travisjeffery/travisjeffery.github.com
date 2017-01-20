@@ -62,13 +62,13 @@ by looking at it, e.g. you have to know the precision/scale order.</p>
 table:</p>
 <p><code>rails g migration add_body_and_pid_to_people body:string:index pid:integer:uniq</code></p>
 <p>Will generate this migration:</p>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddBodyAndPidToPersons</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Migration</span></span></span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>change
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddBodyAndPidToPersons</span> &lt; ActiveRecord::Migration</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">change</span></span>
     add_column <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:body</span>, <span class="hljs-symbol">:string</span>
     add_index <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:body</span>
 
     add_column <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:pid</span>, <span class="hljs-symbol">:integer</span>
-    add_index <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:pid</span>, <span class="hljs-symbol">:unique</span> =&gt; <span class="hljs-keyword">true</span>
+    add_index <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:pid</span>, <span class="hljs-symbol">:unique</span> =&gt; <span class="hljs-literal">true</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre>
 
@@ -77,12 +77,12 @@ table:</p>
 <p><code>rails g migration add_body_to_people body:string:index</code></p>
 <p>Generates the migration we expect, however,</p>
 <p><code>rails g migration remove_body_from_people body:string:index</code></p>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RemoveBodyFromPeople</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Migration</span></span></span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>up
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RemoveBodyFromPeople</span> &lt; ActiveRecord::Migration</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">up</span></span>
     remove_column <span class="hljs-symbol">:people</span>, <span class="hljs-symbol">:body</span>
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>down
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">down</span></span>
     add_column <span class="hljs-symbol">:people</span>, <span class="hljs-symbol">:body</span>, <span class="hljs-symbol">:string</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre>

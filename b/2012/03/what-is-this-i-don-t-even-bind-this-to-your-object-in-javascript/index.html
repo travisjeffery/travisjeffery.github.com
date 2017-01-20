@@ -50,11 +50,11 @@ different each time the function is called.</p>
 <p>In this example, as we and anyone else would expect after reading this code,
 <code>this</code> refers to MyObject,</p>
 <pre><code class="hljs js"><span class="hljs-keyword">var</span> MyObject = {
-  my_method: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-attr">my_method</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
     <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>)
   },
 
-  inspect: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-attr">inspect</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
     <span class="hljs-keyword">return</span> <span class="hljs-string">"I'm MyObject!"</span>
   }
 }
@@ -71,7 +71,7 @@ called within the context of the global object.</p>
   <span class="hljs-comment">// ...</span>
 }
 
-global.inspect = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+global.inspect = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-keyword">return</span> <span class="hljs-string">"I'm the Global Object!"</span>
 }
 
@@ -87,9 +87,9 @@ triggered your event on,</p>
 <pre><code class="hljs js"><span class="hljs-keyword">var</span> myDiv = $(<span class="hljs-string">"body"</span>).append(<span class="hljs-string">"&lt;div id='js-my-div'&gt;&lt;/div&gt;"</span>)
 
 <span class="hljs-keyword">var</span> CarlDouglas = {
-  lyrics: <span class="hljs-string">"OhohOhoOh... Everybody was Kung fu fighting! Ha!"</span>,
+  <span class="hljs-attr">lyrics</span>: <span class="hljs-string">"OhohOhoOh... Everybody was Kung fu fighting! Ha!"</span>,
 
-  sing: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-attr">sing</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
     <span class="hljs-keyword">this</span>.lyrics || (<span class="hljs-keyword">this</span>.lyrics = <span class="hljs-string">"Where are Carl Douglas's lyrics?! What this is _this_??"</span>)
 
     <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.lyrics)
@@ -114,9 +114,9 @@ sources</a> for more detail.</p>
 <pre><code class="hljs js"><span class="hljs-keyword">var</span> myDiv = $(<span class="hljs-string">"body"</span>).append(<span class="hljs-string">"&lt;div id='js-my-div'&gt;&lt;/div&gt;"</span>)
 
 <span class="hljs-keyword">var</span> CarlDouglas = {
-  lyrics: <span class="hljs-string">"OhohOhoOh... Everybody was Kung fu fighting! Ha!"</span>,
+  <span class="hljs-attr">lyrics</span>: <span class="hljs-string">"OhohOhoOh... Everybody was Kung fu fighting! Ha!"</span>,
 
-  sing: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+  <span class="hljs-attr">sing</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
     <span class="hljs-keyword">this</span>.lyrics || (<span class="hljs-keyword">this</span>.lyrics = <span class="hljs-string">"Where are Carl Douglas's lyrics?! What this is _this_??"</span>)
 
     <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.lyrics)

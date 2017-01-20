@@ -49,18 +49,18 @@ cell of a table view needed a drop shadow.</p>
 <p>The idea of the implementation was to use the shadow properties on the
 table cell’s Core Animation layer to render our drop shadow. </p>
 <p>(cell references the last cell of the table view)</p>
-<pre><code class="hljs">- (UITableViewCell *)tableView:(UITableView *)tableView
-  cellForRowAtIndexPath:(NSIndexPath *)indexPath
+<pre><code class="hljs">- (<span class="hljs-built_in">UITableViewCell</span> *)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView
+  cellForRowAtIndexPath:(<span class="hljs-built_in">NSIndexPath</span> *)indexPath
 {
-  // <span class="hljs-keyword">...</span>
-  cell.layer.shadowOffset = CGSizeMake(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>);
-  cell.layer.shadowColor = [[UIColor blackColor] CGColor];
+  <span class="hljs-comment">// ...</span>
+  cell.layer.shadowOffset = <span class="hljs-built_in">CGSizeMake</span>(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>);
+  cell.layer.shadowColor = [[<span class="hljs-built_in">UIColor</span> blackColor] <span class="hljs-built_in">CGColor</span>];
   cell.layer.shadowRadius = <span class="hljs-number">3</span>;
-  cell.layer.shadowOpacity = .75f;
-  CGRect shadowFrame = cell.layer.bounds;
-  CGPathRef shadowPath = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+  cell.layer.shadowOpacity = <span class="hljs-number">.75</span>f;
+  <span class="hljs-built_in">CGRect</span> shadowFrame = cell.layer.bounds;
+  <span class="hljs-built_in">CGPathRef</span> shadowPath = [<span class="hljs-built_in">UIBezierPath</span> bezierPathWithRect:shadowFrame].CGPath;
   cell.layer.shadowPath = shadowPath;
-  // <span class="hljs-keyword">...</span>
+  <span class="hljs-comment">// ...</span>
 }</code></pre>
 
 <p>The shadow path is set for performance reasons, by setting it you remove the

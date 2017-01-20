@@ -53,37 +53,37 @@ to get you on your way:</p>
 <p>Here’s a longer example showing a more in-depth and possibly practical example:</p>
 <p>In this example let’s say you have something like an HTML table whose rows
 contain some information that you need to parse out, like ids,</p>
-<pre><code class="hljs js"><span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>);
+<pre><code class="hljs js">var _ = require('underscore');
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Table</span><span class="hljs-params">(rows, options)</span></span>{
-    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Table)){
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Table(rows, options);
+function Table(rows, options){
+    if (!(this instanceof Table)){
+        return new Table(rows, options);
     }
 
-    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
+    var self = this;
 
     self.rows = rows;
     self.options = options;
 
-    self._id_for_row = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(row)</span></span>{
-        <span class="hljs-keyword">var</span> re = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(self.options.field_name + <span class="hljs-regexp">/_(\d+)/</span>.source);
-        <span class="hljs-keyword">return</span> row.match(re)[<span class="hljs-number">1</span>];
+    self._id_for_row = function(row){
+        var re = new RegExp(self.options.field_name + /_(\d+)/.source);
+        return row.match(re)[1];
     }
 
-    self.row_ids = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
-        <span class="hljs-keyword">return</span> _.map(self.rows, self._id_for_row);
+    self.row_ids = function(){
+        return _.map(self.rows, self._id_for_row);
     };
 }
 
-<span class="hljs-keyword">var</span> table = <span class="hljs-keyword">new</span> Table(
-    [<span class="hljs-string">"user_name_field_1"</span>, <span class="hljs-string">"user_name_field_22"</span>, <span class="hljs-string">"user_name_field_23"</span>],
-    {<span class="hljs-string">"field_name"</span>:<span class="hljs-string">"user_name_field"</span>}
+var table = new Table(
+    ["user_name_field_1", "user_name_field_22", "user_name_field_23"],
+    {"field_name":"user_name_field"}
 );
 
 ###
 #
-# &gt; <span class="hljs-built_in">console</span>.log(table.row_ids());
-# =&gt; [ <span class="hljs-string">'1'</span>, <span class="hljs-string">'22'</span>, <span class="hljs-string">'23'</span> ]</code></pre>
+# &gt; console.log(table.row_ids());
+# =&gt; [ '1', '22', '23' ]</code></pre>
 
 
 

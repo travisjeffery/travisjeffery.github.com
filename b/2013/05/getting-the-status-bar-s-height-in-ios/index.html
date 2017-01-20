@@ -46,8 +46,8 @@
 
           <p>I had someone ask me for the best way to get the status bar’s height. Their problem was they were using UIApplication-statusBarFrame.size.height which will usually be 20.0f when in portrait (<strong><em>but</em></strong> would be bigger if the user is on the phone, etc.) but when the phone was oriented in landscape the height was 480.0f.</p>
 <p>The trick to the status bar’s frame and height is to make sure you’ve converted it to the coordinate space of the view that you care about, this will probably be a UIViewController’s view or subview.</p>
-<pre><code class="hljs objc"><span class="hljs-built_in">CGRect</span> statusBarFrame = [yourView<span class="hljs-variable">.window</span> convertRect:<span class="hljs-built_in">UIApplication</span><span class="hljs-variable">.sharedApplication</span><span class="hljs-variable">.statusBarFrame</span> toView:yourView];
-<span class="hljs-built_in">CGFloat</span> statusBarHeight = statusBarFrame<span class="hljs-variable">.size</span><span class="hljs-variable">.height</span>;</code></pre>
+<pre><code class="hljs objc"><span class="hljs-built_in">CGRect</span> statusBarFrame = [yourView.window convertRect:<span class="hljs-built_in">UIApplication</span>.sharedApplication.statusBarFrame toView:yourView];
+<span class="hljs-built_in">CGFloat</span> statusBarHeight = statusBarFrame.size.height;</code></pre>
 
 <p>Now you’ve got a height you’d expect—usually 20.0f.</p>
 <p>I made a <a href="https://github.com/travisjeffery/StatusBarDemo">demo app</a> that may make this concrete for you. Build &amp; Run, switch your device’s orientation and watch the output in the Debug Area.</p>

@@ -62,26 +62,26 @@
 <p>For grunt, you need a <a href="https://github.com/velesin/jasmine-jquery/blob/master/Gruntfile.js">Gruntfile.js</a>:</p>
 <pre><code class="hljs javascript"><span class="hljs-comment">/* jshint node: true */</span>
 
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(grunt)</span> </span>{
-<span class="hljs-pi">  "use strict"</span>;
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">grunt</span>) </span>{
+<span class="hljs-meta">  "use strict"</span>;
 
   grunt.initConfig({
-      pkg: grunt.file.readJSON(<span class="hljs-string">'package.json'</span>)
-    , jshint: {
-        all: [
+      <span class="hljs-attr">pkg</span>: grunt.file.readJSON(<span class="hljs-string">'package.json'</span>)
+    , <span class="hljs-attr">jshint</span>: {
+        <span class="hljs-attr">all</span>: [
             <span class="hljs-string">"Gruntfile.js"</span>
           , <span class="hljs-string">"lib/**/*.js"</span>
           , <span class="hljs-string">"spec/**/*.js"</span>
         ]
-      , options: {
-          jshintrc: <span class="hljs-string">'.jshintrc'</span>
+      , <span class="hljs-attr">options</span>: {
+          <span class="hljs-attr">jshintrc</span>: <span class="hljs-string">'.jshintrc'</span>
         },
       }
-    , jasmine: {
-        src: <span class="hljs-string">"lib/**/*.js"</span>
-      , options: {
-          specs: <span class="hljs-string">"spec/**/*.js"</span>
-        , vendor: <span class="hljs-string">"vendor/**/*.js"</span>
+    , <span class="hljs-attr">jasmine</span>: {
+        <span class="hljs-attr">src</span>: <span class="hljs-string">"lib/**/*.js"</span>
+      , <span class="hljs-attr">options</span>: {
+          <span class="hljs-attr">specs</span>: <span class="hljs-string">"spec/**/*.js"</span>
+        , <span class="hljs-attr">vendor</span>: <span class="hljs-string">"vendor/**/*.js"</span>
       }
     }
   })
@@ -96,11 +96,11 @@
 <p>See <a href="https://github.com/gruntjs/grunt-contrib-jasmine">grunt-contrib-jasmine’s README</a> for the available options you can set.</p>
 <p><code>grunt test</code> runs our test task, this checks the code’s quality with jshint, then runs the tests with jasmine. <a href="https://github.com/velesin/jasmine-jquery/blob/master/.jshintrc">jasmine-jquery’s .jshintrc</a>.</p>
 <p>To setup travis-ci, you need a <a href="https://github.com/velesin/jasmine-jquery/blob/master/.travis.yml">.travis.yml file</a>:</p>
-<pre><code><span class="hljs-label">language:</span> node_js
-<span class="hljs-label">node_js:</span>
-  - <span class="hljs-number">0.8</span>
-<span class="hljs-label">before_script:</span>
-  - npm install -g grunt-<span class="hljs-keyword">cli</span></code></pre>
+<pre><code class="hljs yaml"><span class="hljs-attr">language:</span> node_js
+<span class="hljs-attr">node_js:</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-number">0.8</span>
+<span class="hljs-attr">before_script:</span>
+<span class="hljs-bullet">  -</span> npm install -g grunt-cli</code></pre>
 
 <p><a href="http://about.travis-ci.org/docs/user/getting-started/#Step-one%3A-Sign-in">Integrate travis-ci with your project on GitHub.</a></p>
 <p>Fin.</p>

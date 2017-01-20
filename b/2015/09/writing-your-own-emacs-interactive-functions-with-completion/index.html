@@ -46,17 +46,17 @@
 
           <p>Here’s how to use (Ido)[<a href="http://emacswiki.org/emacs/InteractivelyDoThings">http://emacswiki.org/emacs/InteractivelyDoThings</a>] in Emacs to write your own interactive functions with completion. In this example, we’ll make a function that completes directories but Ido provides functions for reading files, buffers, and more. </p>
 <p>This function will go to the given repo in my dev directory, and if that repo isn’t cloned yet, will clone it from my GitHub first.</p>
-<pre><code class="hljs scheme"><span class="hljs-list">(<span class="hljs-keyword">defun</span> tj-goto <span class="hljs-list">(<span class="hljs-keyword">repo</span>)</span>
+<pre><code class="hljs scheme">(<span class="hljs-name">defun</span> tj-goto (<span class="hljs-name">repo</span>)
   <span class="hljs-string">"Go to or clone the given dev `repo'."</span>
-  <span class="hljs-list">(<span class="hljs-keyword">interactive</span>
-   <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">list</span></span>
-    <span class="hljs-list">(<span class="hljs-keyword">ido-read-directory-name</span> <span class="hljs-string">"Directory: "</span> <span class="hljs-string">"~/dev/"</span>)</span>)</span>)</span>
-  <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">let*</span></span> <span class="hljs-list">(<span class="hljs-list">(<span class="hljs-keyword">dev-dir</span> <span class="hljs-string">"~/dev/"</span>)</span>
-         <span class="hljs-list">(<span class="hljs-keyword">repo-dir</span> repo)</span>)</span>
-    <span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">if</span></span> <span class="hljs-list">(<span class="hljs-keyword">file-exists-p</span> repo-dir)</span>
-        <span class="hljs-list">(<span class="hljs-keyword">projectile-find-file-in-directory</span> repo)</span>
-      <span class="hljs-list">(<span class="hljs-keyword">shell-command</span> <span class="hljs-list">(<span class="hljs-keyword">format</span> <span class="hljs-string">"cd %s; git clone git@github.com:travisjeffery/%s.git"</span> dev-dir repo)</span>)</span>
-      <span class="hljs-list">(<span class="hljs-keyword">projectile-find-file-in-directory</span> repo)</span>)</span>)</span>)</span></code></pre>
+  (<span class="hljs-name">interactive</span>
+   (<span class="hljs-name"><span class="hljs-builtin-name">list</span></span>
+    (<span class="hljs-name">ido-read-directory-name</span> <span class="hljs-string">"Directory: "</span> <span class="hljs-string">"~/dev/"</span>)))
+  (<span class="hljs-name"><span class="hljs-builtin-name">let*</span></span> ((<span class="hljs-name">dev-dir</span> <span class="hljs-string">"~/dev/"</span>)
+         (<span class="hljs-name">repo-dir</span> repo))
+    (<span class="hljs-name"><span class="hljs-builtin-name">if</span></span> (<span class="hljs-name">file-exists-p</span> repo-dir)
+        (<span class="hljs-name">projectile-find-file-in-directory</span> repo)
+      (<span class="hljs-name">shell-command</span> (<span class="hljs-name">format</span> <span class="hljs-string">"cd %s; git clone git@github.com:travisjeffery/%s.git"</span> dev-dir repo))
+      (<span class="hljs-name">projectile-find-file-in-directory</span> repo))))</code></pre>
 
           <hr>
           

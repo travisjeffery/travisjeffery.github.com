@@ -47,11 +47,11 @@
           <p>Make sure you’ve got the <a href="https://github.com/aws/aws-cl">aws-cli</a> and <a href="https://github.com/stedolan/jq">jq</a> installed and configured.</p>
 <p>Drop this into your .zshrc or .bashrc:</p>
 <pre><code class="hljs sh"><span class="hljs-keyword">function</span> ec2-<span class="hljs-function"><span class="hljs-title">ssh</span></span> () {
-  ssh $(aws ec2 describe-instances --filter Name=instance-id,Values=<span class="hljs-variable">$1</span> | jq <span class="hljs-string">'.Reservations[0].Instances[0].PrivateIpAddress'</span> | tr <span class="hljs-operator">-d</span> <span class="hljs-string">'"'</span>)
+  ssh $(aws ec2 describe-instances --filter Name=instance-id,Values=<span class="hljs-variable">$1</span> | jq <span class="hljs-string">'.Reservations[0].Instances[0].PrivateIpAddress'</span> | tr <span class="hljs-_">-d</span> <span class="hljs-string">'"'</span>)
 }</code></pre>
 
 <p>And now you can ssh into your EC2 instance with:</p>
-<pre><code class="hljs sh">ec2-ssh i-<span class="hljs-number">6</span>g5c7ed4</code></pre>
+<pre><code class="hljs sh">ec2-ssh i-6g5c7ed4</code></pre>
 
           <hr>
           

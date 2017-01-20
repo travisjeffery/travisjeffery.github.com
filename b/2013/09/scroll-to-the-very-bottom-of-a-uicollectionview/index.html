@@ -48,7 +48,7 @@
 <pre><code class="hljs obj-c"><span class="hljs-built_in">NSInteger</span> section = [<span class="hljs-keyword">self</span> numberOfSectionsInCollectionView:collectionView] - <span class="hljs-number">1</span>;
 <span class="hljs-built_in">NSInteger</span> item = [<span class="hljs-keyword">self</span> collectionView:collectionView numberOfItemsInSection:section] - <span class="hljs-number">1</span>;
 <span class="hljs-built_in">NSIndexPath</span> *lastIndexPath = [<span class="hljs-built_in">NSIndexPath</span> indexPathForItem:item inSection:section];
-[collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionBottom animated:<span class="hljs-literal">YES</span>];</code></pre>
+[collectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:<span class="hljs-built_in">UICollectionViewScrollPositionBottom</span> animated:<span class="hljs-literal">YES</span>];</code></pre>
 
           <hr>
           

@@ -45,10 +45,10 @@
           </header>
 
           <p>Boom goes the dynamite.</p>
-<pre><code class="hljs objc">NSTextAttachment *attachment = [[NSTextAttachment alloc] initWithData:<span class="hljs-literal">nil</span> ofType:<span class="hljs-literal">nil</span>];
-attachment<span class="hljs-variable">.image</span> = [<span class="hljs-built_in">UIImage</span> imageNamed:<span class="hljs-string">@"whatever"</span>];
-NSAttributedString *attributedString = [NSAttributedString attributedStringWithAttachment:attachment];
-<span class="hljs-keyword">self</span><span class="hljs-variable">.textView</span><span class="hljs-variable">.attributedText</span> = attributedString;</code></pre>
+<pre><code class="hljs objc"><span class="hljs-built_in">NSTextAttachment</span> *attachment = [[<span class="hljs-built_in">NSTextAttachment</span> alloc] initWithData:<span class="hljs-literal">nil</span> ofType:<span class="hljs-literal">nil</span>];
+attachment.image = [<span class="hljs-built_in">UIImage</span> imageNamed:<span class="hljs-string">@"whatever"</span>];
+<span class="hljs-built_in">NSAttributedString</span> *attributedString = [<span class="hljs-built_in">NSAttributedString</span> attributedStringWithAttachment:attachment];
+<span class="hljs-keyword">self</span>.textView.attributedText = attributedString;</code></pre>
 
 
 

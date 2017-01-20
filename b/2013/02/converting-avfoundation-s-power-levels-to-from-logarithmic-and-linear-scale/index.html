@@ -46,10 +46,10 @@
 
           <p>When using AVFoundation, you’ll notice that the numbers returned when checking the audio channel power levels may look kind of strange. The audio levels returned to you when calling <code>AVCaptureSession-averagePowerLevel</code> or <code>AVCaptureAudioChannel-averagePowerLevel</code>, etc. are in a logarithmic scale from -160dB to 0dB, similar to how we perceive sound. </p>
 <p>But you may want to convert this logarithmic scale to a linear scale from 0.0 to 1.0 to use in an interface  or something, here’s how to do it:</p>
-<pre><code>CGFloat linearPowerLevel = powf(<span class="hljs-number">10.f</span>, decibelPowerLevel / <span class="hljs-number">20.f</span>);</code></pre>
+<pre><code><span class="hljs-attribute">CGFloat linearPowerLevel</span> = powf(10.f, decibelPowerLevel / 20.f);</code></pre>
 
 <p>Here’s how to go the other way:</p>
-<pre><code>CGFloat decibelPowerLevel = lo<span class="hljs-keyword">g10</span>f<span class="hljs-comment">(linearPowerLevel)</span> * <span class="hljs-number">20.</span>f;</code></pre>
+<pre><code><span class="hljs-attribute">CGFloat decibelPowerLevel</span> = log10f(linearPowerLevel) * 20.f;</code></pre>
 
           <hr>
           
