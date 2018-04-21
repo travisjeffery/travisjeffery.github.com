@@ -62,13 +62,13 @@ by looking at it, e.g. you have to know the precision/scale order.</p>
 table:</p>
 <p><code>rails g migration add_body_and_pid_to_people body:string:index pid:integer:uniq</code></p>
 <p>Will generate this migration:</p>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddBodyAndPidToPersons</span> &lt; ActiveRecord::Migration</span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">change</span></span>
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddBodyAndPidToPersons</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Migration</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>change
     add_column <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:body</span>, <span class="hljs-symbol">:string</span>
     add_index <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:body</span>
 
     add_column <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:pid</span>, <span class="hljs-symbol">:integer</span>
-    add_index <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:pid</span>, <span class="hljs-symbol">:unique</span> =&gt; <span class="hljs-literal">true</span>
+    add_index <span class="hljs-symbol">:persons</span>, <span class="hljs-symbol">:pid</span>, <span class="hljs-symbol">:unique</span> =&gt; <span class="hljs-keyword">true</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre>
 
@@ -77,12 +77,12 @@ table:</p>
 <p><code>rails g migration add_body_to_people body:string:index</code></p>
 <p>Generates the migration we expect, however,</p>
 <p><code>rails g migration remove_body_from_people body:string:index</code></p>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RemoveBodyFromPeople</span> &lt; ActiveRecord::Migration</span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">up</span></span>
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RemoveBodyFromPeople</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Migration</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>up
     remove_column <span class="hljs-symbol">:people</span>, <span class="hljs-symbol">:body</span>
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">down</span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>down
     add_column <span class="hljs-symbol">:people</span>, <span class="hljs-symbol">:body</span>, <span class="hljs-symbol">:string</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre>
@@ -92,7 +92,7 @@ table:</p>
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -102,25 +102,6 @@ table:</p>
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: March 16th, 2012<br>
               Categories: rails, migrations, generators

@@ -49,18 +49,18 @@ cell of a table view needed a drop shadow.</p>
 <p>The idea of the implementation was to use the shadow properties on the
 table cell’s Core Animation layer to render our drop shadow. </p>
 <p>(cell references the last cell of the table view)</p>
-<pre><code class="hljs">- (<span class="hljs-built_in">UITableViewCell</span> *)tableView:(<span class="hljs-built_in">UITableView</span> *)tableView
-  cellForRowAtIndexPath:(<span class="hljs-built_in">NSIndexPath</span> *)indexPath
+<pre><code class="hljs">- (UITableViewCell *)tableView:(UITableView *)tableView
+  cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  <span class="hljs-comment">// ...</span>
-  cell.layer.shadowOffset = <span class="hljs-built_in">CGSizeMake</span>(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>);
-  cell.layer.shadowColor = [[<span class="hljs-built_in">UIColor</span> blackColor] <span class="hljs-built_in">CGColor</span>];
+  // <span class="hljs-keyword">...</span>
+  cell.layer.shadowOffset = CGSizeMake(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>);
+  cell.layer.shadowColor = [[UIColor blackColor] CGColor];
   cell.layer.shadowRadius = <span class="hljs-number">3</span>;
-  cell.layer.shadowOpacity = <span class="hljs-number">.75</span>f;
-  <span class="hljs-built_in">CGRect</span> shadowFrame = cell.layer.bounds;
-  <span class="hljs-built_in">CGPathRef</span> shadowPath = [<span class="hljs-built_in">UIBezierPath</span> bezierPathWithRect:shadowFrame].CGPath;
+  cell.layer.shadowOpacity = .75f;
+  CGRect shadowFrame = cell.layer.bounds;
+  CGPathRef shadowPath = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
   cell.layer.shadowPath = shadowPath;
-  <span class="hljs-comment">// ...</span>
+  // <span class="hljs-keyword">...</span>
 }</code></pre>
 
 <p>The shadow path is set for performance reasons, by setting it you remove the
@@ -72,7 +72,7 @@ to have a longer shadow, etc.</p>
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -82,25 +82,6 @@ to have a longer shadow, etc.</p>
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: July 23rd, 2012<br>
               Categories: ios, table-view, drop-shadow, table-view-cell, core-animation

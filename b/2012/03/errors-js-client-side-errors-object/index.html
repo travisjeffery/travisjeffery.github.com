@@ -53,9 +53,9 @@ sophisticated and well practiced.</p>
 provide a simple, ubiquitous, consistent interface to handle and use error
 messages on the client side.</p>
 <p><a href="http://github.com/travisjeffery/errors.js">errors.js is on GitHub</a>, here is the source,</p>
-<pre><code class="hljs js">(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$, _</span>)</span>{
+<pre><code class="hljs js">(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($, _)</span></span>{
   $.widget(<span class="hljs-string">"travisjeffery.errors"</span>, {
-    <span class="hljs-attr">_create</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    _create: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
       _.bindAll(<span class="hljs-keyword">this</span>)
       <span class="hljs-keyword">this</span>.container = <span class="hljs-keyword">this</span>.element
       <span class="hljs-keyword">this</span>.list = <span class="hljs-keyword">this</span>.element.find(<span class="hljs-string">"ul"</span>)
@@ -63,7 +63,7 @@ messages on the client side.</p>
   })
 
   $.extend($.travisjeffery.errors.prototype, {
-    <span class="hljs-attr">add</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>)</span>{
+    add: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(error)</span></span>{
       <span class="hljs-keyword">var</span> errors = <span class="hljs-keyword">this</span>._buildErrorList(error)
 
       <span class="hljs-keyword">this</span>.reset()
@@ -72,27 +72,27 @@ messages on the client side.</p>
       <span class="hljs-keyword">this</span>.list.append(errors)
     },
 
-    <span class="hljs-attr">show</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    show: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
       <span class="hljs-keyword">this</span>.container.show()
     },
 
-    <span class="hljs-attr">hide</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    hide: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
       <span class="hljs-keyword">this</span>.container.hide()
     },
 
-    <span class="hljs-attr">reset</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    reset: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
       <span class="hljs-keyword">this</span>.hide()
       <span class="hljs-keyword">this</span>.list.empty()
     },
 
-    <span class="hljs-attr">handle</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">xhr, status, error</span>)</span>{
+    handle: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(xhr, status, error)</span></span>{
       <span class="hljs-keyword">var</span> errors = $.parseJSON(xhr.responseText).errors
       <span class="hljs-keyword">this</span>.add(errors)
     },
 
-    <span class="hljs-attr">_buildErrorList</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">errors</span>)</span>{
+    _buildErrorList: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(errors)</span></span>{
       <span class="hljs-keyword">var</span> errorArray = $.makeArray(errors),
-      stringToItem = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message</span>)</span>{<span class="hljs-keyword">return</span> <span class="hljs-string">"&lt;li&gt;"</span>+ message +<span class="hljs-string">"&lt;/li&gt;"</span>},
+      stringToItem = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(message)</span></span>{<span class="hljs-keyword">return</span> <span class="hljs-string">"&lt;li&gt;"</span>+ message +<span class="hljs-string">"&lt;/li&gt;"</span>},
       errorList = $.map(errorArray, stringToItem).join(<span class="hljs-string">"\n"</span>)
 
       <span class="hljs-keyword">return</span> errorList
@@ -104,25 +104,25 @@ messages on the client side.</p>
 <p>It’s small and really simple, and only depends on jQuery/UI and Underscorejs. Using it looks
 like this,</p>
 <h2 id="controller">Controller</h2>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PeopleController</span> &lt; ApplicationController</span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show</span></span>
-    @person = Person.find params[<span class="hljs-symbol">:id</span>]
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PeopleController</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ApplicationController</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>show
+    <span class="hljs-variable">@person</span> = <span class="hljs-constant">Person</span>.find params[<span class="hljs-symbol">:id</span>]
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update</span></span>
-    @person = Person.find params[<span class="hljs-symbol">:id</span>]
-    @person.update_attributes params[<span class="hljs-symbol">:person</span>]
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>update
+    <span class="hljs-variable">@person</span> = <span class="hljs-constant">Person</span>.find params[<span class="hljs-symbol">:id</span>]
+    <span class="hljs-variable">@person</span>.update_attributes params[<span class="hljs-symbol">:person</span>]
 
-    <span class="hljs-keyword">if</span> @person.valid?
-      render <span class="hljs-symbol">:json</span> =&gt; @person, <span class="hljs-symbol">:status</span> =&gt; <span class="hljs-number">200</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-variable">@person</span>.valid?
+      render <span class="hljs-symbol">:json</span> =&gt; <span class="hljs-variable">@person</span>, <span class="hljs-symbol">:status</span> =&gt; <span class="hljs-number">200</span>
     <span class="hljs-keyword">else</span>
-      render <span class="hljs-symbol">:json</span> =&gt; {<span class="hljs-symbol">:errors</span> =&gt; @person.errors.full_messages}, <span class="hljs-symbol">:status</span> =&gt; <span class="hljs-number">422</span>
+      render <span class="hljs-symbol">:json</span> =&gt; {<span class="hljs-symbol">:errors</span> =&gt; <span class="hljs-variable">@person</span>.errors.full_messages}, <span class="hljs-symbol">:status</span> =&gt; <span class="hljs-number">422</span>
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre>
 
 <h2 id="javascript-asset">Javascript asset</h2>
-<pre><code class="hljs js">jQuery(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$</span>)</span>{
+<pre><code class="hljs js">jQuery(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">($)</span></span>{
   App = <span class="hljs-built_in">window</span>.App || (<span class="hljs-built_in">window</span>.App = {})
   App.Errors =
     $(<span class="hljs-string">"div#js-errors"</span>)
@@ -130,31 +130,31 @@ like this,</p>
       .data(<span class="hljs-string">"errors"</span>)
 
   $(<span class="hljs-string">"a.js-person"</span>)
-    .on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>)</span>{
+    .on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(event)</span></span>{
       event.preventDefault()
 
       <span class="hljs-keyword">var</span> personId = $(<span class="hljs-string">"[data-person-id]"</span>).data(<span class="hljs-string">"person-id"</span>),
       personURL = <span class="hljs-string">"/people/"</span> + personId
 
       $.ajax({
-        <span class="hljs-attr">url</span>: personURL,
+        url: personURL,
         <span class="hljs-comment">// =&gt; ["Name can't be blank"]</span>
-        data: {<span class="hljs-attr">id</span>: personId, <span class="hljs-attr">person</span>: {<span class="hljs-attr">name</span>: <span class="hljs-string">""</span>}},
-        <span class="hljs-attr">type</span>: <span class="hljs-string">"put"</span>,
-        <span class="hljs-attr">error</span>: App.Errors.handle
+        data: {id: personId, person: {name: <span class="hljs-string">""</span>}},
+        type: <span class="hljs-string">"put"</span>,
+        error: App.Errors.handle
       })
     })
 })</code></pre>
 
 <h2 id="view">View</h2>
-<pre><code class="hljs erb"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">%=</span></span></span><span class="ruby"> link_to @person.name, person_path(@person),
+<pre><code class="hljs erb"><span class="xml"></span>&lt;%=<span class="ruby"> link_to <span class="hljs-variable">@person</span>.name, person_path(<span class="hljs-variable">@person</span>),
   <span class="hljs-symbol">:method</span> =&gt; <span class="hljs-string">"put"</span>,
-  <span class="hljs-symbol">:remote</span> =&gt; <span class="hljs-literal">true</span>,
-  <span class="hljs-symbol">:<span class="hljs-string">"data-person-id"</span></span> =&gt; @person.id,
+  <span class="hljs-symbol">:remote</span> =&gt; <span class="hljs-keyword">true</span>,
+  <span class="hljs-symbol">:<span class="hljs-string">"data-person-id"</span></span> =&gt; <span class="hljs-variable">@person</span>.id,
   <span class="hljs-symbol">:class</span> =&gt; <span class="hljs-string">"js-person"</span>
-</span><span class="xml"><span class="hljs-tag">%&gt;</span>
+</span>%&gt;<span class="xml">
 
-<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-errors"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></code></pre>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"js-errors"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></span></code></pre>
 
 <h2 id="api-usable-without-handle-callback-">Api (usable without #handle callback)</h2>
 <pre><code class="hljs js"><span class="hljs-keyword">var</span> Errors = $(<span class="hljs-string">"div#errors"</span>).errors().data(<span class="hljs-string">"errors"</span>)
@@ -168,7 +168,7 @@ Errors.hide()
 Errors.reset()</code></pre>
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -178,25 +178,6 @@ Errors.reset()</code></pre>
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: March 30th, 2012<br>
               Categories: javascript, errors, rails, client, errors.js, jquery.errors.js

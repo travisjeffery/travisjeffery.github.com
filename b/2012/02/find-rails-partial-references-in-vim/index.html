@@ -51,8 +51,8 @@ is called and used. I’ve written a Vim command to do this (put in your .vimrc)
   <span class="hljs-keyword">if</span> (<span class="hljs-variable">a:partial</span>)
     <span class="hljs-keyword">let</span> pattern = <span class="hljs-string">"partial.*"</span> . partial
   <span class="hljs-keyword">else</span>
-    <span class="hljs-keyword">let</span> path = <span class="hljs-keyword">substitute</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">"%:h"</span>), <span class="hljs-string">"app/views/"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">""</span>)
-    <span class="hljs-keyword">let</span> action = <span class="hljs-keyword">substitute</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">"%:t:r:r"</span>), <span class="hljs-string">"^_"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">""</span>)
+    <span class="hljs-keyword">let</span> path = <span class="hljs-built_in">substitute</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">"%:h"</span>), <span class="hljs-string">"app/views/"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">""</span>)
+    <span class="hljs-keyword">let</span> action = <span class="hljs-built_in">substitute</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">"%:t:r:r"</span>), <span class="hljs-string">"^_"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">""</span>)
     <span class="hljs-keyword">let</span> pattern = <span class="hljs-string">"partial.*"</span> . path . <span class="hljs-string">"/"</span> . action
   <span class="hljs-keyword">endif</span>
 
@@ -61,12 +61,12 @@ is called and used. I’ve written a Vim command to do this (put in your .vimrc)
   <span class="hljs-keyword">elseif</span> (<span class="hljs-built_in">exists</span>(<span class="hljs-string">'g:ackprg'</span>))
     <span class="hljs-keyword">execute</span> <span class="hljs-string">"Ack "</span> . <span class="hljs-string">'"'</span> . pattern . <span class="hljs-string">'\b" app/views'</span>
   <span class="hljs-keyword">else</span>
-    <span class="hljs-comment">" seriously? use git grep or ack!</span>
-    <span class="hljs-keyword">execute</span> <span class="hljs-string">"vimgrep "</span> . <span class="hljs-string">'"'</span> . pattern . <span class="hljs-string">'\&gt;" app/views/*/**'</span>
+    <span class="hljs-string">" seriously? use git grep or ack!
+</span>    <span class="hljs-keyword">execute</span> <span class="hljs-string">"vimgrep "</span> . <span class="hljs-string">'"'</span> . pattern . <span class="hljs-string">'\&gt;" app/views/*/**'</span>
   <span class="hljs-keyword">endif</span>
 <span class="hljs-keyword">endfunction</span>
 command! -nargs=? GrepPartial
-      \ <span class="hljs-keyword">call</span> GrepPartial(<span class="hljs-symbol">&lt;q-args&gt;</span>)</code></pre>
+      \ <span class="hljs-built_in">call</span> GrepPartial(&lt;<span class="hljs-keyword">q</span>-<span class="hljs-keyword">args</span>&gt;)</code></pre>
 
 <p>Now while editing a partial just use <code>:GrepPartial</code>.</p>
 <p>You can also pass in a partial:</p>
@@ -83,7 +83,7 @@ pattern.</p>
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -93,25 +93,6 @@ pattern.</p>
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: February 23rd, 2012<br>
               Categories: rails, grep, vim

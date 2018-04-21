@@ -55,12 +55,12 @@ let you save a file in a nonexistent directory. So this what you do:</p>
 <p>An aside, this is what I previously used:</p>
 <pre><code class="hljs vim"><span class="hljs-keyword">augroup</span> vimrc-auto-<span class="hljs-built_in">mkdir</span>
   autocmd!
-  <span class="hljs-keyword">autocmd</span> BufWritePre * <span class="hljs-keyword">call</span> <span class="hljs-variable">s:auto_mkdir</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">'&lt;afile&gt;:p:h'</span>), <span class="hljs-variable">v:cmdbang</span>)
+  <span class="hljs-keyword">autocmd</span> BufWritePre * <span class="hljs-built_in">call</span> <span class="hljs-variable">s:auto_mkdir</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">'&lt;afile&gt;:p:h'</span>), <span class="hljs-variable">v:cmdbang</span>)
   <span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">s</span>:<span class="hljs-title">auto_mkdir</span><span class="hljs-params">(dir, force)</span></span>
     <span class="hljs-keyword">if</span> !isdirectory(<span class="hljs-variable">a:dir</span>)
           \   &amp;&amp; (<span class="hljs-variable">a:force</span>
           \       || <span class="hljs-built_in">input</span>(<span class="hljs-string">"'"</span> . <span class="hljs-variable">a:dir</span> . <span class="hljs-string">"' does not exist. Create? [y/N]"</span>) =~? <span class="hljs-string">'^y\%[es]$'</span>)
-      <span class="hljs-keyword">call</span> <span class="hljs-built_in">mkdir</span>(<span class="hljs-built_in">iconv</span>(<span class="hljs-variable">a:dir</span>, &amp;encoding, &amp;termencoding), <span class="hljs-string">'p'</span>)
+      <span class="hljs-built_in">call</span> <span class="hljs-built_in">mkdir</span>(<span class="hljs-built_in">iconv</span>(<span class="hljs-variable">a:dir</span>, &amp;encoding, &amp;termencoding), <span class="hljs-string">'p'</span>)
     <span class="hljs-keyword">endif</span>
   <span class="hljs-keyword">endfunction</span>
 <span class="hljs-keyword">augroup</span> END</code></pre>
@@ -72,7 +72,7 @@ badass.</p>
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -82,25 +82,6 @@ badass.</p>
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: November 28th, 2011<br>
               Categories: vim, automation

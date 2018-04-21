@@ -55,15 +55,15 @@ you need to explicitly set this otherwise.</p>
 commit(s), then copying and pasting the author info. So I wrote <code>git author sha</code>.</p>
 <p><code>git author HEAD</code> writes <code>rza &lt;rza@wu-tang.xxx&gt;</code>.</p>
 <p>Now I can do:</p>
-<p><code>git commit -a -m &#39;some shit (fixes #99) --author=&quot;``git author sha``&quot;</code></p>
+<p><code>git commit -a -m &#39;some shit (fixes #99) --author=&quot;`</code>git author sha<code></code>“`</p>
 <p>Here’s <code>git author</code> in my <a href="https://github.com/travisjeffery/dotfiles/blob/master/.gitconfig">.gitconfig</a>:</p>
 <pre><code class="hljs">[alias]
-  author = <span class="hljs-string">"!sh -c 'echo $(git log -1 --format=<span class="hljs-subst">\"</span>%an &lt;%ae&gt;<span class="hljs-subst">\"</span> $@) | tr -d <span class="hljs-subst">\"</span><span class="hljs-subst">\\</span>n<span class="hljs-subst">\"</span>'"</span> -<span class="hljs-string">"'"</span></code></pre>
+  author = <span class="hljs-string">"!sh -c 'echo $(git log -1 --format=\"%an &lt;%ae&gt;\" $@) | tr -d \"\\n\"'"</span> -<span class="hljs-string">"'"</span></code></pre>
 
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -73,25 +73,6 @@ commit(s), then copying and pasting the author info. So I wrote <code>git author
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: October 5th, 2013<br>
               Categories: git, sha, author, open-source

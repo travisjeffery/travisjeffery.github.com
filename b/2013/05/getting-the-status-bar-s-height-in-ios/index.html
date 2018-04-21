@@ -46,15 +46,15 @@
 
           <p>I had someone ask me for the best way to get the status bar’s height. Their problem was they were using UIApplication-statusBarFrame.size.height which will usually be 20.0f when in portrait (<strong><em>but</em></strong> would be bigger if the user is on the phone, etc.) but when the phone was oriented in landscape the height was 480.0f.</p>
 <p>The trick to the status bar’s frame and height is to make sure you’ve converted it to the coordinate space of the view that you care about, this will probably be a UIViewController’s view or subview.</p>
-<pre><code class="hljs objc"><span class="hljs-built_in">CGRect</span> statusBarFrame = [yourView.window convertRect:<span class="hljs-built_in">UIApplication</span>.sharedApplication.statusBarFrame toView:yourView];
-<span class="hljs-built_in">CGFloat</span> statusBarHeight = statusBarFrame.size.height;</code></pre>
+<pre><code class="hljs objc"><span class="hljs-built_in">CGRect</span> statusBarFrame = [yourView<span class="hljs-variable">.window</span> convertRect:<span class="hljs-built_in">UIApplication</span><span class="hljs-variable">.sharedApplication</span><span class="hljs-variable">.statusBarFrame</span> toView:yourView];
+<span class="hljs-built_in">CGFloat</span> statusBarHeight = statusBarFrame<span class="hljs-variable">.size</span><span class="hljs-variable">.height</span>;</code></pre>
 
 <p>Now you’ve got a height you’d expect—usually 20.0f.</p>
 <p>I made a <a href="https://github.com/travisjeffery/StatusBarDemo">demo app</a> that may make this concrete for you. Build &amp; Run, switch your device’s orientation and watch the output in the Debug Area.</p>
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -64,25 +64,6 @@
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: May 6th, 2013<br>
               Categories: ios, status-bar, orientation

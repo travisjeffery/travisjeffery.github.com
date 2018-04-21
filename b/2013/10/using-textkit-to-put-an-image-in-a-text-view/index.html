@@ -45,15 +45,15 @@
           </header>
 
           <p>Boom goes the dynamite.</p>
-<pre><code class="hljs objc"><span class="hljs-built_in">NSTextAttachment</span> *attachment = [[<span class="hljs-built_in">NSTextAttachment</span> alloc] initWithData:<span class="hljs-literal">nil</span> ofType:<span class="hljs-literal">nil</span>];
-attachment.image = [<span class="hljs-built_in">UIImage</span> imageNamed:<span class="hljs-string">@"whatever"</span>];
-<span class="hljs-built_in">NSAttributedString</span> *attributedString = [<span class="hljs-built_in">NSAttributedString</span> attributedStringWithAttachment:attachment];
-<span class="hljs-keyword">self</span>.textView.attributedText = attributedString;</code></pre>
+<pre><code class="hljs objc">NSTextAttachment *attachment = [[NSTextAttachment alloc] initWithData:<span class="hljs-literal">nil</span> ofType:<span class="hljs-literal">nil</span>];
+attachment<span class="hljs-variable">.image</span> = [<span class="hljs-built_in">UIImage</span> imageNamed:<span class="hljs-string">@"whatever"</span>];
+NSAttributedString *attributedString = [NSAttributedString attributedStringWithAttachment:attachment];
+<span class="hljs-keyword">self</span><span class="hljs-variable">.textView</span><span class="hljs-variable">.attributedText</span> = attributedString;</code></pre>
 
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -63,25 +63,6 @@ attachment.image = [<span class="hljs-built_in">UIImage</span> imageNamed:<span 
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: October 20th, 2013<br>
               Categories: ios, textkit, uitextview, uiimage, image, text, kit

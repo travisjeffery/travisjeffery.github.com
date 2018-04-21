@@ -50,10 +50,10 @@
 namespace that contains a initializer method to setup your application,
 including starting Backbone’s history.</p>
 <pre><code class="hljs coffeescript">App =
-  initialize: <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span>
+  <span class="hljs-attribute">initialize</span>: <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span>
     <span class="hljs-comment"># ...</span>
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> Backbone.history.started?
-      Backbone.history.start({pushState: <span class="hljs-literal">true</span>})
+      Backbone.history.start({<span class="hljs-attribute">pushState</span>: <span class="hljs-literal">true</span>})
       Backbone.history.started = <span class="hljs-literal">true</span></code></pre>
 
 <p>But each test case you write that calls this initializer method will also call
@@ -76,7 +76,7 @@ will disable history temporarily.</p>
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -86,25 +86,6 @@ will disable history temporarily.</p>
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: April 16th, 2012<br>
               Categories: backbone, backbonejs, history, start, testing

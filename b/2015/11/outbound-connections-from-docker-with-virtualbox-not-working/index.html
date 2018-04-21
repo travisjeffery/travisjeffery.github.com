@@ -46,10 +46,10 @@
 
           <p>Using Docker and VirtualBox and having trouble making outbound
 connections? For instance, you might be getting errors like:</p>
-<pre><code class="hljs"><span class="hljs-selector-tag">curl</span>: (7) <span class="hljs-selector-tag">Failed</span> <span class="hljs-selector-tag">connect</span> <span class="hljs-selector-tag">to</span> 10<span class="hljs-selector-class">.0</span><span class="hljs-selector-class">.2</span><span class="hljs-selector-class">.224</span><span class="hljs-selector-pseudo">:8000</span>; <span class="hljs-selector-tag">No</span> <span class="hljs-selector-tag">route</span> <span class="hljs-selector-tag">to</span> <span class="hljs-selector-tag">host</span></code></pre>
+<pre><code class="hljs">curl: (<span class="hljs-number">7</span>) Failed connect <span class="hljs-keyword">to</span> <span class="hljs-number">10.0</span><span class="hljs-number">.2</span><span class="hljs-number">.224</span>:<span class="hljs-number">8000</span>; No route <span class="hljs-keyword">to</span> host</code></pre>
 
 <p>Or:</p>
-<pre><code class="hljs"><span class="hljs-keyword">Error: </span>Redis connection to redis:6379 failed - connect EHOSTUNREACH</code></pre>
+<pre><code class="hljs"><span class="hljs-string">Error:</span> Redis connection to <span class="hljs-string">redis:</span><span class="hljs-number">6379</span> failed - connect EHOSTUNREACH</code></pre>
 
 <p>Here’s what I did to fix it. First I ssh’d into the Docker machine:</p>
 <pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine ssh dev</code></pre>
@@ -68,17 +68,17 @@ RX <span class="hljs-string">bytes:</span><span class="hljs-number">238029328</s
 <p>Where I see eth0 is configured on this subnet and doesn’t seem to be
 modifiable. So I fixed this via:</p>
 <pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine stop dev
-<span class="hljs-variable">$ </span>VBoxManage modifyvm dev --natnet1 <span class="hljs-string">"10.254.0.0/24"</span>
+<span class="hljs-variable">$ </span><span class="hljs-constant">VBoxManage </span>modifyvm dev --natnet1 <span class="hljs-string">"10.254.0.0/24"</span>
 <span class="hljs-variable">$ </span>docker-machine restart dev</code></pre>
 
 <p>And boom, just like that it works:</p>
-<pre><code class="hljs"><span class="hljs-symbol">$</span> docker@dev:~<span class="hljs-symbol">$</span> curl http:<span class="hljs-comment">//10.0.2.224:8000</span>
+<pre><code class="hljs">$ docker<span class="hljs-annotation">@dev</span>:~$ curl <span class="hljs-string">http:</span><span class="hljs-comment">//10.0.2.224:8000</span>
 HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> OK</code></pre>
 
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -88,25 +88,6 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: November 17th, 2015<br>
               Categories: docker, virtualbox

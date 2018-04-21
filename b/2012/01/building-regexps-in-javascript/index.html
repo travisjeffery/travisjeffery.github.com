@@ -53,42 +53,42 @@ to get you on your way:</p>
 <p>Here’s a longer example showing a more in-depth and possibly practical example:</p>
 <p>In this example let’s say you have something like an HTML table whose rows
 contain some information that you need to parse out, like ids,</p>
-<pre><code class="hljs js">var _ = require('underscore');
+<pre><code class="hljs js"><span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>);
 
-function Table(rows, options){
-    if (!(this instanceof Table)){
-        return new Table(rows, options);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Table</span><span class="hljs-params">(rows, options)</span></span>{
+    <span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">this</span> <span class="hljs-keyword">instanceof</span> Table)){
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Table(rows, options);
     }
 
-    var self = this;
+    <span class="hljs-keyword">var</span> self = <span class="hljs-keyword">this</span>;
 
     self.rows = rows;
     self.options = options;
 
-    self._id_for_row = function(row){
-        var re = new RegExp(self.options.field_name + /_(\d+)/.source);
-        return row.match(re)[1];
+    self._id_for_row = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(row)</span></span>{
+        <span class="hljs-keyword">var</span> re = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(self.options.field_name + <span class="hljs-regexp">/_(\d+)/</span>.source);
+        <span class="hljs-keyword">return</span> row.match(re)[<span class="hljs-number">1</span>];
     }
 
-    self.row_ids = function(){
-        return _.map(self.rows, self._id_for_row);
+    self.row_ids = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">return</span> _.map(self.rows, self._id_for_row);
     };
 }
 
-var table = new Table(
-    ["user_name_field_1", "user_name_field_22", "user_name_field_23"],
-    {"field_name":"user_name_field"}
+<span class="hljs-keyword">var</span> table = <span class="hljs-keyword">new</span> Table(
+    [<span class="hljs-string">"user_name_field_1"</span>, <span class="hljs-string">"user_name_field_22"</span>, <span class="hljs-string">"user_name_field_23"</span>],
+    {<span class="hljs-string">"field_name"</span>:<span class="hljs-string">"user_name_field"</span>}
 );
 
 ###
 #
-# &gt; console.log(table.row_ids());
-# =&gt; [ '1', '22', '23' ]</code></pre>
+# &gt; <span class="hljs-built_in">console</span>.log(table.row_ids());
+# =&gt; [ <span class="hljs-string">'1'</span>, <span class="hljs-string">'22'</span>, <span class="hljs-string">'23'</span> ]</code></pre>
 
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -98,25 +98,6 @@ var table = new Table(
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: January 5th, 2012<br>
               Categories: javascript, regexp, regular-expressions

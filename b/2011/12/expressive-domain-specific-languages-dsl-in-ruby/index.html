@@ -47,7 +47,7 @@
           <p>In this example, I’m creating a User object such that I can set the name using
 my own DSL:</p>
 <pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span> <span class="hljs-title">&amp;</span><span class="hljs-title">block</span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>initialize &amp;block
     <span class="hljs-keyword">if</span> block.arity == <span class="hljs-number">1</span>
       block[<span class="hljs-keyword">self</span>]
     <span class="hljs-keyword">else</span>
@@ -55,20 +55,20 @@ my own DSL:</p>
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span> <span class="hljs-title">new_name</span> = <span class="hljs-title">nil</span></span>
-    @name <span class="hljs-params">||</span>= new_name
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>name new_name = <span class="hljs-keyword">nil</span>
+    <span class="hljs-variable">@name</span> ||= new_name
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">location</span> <span class="hljs-title">new_location</span> = <span class="hljs-title">nil</span></span>
-    @location <span class="hljs-params">||</span>= new_location
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>location new_location = <span class="hljs-keyword">nil</span>
+    <span class="hljs-variable">@location</span> ||= new_location
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">occupation</span> <span class="hljs-title">new_occupation</span> = <span class="hljs-title">nil</span></span>
-    @occupation <span class="hljs-params">||</span>= new_occupation
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>occupation new_occupation = <span class="hljs-keyword">nil</span>
+    <span class="hljs-variable">@occupation</span> ||= new_occupation
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 
-u = User.new <span class="hljs-keyword">do</span>
+u = <span class="hljs-constant">User</span>.new <span class="hljs-keyword">do</span>
   name       <span class="hljs-string">"Travis Jeffery"</span>
   location   <span class="hljs-string">"Toronto, Ontario"</span>
   occupation <span class="hljs-string">"Mathematician, Software Engineer"</span>
@@ -84,7 +84,7 @@ u = User.new <span class="hljs-keyword">do</span>
 <span class="hljs-comment"># =&gt; "Mathematician, Software Engineer"</span></code></pre>
 
 <p>The reason for checking the arity of the block given is so you can support the case when a user of our API would use it like so:</p>
-<pre><code class="hljs ruby">u = User.new <span class="hljs-keyword">do</span> <span class="hljs-params">|u|</span>
+<pre><code class="hljs ruby">u = <span class="hljs-constant">User</span>.new <span class="hljs-keyword">do</span> |u|
   u.name <span class="hljs-string">"Travis Jeffery"</span>
 <span class="hljs-keyword">end</span></code></pre>
 
@@ -92,7 +92,7 @@ u = User.new <span class="hljs-keyword">do</span>
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -102,25 +102,6 @@ u = User.new <span class="hljs-keyword">do</span>
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: December 28th, 2011<br>
               Categories: ruby, domain-specific-languages, dsl

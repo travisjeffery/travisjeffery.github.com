@@ -53,23 +53,23 @@
 <span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">APIClientTests</span></span>
 
 - (<span class="hljs-keyword">void</span>)setUp {
-    <span class="hljs-keyword">self</span>.URLSession = [<span class="hljs-built_in">NSURLSession</span> sessionWithConfiguration:[<span class="hljs-built_in">NSURLSessionConfiguration</span> defaultSessionConfiguration]];
+    <span class="hljs-keyword">self</span><span class="hljs-variable">.URLSession</span> = [<span class="hljs-built_in">NSURLSession</span> sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 }
 
 - (<span class="hljs-keyword">void</span>)testAPIEndpoint {
     __block <span class="hljs-built_in">NSDictionary</span> *JSON = <span class="hljs-literal">nil</span>;
     __block TRVSMonitor *monitor = [TRVSMonitor monitor];
 
-    [<span class="hljs-keyword">self</span>.URLSession dataTaskWithRequest:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:[<span class="hljs-built_in">NSURL</span> URLWithString:<span class="hljs-string">@"http://127.0.0.1:8000"</span>]] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, <span class="hljs-built_in">NSURLResponse</span> *response, <span class="hljs-built_in">NSError</span> *error) {
-        JSON = [<span class="hljs-built_in">NSJSONSerialization</span> JSONObjectWithData:data options:<span class="hljs-number">0</span> error:<span class="hljs-literal">NULL</span>];
+    [<span class="hljs-keyword">self</span><span class="hljs-variable">.URLSession</span> dataTaskWithRequest:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:[<span class="hljs-built_in">NSURL</span> URLWithString:<span class="hljs-string">@"http://127.0.0.1:8000"</span>]] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, NSURLResponse *response, <span class="hljs-built_in">NSError</span> *error) {
+        JSON = [NSJSONSerialization JSONObjectWithData:data options:<span class="hljs-number">0</span> error:<span class="hljs-literal">NULL</span>];
         [monitor signal];
     }];
 
     [monitor wait];
 
-    <span class="hljs-built_in">XCTAssert</span>(JSON);
-    <span class="hljs-built_in">XCTAssertEqualObjects</span>(<span class="hljs-string">@"1"</span>, JSON[<span class="hljs-string">@"id"</span>]);
-    <span class="hljs-built_in">XCTAssertEqualObjects</span>(<span class="hljs-string">@"travis jeffery"</span>, JSON[<span class="hljs-string">@"name"</span>]);
+    XCTAssert(JSON);
+    XCTAssertEqualObjects(<span class="hljs-string">@"1"</span>, JSON[<span class="hljs-string">@"id"</span>]);
+    XCTAssertEqualObjects(<span class="hljs-string">@"travis jeffery"</span>, JSON[<span class="hljs-string">@"name"</span>]);
 }
 
 <span class="hljs-keyword">@end</span></code></pre>
@@ -78,7 +78,7 @@
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -88,25 +88,6 @@
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: October 11th, 2013<br>
               Categories: objc, ios, mac, async, testing, xctest

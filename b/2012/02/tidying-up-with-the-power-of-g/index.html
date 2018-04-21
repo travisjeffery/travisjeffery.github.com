@@ -52,30 +52,30 @@ creativity.</p>
 scattered across a file.</p>
 <p>Here’s an example:</p>
 <pre><code class="hljs vim">Bundle <span class="hljs-string">'git@github.com:travisjeffery/IndexedSearch.git'</span>
-<span class="hljs-comment">" Bundle 'https://github.com/Shougo/neocomplcache.git'</span>
-Bundle <span class="hljs-string">'https://github.com/tpope/vim-fugitive.git'</span>
+<span class="hljs-string">" Bundle 'https://github.com/Shougo/neocomplcache.git'
+</span>Bundle <span class="hljs-string">'https://github.com/tpope/vim-fugitive.git'</span>
 Bundle <span class="hljs-string">'https://github.com/travisjeffery/vim-help'</span>
-<span class="hljs-comment">" Bundle 'https://github.com/Lokaltog/vim-powerline.git'</span>
-<span class="hljs-comment">" Bundle 'https://github.com/jiangmiao/auto-pairs.git'</span>
-Bundle <span class="hljs-string">'https://github.com/tpope/vim-ragtag.git'</span>
+<span class="hljs-string">" Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+</span><span class="hljs-string">" Bundle 'https://github.com/jiangmiao/auto-pairs.git'
+</span>Bundle <span class="hljs-string">'https://github.com/tpope/vim-ragtag.git'</span>
 Bundle <span class="hljs-string">'git@github.com:travisjeffery/vim-rails.git'</span>
-<span class="hljs-comment">" Bundle 'git@github.com:travisjeffery/vim-rails-fork.git'</span>
-Bundle <span class="hljs-string">'https://github.com/tpope/vim-repeat.git'</span>
+<span class="hljs-string">" Bundle 'git@github.com:travisjeffery/vim-rails-fork.git'
+</span>Bundle <span class="hljs-string">'https://github.com/tpope/vim-repeat.git'</span>
 Bundle <span class="hljs-string">'https://github.com/kien/ctrlp.vim.git'</span>
 Bundle <span class="hljs-string">'git@github.com:travisjeffery/vim-unimpaired.git'</span>
-<span class="hljs-comment">" Bundle 'https://github.com/thinca/vim-poslist.git'</span></code></pre>
+" Bundle <span class="hljs-string">'https://github.com/thinca/vim-poslist.git'</span></code></pre>
 
 <p>The lines that I care about are the lines that are commented out, in one fell
 swoop I’d like to bundle those lines together and put them neatly at the top.
 Here’s how to do it:</p>
 <p><code>:g/^&quot;/m 0</code></p>
 <p>Now our set of lines is nicely bundled together:</p>
-<pre><code class="hljs vim"><span class="hljs-comment">" Bundle 'https://github.com/thinca/vim-poslist.git'</span>
-<span class="hljs-comment">" Bundle 'git@github.com:travisjeffery/vim-rails-fork.git'</span>
-<span class="hljs-comment">" Bundle 'https://github.com/jiangmiao/auto-pairs.git'</span>
-<span class="hljs-comment">" Bundle 'https://github.com/Lokaltog/vim-powerline.git'</span>
-<span class="hljs-comment">" Bundle 'https://github.com/Shougo/neocomplcache.git'</span>
-Bundle <span class="hljs-string">'git@github.com:travisjeffery/IndexedSearch.git'</span>
+<pre><code class="hljs vim"><span class="hljs-string">" Bundle 'https://github.com/thinca/vim-poslist.git'
+</span><span class="hljs-string">" Bundle 'git@github.com:travisjeffery/vim-rails-fork.git'
+</span><span class="hljs-string">" Bundle 'https://github.com/jiangmiao/auto-pairs.git'
+</span><span class="hljs-string">" Bundle 'https://github.com/Lokaltog/vim-powerline.git'
+</span><span class="hljs-string">" Bundle 'https://github.com/Shougo/neocomplcache.git'
+</span>Bundle <span class="hljs-string">'git@github.com:travisjeffery/IndexedSearch.git'</span>
 Bundle <span class="hljs-string">'https://github.com/tpope/vim-fugitive.git'</span>
 Bundle <span class="hljs-string">'https://github.com/travisjeffery/vim-help'</span>
 Bundle <span class="hljs-string">'https://github.com/tpope/vim-ragtag.git'</span>
@@ -96,7 +96,7 @@ appended to.</p>
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -106,25 +106,6 @@ appended to.</p>
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: February 17th, 2012<br>
               Categories: vim

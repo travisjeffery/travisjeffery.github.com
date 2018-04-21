@@ -56,8 +56,8 @@ programming so having them as a data type in a database is massively
 powerful with many use cases, e.g. dynamic columns.</p>
 <p>Rails can actually already do this by adding a text field to a table and
 calling serialize like so:</p>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyModel</span> &lt; ActiveRecord::Base</span>
-  serialize <span class="hljs-symbol">:field</span>, Hash
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyModel</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
+  serialize <span class="hljs-symbol">:field</span>, <span class="hljs-constant">Hash</span>
 <span class="hljs-keyword">end</span></code></pre>
 
 <p>The problem with this is that a field stored and serialized in this manner will not
@@ -76,27 +76,27 @@ hstore.</p>
 <p><code>rake db:migrate</code></p>
 <p><code>CREATE INDEX people_gin_preferences ON people USING GIN(preferences);</code></p>
 <h3 id="storage-and-retrieval">Storage and retrieval</h3>
-<p>Now we have our Person entity and we can use it with <code>@travis.preferences[&quot;key&quot;]</code> like so, serialization/deserialization is handled
+<p>Now we have our Person entity and we can use it with <a href="mailto:`@travis.preferences">`@travis.preferences</a>[“key”]` like so, serialization/deserialization is handled
 for us:</p>
 <pre><code class="hljs ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">'test_helper'</span>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PersonTest</span> &lt; ActiveSupport::TestCase</span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setup</span></span>
-    @travis = Person.create <span class="hljs-symbol">:name</span> =&gt; <span class="hljs-string">"Travis Jeffery"</span>, <span class="hljs-symbol">:preferences</span> =&gt; {<span class="hljs-string">"private?"</span> =&gt; <span class="hljs-literal">true</span>, <span class="hljs-string">"location"</span> =&gt; <span class="hljs-string">"Toronto, Ontario"</span>}
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PersonTest</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveSupport::TestCase</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>setup
+    <span class="hljs-variable">@travis</span> = <span class="hljs-constant">Person</span>.create <span class="hljs-symbol">:name</span> =&gt; <span class="hljs-string">"Travis Jeffery"</span>, <span class="hljs-symbol">:preferences</span> =&gt; {<span class="hljs-string">"private?"</span> =&gt; <span class="hljs-keyword">true</span>, <span class="hljs-string">"location"</span> =&gt; <span class="hljs-string">"Toronto, Ontario"</span>}
   <span class="hljs-keyword">end</span>
 
   test <span class="hljs-string">"accessing preferences"</span> <span class="hljs-keyword">do</span>
-    assert_equal <span class="hljs-literal">true</span>, @travis.preferences[<span class="hljs-string">"private?"</span>]
-    assert_equal <span class="hljs-string">"Toronto, Ontario"</span>, @travis.preferences[<span class="hljs-string">"location"</span>]
+    assert_equal <span class="hljs-keyword">true</span>, <span class="hljs-variable">@travis</span>.preferences[<span class="hljs-string">"private?"</span>]
+    assert_equal <span class="hljs-string">"Toronto, Ontario"</span>, <span class="hljs-variable">@travis</span>.preferences[<span class="hljs-string">"location"</span>]
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre>
 
 <h2 id="improving-the-api">Improving the api</h2>
 <p>This API is not very nice and has bad encapsulation, how much cooler would
-it be to be able to just use <code>@travis.private?</code> or <code>@travis.location</code>? Here’s
+it be to be able to just use <a href="mailto:`@travis.private">`@travis.private</a>?<code>or</code>@travis.location`? Here’s
 how:</p>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> &lt; ActiveRecord::Base</span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">method_missing</span><span class="hljs-params">(id, *args, &amp;block)</span></span>
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>method_missing(id, *args, &amp;block)
     <span class="hljs-keyword">if</span> preferences.has_key?(id.to_s)
       preferences.fetch(id.to_s)
     <span class="hljs-keyword">else</span>
@@ -139,7 +139,7 @@ PostgreSQL works <a href="http://www.postgresql.org/docs/8.1/static/manage-ag-te
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -149,25 +149,6 @@ PostgreSQL works <a href="http://www.postgresql.org/docs/8.1/static/manage-ag-te
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: February 20th, 2012<br>
               Categories: hstore, postgresql, rails

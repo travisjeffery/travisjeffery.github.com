@@ -54,70 +54,70 @@
 <li>Control these network operations the same as other <code>NSOperation</code> objects (e.g. you have an <code>NSOperation</code> that creates an image, then an <code>TRVSURLSessionOperation</code> that uploads that image to a web service)</li>
 </ul>
 <h2 id="usage">Usage</h2>
-<pre><code>NSOperationQueue *queue = <span class="hljs-string">[[NSOperationQueue alloc] init];
-NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]]</span>;
+<pre><code>NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 
-[queue addOperation:<span class="hljs-string">[[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@"https://twitter.com/travisjeffery"] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { ... }]]</span>;</code></pre>
+[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"https://twitter.com/travisjeffery"</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }]];</code></pre>
 
 <h3 id="run-a-request-on-the-completion-of-another-specific-request">Run a request on the completion of another, specific request</h3>
 <p>For example, you have an initial request to log a user in or fetch their settings, and you want subsequent requests to wait for that initial request to finish and then they run.</p>
-<pre><code><span class="hljs-built_in">NSOperationQueue</span> *queue = [[<span class="hljs-built_in">NSOperationQueue</span> alloc] init];
-<span class="hljs-built_in">NSURLSession</span> *session = [<span class="hljs-built_in">NSURLSession</span> sessionWithConfiguration:[<span class="hljs-built_in">NSURLSessionConfiguration</span> defaultSessionConfiguration]];
+<pre><code>NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 
-TRVSURLSessionOperation *settingsOperation = [[TRVSURLSessionOperation alloc] initWithSession:session request:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:<span class="hljs-string">@"..."</span>] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, <span class="hljs-built_in">NSURLResponse</span> *response, <span class="hljs-built_in">NSError</span> *error) { ... }];
+TRVSURLSessionOperation *settingsOperation = [[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"..."</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }];
 
-TRVSURLSessionOperation *anotherOperation = [[TRVSURLSessionOperation alloc] initWithSession:session request:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:<span class="hljs-string">@"..."</span>] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, <span class="hljs-built_in">NSURLResponse</span> *response, <span class="hljs-built_in">NSError</span> *error) { ... }];
+TRVSURLSessionOperation *anotherOperation = [[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"..."</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }];
 
-<span class="hljs-comment">// get some settings for your app from your server, and queue subsequent requests that depend on those settings.</span>
+// get some settings <span class="hljs-keyword">for</span> your app from your server, and queue subsequent requests that depend on those settings.
 [anotherOperation addDependency:settingsOperation];
 
-[queue addOperations:@[ loginOperation, settingsOperation ] waitUntilAllOperationsAreFinished:<span class="hljs-literal">NO</span>];</code></pre>
+[queue addOperations:@[ loginOperation, settingsOperation ] waitUntilAllOperationsAreFinished:NO];</code></pre>
 
 <h3 id="pause-and-resume-suspend-requests-from-executing">Pause and resume/suspend requests from executing</h3>
-<pre><code><span class="hljs-built_in">NSOperationQueue</span> *queue = [[<span class="hljs-built_in">NSOperation</span> alloc] init];
-queue.suspended = <span class="hljs-literal">YES</span>;
+<pre><code>NSOperationQueue *queue = [[NSOperation alloc] init];
+queue.suspended = YES;
 
 <span class="hljs-comment">// these request/operations won't run</span>
-[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:<span class="hljs-string">@"https://twitter.com/travisjeffery"</span>] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, <span class="hljs-built_in">NSURLResponse</span> *response, <span class="hljs-built_in">NSError</span> *error) { ... }]];
+[queue <span class="hljs-string">addOperation:</span>[[TRVSURLSessionOperation alloc] <span class="hljs-string">initWithSession:</span>session <span class="hljs-string">request:</span>[NSURLRequest <span class="hljs-string">requestWithURL:</span>@<span class="hljs-string">"https://twitter.com/travisjeffery"</span>] <span class="hljs-string">completionHandler:</span>^(NSData *data, NSURLResponse *response, NSError *error) { ... }]];
 
-[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:<span class="hljs-string">@"https://github.com/travisjeffery"</span>] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, <span class="hljs-built_in">NSURLResponse</span> *response, <span class="hljs-built_in">NSError</span> *error) { ... }]];
+[queue <span class="hljs-string">addOperation:</span>[[TRVSURLSessionOperation alloc] <span class="hljs-string">initWithSession:</span>session <span class="hljs-string">request:</span>[NSURLRequest <span class="hljs-string">requestWithURL:</span>@<span class="hljs-string">"https://github.com/travisjeffery"</span>] <span class="hljs-string">completionHandler:</span>^(NSData *data, NSURLResponse *response, NSError *error) { ... }]];
 
-queue.suspended = <span class="hljs-literal">NO</span>;
+queue.suspended = NO;
 <span class="hljs-comment">// until now</span></code></pre>
 
 <h3 id="limit-the-number-of-concurrent-requests">Limit the number of concurrent requests</h3>
-<pre><code><span class="hljs-built_in">NSOperationQueue</span> *queue = [[<span class="hljs-built_in">NSOperationQueue</span> alloc] init];
-queue.maxConcurrentOperationCount = <span class="hljs-number">1</span>; <span class="hljs-comment">// only one request will run at once</span>
+<pre><code>NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+queue.maxConcurrentOperationCount = <span class="hljs-number">1</span>; // only one request will run at once
 
-<span class="hljs-built_in">NSURLSession</span> *session = [<span class="hljs-built_in">NSURLSession</span> sessionWithConfiguration:[<span class="hljs-built_in">NSURLSessionConfiguration</span> defaultSessionConfiguration]];
+NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 
-[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:<span class="hljs-string">@"https://twitter.com/travisjeffery"</span>] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, <span class="hljs-built_in">NSURLResponse</span> *response, <span class="hljs-built_in">NSError</span> *error) { ... }]];
+[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"https://twitter.com/travisjeffery"</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }]];
 
-[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:<span class="hljs-string">@"https://github.com/travisjeffery"</span>] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, <span class="hljs-built_in">NSURLResponse</span> *response, <span class="hljs-built_in">NSError</span> *error) { ... }]];</code></pre>
+[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"https://github.com/travisjeffery"</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }]];</code></pre>
 
 <h3 id="wait-until-all-requests-are-finished">Wait until all requests are finished</h3>
-<pre><code><span class="hljs-built_in">NSOperationQueue</span> *queue = [[<span class="hljs-built_in">NSOperationQueue</span> alloc] init];
+<pre><code>NSOperationQueue *queue = [[NSOperationQueue alloc] init];
 
-<span class="hljs-built_in">NSURLSession</span> *session = [<span class="hljs-built_in">NSURLSession</span> sessionWithConfiguration:[<span class="hljs-built_in">NSURLSessionConfiguration</span> defaultSessionConfiguration]];
+NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
 
-[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:<span class="hljs-string">@"https://twitter.com/travisjeffery"</span>] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, <span class="hljs-built_in">NSURLResponse</span> *response, <span class="hljs-built_in">NSError</span> *error) { ... }]];
+[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"https://twitter.com/travisjeffery"</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }]];
 
-[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[<span class="hljs-built_in">NSURLRequest</span> requestWithURL:<span class="hljs-string">@"https://github.com/travisjeffery"</span>] completionHandler:^(<span class="hljs-built_in">NSData</span> *data, <span class="hljs-built_in">NSURLResponse</span> *response, <span class="hljs-built_in">NSError</span> *error) { ... }]];
+[queue addOperation:[[TRVSURLSessionOperation alloc] initWithSession:session request:[NSURLRequest requestWithURL:@<span class="hljs-string">"https://github.com/travisjeffery"</span>] completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { <span class="hljs-keyword">...</span> }]];
 
 [queue waitUntilAllOperationsAreFinished];
 
-<span class="hljs-built_in">NSLog</span>(<span class="hljs-string">@"All requests are done!"</span>);</code></pre>
+NSLog(@<span class="hljs-string">"All requests are done!"</span>);</code></pre>
 
 <h2 id="install">Install</h2>
 <p>Use Cocoapods, and put the following in your Podfile:</p>
-<pre><code class="hljs ruby">pod <span class="hljs-string">`TRVSURLSessionOperation`</span>, <span class="hljs-string">'~&gt; 0.0.1'</span></code></pre>
+<pre><code class="hljs ruby"><span class="hljs-prompt">pod `TRVSURLSessionOperation`, '~&gt;</span> <span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span><span class="hljs-string">'</span></code></pre>
 
 <p>Or manually drag the TRVSURLSessionOperation folder into your Xcode project.</p>
 <p>Check it out on <a href="https://github.com/travisjeffery/TRVSURLSessionOperation">GitHub</a>.</p>
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -127,25 +127,6 @@ queue.maxConcurrentOperationCount = <span class="hljs-number">1</span>; <span cl
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: June 17th, 2014<br>
               Categories: ios, mac, nsurlsession, nsoperationqueue

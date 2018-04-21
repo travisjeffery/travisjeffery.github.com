@@ -62,26 +62,26 @@
 <p>For grunt, you need a <a href="https://github.com/velesin/jasmine-jquery/blob/master/Gruntfile.js">Gruntfile.js</a>:</p>
 <pre><code class="hljs javascript"><span class="hljs-comment">/* jshint node: true */</span>
 
-<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">grunt</span>) </span>{
-<span class="hljs-meta">  "use strict"</span>;
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(grunt)</span> </span>{
+<span class="hljs-pi">  "use strict"</span>;
 
   grunt.initConfig({
-      <span class="hljs-attr">pkg</span>: grunt.file.readJSON(<span class="hljs-string">'package.json'</span>)
-    , <span class="hljs-attr">jshint</span>: {
-        <span class="hljs-attr">all</span>: [
+      pkg: grunt.file.readJSON(<span class="hljs-string">'package.json'</span>)
+    , jshint: {
+        all: [
             <span class="hljs-string">"Gruntfile.js"</span>
           , <span class="hljs-string">"lib/**/*.js"</span>
           , <span class="hljs-string">"spec/**/*.js"</span>
         ]
-      , <span class="hljs-attr">options</span>: {
-          <span class="hljs-attr">jshintrc</span>: <span class="hljs-string">'.jshintrc'</span>
+      , options: {
+          jshintrc: <span class="hljs-string">'.jshintrc'</span>
         },
       }
-    , <span class="hljs-attr">jasmine</span>: {
-        <span class="hljs-attr">src</span>: <span class="hljs-string">"lib/**/*.js"</span>
-      , <span class="hljs-attr">options</span>: {
-          <span class="hljs-attr">specs</span>: <span class="hljs-string">"spec/**/*.js"</span>
-        , <span class="hljs-attr">vendor</span>: <span class="hljs-string">"vendor/**/*.js"</span>
+    , jasmine: {
+        src: <span class="hljs-string">"lib/**/*.js"</span>
+      , options: {
+          specs: <span class="hljs-string">"spec/**/*.js"</span>
+        , vendor: <span class="hljs-string">"vendor/**/*.js"</span>
       }
     }
   })
@@ -96,18 +96,18 @@
 <p>See <a href="https://github.com/gruntjs/grunt-contrib-jasmine">grunt-contrib-jasmine’s README</a> for the available options you can set.</p>
 <p><code>grunt test</code> runs our test task, this checks the code’s quality with jshint, then runs the tests with jasmine. <a href="https://github.com/velesin/jasmine-jquery/blob/master/.jshintrc">jasmine-jquery’s .jshintrc</a>.</p>
 <p>To setup travis-ci, you need a <a href="https://github.com/velesin/jasmine-jquery/blob/master/.travis.yml">.travis.yml file</a>:</p>
-<pre><code class="hljs yaml"><span class="hljs-attr">language:</span> node_js
-<span class="hljs-attr">node_js:</span>
-<span class="hljs-bullet">  -</span> <span class="hljs-number">0.8</span>
-<span class="hljs-attr">before_script:</span>
-<span class="hljs-bullet">  -</span> npm install -g grunt-cli</code></pre>
+<pre><code><span class="hljs-label">language:</span> node_js
+<span class="hljs-label">node_js:</span>
+  - <span class="hljs-number">0.8</span>
+<span class="hljs-label">before_script:</span>
+  - npm install -g grunt-<span class="hljs-keyword">cli</span></code></pre>
 
 <p><a href="http://about.travis-ci.org/docs/user/getting-started/#Step-one%3A-Sign-in">Integrate travis-ci with your project on GitHub.</a></p>
 <p>Fin.</p>
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -117,25 +117,6 @@
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: September 3rd, 2013<br>
               Categories: javascript, jshint, grunt, jasmine, jasmine-jquery, travis-ci, github, ci, npm, node

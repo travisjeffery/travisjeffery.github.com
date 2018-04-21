@@ -45,28 +45,28 @@
           </header>
 
           <p>This week I switched from working on iOS apps at 37signals to working on a similar mac app. I wanted to shared code between the ios and mac app, this is easy to do with foundation classes - my model and networking code. But doesn’t work right out of the box for stuff like images, colors, fonts, since they’re either in UIKit or AppKit. Thankfully you can adapt code for images, colors, and bezier paths using #define. Like so:</p>
-<pre><code class="hljs objc"><span class="hljs-meta">#if TARGET_OS_IPHONE</span>
+<pre><code class="hljs objc"><span class="hljs-preprocessor">#if TARGET_OS_IPHONE</span>
 
-<span class="hljs-meta">#define TRVSColor UIColor</span>
-<span class="hljs-meta">#define TRVSImage UIImage</span>
-<span class="hljs-meta">#define TRVSFont UIFont</span>
-<span class="hljs-meta">#define TRVSBezierPath UIBezierPath</span>
+<span class="hljs-preprocessor">#define TRVSColor UIColor</span>
+<span class="hljs-preprocessor">#define TRVSImage UIImage</span>
+<span class="hljs-preprocessor">#define TRVSFont UIFont</span>
+<span class="hljs-preprocessor">#define TRVSBezierPath UIBezierPath</span>
 
-<span class="hljs-meta">#elif TARGET_OS_MAC &amp;&amp; !TARGET_OS_IPHONE</span>
+<span class="hljs-preprocessor">#elif TARGET_OS_MAC &amp;&amp; !TARGET_OS_IPHONE</span>
 
-<span class="hljs-meta">#define TRVSColor NSColor</span>
-<span class="hljs-meta">#define TRVSImage NSImage</span>
-<span class="hljs-meta">#define TRVSFont NSFont</span>
-<span class="hljs-meta">#define TRVSBezierPath NSBezierPath</span>
+<span class="hljs-preprocessor">#define TRVSColor NSColor</span>
+<span class="hljs-preprocessor">#define TRVSImage NSImage</span>
+<span class="hljs-preprocessor">#define TRVSFont NSFont</span>
+<span class="hljs-preprocessor">#define TRVSBezierPath NSBezierPath</span>
 
-<span class="hljs-meta">#endif</span></code></pre>
+<span class="hljs-preprocessor">#endif</span></code></pre>
 
 <p>Those are the only classes you can do this with.</p>
 <p>Throw that code in something like <code>TRVSPlatformAdapter.h</code>.</p>
 <p>Often in apps I write, I’ll put category methods UIColor/NSColor for colors often used in the app’s design.</p>
 <p>This is how this is done while still being platform independent.</p>
 <p>Have <code>Color+TRVSKit.{h, m}</code> like so:</p>
-<pre><code class="hljs objc"><span class="hljs-meta">#import <span class="hljs-meta-string">"TRVSPlatformAdapter.h"</span></span>
+<pre><code class="hljs objc"><span class="hljs-preprocessor">#import <span class="hljs-title">"TRVSPlatformAdapter.h"</span></span>
 
 <span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">TRVSColor</span> (<span class="hljs-title">TRVSKit</span>)</span>
 
@@ -76,7 +76,7 @@
 
 <span class="hljs-comment">//</span>
 
-<span class="hljs-meta">#import <span class="hljs-meta-string">"Color+TRVSKit.h"</span></span>
+<span class="hljs-preprocessor">#import <span class="hljs-title">"Color+TRVSKit.h"</span></span>
 
 <span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">TRVSColor</span> (<span class="hljs-title">TRVSKit</span>)</span>
 
@@ -89,7 +89,7 @@
 
 
           <hr>
-          
+
           <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
 
           <footer>
@@ -99,25 +99,6 @@
             </div>
 
             <p>
-              <p>
-                <strong>Subscribe to my mailing list to learn more about technology and business.</strong>
-              
-                <form action="//travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                  <fieldset class="form-group">
-                    <label class="sr-only" for="mce-EMAIL">Email Address</label>
-              	    <input placeholder="Email" type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL">
-                    <small class="text-muted">Your email will never be shared with anyone else.</small>
-                  </fieldset>
-              
-                  <input type="submit" value="Learn more about technology and business" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary" />
-              
-              	  <div id="mce-responses" class="clear">
-              		  <div class="response" id="mce-error-response" style="display:none"></div>
-              		  <div class="response" id="mce-success-response" style="display:none"></div>
-              	  </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                </form>
-              </p>
               <a href="/#tech-writing">Read more posts &#8230;</a> <br>
               Written: November 2nd, 2013<br>
               Categories: ios, mac, uikit, appkit
