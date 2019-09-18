@@ -23,7 +23,7 @@ commit(s), then copying and pasting the author info. So I wrote `git author sha`
 
 Now I can do:
 
-`git commit -a -m 'some shit (fixes #99) --author="``git author sha``"`
+`git commit -a -m 'some shit (fixes #99) --author="$(git author sha)"`
 
 Here's `git author` in my [.gitconfig](https://github.com/travisjeffery/dotfiles/blob/master/.gitconfig):
 
@@ -31,4 +31,3 @@ Here's `git author` in my [.gitconfig](https://github.com/travisjeffery/dotfiles
 [alias]
   author = "!sh -c 'echo $(git log -1 --format=\"%an <%ae>\" $@) | tr -d \"\\n\"'" -"'"
 ```
-
