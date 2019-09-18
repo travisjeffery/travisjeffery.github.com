@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="description" content="Travis Jeffery">
-  <link href="/css/style.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,700,700i" rel="stylesheet">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
-  <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
-  <script>
-   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">  
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Writing @ prefixed macros</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+            
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
 
-   ga('create', 'UA-8462120-1', 'travisjeffery.com');
-    ga('send', 'pageview');
-  </script>
-  <title>Writing @ prefixed macros</title>
-</head>
-<body>
-  <div class="container-fluid container">
-    <div class="row">
-      <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-        <hgroup id="header">
-          <h1 class="logo col-xs-6">
-            <a class="" href="/">travis jeffery</a>
-          </h1>
-          
-          <div class="social col-xs-6 pull-xs-right">
-                <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-          </div>
-        </hgroup>
+          <hr>
 
-        <hr>
+          <article>
+            <header>
+              <h2 class="article-title">Writing @ prefixed macros</h2>
+            </header>
 
-        <article>
-          <header>
-            <h2 class="article-title">Writing @ prefixed macros</h2>
-          </header>
-
-          <p>While writing my own debugging lib, an idea I was toying with was having a debug macro look like one of the built-in @ compiler directives, e.g. @selector, @encode, etc.</p>
+            <p>While writing my own debugging lib, an idea I was toying with was having a debug macro look like one of the built-in @ compiler directives, e.g. @selector, @encode, etc.</p>
 <p>Since macro names must be identifiers, and identifiers <a href="http://msdn.microsoft.com/en-us/library/e7f8y25b.aspx">can’t have @s in them</a>. You can’t do this:</p>
 <pre><code class="hljs objc"><span class="hljs-preprocessor">#define @debug(fmt, ...) \</span>
   <span class="hljs-built_in">NSLog</span>(fmt, <span class="hljs-preprocessor">##__VA_ARGS__)</span></code></pre>
@@ -65,32 +65,28 @@
 <p>Neat. It’s possible you could clash with directives that are added in the future, so namespacing your macros is probably best (e.g. <code>TRVSDebug</code>), especially in shared libraries. However, I have seen this techniqued used in <a href="https://github.com/jspahrsummers/libextobjc">libextobjc</a> — providing macros such as @weakify and @strongify.</p>
 
 
+            <hr>
+
+            <footer>
+              <p>
+                <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a> this post<br>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                Written: January 10th, 2014<br>
+                Categories: objc, c, macros
+              </p>
+
+              <p><a href="/#tech-writing">Read more posts &#8230;</a> <br></p>
+            </footer>
+          </article>
+
           <hr>
-
-          <p><a href="http://twitter.com/travisjeffery">Follow me on Twitter</a> to keep up with what I’ve learned building my personal finance tool, <a href="http://stash.cool">Stash</a>.</p>
-
-          <footer>
-            <div>
-              <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-            </div>
-
-            <p>
-              <a href="/#tech-writing">Read more posts &#8230;</a> <br>
-              Written: January 10th, 2014<br>
-              Categories: objc, c, macros
-            </p>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
           </footer>
-        </article>
-
-        <hr>
-        
-        <footer class="footer">
-          <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
-        </footer>
+        </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>
