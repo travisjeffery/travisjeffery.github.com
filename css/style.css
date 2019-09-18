@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  * Bootstrap v4.0.0-alpha.2 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -6130,6 +6131,7 @@ p {
 }
 
 ul {
+  list-style-type: none;
   margin-bottom: 1.5em;
 }
 
@@ -6141,7 +6143,6 @@ ul.plain {
 }
 
 ul li {
-  list-style-type: none;
   margin-bottom: 1.5em;
 }
 
@@ -6160,6 +6161,14 @@ ul li:after {
   content: " ";
   display: block;
   clear: both;
+}
+
+ul li:before {
+  content: "•";
+  color: darkorange;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
 }
 
 hr {
