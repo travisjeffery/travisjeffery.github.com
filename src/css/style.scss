@@ -73,6 +73,10 @@ ul {
 	    display: block;
 	    clear: both;
 	}
+    }
+}
+article {
+    li {
         &:before {
             content: "•";
             color: $color_pizazz_approx;
