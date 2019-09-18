@@ -1,123 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  {{> head}}
-  <body>
-    <div class="container-fluid container">
-      <div class="row">
-        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          {{> header}}
+    {{> head}}
+    <body>
+        <div class="container-fluid container">
+            <div class="row">
+                <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+                    {{> header}}
 
-          <p>
-            I make software and write.
-          </p>
+                    <p>
+                        Software maker &amp; writer.
+                    </p>
 
-          <hr>
+                    <hr>
 
-          <h3 class="section-header"><span class="on-the-web">on the web:</span></h3>
+                    <h3 class="section-header"><span class="on-the-web">on the web:</span></h3>
 
-          <ul class="plain col-xs-12 col-md-6">
-            <li><a class="js-judy" href="http://twitter.com/travisjeffery">twitter</a></li>
-            <li><a class="js-judy" href="http://github.com/travisjeffery">github</a></li>
-          </ul>
+                    <ul class="plain col-xs-12 col-md-6">
+                        <li><a class="js-judy" href="http://twitter.com/travisjeffery">twitter</a></li>
+                        <li><a class="js-judy" href="http://github.com/travisjeffery">github</a></li>
+                    </ul>
 
-          <ul class="plain col-xs-12 col-md-6">
-            <li><a class="js-judy" href="http://medium.com/@travisjeffery">medium</a></li>
-            <li><a id="email" class="js-judy" href="mailto:tj@travisjeffery.com">email</a></li>
-          </ul>
+                    <ul class="plain col-xs-12 col-md-6">
+                        <li><a class="js-judy" href="http://medium.com/@travisjeffery">medium</a></li>
+                        <li><a id="email" class="js-judy" href="mailto:tj@travisjeffery.com">email</a></li>
+                    </ul>
 
-          <div style="clear:both;"></div>
+                    <div style="clear:both;"></div>
 
-          <p>Want to reach me? Send me an <a href="mailto:tj@travisjeffery.com">email</a> or message me on <a href="https://twitter.com/travisjeffery">Twitter</a>.</p>
+                    <p>
+                        Want to reach me? Send me an <a href="mailto:tj@travisjeffery.com">email</a> or message me on <a href="https://twitter.com/travisjeffery">Twitter</a>.
+                    </p>
 
-          <hr>
+                    <hr>
 
-          <h3 class="section-header">
-            <span class="work">work projects:</span>
-          </h3>
+                    <h3 class="section-header" id="tech-writing"><span class="tech-writing">writing:</span></h3>
 
-          <ul class="plain">
-            <li><a href="http://confluent.io" class="js-judy">Confluent Cloud</a>&mdash; Early engineer</li>
-            <li><a href="http://segment.com" class="js-judy">Segment</a>&mdash; #8 hire at the company</li>
-            <li><a href="http://basecamp.com" class="js-judy">Basecamp</a>&mdash; Protoyper</li>
-          </ul>
+                    <ul class="plain col-xs-12"> {{#each collections.medium}}
+                        <li> <span class="article-title col-xs-9 pull-xs-left">
+                            <strong><a target="_blank"
+                                       href="{{medium_link}}">{{title}}</a></strong> </span>
+                            <span class="article-date col-xs-3 push-xs-left
+                                         pull-xs-right"> {{dateShort}} </span> </li> {{/each}}
 
-          <hr>
+                        {{#each collections.articles}}
+                        <li>
+                            <span class="article-title col-xs-9 pull-xs-left"><strong><a href="{{path}}">{{title}}</a></strong></span> <span class="article-date col-xs-3 push-xs-left pull-xs-right">{{dateShort}}</span>
+                        </li>
+                        {{/each}}
+                    </ul>
 
-          <h3 class="section-header"><span class="open-source">open source projects i work on:</span></h3>
+                    {{> footer}}
+                </div>
+            </div>
+        </div>
 
-          <ul class="plain lotta-text">
-            <li>
-              <a class="js-judy" href="https://github.com/travisjeffery/jocko">Jocko</a> <span class="project-description">&mdash;distributed commit log, i.e. Kafka implemented in Golang.</span>
-            </li>
-
-            <li>
-              <a class="js-judy" href="https://github.com/travisjeffery/timecop">timecop</a><span class="project-description">&mdash;a gem providing &#8220;time travel&#8221; and &#8220;time freezing&#8221; capabilities, making it dead simple to test time-dependent code.</span>
-            </li>
-
-            <li><a class="js-judy" href="https://github.com/travisjeffery/ClangFormat-Xcode">TRVSClangFormat</a><span class="project-description">
-              &mdash;Xcode plug-in to use Clang's format tools and consistently format your code.
-            </span>
-            </li>
-
-            <li>
-              <a class="js-judy" href="https://github.com/visionmedia/mocha">mocha</a><span class="project-description">&mdash;a simple, flexible, fun javascript test framework for node.js &amp; the browser. (BDD, TDD, QUnit styles via interfaces)</span>
-            </li>
-
-            <li>
-              <a class="js-judy" href="https://github.com/travisjeffery/ecs-deploy">ecs-deploy</a><span class="project-description">
-                &mdash;CLI tool to easily deploy your ECS services.
-              </span>
-            </li>
-
-            <li>
-              <a class="js-judy" href="https://github.com/travisjeffery/ecs-exec">ecs-exec</a><span class="project-description">
-                &mdash;CLI tool to run commands your ECS container instances.
-              </span>
-            </li>
-
-            <li> <a class="js-judy"
-                   href="http://github.com/travisjeffery">See my GitHub profile for the full list&#8230;</a>
-            </li>
-          </ul>
-
-
-          <hr>
-
-          <!-- <h3 class="section-header"><span class="work">talks and
-               podcasts:</span></h3>
-
-               <ul class="plain col-xs-12">
-               <li>
-               <span
-               class="article-title col-xs-9 pull-xs-left"> <strong><a
-               target="_blank" href="link to
-               podcast">{{title}}</a></strong>
-               </span>
-
-               <span
-               class="article-date col-xs-3 push-xs-left
-               pull-xs-right"> {{dateShort}} </span>
-               </li>
-               </ul>
-
-               <hr> -->
-
-          <h3 class="section-header" id="tech-writing"><span class="tech-writing">writing:</span></h3>
-
-          <ul class="plain col-xs-12"> {{#each collections.medium}}
-            <li> <span class="article-title col-xs-9 pull-xs-left">
-              <strong><a target="_blank"
-                        href="{{medium_link}}">{{title}}</a></strong> </span>
-              <span class="article-date col-xs-3 push-xs-left
-                           pull-xs-right"> {{dateShort}} </span> </li> {{/each}}
-
-            {{#each collections.articles}} <li> <span
-                                                  class="article-title col-xs-9 pull-xs-left"> <strong><a
-                                                                                                         href="{{path}}">{{title}}</a></strong> </span> <span
-                                                                                                                                                          class="article-date col-xs-3 push-xs-left
-                                                                                                                                                                 pull-xs-right"> {{dateShort}} </span> </li> {{/each}}
-          </ul>
-
-          {{> footer}} </div> </div> </div>
-
-  </body> </html>
+    </body>
+</html>
