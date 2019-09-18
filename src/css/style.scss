@@ -24,137 +24,144 @@ $font_13: monospace;
 
 @import "bower_components/bootstrap/scss/bootstrap";
 html {
-	font-size: 20px;
+    font-size: 20px;
 }
 body {
-	font-family: $font_0, $font_1, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8 !important;
-	font-weight: 300;
+    font-family: $font_0, $font_1, $font_3, $font_4, $font_5, $font_6, $font_7, $font_8 !important;
+    font-weight: 300;
 }
 pre, code {
-	font-size: .8em;
-	font-family: $font_9, $font_10, $font_11, $font_12, $font_13;
+    font-size: .8em;
+    font-family: $font_9, $font_10, $font_11, $font_12, $font_13;
 }
 pre {
-  white-space:pre-wrap;
+    white-space:pre-wrap;
 }
 a {
-	color: $blue;
-	text-decoration: none !important;
-	border-bottom: 1px solid $blue;
-	&.js-judy {
-		font-weight: bold;
-	}
+    color: $blue;
+    text-decoration: none !important;
+    border-bottom: 1px solid $blue;
+    &.js-judy {
+	font-weight: bold;
+    }
 }
 p {
-	margin-bottom: 1.5em;
+    margin-bottom: 1.5em;
 }
 ul {
+    list-style-type: none;
+    margin-bottom: 1.5em;
+    &.plain {
+	margin-bottom: 0;
+	margin-left: 0;
+	padding-left: 0;
+	padding-right: 0;
+    }
+    li {
 	margin-bottom: 1.5em;
-	&.plain {
-		margin-bottom: 0;
-		margin-left: 0;
-		padding-left: 0;
-		padding-right: 0;
+	.article-title {
+	    padding-left: 0;
+	    padding-right: 0;
 	}
-	li {
-		list-style-type: none;
-		margin-bottom: 1.5em;
-		.article-title {
-			padding-left: 0;
-			padding-right: 0;
-		}
-		.article-date {
-			text-align: right;
-			padding-right: 0;
-			padding-left: 0;
-		}
-		&:after {
-			content: " ";
-			display: block;
-			clear: both;
-		}
+	.article-date {
+	    text-align: right;
+	    padding-right: 0;
+	    padding-left: 0;
 	}
+	&:after {
+	    content: " ";
+	    display: block;
+	    clear: both;
+	}
+        &:before {
+            content: "•";
+            color: $color_pizazz_approx;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+    }
 }
 hr {
-	border-style: dashed;
-	border-width: 1px 0 0;
-	border-color: $color_pizazz_approx;
-	clear: both;
-	margin: 0;
-	margin-left: 0;
-	margin-right: 0;
-	margin-bottom: 1.5em;
-	height: 0;
-	width: auto;
+    border-style: dashed;
+    border-width: 1px 0 0;
+    border-color: $color_pizazz_approx;
+    clear: both;
+    margin: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 1.5em;
+    height: 0;
+    width: auto;
 }
 #header {
-	display: flex;
-	align-items: center;
-	margin-top: 1.5em;
-	margin-bottom: .5em;
+    display: flex;
+    align-items: center;
+    margin-top: 1.5em;
+    margin-bottom: .5em;
+    font-size: 1.5em;
+    h1 {
+	font-weight: bold;
+    }
+    a {
+	color: $red;
+	text-decoration: none;
+	border: none;
+	&:after {
+	    content: "travis jeffery";
+	    color: $blue;
+	    position: absolute;
+	    left: 3px;
+	    top: 2px;
+	    z-index: -1;
+	}
+    }
+    .logo {
 	font-size: 1.5em;
-	h1 {
-		font-weight: bold;
-	}
-	a {
-		color: $red;
-		text-decoration: none;
-		border: none;
-		&:after {
-			content: "travis jeffery";
-			color: $blue;
-			position: absolute;
-			left: 3px;
-			top: 2px;
-			z-index: -1;
-		}
-	}
-	.logo {
-		font-size: 1.5em;
-		padding-left: 0;
-	}
-	.social {
-		display: inline;
-		text-align: right;
-		padding-right: 0;
-	}
+	padding-left: 0;
+    }
+    .social {
+	display: inline;
+	text-align: right;
+	padding-right: 0;
+    }
 }
 .section-header {
-	margin-bottom: 1em;
-	font-size: 1.2em;
-	a {
-		border: none;
-	}
-	.on-the-web {
-		background-color: $yellow;
-	}
-	.open-source {
-		background-color: $cyan_aqua;
-	}
-	.work {
-		background-color: $green;
-	}
-	.tech-writing {
-		background-color: $pink_flamingo;
-	}
+    margin-bottom: 1em;
+    font-size: 1.2em;
+    a {
+	border: none;
+    }
+    .on-the-web {
+	background-color: $yellow;
+    }
+    .open-source {
+	background-color: $cyan_aqua;
+    }
+    .work {
+	background-color: $green;
+    }
+    .tech-writing {
+	background-color: $pink_flamingo;
+    }
 }
 
 .footer {
-	margin-top: 1.5em;
-	margin-bottom: 1.5em;
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
 }
 
 h2.article-title {
-	font-weight: 300;
-	margin-bottom: 1em;
-	margin-top: 1em;
-	font-size: 1.5em;
+    font-weight: 300;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    font-size: 1.5em;
 }
 
 article footer {
-	margin-top: 1.5em;
+    margin-top: 1.5em;
 }
 
 .mc-field-group {
-  padding: 0;
+    padding: 0;
 }
