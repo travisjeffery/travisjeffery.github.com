@@ -6163,7 +6163,7 @@ ul li:after {
   clear: both;
 }
 
-ul li:before {
+article li:before {
   content: "•";
   color: darkorange;
   display: inline-block;
