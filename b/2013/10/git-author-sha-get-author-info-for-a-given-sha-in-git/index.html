@@ -55,12 +55,10 @@ you need to explicitly set this otherwise.</p>
 commit(s), then copying and pasting the author info. So I wrote <code>git author sha</code>.</p>
 <p><code>git author HEAD</code> writes <code>rza &lt;rza@wu-tang.xxx&gt;</code>.</p>
 <p>Now I can do:</p>
-<p><code>git commit -a -m &#39;some shit (fixes #99) --author=&quot;`</code>git author sha<code></code>“`</p>
+<p><code>git commit -a -m &#39;some shit (fixes #99) --author=&quot;$(git author sha)&quot;</code></p>
 <p>Here’s <code>git author</code> in my <a href="https://github.com/travisjeffery/dotfiles/blob/master/.gitconfig">.gitconfig</a>:</p>
 <pre><code class="hljs">[alias]
   author = <span class="hljs-string">"!sh -c 'echo $(git log -1 --format=\"%an &lt;%ae&gt;\" $@) | tr -d \"\\n\"'"</span> -<span class="hljs-string">"'"</span></code></pre>
-
-
 
           </article>
 

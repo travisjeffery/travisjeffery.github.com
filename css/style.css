@@ -6165,7 +6165,7 @@ ul li:after {
 
 article li:before {
   content: "•";
-  color: darkorange;
+  color: #373a3c;
   display: inline-block;
   width: 1em;
   margin-left: -1em;
