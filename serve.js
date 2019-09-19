@@ -50,6 +50,7 @@ var pipe = metalsmith(__dirname)
        .use(markdown({
          smartypants: true,
          gfm: true,
+         mangle: false,
          tables: true
        }))
       )
