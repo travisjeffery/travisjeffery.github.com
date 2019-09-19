@@ -6103,13 +6103,13 @@ html {
 }
 
 body {
-  font-family: Josefin Sans, Josefin Sans, Helvetica Neue, Helvetica, Arial, pragmatica-web-1, pragmatica-web-2, sans-serif !important;
+  font-family: Josefin Sans, Helvetica Neue, Helvetica, Arial, sans-serif !important;
   font-weight: 300;
 }
 
 pre, code {
   font-size: .8em;
-  font-family: Monaco, Menlo, Consolas, Courier New, monospace;
+  font-family: Fira Code, Menlo, Consolas, Courier New, monospace;
 }
 
 pre {
@@ -6163,7 +6163,7 @@ ul li:after {
   clear: both;
 }
 
-article li:before {
+article ul li:before {
   content: "•";
   color: #373a3c;
   display: inline-block;
