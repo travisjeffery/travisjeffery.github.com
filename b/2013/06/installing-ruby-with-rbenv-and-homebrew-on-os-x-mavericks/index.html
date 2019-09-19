@@ -52,9 +52,9 @@
 <li>Let the old compiler know about Xcode 5. Add this to your shell config file in your home directory:</li>
 </ol>
 <pre><code class="hljs"><span class="hljs-comment"># XCode 5 hides these away:</span>
-<span class="hljs-keyword">export</span> C_INCLUDE_PATH=<span class="hljs-string">"<span class="hljs-variable">$(xcrun --show-sdk-path)</span>/usr/include"</span>
-<span class="hljs-keyword">export</span> CPLUS_INCLUDE_PATH=<span class="hljs-string">"<span class="hljs-variable">$(xcrun --show-sdk-path)</span>/usr/include"</span>
-<span class="hljs-keyword">export</span> LIBRARY_PATH=<span class="hljs-string">"<span class="hljs-variable">$(xcrun --show-sdk-path)</span>/usr/lib:<span class="hljs-variable">$(xcrun --show-sdk-path)</span>/usr/lib/system:<span class="hljs-variable">$LIBRARY_PATH</span>"</span></code></pre>
+<span class="hljs-builtin-name">export</span> <span class="hljs-attribute">C_INCLUDE_PATH</span>=<span class="hljs-string">"<span class="hljs-variable">$(xcrun --show-sdk-path)</span>/usr/include"</span>
+<span class="hljs-builtin-name">export</span> <span class="hljs-attribute">CPLUS_INCLUDE_PATH</span>=<span class="hljs-string">"<span class="hljs-variable">$(xcrun --show-sdk-path)</span>/usr/include"</span>
+<span class="hljs-builtin-name">export</span> <span class="hljs-attribute">LIBRARY_PATH</span>=<span class="hljs-string">"<span class="hljs-variable">$(xcrun --show-sdk-path)</span>/usr/lib:<span class="hljs-variable">$(xcrun --show-sdk-path)</span>/usr/lib/system:<span class="hljs-variable">$LIBRARY_PATH</span>"</span></code></pre>
 
           </article>
 

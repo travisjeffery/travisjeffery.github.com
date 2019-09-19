@@ -46,13 +46,13 @@
 
             <p>While writing my own debugging lib, an idea I was toying with was having a debug macro look like one of the built-in @ compiler directives, e.g. @selector, @encode, etc.</p>
 <p>Since macro names must be identifiers, and identifiers <a href="http://msdn.microsoft.com/en-us/library/e7f8y25b.aspx">can’t have @s in them</a>. You can’t do this:</p>
-<pre><code class="hljs objc"><span class="hljs-preprocessor">#define @debug(fmt, ...) \</span>
-  <span class="hljs-built_in">NSLog</span>(fmt, <span class="hljs-preprocessor">##__VA_ARGS__)</span></code></pre>
+<pre><code class="hljs objc"><span class="hljs-meta">#define @debug(fmt, ...) \</span>
+  <span class="hljs-built_in">NSLog</span>(fmt, <span class="hljs-meta">##__VA_ARGS__)</span></code></pre>
 
 <p>The trick, we’ll write our macro such that the macro definition will be missing an @ prefix. When the definition expands, the @ before the real identifier will make our code valid.</p>
-<pre><code class="hljs objc"><span class="hljs-preprocessor">#define debug(fmt, ...) \</span>
+<pre><code class="hljs objc"><span class="hljs-meta">#define debug(fmt, ...) \</span>
   try {} <span class="hljs-keyword">@finally</span> {} \
-  <span class="hljs-built_in">NSLog</span>(fmt, <span class="hljs-preprocessor">##__VA_ARGS__)</span></code></pre>
+  <span class="hljs-built_in">NSLog</span>(fmt, <span class="hljs-meta">##__VA_ARGS__)</span></code></pre>
 
 <p>Here, the <code>try</code> in the macro is missing its @ prefix. So before and after the preprocessor does its job, we have:</p>
 <pre><code class="hljs objc"><span class="hljs-comment">// before</span>

@@ -48,10 +48,10 @@
 <p>For example, in your AFHTTPSessionManager subclass:</p>
 <pre><code class="hljs objc"><span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">MyHTTPSessionManager</span></span>
 
-- (instancetype)initWithBaseURL:(<span class="hljs-built_in">NSURL</span> *)url {
+- (<span class="hljs-keyword">instancetype</span>)initWithBaseURL:(<span class="hljs-built_in">NSURL</span> *)url {
     <span class="hljs-keyword">self</span> = [<span class="hljs-keyword">super</span> initWithBaseURL:url];
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">self</span>) {
-        [<span class="hljs-keyword">self</span><span class="hljs-variable">.requestSerializer</span> setAuthorizationHeaderFieldWithUsername:<span class="hljs-string">@"username"</span> password:<span class="hljs-string">@"password"</span>];
+        [<span class="hljs-keyword">self</span>.requestSerializer setAuthorizationHeaderFieldWithUsername:<span class="hljs-string">@"username"</span> password:<span class="hljs-string">@"password"</span>];
     }
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">self</span>;
 }

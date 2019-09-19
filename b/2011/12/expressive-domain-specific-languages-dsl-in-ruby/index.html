@@ -47,7 +47,7 @@
             <p>In this example, I’m creating a User object such that I can set the name using
 my own DSL:</p>
 <pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>initialize &amp;block
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span> <span class="hljs-title">&amp;</span><span class="hljs-title">block</span></span>
     <span class="hljs-keyword">if</span> block.arity == <span class="hljs-number">1</span>
       block[<span class="hljs-keyword">self</span>]
     <span class="hljs-keyword">else</span>
@@ -55,20 +55,20 @@ my own DSL:</p>
     <span class="hljs-keyword">end</span>
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>name new_name = <span class="hljs-keyword">nil</span>
-    <span class="hljs-variable">@name</span> ||= new_name
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span> <span class="hljs-title">new_name</span> = <span class="hljs-title">nil</span></span>
+    @name <span class="hljs-params">||</span>= new_name
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>location new_location = <span class="hljs-keyword">nil</span>
-    <span class="hljs-variable">@location</span> ||= new_location
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">location</span> <span class="hljs-title">new_location</span> = <span class="hljs-title">nil</span></span>
+    @location <span class="hljs-params">||</span>= new_location
   <span class="hljs-keyword">end</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>occupation new_occupation = <span class="hljs-keyword">nil</span>
-    <span class="hljs-variable">@occupation</span> ||= new_occupation
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">occupation</span> <span class="hljs-title">new_occupation</span> = <span class="hljs-title">nil</span></span>
+    @occupation <span class="hljs-params">||</span>= new_occupation
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 
-u = <span class="hljs-constant">User</span>.new <span class="hljs-keyword">do</span>
+u = User.new <span class="hljs-keyword">do</span>
   name       <span class="hljs-string">"Travis Jeffery"</span>
   location   <span class="hljs-string">"Toronto, Ontario"</span>
   occupation <span class="hljs-string">"Mathematician, Software Engineer"</span>
@@ -84,7 +84,7 @@ u = <span class="hljs-constant">User</span>.new <span class="hljs-keyword">do</s
 <span class="hljs-comment"># =&gt; "Mathematician, Software Engineer"</span></code></pre>
 
 <p>The reason for checking the arity of the block given is so you can support the case when a user of our API would use it like so:</p>
-<pre><code class="hljs ruby">u = <span class="hljs-constant">User</span>.new <span class="hljs-keyword">do</span> |u|
+<pre><code class="hljs ruby">u = User.new <span class="hljs-keyword">do</span> <span class="hljs-params">|u|</span>
   u.name <span class="hljs-string">"Travis Jeffery"</span>
 <span class="hljs-keyword">end</span></code></pre>
 

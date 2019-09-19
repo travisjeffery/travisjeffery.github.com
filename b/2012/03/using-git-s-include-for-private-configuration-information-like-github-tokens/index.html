@@ -52,22 +52,22 @@ git ignored .githubconfig file containing your private github token.</p>
 <p>Storing GitHub tokens doesn’t <a href="https://github.com/search?q=token+path%3A.gitconfig&amp;repo=&amp;langOverride=&amp;start_value=1&amp;type=Code&amp;language=">seem to be</a>
 all that uncommon, so hopefully with Git’s include feature this will change.</p>
 <p>This what you’ll have in your .gitconfig file:</p>
-<pre><code class="hljs">[<span class="hljs-literal">include</span>]
-  <span class="hljs-built_in">path</span> = .githubconfig</code></pre>
+<pre><code class="hljs">[<span class="hljs-keyword">include</span>]
+  <span class="hljs-type">path</span> = .githubconfig</code></pre>
 
 <p>And in your .githubconfig file:</p>
 <pre><code class="hljs">[github]
-  <span class="hljs-variable">user =</span> travisjeffery
-  <span class="hljs-variable">token =</span> secret!</code></pre>
+ <span class="hljs-built_in"> user </span>= travisjeffery
+  token = secret!</code></pre>
 
 <p>Then in your .gitignore file have:</p>
 <pre><code class="hljs"><span class="hljs-title">.githubconfig</span></code></pre>
 
 <p>As an aside, to include multiple config files the directive is the same:</p>
-<pre><code class="hljs">[<span class="hljs-literal">include</span>]
-  <span class="hljs-built_in">path</span> = .githubconfig
-  <span class="hljs-built_in">path</span> = .anotherconfig
-  <span class="hljs-built_in">path</span> = .yetanotherconfig</code></pre>
+<pre><code class="hljs">[<span class="hljs-keyword">include</span>]
+  <span class="hljs-type">path</span> = .githubconfig
+  <span class="hljs-type">path</span> = .anotherconfig
+  <span class="hljs-type">path</span> = .yetanotherconfig</code></pre>
 
 <p>The path can be either relative from the gitconfig file or absolute.</p>
 <p>If you’ve been silly enough to have put sensitive information into your

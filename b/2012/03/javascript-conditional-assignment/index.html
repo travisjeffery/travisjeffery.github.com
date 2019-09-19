@@ -63,20 +63,20 @@ Namespace || (Namepace = {});</code></pre>
 <pre><code class="hljs js">Namespace.Model = {};
 
 _.extend(Namespace.Model, {
-  set: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(attrs, options)</span> </span>{
+  set: function(attrs, options) {
     options || (options = {});
 
-    <span class="hljs-keyword">if</span> (options.logger) {
-      <span class="hljs-keyword">return</span> options.logger.log(<span class="hljs-string">"Hello. Yes, This is log."</span>)
+    if (options.logger) {
+      return options.logger.log("Hello. Yes, This is log.")
     }
   }
 });
 
 Namespace.Model.set({});
-# =&gt; ...Nothing/no <span class="hljs-built_in">ReferenceError</span>!
+# =&gt; ...Nothing/no ReferenceError!
 
-Namespace.Model.set({}, {logger: <span class="hljs-built_in">console</span>})
-# =&gt; <span class="hljs-string">"Hello. Yes, This is log."</span></code></pre>
+Namespace.Model.set({}, {logger: console})
+# =&gt; "Hello. Yes, This is log."</code></pre>
 
           </article>
 

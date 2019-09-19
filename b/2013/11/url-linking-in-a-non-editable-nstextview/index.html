@@ -45,7 +45,7 @@
             </header>
 
             <p>You’re likely here because you thought you could just do this:</p>
-<pre><code class="hljs objc">NSTextView *textView = [NSTextView new];
+<pre><code class="hljs objc"><span class="hljs-built_in">NSTextView</span> *textView = [<span class="hljs-built_in">NSTextView</span> new];
 [textView setEditable:<span class="hljs-literal">NO</span>];
 [textView setAutomaticLinkDetectionEnabled:<span class="hljs-literal">YES</span>];
 [textView setString:<span class="hljs-string">@"homesite: http://travisjeffery.com/ and twitter: http://twitter.com/travisjeffery"</span>];
@@ -53,18 +53,18 @@
 
 <p>And you’d have clickable links in your NSTextView. Nope. setAutomaticLinkDetectionEnabled: works only when the NSTextView is editable.</p>
 <p>The simplest solution is to build an NSAttributedString with links found using an NSDataDetector. Like so:</p>
-<pre><code class="hljs objc">[textView<span class="hljs-variable">.textStorage</span> setAttributedString:[<span class="hljs-keyword">self</span> autoLinkURLs:<span class="hljs-string">@"homesite: http://travisjeffery.com/ and twitter: http://twitter.com/travisjeffery"</span>]];
+<pre><code class="hljs objc">[textView.textStorage setAttributedString:[<span class="hljs-keyword">self</span> autoLinkURLs:<span class="hljs-string">@"homesite: http://travisjeffery.com/ and twitter: http://twitter.com/travisjeffery"</span>]];
 
 <span class="hljs-comment">// ..</span>
 
-- (NSAttributedString *)autoLinkURLs:(<span class="hljs-built_in">NSString</span> *)string {
-    NSMutableAttributedString *linkedString = [[NSMutableAttributedString alloc] initWithString:string];
+- (<span class="hljs-built_in">NSAttributedString</span> *)autoLinkURLs:(<span class="hljs-built_in">NSString</span> *)string {
+    <span class="hljs-built_in">NSMutableAttributedString</span> *linkedString = [[<span class="hljs-built_in">NSMutableAttributedString</span> alloc] initWithString:string];
 
-    NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:<span class="hljs-literal">nil</span>];
-    [detector enumerateMatchesInString:string options:<span class="hljs-number">0</span> range:NSMakeRange(<span class="hljs-number">0</span>, string<span class="hljs-variable">.length</span>) usingBlock:^(NSTextCheckingResult *match, NSMatchingFlags flags, <span class="hljs-built_in">BOOL</span> *stop) {
-        <span class="hljs-keyword">if</span> (match<span class="hljs-variable">.URL</span>) {
-            <span class="hljs-built_in">NSDictionary</span> *attributes = @{ NSLinkAttributeName: match<span class="hljs-variable">.URL</span> };
-            [linkedString addAttributes:attributes range:match<span class="hljs-variable">.range</span>];
+    <span class="hljs-built_in">NSDataDetector</span> *detector = [<span class="hljs-built_in">NSDataDetector</span> dataDetectorWithTypes:<span class="hljs-built_in">NSTextCheckingTypeLink</span> error:<span class="hljs-literal">nil</span>];
+    [detector enumerateMatchesInString:string options:<span class="hljs-number">0</span> range:<span class="hljs-built_in">NSMakeRange</span>(<span class="hljs-number">0</span>, string.length) usingBlock:^(<span class="hljs-built_in">NSTextCheckingResult</span> *match, <span class="hljs-built_in">NSMatchingFlags</span> flags, <span class="hljs-built_in">BOOL</span> *stop) {
+        <span class="hljs-keyword">if</span> (match.URL) {
+            <span class="hljs-built_in">NSDictionary</span> *attributes = @{ <span class="hljs-built_in">NSLinkAttributeName</span>: match.URL };
+            [linkedString addAttributes:attributes range:match.range];
         }
     }];
 

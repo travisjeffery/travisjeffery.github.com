@@ -56,13 +56,13 @@ programming so having them as a data type in a database is massively
 powerful with many use cases, e.g. dynamic columns.</p>
 <p>Rails can actually already do this by adding a text field to a table and
 calling serialize like so:</p>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyModel</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
-  serialize <span class="hljs-symbol">:field</span>, <span class="hljs-constant">Hash</span>
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyModel</span> &lt; ActiveRecord::Base</span>
+  serialize <span class="hljs-symbol">:field</span>, Hash
 <span class="hljs-keyword">end</span></code></pre>
 
 <p>The problem with this is that a field stored and serialized in this manner will not
 support indexing and lookups will be very slow. hstore on the other hand does support indexing.</p>
-<p><img src="https://docs.google.com/spreadsheet/oimg?key=0At-PylhYQ8Q0dDVlblluWW1kQUxpZWUyZElLMVJCUmc&amp;oid=1&amp;zx=jfvyr8xso2hq" alt="Graph"></p>
+<p><img src="https://docs.google.com/spreadsheet/oimg?key=0At-PylhYQ8Q0dDVlblluWW1kQUxpZWUyZElLMVJCUmc&oid=1&zx=jfvyr8xso2hq" alt="Graph"></p>
 <h2 id="using-hstore-with-rails-today">Using hstore with rails today</h2>
 <p>Any Rails version &lt; v4.0/master does not support hstore out of
 the box. Thankfully there’s a gem: <a href="https://github.com/softa/activerecord-postgres-hstore">activerecord-postgres-hstore</a>
@@ -76,27 +76,27 @@ hstore.</p>
 <p><code>rake db:migrate</code></p>
 <p><code>CREATE INDEX people_gin_preferences ON people USING GIN(preferences);</code></p>
 <h3 id="storage-and-retrieval">Storage and retrieval</h3>
-<p>Now we have our Person entity and we can use it with <a href="mailto:`@travis.preferences">`@travis.preferences</a>[“key”]` like so, serialization/deserialization is handled
+<p>Now we have our Person entity and we can use it with <code>@travis.preferences[&quot;key&quot;]</code> like so, serialization/deserialization is handled
 for us:</p>
 <pre><code class="hljs ruby"><span class="hljs-keyword">require</span> <span class="hljs-string">'test_helper'</span>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PersonTest</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveSupport::TestCase</span></span></span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>setup
-    <span class="hljs-variable">@travis</span> = <span class="hljs-constant">Person</span>.create <span class="hljs-symbol">:name</span> =&gt; <span class="hljs-string">"Travis Jeffery"</span>, <span class="hljs-symbol">:preferences</span> =&gt; {<span class="hljs-string">"private?"</span> =&gt; <span class="hljs-keyword">true</span>, <span class="hljs-string">"location"</span> =&gt; <span class="hljs-string">"Toronto, Ontario"</span>}
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PersonTest</span> &lt; ActiveSupport::TestCase</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">setup</span></span>
+    @travis = Person.create <span class="hljs-symbol">:name</span> =&gt; <span class="hljs-string">"Travis Jeffery"</span>, <span class="hljs-symbol">:preferences</span> =&gt; {<span class="hljs-string">"private?"</span> =&gt; <span class="hljs-literal">true</span>, <span class="hljs-string">"location"</span> =&gt; <span class="hljs-string">"Toronto, Ontario"</span>}
   <span class="hljs-keyword">end</span>
 
   test <span class="hljs-string">"accessing preferences"</span> <span class="hljs-keyword">do</span>
-    assert_equal <span class="hljs-keyword">true</span>, <span class="hljs-variable">@travis</span>.preferences[<span class="hljs-string">"private?"</span>]
-    assert_equal <span class="hljs-string">"Toronto, Ontario"</span>, <span class="hljs-variable">@travis</span>.preferences[<span class="hljs-string">"location"</span>]
+    assert_equal <span class="hljs-literal">true</span>, @travis.preferences[<span class="hljs-string">"private?"</span>]
+    assert_equal <span class="hljs-string">"Toronto, Ontario"</span>, @travis.preferences[<span class="hljs-string">"location"</span>]
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre>
 
 <h2 id="improving-the-api">Improving the api</h2>
 <p>This API is not very nice and has bad encapsulation, how much cooler would
-it be to be able to just use <a href="mailto:`@travis.private">`@travis.private</a>?<code>or</code>@travis.location`? Here’s
+it be to be able to just use <code>@travis.private?</code> or <code>@travis.location</code>? Here’s
 how:</p>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> <span class="hljs-inheritance">&lt; <span class="hljs-parent">ActiveRecord::Base</span></span></span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> </span>method_missing(id, *args, &amp;block)
+<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> &lt; ActiveRecord::Base</span>
+  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">method_missing</span><span class="hljs-params">(id, *args, &amp;block)</span></span>
     <span class="hljs-keyword">if</span> preferences.has_key?(id.to_s)
       preferences.fetch(id.to_s)
     <span class="hljs-keyword">else</span>
@@ -107,7 +107,7 @@ how:</p>
 
 <h2 id="issues">Issues</h2>
 <p><code>PG::Error: ERROR:  type &quot;hstore&quot; does not exist</code></p>
-<h2 id="schema-load-dump">Schema load/dump</h2>
+<h2 id="schema-loaddump">Schema load/dump</h2>
 <p>One problem you may run into is when you try to <code>rake db:test:prepare</code> is that
 Rails will not be able to load the schema properly since it doesn’t support
 hstore yet, to fix this you can either dump to sql by uncommenting or adding to your
@@ -130,7 +130,7 @@ your system.</p>
 if you’re on master you shouldn’t don’t need to worry about any these issues other than making sure your
 database does actually have the hstore data type. I would recommend improving the API and encapsulation as I’ve done above too.</p>
 <p>It’s an exciting time to be PostgreSQL and Rails developer!</p>
-<h2 id="further-reading-">Further reading:</h2>
+<h2 id="further-reading">Further reading:</h2>
 <ul>
 <li>PostgreSQL’s <a href="http://www.postgresql.org/docs/9.1/static/hstore.html">reference documentation</a> on hstore</li>
 <li>More on PostgreSQL’s template databases and how creating a database in

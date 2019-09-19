@@ -60,7 +60,7 @@ addr=<span class="hljs-variable">${3:-nsqd:4150}</span>
 
 cat - \
     | throttle <span class="hljs-variable">$rate</span> \
-    | json_to_nsq -t events <span class="hljs-operator">-a</span> <span class="hljs-string">"<span class="hljs-variable">$addr</span>"</span></code></pre>
+    | json_to_nsq -t events -a <span class="hljs-string">"<span class="hljs-variable">$addr</span>"</span></code></pre>
 
 <p>And here’s how to run it (assuming the image is called <code>events</code>):</p>
 <pre><code class="hljs sh">cat events.json | docker run -it events</code></pre>

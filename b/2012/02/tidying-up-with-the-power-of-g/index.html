@@ -52,30 +52,30 @@ creativity.</p>
 scattered across a file.</p>
 <p>Here’s an example:</p>
 <pre><code class="hljs vim">Bundle <span class="hljs-string">'git@github.com:travisjeffery/IndexedSearch.git'</span>
-<span class="hljs-string">" Bundle 'https://github.com/Shougo/neocomplcache.git'
-</span>Bundle <span class="hljs-string">'https://github.com/tpope/vim-fugitive.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/Shougo/neocomplcache.git'</span>
+Bundle <span class="hljs-string">'https://github.com/tpope/vim-fugitive.git'</span>
 Bundle <span class="hljs-string">'https://github.com/travisjeffery/vim-help'</span>
-<span class="hljs-string">" Bundle 'https://github.com/Lokaltog/vim-powerline.git'
-</span><span class="hljs-string">" Bundle 'https://github.com/jiangmiao/auto-pairs.git'
-</span>Bundle <span class="hljs-string">'https://github.com/tpope/vim-ragtag.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/Lokaltog/vim-powerline.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/jiangmiao/auto-pairs.git'</span>
+Bundle <span class="hljs-string">'https://github.com/tpope/vim-ragtag.git'</span>
 Bundle <span class="hljs-string">'git@github.com:travisjeffery/vim-rails.git'</span>
-<span class="hljs-string">" Bundle 'git@github.com:travisjeffery/vim-rails-fork.git'
-</span>Bundle <span class="hljs-string">'https://github.com/tpope/vim-repeat.git'</span>
+<span class="hljs-comment">" Bundle 'git@github.com:travisjeffery/vim-rails-fork.git'</span>
+Bundle <span class="hljs-string">'https://github.com/tpope/vim-repeat.git'</span>
 Bundle <span class="hljs-string">'https://github.com/kien/ctrlp.vim.git'</span>
 Bundle <span class="hljs-string">'git@github.com:travisjeffery/vim-unimpaired.git'</span>
-" Bundle <span class="hljs-string">'https://github.com/thinca/vim-poslist.git'</span></code></pre>
+<span class="hljs-comment">" Bundle 'https://github.com/thinca/vim-poslist.git'</span></code></pre>
 
 <p>The lines that I care about are the lines that are commented out, in one fell
 swoop I’d like to bundle those lines together and put them neatly at the top.
 Here’s how to do it:</p>
 <p><code>:g/^&quot;/m 0</code></p>
 <p>Now our set of lines is nicely bundled together:</p>
-<pre><code class="hljs vim"><span class="hljs-string">" Bundle 'https://github.com/thinca/vim-poslist.git'
-</span><span class="hljs-string">" Bundle 'git@github.com:travisjeffery/vim-rails-fork.git'
-</span><span class="hljs-string">" Bundle 'https://github.com/jiangmiao/auto-pairs.git'
-</span><span class="hljs-string">" Bundle 'https://github.com/Lokaltog/vim-powerline.git'
-</span><span class="hljs-string">" Bundle 'https://github.com/Shougo/neocomplcache.git'
-</span>Bundle <span class="hljs-string">'git@github.com:travisjeffery/IndexedSearch.git'</span>
+<pre><code class="hljs vim"><span class="hljs-comment">" Bundle 'https://github.com/thinca/vim-poslist.git'</span>
+<span class="hljs-comment">" Bundle 'git@github.com:travisjeffery/vim-rails-fork.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/jiangmiao/auto-pairs.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/Lokaltog/vim-powerline.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/Shougo/neocomplcache.git'</span>
+Bundle <span class="hljs-string">'git@github.com:travisjeffery/IndexedSearch.git'</span>
 Bundle <span class="hljs-string">'https://github.com/tpope/vim-fugitive.git'</span>
 Bundle <span class="hljs-string">'https://github.com/travisjeffery/vim-help'</span>
 Bundle <span class="hljs-string">'https://github.com/tpope/vim-ragtag.git'</span>

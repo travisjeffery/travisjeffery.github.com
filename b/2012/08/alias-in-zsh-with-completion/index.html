@@ -48,7 +48,7 @@
 ridiculous. We have shell aliases to make stuff like this a bit shorter, but
 often with less functionality. In particular, an alias in itself won’t maintain
 the completion function, but this is easy to fix:</p>
-<pre><code class="hljs sh">alias g=git
+<pre><code class="hljs sh"><span class="hljs-built_in">alias</span> g=git
 compdef g=git</code></pre>
 
 <p>And boom! You can now do <code>g st&lt;TAB&gt;</code> to complete <code>status</code> or whatever,

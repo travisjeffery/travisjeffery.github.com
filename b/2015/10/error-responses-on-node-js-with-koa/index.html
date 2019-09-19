@@ -56,7 +56,7 @@ terminology here I recommend skimming over the Koa <a href="http://koajs.com/">d
 <p>A Koa application is an object containing an array of middleware generator
 functions that are composed and ran in a stack-like manner upon request. The
 most basic error response middleware would look something like this:</p>
-<pre><code class="hljs js">app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *<span class="hljs-params">(next)</span> </span>{
+<pre><code class="hljs js">app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *(<span class="hljs-params">next</span>) </span>{
   <span class="hljs-keyword">try</span> {
     <span class="hljs-comment">// yield downstream</span>
     <span class="hljs-keyword">yield</span> next;
@@ -68,12 +68,12 @@ most basic error response middleware would look something like this:</p>
 
 <p>Somewhere downstream you’d have a call to a generator like <code>findByEmail</code> below that would
 throw. For example, we’re throwing an error here when the given user isn’t found.</p>
-<pre><code class="hljs js">Users.prototype.findByEmail = <span class="hljs-function"><span class="hljs-keyword">function</span>*<span class="hljs-params">(email)</span> </span>{
-  <span class="hljs-keyword">let</span> user = <span class="hljs-keyword">yield</span> <span class="hljs-keyword">this</span>.db.findOne({ email: email });
+<pre><code class="hljs js">Users.prototype.findByEmail = <span class="hljs-function"><span class="hljs-keyword">function</span>*(<span class="hljs-params">email</span>) </span>{
+  <span class="hljs-keyword">let</span> user = <span class="hljs-keyword">yield</span> <span class="hljs-keyword">this</span>.db.findOne({ <span class="hljs-attr">email</span>: email });
   <span class="hljs-keyword">if</span> (!user) {
     <span class="hljs-keyword">let</span> err = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'User not found'</span>);
     err.status = <span class="hljs-number">404</span>;
-    err.message = `User not found <span class="hljs-keyword">with</span> email: ${email}`;
+    err.message = <span class="hljs-string">`User not found with email: <span class="hljs-subst">${email}</span>`</span>;
     <span class="hljs-keyword">throw</span> err;
   }
   <span class="hljs-keyword">return</span> user;
@@ -88,13 +88,13 @@ languages.</p>
 <p>First we put our error response schema in YAML. This makes for a very clean and
 nicely structured schema, and also means that you could use the same error
 schema in another language.</p>
-<pre><code>user_not_found:
-  message: User <span class="hljs-keyword">not</span> found <span class="hljs-keyword">with</span> <span class="hljs-string">":email"</span>
-  status: <span class="hljs-number">404</span></code></pre>
+<pre><code class="hljs yaml"><span class="hljs-attr">user_not_found:</span>
+<span class="hljs-attr">  message:</span> <span class="hljs-string">User</span> <span class="hljs-string">not</span> <span class="hljs-string">found</span> <span class="hljs-string">with</span> <span class="hljs-string">":email"</span>
+<span class="hljs-attr">  status:</span> <span class="hljs-number">404</span></code></pre>
 
 <p>Our <code>findByEmail</code> implementation looks like this now:</p>
-<pre><code class="hljs js">Users.prototype.findByEmail = <span class="hljs-function"><span class="hljs-keyword">function</span>*<span class="hljs-params">(email)</span> </span>{
-  <span class="hljs-keyword">let</span> query = { email: email };
+<pre><code class="hljs js">Users.prototype.findByEmail = <span class="hljs-function"><span class="hljs-keyword">function</span>*(<span class="hljs-params">email</span>) </span>{
+  <span class="hljs-keyword">let</span> query = { <span class="hljs-attr">email</span>: email };
   <span class="hljs-keyword">let</span> user = <span class="hljs-keyword">yield</span> <span class="hljs-keyword">this</span>.db.findOne(query);
   <span class="hljs-keyword">if</span> (!user) {
     <span class="hljs-keyword">this</span>.thrower.throw(<span class="hljs-string">'user_not_found'</span>, query);
@@ -105,7 +105,7 @@ schema in another language.</p>
 <p>Here’s <code>thrower.throw</code>, which is used to add the key/values from <code>extra</code> onto
 the error which will then be used to fill in the user’s email into the error
 message.</p>
-<pre><code class="hljs js">Thrower.prototype.throw = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(msg, extra)</span> </span>{
+<pre><code class="hljs js">Thrower.prototype.throw = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">msg, extra</span>) </span>{
   <span class="hljs-keyword">let</span> err = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(msg);
   <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> k <span class="hljs-keyword">in</span> extra) {
     err[k] = extra[k];
@@ -116,7 +116,7 @@ message.</p>
 <p>And for our error middleware we have:</p>
 <pre><code class="hljs js"><span class="hljs-keyword">let</span> fmt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'format-string'</span>);
 
-app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *<span class="hljs-params">(next)</span> </span>{
+app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *(<span class="hljs-params">next</span>) </span>{
   <span class="hljs-keyword">try</span> {
     <span class="hljs-keyword">yield</span> next;
   } <span class="hljs-keyword">catch</span> (err) {
@@ -137,7 +137,7 @@ point of contact where all errors with go through. So you can make a single call
 to Sentry, or some other JS error tracker here.</p>
 <pre><code class="hljs js"><span class="hljs-keyword">let</span> fmt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'format-string'</span>);
 
-app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *<span class="hljs-params">(next)</span> </span>{
+app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *(<span class="hljs-params">next</span>) </span>{
   <span class="hljs-keyword">try</span> {
     <span class="hljs-keyword">yield</span> next;
   } <span class="hljs-keyword">catch</span> (err) {

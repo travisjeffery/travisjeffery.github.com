@@ -48,38 +48,38 @@
 way to find the host IP from inside the container without having to pass it in via an env var or equivalent.</p>
 <p>Behold! I’m curling inside a Docker container and from the host and
 getting the host’s IP address both times:</p>
-<pre><code class="hljs sh">travis@ip-<span class="hljs-number">10</span>–<span class="hljs-number">0</span>–<span class="hljs-number">8</span>–<span class="hljs-number">119</span>:~$ docker <span class="hljs-keyword">exec</span> -t <span class="hljs-number">80</span>dd8ce35ca0 curl http://<span class="hljs-number">169.254</span>.<span class="hljs-number">169.254</span>/latest/meta-data/local-ipv4; <span class="hljs-built_in">echo</span>
-<span class="hljs-number">10.0</span>.<span class="hljs-number">8.119</span>
-travis@ip-<span class="hljs-number">10</span>–<span class="hljs-number">0</span>–<span class="hljs-number">8</span>–<span class="hljs-number">119</span>:~$ curl http://<span class="hljs-number">169.254</span>.<span class="hljs-number">169.254</span>/latest/meta-data/local-ipv4; <span class="hljs-built_in">echo</span>
-<span class="hljs-number">10.0</span>.<span class="hljs-number">8.119</span>
-travis@ip-<span class="hljs-number">10</span>–<span class="hljs-number">0</span>–<span class="hljs-number">8</span>–<span class="hljs-number">119</span>:~$ <span class="hljs-built_in">echo</span> OMG!
+<pre><code class="hljs sh">travis@ip-10–0–8–119:~$ docker <span class="hljs-built_in">exec</span> -t 80dd8ce35ca0 curl http://169.254.169.254/latest/meta-data/<span class="hljs-built_in">local</span>-ipv4; <span class="hljs-built_in">echo</span>
+10.0.8.119
+travis@ip-10–0–8–119:~$ curl http://169.254.169.254/latest/meta-data/<span class="hljs-built_in">local</span>-ipv4; <span class="hljs-built_in">echo</span>
+10.0.8.119
+travis@ip-10–0–8–119:~$ <span class="hljs-built_in">echo</span> OMG!
 OMG!</code></pre>
 
 <p>This is useful for stats and monitoring. So you can track stats by the host,
 and have your alerts include the host’s IP so you know exactly where to go to fix your issue.</p>
 <p>Aside from the hostname and local IP address, there’s plenty of other metadata:</p>
-<pre><code class="hljs">travis@<span class="hljs-literal">ip</span>-<span class="hljs-number">10</span>–<span class="hljs-number">0</span>–<span class="hljs-number">8</span>–<span class="hljs-number">119</span>:~$ curl http://<span class="hljs-number">169.254</span>.<span class="hljs-number">169.254</span>/latest/meta-data/
-ami-<span class="hljs-built_in">id</span>
+<pre><code class="hljs">travis@ip-10–0–8–119:~$ curl http://169.254.169.254/latest/meta-data/
+ami-id
 ami-launch-index
-ami-<span class="hljs-literal">manifest</span>-<span class="hljs-built_in">path</span>
-block-<span class="hljs-literal">device</span>-mapping/
-<span class="hljs-built_in">hostname</span>
-iam/
-<span class="hljs-literal">instance</span>-action
-<span class="hljs-literal">instance</span>-<span class="hljs-built_in">id</span>
-<span class="hljs-literal">instance</span>-<span class="hljs-built_in">type</span>
-local-<span class="hljs-built_in">hostname</span>
+ami-manifest-path
+block-device-mapping/
+hostname
+iam/<span class="hljs-built_in">
+instance-action
+</span>instance-id<span class="hljs-built_in">
+instance-type
+</span>local-hostname
 local-ipv4
 mac
 metrics/
 network/
 placement/
-profile
-public-<span class="hljs-built_in">hostname</span>
-public-ipv4
-public-<span class="hljs-literal">keys</span>/
-reservation-<span class="hljs-built_in">id</span>
-security-<span class="hljs-literal">groups</span></code></pre>
+profile<span class="hljs-keyword">
+public</span>-hostname<span class="hljs-keyword">
+public</span>-ipv4<span class="hljs-keyword">
+public</span>-keys/
+reservation-id
+security-groups</code></pre>
 
 <p>Let me know on Twitter if you found this post useful.</p>
 <ul>

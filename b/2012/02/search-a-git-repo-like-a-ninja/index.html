@@ -61,9 +61,11 @@ users:</p>
 <p>As far as I know there is no non-trivial way to add default arguments/override
 git commands, plus g is nice and short.</p>
 <p>Compare this output, without grouping:</p>
-<p><img class="img-fluid" alt="Without grouping" src="images/without-grouping.jpg" /></p>
+<img class="img-fluid" alt="Without grouping" src="images/without-grouping.jpg" />
+
 <p>To this much more readable output, with grouping:</p>
-<p><img class="img-fluid" alt="With grouping" src="images/grouping.jpg" /></p>
+<img class="img-fluid" alt="With grouping" src="images/grouping.jpg" />
+
 <p>The speed of git grep, which is basically a product of it being implemented in
 C and only searching your project files, i.e. not files in .git, is
 alone very compelling, but where git grep becomes really interesting and
@@ -74,8 +76,8 @@ grep and git log that you will be able to reuse/use as instruction to
 reformulate later:</p>
 <p><strong>Search for our regexp in JavaScript files from another branch</strong></p>
 <p><code>git grep -e &lt;regexp&gt; my_other_branch -- &#39;*.js&#39;</code></p>
-<p>The <code>--</code> signals the end of options, that the rest of the paramaters are</p>
-<p><pathspec> limiters.</p>
+<p>The <code>--</code> signals the end of options, that the rest of the paramaters are
+<pathspec> limiters.</p>
 <p><strong>Search files registered in the index, rather than the working tree</strong></p>
 <p><code>git grep --cached -e &lt;regexp&gt;</code></p>
 <p>Note that we’re searching what’s registered in the index rather than what is staged…</p>
@@ -96,13 +98,14 @@ argument size, so if you run into this problem, do something like:</p>
 <span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Bad</span>;</span> <span class="hljs-keyword">end</span>
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>
-  extend <span class="hljs-constant">UserSpecification</span>
-  <span class="hljs-keyword">include</span> <span class="hljs-constant">UserFactory</span>
-  <span class="hljs-keyword">include</span> <span class="hljs-constant">Bad</span>
+  extend UserSpecification
+  <span class="hljs-keyword">include</span> UserFactory
+  <span class="hljs-keyword">include</span> Bad
 <span class="hljs-keyword">end</span></code></pre>
 
 <p>Given this file, after running the command above we get:</p>
-<p><img class="img-fluid" alt="git grep example" src="images/combination.jpg" /></p>
+<img class="img-fluid" alt="git grep example" src="images/combination.jpg" />
+
 <p><strong>Find files that contain some terms, not necessarily on the same line</strong></p>
 <p><code>git grep -e &lt;regexp&gt; --and -e &lt;regexp&gt;</code></p>
 <p>…is not what you want, as it will search for <em>lines</em> that contain both those
@@ -121,7 +124,8 @@ interface with git grep by being to search and have your results listed and
 linked in the quickfix window. By listing the results in the quickfix window
 this mean you have the usual quickfix navigation keybindings, if you’re
 unfamiliar, see <code>:h quickfix</code></p>
-<p><img class="img-fluid" alt="Using :Ggrep in Vim" src="images/editor.jpg" /></p>
+<img class="img-fluid" alt="Using :Ggrep in Vim" src="images/editor.jpg" />
+
 <p>If your project is not under git version control than you can use ack.vim in a
 similar manner:</p>
 <p><code>:Ack &lt;args&gt;</code></p>

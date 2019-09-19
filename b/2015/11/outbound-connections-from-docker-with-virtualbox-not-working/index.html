@@ -46,33 +46,33 @@
 
             <p>Using Docker and VirtualBox and having trouble making outbound
 connections? For instance, you might be getting errors like:</p>
-<pre><code class="hljs">curl: (<span class="hljs-number">7</span>) Failed connect <span class="hljs-keyword">to</span> <span class="hljs-number">10.0</span><span class="hljs-number">.2</span><span class="hljs-number">.224</span>:<span class="hljs-number">8000</span>; No route <span class="hljs-keyword">to</span> host</code></pre>
+<pre><code class="hljs">curl: (7) Failed connect <span class="hljs-keyword">to</span> 10.0.2.224:8000; <span class="hljs-literal">No</span><span class="hljs-built_in"> route </span><span class="hljs-keyword">to</span> host</code></pre>
 
 <p>Or:</p>
-<pre><code class="hljs"><span class="hljs-string">Error:</span> Redis connection to <span class="hljs-string">redis:</span><span class="hljs-number">6379</span> failed - connect EHOSTUNREACH</code></pre>
+<pre><code class="hljs">Error: Redis<span class="hljs-built_in"> connection </span><span class="hljs-keyword">to</span> redis:6379 failed - connect EHOSTUNREACH</code></pre>
 
 <p>Here’s what I did to fix it. First I ssh’d into the Docker machine:</p>
 <pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine ssh dev</code></pre>
 
 <p>And took a look at the network config:</p>
 <pre><code class="hljs">$ ifconfig eth0
-eth0      Link <span class="hljs-string">encap:</span>Ethernet  HWaddr <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:<span class="hljs-string">C8:</span><span class="hljs-string">C7:</span><span class="hljs-number">50</span>
-inet <span class="hljs-string">addr:</span><span class="hljs-number">10.254</span><span class="hljs-number">.0</span><span class="hljs-number">.15</span>  <span class="hljs-string">Bcast:</span><span class="hljs-number">10.254</span><span class="hljs-number">.0</span><span class="hljs-number">.255</span>  <span class="hljs-string">Mask:</span><span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span>
-inet6 <span class="hljs-string">addr:</span> <span class="hljs-string">fe80:</span>:<span class="hljs-string">a00:</span><span class="hljs-number">27</span><span class="hljs-string">ff:</span><span class="hljs-string">fec8:</span>c750/<span class="hljs-number">64</span> <span class="hljs-string">Scope:</span>Link
-UP BROADCAST RUNNING MULTICAST  <span class="hljs-string">MTU:</span><span class="hljs-number">1500</span>  <span class="hljs-string">Metric:</span><span class="hljs-number">1</span>
-RX <span class="hljs-string">packets:</span><span class="hljs-number">230796</span> <span class="hljs-string">errors:</span><span class="hljs-number">0</span> <span class="hljs-string">dropped:</span><span class="hljs-number">0</span> <span class="hljs-string">overruns:</span><span class="hljs-number">0</span> <span class="hljs-string">frame:</span><span class="hljs-number">0</span>
-TX <span class="hljs-string">packets:</span><span class="hljs-number">62400</span> <span class="hljs-string">errors:</span><span class="hljs-number">0</span> <span class="hljs-string">dropped:</span><span class="hljs-number">0</span> <span class="hljs-string">overruns:</span><span class="hljs-number">0</span> <span class="hljs-string">carrier:</span><span class="hljs-number">0</span>
-<span class="hljs-string">collisions:</span><span class="hljs-number">0</span> <span class="hljs-string">txqueuelen:</span><span class="hljs-number">1000</span>
-RX <span class="hljs-string">bytes:</span><span class="hljs-number">238029328</span> (<span class="hljs-number">227.0</span> MiB)  TX <span class="hljs-string">bytes:</span><span class="hljs-number">4768029</span> (<span class="hljs-number">4.5</span> MiB)</code></pre>
+eth0      Link encap:Ethernet  HWaddr <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:C8:C7:<span class="hljs-number">50</span>
+inet addr:<span class="hljs-number">10.254</span><span class="hljs-number">.0</span><span class="hljs-number">.15</span>  Bcast:<span class="hljs-number">10.254</span><span class="hljs-number">.0</span><span class="hljs-number">.255</span>  Mask:<span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span>
+inet6 addr: fe80::a00:<span class="hljs-number">27f</span>f:fec8:c750/<span class="hljs-number">64</span> Scope:Link
+UP BROADCAST RUNNING MULTICAST  MTU:<span class="hljs-number">1500</span>  Metric:<span class="hljs-number">1</span>
+RX packets:<span class="hljs-number">230796</span> errors:<span class="hljs-number">0</span> dropped:<span class="hljs-number">0</span> overruns:<span class="hljs-number">0</span> frame:<span class="hljs-number">0</span>
+TX packets:<span class="hljs-number">62400</span> errors:<span class="hljs-number">0</span> dropped:<span class="hljs-number">0</span> overruns:<span class="hljs-number">0</span> carrier:<span class="hljs-number">0</span>
+collisions:<span class="hljs-number">0</span> txqueuelen:<span class="hljs-number">1000</span>
+RX bytes:<span class="hljs-number">238029328</span> (<span class="hljs-number">227.0</span> MiB)  TX bytes:<span class="hljs-number">4768029</span> (<span class="hljs-number">4.5</span> MiB)</code></pre>
 
 <p>Where I see eth0 is configured on this subnet and doesn’t seem to be
 modifiable. So I fixed this via:</p>
 <pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine stop dev
-<span class="hljs-variable">$ </span><span class="hljs-constant">VBoxManage </span>modifyvm dev --natnet1 <span class="hljs-string">"10.254.0.0/24"</span>
+<span class="hljs-variable">$ </span>VBoxManage modifyvm dev --natnet1 <span class="hljs-string">"10.254.0.0/24"</span>
 <span class="hljs-variable">$ </span>docker-machine restart dev</code></pre>
 
 <p>And boom, just like that it works:</p>
-<pre><code class="hljs">$ docker<span class="hljs-annotation">@dev</span>:~$ curl <span class="hljs-string">http:</span><span class="hljs-comment">//10.0.2.224:8000</span>
+<pre><code class="hljs">$ <span class="hljs-symbol">docker@</span>dev:~$ curl http:<span class="hljs-comment">//10.0.2.224:8000</span>
 HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> OK</code></pre>
 
 

@@ -58,10 +58,10 @@ correctly in the current view until the animation completes.</p>
 <p><img src="https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Bad.gif" alt="Bad"> <img src="https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Good.gif" alt="Good"></p>
 <h2 id="development-and-alternatives">Development and alternatives</h2>
 <p>Before, I tried and saw others using a CATransition, like so:</p>
-<pre><code>CATransition* <span class="hljs-variable">animation =</span> [CATransition animation];
-animation.<span class="hljs-variable">duration =</span> <span class="hljs-number">0.3</span>f;
-animation.<span class="hljs-variable">type =</span> kCATransitionPush;
-animation.<span class="hljs-variable">subtype =</span> kCATransitionFromRight;</code></pre>
+<pre><code>CATransition* <span class="hljs-built_in">animation</span> = [CATransition <span class="hljs-built_in">animation</span>];
+<span class="hljs-built_in">animation</span>.duration = <span class="hljs-number">0.</span>3f;
+<span class="hljs-built_in">animation</span>.type = kCATransitionPush;
+<span class="hljs-built_in">animation</span>.subtype = kCATransitionFromRight;</code></pre>
 
 <p>The problem is that kCATransitionPush not only animates the
 translations like you’d expect, but also the opacities of the views so the
@@ -88,11 +88,11 @@ but make sure you check for what the latest version is.</p>
 <h2 id="usage">Usage</h2>
 <p>To use TRVSNavigationControllerTransition just make sure your binary is linked
 with the QuartzCore.framework library, and then to use:</p>
-<pre><code># <span class="hljs-keyword">to</span> push, called just <span class="hljs-keyword">as</span> you would <span class="hljs-keyword">with</span> pushviewcontroller:animated:
-[<span class="hljs-keyword">self</span>.navigationController pushViewControllerWithNavigationControllerTransition:viewController];
+<pre><code><span class="hljs-comment"># to push, called just as you would with pushviewcontroller:animated:</span>
+<span class="hljs-section">[self.navigationController pushViewControllerWithNavigationControllerTransition:viewController]</span><span class="hljs-comment">;</span>
 
-# <span class="hljs-keyword">to</span> pop called just <span class="hljs-keyword">as</span> you would <span class="hljs-keyword">with</span> popviewcontrolleranimated:
-[<span class="hljs-keyword">self</span>.navigationController popViewControllerWithNavigationControllerTransition];</code></pre>
+<span class="hljs-comment"># to pop called just as you would with popviewcontrolleranimated:</span>
+<span class="hljs-section">[self.navigationController popViewControllerWithNavigationControllerTransition]</span><span class="hljs-comment">;</span></code></pre>
 
           </article>
 

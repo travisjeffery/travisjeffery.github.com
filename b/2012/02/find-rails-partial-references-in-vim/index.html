@@ -51,8 +51,8 @@ is called and used. I’ve written a Vim command to do this (put in your .vimrc)
   <span class="hljs-keyword">if</span> (<span class="hljs-variable">a:partial</span>)
     <span class="hljs-keyword">let</span> pattern = <span class="hljs-string">"partial.*"</span> . partial
   <span class="hljs-keyword">else</span>
-    <span class="hljs-keyword">let</span> path = <span class="hljs-built_in">substitute</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">"%:h"</span>), <span class="hljs-string">"app/views/"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">""</span>)
-    <span class="hljs-keyword">let</span> action = <span class="hljs-built_in">substitute</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">"%:t:r:r"</span>), <span class="hljs-string">"^_"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">""</span>)
+    <span class="hljs-keyword">let</span> path = <span class="hljs-keyword">substitute</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">"%:h"</span>), <span class="hljs-string">"app/views/"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">""</span>)
+    <span class="hljs-keyword">let</span> action = <span class="hljs-keyword">substitute</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">"%:t:r:r"</span>), <span class="hljs-string">"^_"</span>, <span class="hljs-string">""</span>, <span class="hljs-string">""</span>)
     <span class="hljs-keyword">let</span> pattern = <span class="hljs-string">"partial.*"</span> . path . <span class="hljs-string">"/"</span> . action
   <span class="hljs-keyword">endif</span>
 
@@ -61,12 +61,12 @@ is called and used. I’ve written a Vim command to do this (put in your .vimrc)
   <span class="hljs-keyword">elseif</span> (<span class="hljs-built_in">exists</span>(<span class="hljs-string">'g:ackprg'</span>))
     <span class="hljs-keyword">execute</span> <span class="hljs-string">"Ack "</span> . <span class="hljs-string">'"'</span> . pattern . <span class="hljs-string">'\b" app/views'</span>
   <span class="hljs-keyword">else</span>
-    <span class="hljs-string">" seriously? use git grep or ack!
-</span>    <span class="hljs-keyword">execute</span> <span class="hljs-string">"vimgrep "</span> . <span class="hljs-string">'"'</span> . pattern . <span class="hljs-string">'\&gt;" app/views/*/**'</span>
+    <span class="hljs-comment">" seriously? use git grep or ack!</span>
+    <span class="hljs-keyword">execute</span> <span class="hljs-string">"vimgrep "</span> . <span class="hljs-string">'"'</span> . pattern . <span class="hljs-string">'\&gt;" app/views/*/**'</span>
   <span class="hljs-keyword">endif</span>
 <span class="hljs-keyword">endfunction</span>
 command! -nargs=? GrepPartial
-      \ <span class="hljs-built_in">call</span> GrepPartial(&lt;<span class="hljs-keyword">q</span>-<span class="hljs-keyword">args</span>&gt;)</code></pre>
+      \ <span class="hljs-keyword">call</span> GrepPartial(<span class="hljs-symbol">&lt;q-args&gt;</span>)</code></pre>
 
 <p>Now while editing a partial just use <code>:GrepPartial</code>.</p>
 <p>You can also pass in a partial:</p>

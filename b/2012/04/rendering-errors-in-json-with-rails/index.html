@@ -53,7 +53,7 @@ bad and good practices.</p>
 <pre><code class="hljs js">$.ajax(
   <span class="hljs-comment">// ...</span>
     dataType: <span class="hljs-string">"json"</span>
-  , success: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span></span>{
+  , <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)</span>{
     <span class="hljs-keyword">if</span> (data.errors) {
       <span class="hljs-comment">// do something with errors</span>
     } <span class="hljs-keyword">else</span> {
@@ -63,12 +63,12 @@ bad and good practices.</p>
 )</code></pre>
 
 <p>Controller,</p>
-<pre><code class="hljs ruby"><span class="hljs-function"><span class="hljs-keyword">def</span> </span>create
-  <span class="hljs-variable">@model</span> = <span class="hljs-constant">Model</span>.new(params[<span class="hljs-symbol">:model</span>])
-  <span class="hljs-keyword">if</span> <span class="hljs-variable">@model</span>.save
-    render <span class="hljs-symbol">:json</span> =&gt; <span class="hljs-variable">@model</span>.to_json
+<pre><code class="hljs ruby"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">create</span></span>
+  @model = Model.new(params[<span class="hljs-symbol">:model</span>])
+  <span class="hljs-keyword">if</span> @model.save
+    render <span class="hljs-symbol">:json</span> =&gt; @model.to_json
   <span class="hljs-keyword">else</span>
-    render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; <span class="hljs-variable">@model</span>.errors.full_messages }
+    render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; @model.errors.full_messages }
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre>
 
@@ -82,22 +82,22 @@ work together to extract the switch logic.</p>
 <pre><code class="hljs js">$.ajax({
   <span class="hljs-comment">// ...</span>
     dataType: <span class="hljs-string">"json"</span>
-  , success: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span></span>{
+  , <span class="hljs-attr">success</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>)</span>{
       <span class="hljs-comment">// do something with successful data</span>
   }
-  , error: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(xhr)</span></span>{
+  , <span class="hljs-attr">error</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">xhr</span>)</span>{
       <span class="hljs-keyword">var</span> errors = $.parseJSON(xhr.responseText).errors
       <span class="hljs-comment">// do something with errors</span>
   }
 })</code></pre>
 
 <p>Controller:</p>
-<pre><code class="hljs ruby"><span class="hljs-function"><span class="hljs-keyword">def</span> </span>create
-  <span class="hljs-variable">@model</span> = <span class="hljs-constant">Model</span>.create(params[<span class="hljs-symbol">:model</span>])
-  <span class="hljs-keyword">if</span> <span class="hljs-variable">@model</span>.save
-    render <span class="hljs-symbol">:json</span> =&gt; <span class="hljs-variable">@model</span>
+<pre><code class="hljs ruby"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">create</span></span>
+  @model = Model.create(params[<span class="hljs-symbol">:model</span>])
+  <span class="hljs-keyword">if</span> @model.save
+    render <span class="hljs-symbol">:json</span> =&gt; @model
   <span class="hljs-keyword">else</span>
-    render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; <span class="hljs-variable">@model</span>.errors.full_messages }, <span class="hljs-symbol">:status</span> =&gt; <span class="hljs-number">422</span>
+    render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; @model.errors.full_messages }, <span class="hljs-symbol">:status</span> =&gt; <span class="hljs-number">422</span>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span></code></pre>
 
@@ -107,13 +107,13 @@ is called for us, our code is more declarative and without unnecessary logic.</p
 to our response type, i.e. it will call to_json for us.</p>
 <p>Another tip is to use full_messages rather than serializing the errors object
 as it is,</p>
-<pre><code class="hljs ruby">render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; <span class="hljs-variable">@model</span>.errors }</code></pre>
+<pre><code class="hljs ruby">render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; @model.errors }</code></pre>
 
 <p>The above will present the errors in a hash where the keys are attributes and the
 values are errors,</p>
 <pre><code class="hljs ruby"><span class="hljs-comment"># =&gt; { name: ["is blank"], age: ["is not greater than 0"]}</span></code></pre>
 
-<pre><code class="hljs ruby">render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; <span class="hljs-variable">@model</span>.errors.full_messages }</code></pre>
+<pre><code class="hljs ruby">render <span class="hljs-symbol">:json</span> =&gt; { <span class="hljs-symbol">:errors</span> =&gt; @model.errors.full_messages }</code></pre>
 
 
 <p>full_messages on the other hand will return an array of full messages,</p>

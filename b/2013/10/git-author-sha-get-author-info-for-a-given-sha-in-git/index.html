@@ -58,7 +58,7 @@ commit(s), then copying and pasting the author info. So I wrote <code>git author
 <p><code>git commit -a -m &#39;some shit (fixes #99) --author=&quot;$(git author sha)&quot;</code></p>
 <p>Here’s <code>git author</code> in my <a href="https://github.com/travisjeffery/dotfiles/blob/master/.gitconfig">.gitconfig</a>:</p>
 <pre><code class="hljs">[alias]
-  author = <span class="hljs-string">"!sh -c 'echo $(git log -1 --format=\"%an &lt;%ae&gt;\" $@) | tr -d \"\\n\"'"</span> -<span class="hljs-string">"'"</span></code></pre>
+  author = <span class="hljs-string">"!sh -c 'echo $(git log -1 --format=<span class="hljs-subst">\"</span>%an &lt;%ae&gt;<span class="hljs-subst">\"</span> $@) | tr -d <span class="hljs-subst">\"</span><span class="hljs-subst">\\</span>n<span class="hljs-subst">\"</span>'"</span> -<span class="hljs-string">"'"</span></code></pre>
 
           </article>
 

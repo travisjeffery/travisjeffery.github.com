@@ -46,21 +46,19 @@
 
             <p>Quite often you may find yourself editing a file in a nonexistent directory.</p>
 <p>If you’re a Rails developer, you may have used:</p>
-<pre><code>:Rview show.html.erb
-</code></pre><p>This creates the show page for the current controller you’re working on,
+<pre><code>:Rview show.html.erb</code></pre><p>This creates the show page for the current controller you’re working on,
 however the app/views/controller directory may not exist yet, and Vim will not
 let you save a file in a nonexistent directory. So this what you do:</p>
-<pre><code>:!mkdir %:p:h
-</code></pre><p><code>:h expand</code> to the see the meaning of the modifiers used if you’re interested.</p>
+<pre><code>:!mkdir %:p:h</code></pre><p><code>:h expand</code> to the see the meaning of the modifiers used if you’re interested.</p>
 <p>An aside, this is what I previously used:</p>
 <pre><code class="hljs vim"><span class="hljs-keyword">augroup</span> vimrc-auto-<span class="hljs-built_in">mkdir</span>
   autocmd!
-  <span class="hljs-keyword">autocmd</span> BufWritePre * <span class="hljs-built_in">call</span> <span class="hljs-variable">s:auto_mkdir</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">'&lt;afile&gt;:p:h'</span>), <span class="hljs-variable">v:cmdbang</span>)
+  <span class="hljs-keyword">autocmd</span> BufWritePre * <span class="hljs-keyword">call</span> <span class="hljs-variable">s:auto_mkdir</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">'&lt;afile&gt;:p:h'</span>), <span class="hljs-variable">v:cmdbang</span>)
   <span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">s</span>:<span class="hljs-title">auto_mkdir</span><span class="hljs-params">(dir, force)</span></span>
     <span class="hljs-keyword">if</span> !isdirectory(<span class="hljs-variable">a:dir</span>)
           \   &amp;&amp; (<span class="hljs-variable">a:force</span>
           \       || <span class="hljs-built_in">input</span>(<span class="hljs-string">"'"</span> . <span class="hljs-variable">a:dir</span> . <span class="hljs-string">"' does not exist. Create? [y/N]"</span>) =~? <span class="hljs-string">'^y\%[es]$'</span>)
-      <span class="hljs-built_in">call</span> <span class="hljs-built_in">mkdir</span>(<span class="hljs-built_in">iconv</span>(<span class="hljs-variable">a:dir</span>, &amp;encoding, &amp;termencoding), <span class="hljs-string">'p'</span>)
+      <span class="hljs-keyword">call</span> <span class="hljs-built_in">mkdir</span>(<span class="hljs-built_in">iconv</span>(<span class="hljs-variable">a:dir</span>, &amp;encoding, &amp;termencoding), <span class="hljs-string">'p'</span>)
     <span class="hljs-keyword">endif</span>
   <span class="hljs-keyword">endfunction</span>
 <span class="hljs-keyword">augroup</span> END</code></pre>

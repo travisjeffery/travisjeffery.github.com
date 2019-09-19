@@ -50,10 +50,10 @@
 namespace that contains a initializer method to setup your application,
 including starting Backbone’s history.</p>
 <pre><code class="hljs coffeescript">App =
-  <span class="hljs-attribute">initialize</span>: <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span>
+  initialize: <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span>
     <span class="hljs-comment"># ...</span>
     <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> Backbone.history.started?
-      Backbone.history.start({<span class="hljs-attribute">pushState</span>: <span class="hljs-literal">true</span>})
+      Backbone.history.start({pushState: <span class="hljs-literal">true</span>})
       Backbone.history.started = <span class="hljs-literal">true</span></code></pre>
 
 <p>But each test case you write that calls this initializer method will also call

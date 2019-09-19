@@ -49,7 +49,7 @@
 <pre><code>CGFloat linearPowerLevel = powf(<span class="hljs-number">10.f</span>, decibelPowerLevel / <span class="hljs-number">20.f</span>);</code></pre>
 
 <p>Here’s how to go the other way:</p>
-<pre><code>CGFloat decibelPowerLevel = lo<span class="hljs-keyword">g10</span>f<span class="hljs-comment">(linearPowerLevel)</span> * <span class="hljs-number">20.</span>f;</code></pre>
+<pre><code><span class="hljs-attribute">CGFloat decibelPowerLevel</span> = log10f(linearPowerLevel) * 20.f;</code></pre>
 
           </article>
 

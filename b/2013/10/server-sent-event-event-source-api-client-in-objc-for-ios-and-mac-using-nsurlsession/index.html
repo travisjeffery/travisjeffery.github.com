@@ -49,25 +49,25 @@
 <pre><code class="hljs objc">TRVSEventSource *eventSource = [[TRVSEventSource alloc] initWithURL:[<span class="hljs-built_in">NSURL</span> URLWithString:<span class="hljs-string">@"http://127.0.0.1:8000"</span>]];
 
 [eventSource addListenerForEvent:<span class="hljs-string">@"message"</span> usingEventHandler:^(TRVSServerSentEvent *event, <span class="hljs-built_in">NSError</span> *error) {
-    <span class="hljs-built_in">NSDictionary</span> *JSON = [NSJSONSerialization JSONObjectWithData:event<span class="hljs-variable">.data</span> options:<span class="hljs-number">0</span> error:<span class="hljs-literal">NULL</span>];
+    <span class="hljs-built_in">NSDictionary</span> *JSON = [<span class="hljs-built_in">NSJSONSerialization</span> JSONObjectWithData:event.data options:<span class="hljs-number">0</span> error:<span class="hljs-literal">NULL</span>];
     Message *message = [Message messageWithJSON:JSON];
-    <span class="hljs-built_in">NSArray</span> *messages = [<span class="hljs-keyword">self</span><span class="hljs-variable">.messages</span> arrayByAddingObject:message];
-    <span class="hljs-built_in">NSIndexPath</span> *indexPath = [<span class="hljs-built_in">NSIndexPath</span> indexPathForItem:messages<span class="hljs-variable">.count</span> inSection:<span class="hljs-number">0</span>];
+    <span class="hljs-built_in">NSArray</span> *messages = [<span class="hljs-keyword">self</span>.messages arrayByAddingObject:message];
+    <span class="hljs-built_in">NSIndexPath</span> *indexPath = [<span class="hljs-built_in">NSIndexPath</span> indexPathForItem:messages.count inSection:<span class="hljs-number">0</span>];
 
     <span class="hljs-built_in">dispatch_async</span>(dispatch_get_main_queue(), ^{
-        <span class="hljs-keyword">self</span><span class="hljs-variable">.messages</span> = messages;
-        [<span class="hljs-keyword">self</span><span class="hljs-variable">.collectionView</span> insertItemsAtIndexPaths:@[indexPath]];
+        <span class="hljs-keyword">self</span>.messages = messages;
+        [<span class="hljs-keyword">self</span>.collectionView insertItemsAtIndexPaths:@[indexPath]];
     });
 }];</code></pre>
 
 <p>I wrote a <a href="https://github.com/travisjeffery/TRVSEventSource/blob/master/TRVSEventSourceExample/server.js">test server</a> that you can run during development too.</p>
 <p><code>node ./TRVSEventSourceExample/server.js</code></p>
 <pre><code class="hljs">❯ curl <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">8000</span>
-<span class="hljs-label">event:</span> message
-<span class="hljs-label">data:</span> {<span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"body"</span>:<span class="hljs-string">"1381466575460"</span>, <span class="hljs-string">"author_id"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"conversation_id"</span>: <span class="hljs-number">1</span>}
+<span class="hljs-symbol">event:</span> message
+<span class="hljs-symbol">data:</span> {<span class="hljs-string">"id"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"body"</span>:<span class="hljs-string">"1381466575460"</span>, <span class="hljs-string">"author_id"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"conversation_id"</span>: <span class="hljs-number">1</span>}
 
-<span class="hljs-label">event:</span> message
-<span class="hljs-label">data:</span> {<span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>, <span class="hljs-string">"body"</span>:<span class="hljs-string">"1381466577463"</span>, <span class="hljs-string">"author_id"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"conversation_id"</span>: <span class="hljs-number">1</span>}</code></pre>
+<span class="hljs-symbol">event:</span> message
+<span class="hljs-symbol">data:</span> {<span class="hljs-string">"id"</span>: <span class="hljs-number">2</span>, <span class="hljs-string">"body"</span>:<span class="hljs-string">"1381466577463"</span>, <span class="hljs-string">"author_id"</span>: <span class="hljs-number">1</span>, <span class="hljs-string">"conversation_id"</span>: <span class="hljs-number">1</span>}</code></pre>
 
 
 
