@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Search a git repo like a ninja"
+title: "Search a Git Repo Like a Ninja"
 date: 2012-02-02 21:34
 comments: false
 categories: git vim grep ack

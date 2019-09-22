@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Making custom transitions between uiviewcontrollers"
+title: "Making Custom Transitions Between UIViewControllers"
 date: 2012-10-22 18:10
 comments: false
 categories:  ios objective-c uiviewcontroller uinavigationcontroller core-animation animations transitions

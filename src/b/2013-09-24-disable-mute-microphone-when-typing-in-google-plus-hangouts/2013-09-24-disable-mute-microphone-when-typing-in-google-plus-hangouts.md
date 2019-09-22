@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Disable microphone muting when typing in google+ hangouts"
+title: "Disable Microphone Muting When Typing in Google+ Hangouts"
 date: 2013-09-24 10:27
 comments: true
 categories: google google+ hangouts mic microphone config

@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Building a custom Zendesk app"
+title: "Building a Custom Zendesk App"
 date: 2015-11-10 08:42
 comments: false
 categories: zendesk support

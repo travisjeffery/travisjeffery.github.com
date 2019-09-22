@@ -1,11 +1,11 @@
 ---
 layout: post.html
-title: "Writing your own Emacs interactive functions with completion"
+title: "Writing Your Own Emacs Interactive Functions With Completion"
 date: 2015-09-11
 comments: false
 ---
 
-Here's how to use (Ido)[http://emacswiki.org/emacs/InteractivelyDoThings] in Emacs to write your own interactive functions with completion. In this example, we'll make a function that completes directories but Ido provides functions for reading files, buffers, and more. 
+Here's how to use [Ido](http://emacswiki.org/emacs/InteractivelyDoThings) in Emacs to write your own interactive functions with completion. In this example, we'll make a function that completes directories but Ido provides functions for reading files, buffers, and more.
 
 This function will go to the given repo in my dev directory, and if that repo isn't cloned yet, will clone it from my GitHub first.
 

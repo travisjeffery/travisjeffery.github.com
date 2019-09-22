@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Find rails partial references in vim"
+title: "Find Rails Partial References in Vim"
 date: 2012-02-23 09:12
 comments: false
 categories: rails grep vim
@@ -53,4 +53,3 @@ results may be less accurate.
 Right now the function is good-enough for how I use it, though at some point I
 may automatically scope partial references when given a non-scoped partial
 pattern.
-

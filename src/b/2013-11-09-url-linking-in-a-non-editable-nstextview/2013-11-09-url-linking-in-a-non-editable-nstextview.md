@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "URL Linking in a non editable NSTextView"
+title: "URL Linking in a Non-Editable NSTextView"
 date: 2013-11-09 01:39
 comments: true
 categories: appkit detection link mac nstextview
@@ -39,4 +39,3 @@ The simplest solution is to build an NSAttributedString with links found using a
     return [linkedString copy];
 }
 ```
-

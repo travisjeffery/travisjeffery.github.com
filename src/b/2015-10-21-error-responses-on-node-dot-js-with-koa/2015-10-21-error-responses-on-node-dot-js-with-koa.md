@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Error responses on Node.js with Koa"
+title: "Error Responses on Node.js with Koa"
 date: 2015-10-21 02:08
 comments: false
 published: true

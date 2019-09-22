@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Re-architecting the api"
+title: "Re-Architecting Segment's API"
 date: 2015-03-25 21:56
 comments: false
 categories: api distributed-systems nsq message-queue segment

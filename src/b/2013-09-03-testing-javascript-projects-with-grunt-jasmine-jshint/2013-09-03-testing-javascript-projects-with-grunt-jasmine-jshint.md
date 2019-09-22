@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Testing javascript projects with grunt, jasmine, and jshint"
+title: "Testing Javascript Projects With Grunt, Jasmine, and JSHint"
 date: 2013-09-03 22:30
 comments: false
 categories: javascript jshint grunt jasmine jasmine-jquery travis-ci github ci npm node

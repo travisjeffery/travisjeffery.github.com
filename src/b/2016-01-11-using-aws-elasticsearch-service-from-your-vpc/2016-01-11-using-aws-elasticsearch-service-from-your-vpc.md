@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: Using AWS Elasticsearch Service from your VPC
+title: Using AWS Elasticsearch Service From Your VPC
 date: 2016-01-11 15:24
 comments: false
 draft: true

@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Web inspector's new dock to right feature"
+title: "Web Inspector's New Dock to Right Feature"
 date: 2012-04-01 21:14
 comments: false
 categories: webinspector webkit chrome safari

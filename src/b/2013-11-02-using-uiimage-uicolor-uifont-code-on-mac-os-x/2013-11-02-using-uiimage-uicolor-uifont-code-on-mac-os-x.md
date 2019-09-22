@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Using UIImage, UIColor, UIFont code on mac os x"
+title: "Using UIImage, UIColor, UIFont Code on Mac Os X"
 date: 2013-11-02 20:40
 comments: true
 categories: ios mac uikit appkit
@@ -59,4 +59,3 @@ Have `Color+TRVSKit.{h, m}` like so:
 ```
 
 When this code is compiled for ios, TRVSColor will be compiled as UIColor, on os x: NSColor.
-

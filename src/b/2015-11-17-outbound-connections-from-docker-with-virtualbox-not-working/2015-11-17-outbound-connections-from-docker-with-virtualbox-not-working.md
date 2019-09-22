@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Outbound connections from Docker with VirtualBox not working?"
+title: "Outbound Connections From Docker With VirtualBox Not Working?"
 date: 2015-11-17 01:32
 comments: false
 categories: docker virtualbox
@@ -54,4 +54,3 @@ And boom, just like that it works:
 $ docker@dev:~$ curl http://10.0.2.224:8000
 HTTP/1.1 200 OK
 ```
-

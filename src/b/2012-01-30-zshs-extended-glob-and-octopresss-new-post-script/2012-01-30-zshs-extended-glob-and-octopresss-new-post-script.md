@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Zsh's extended glob, and octopress's new_post script"
+title: "Zsh's Extended Glob, and Octopress's new_post Script"
 date: 2012-01-30 06:44
 comments: false
 categories: zsh octopress shell
@@ -37,6 +37,6 @@ Alias `rake` such that globbing is disabled with:
 
 Or always quote arguments given to `rake`:
 
-`rake "new_post[...]"` 
+`rake "new_post[...]"`
 
 Note that I do not have quotes inside my square brackets. This was intentional.
