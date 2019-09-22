@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Scroll to the very bottom of a uicollectionview"
+title: "Scroll to the bottom of a UICollectionView"
 date: 2013-09-19 22:57
 comments: true
 categories: ios uicollectionview collection-view uikit uiscrollview

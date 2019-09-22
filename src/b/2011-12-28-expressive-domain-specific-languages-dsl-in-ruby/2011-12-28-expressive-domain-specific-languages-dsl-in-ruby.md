@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Expressive domain specific languages (dsl) in ruby"
+title: "Expressive domain specific languages (DSL) in Ruby"
 date: 2011-12-28 23:21
 comments: false
 categories: ruby domain-specific-languages dsl

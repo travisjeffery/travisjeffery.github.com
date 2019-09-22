@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Comments, and automatically folding them in vim"
+title: "Comments, and automatically folding them in Vim"
 date: 2012-01-17 22:47
 comments: false
 categories: vim ruby comments documentation automation
@@ -39,5 +39,3 @@ autocmd FileType ruby,eruby
 ```
 
 For more details on Vim's folding, see the Vim Reference Manual's entry with `:h folding`.
-
-

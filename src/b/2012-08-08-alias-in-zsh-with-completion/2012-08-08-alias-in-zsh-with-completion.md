@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Alias in Zsh With Completion"
+title: "Alias in Zsh with completion"
 date: 2012-08-08 03:56
 comments: false
 categories: zsh git shell alias completion compdef

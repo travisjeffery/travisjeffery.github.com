@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "M-x occur for vim"
+title: "M-x occur for Vim"
 date: 2011-10-31 02:11
 comments: false
 categories: vim emacs grep
@@ -23,4 +23,3 @@ as input and uses that as your pattern instead of what you last searched for
 (the `<C-R>/` part). Or if you're not a fan of the QuickFix buffer, what I
 previously used was `nmap g/ global//print`, but I feel what I have now is
 superior.
-

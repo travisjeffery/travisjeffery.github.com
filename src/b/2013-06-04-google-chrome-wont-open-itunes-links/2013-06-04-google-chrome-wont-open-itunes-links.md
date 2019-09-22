@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "When google chrome won't open itunes links"
+title: "When Google Chrome won't open iTunes links"
 date: 2013-06-04 19:54
 comments: true
 categories: google-chrome itunes

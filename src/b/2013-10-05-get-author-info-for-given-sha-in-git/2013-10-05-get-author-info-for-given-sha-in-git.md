@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "`git author sha` - get author info for a given sha in git"
+title: "`git author sha`: get author info for a given sha in git"
 date: 2013-10-05 05:33
 comments: true
 categories: git sha author open-source

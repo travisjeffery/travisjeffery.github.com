@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Writing Your Own Emacs Interactive Functions With Completion"
+title: "Writing your own Emacs interactive functions with completion"
 date: 2015-09-11
 comments: false
 ---

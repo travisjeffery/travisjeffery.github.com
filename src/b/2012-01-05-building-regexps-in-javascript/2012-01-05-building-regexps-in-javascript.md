@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Building regexps in javascript"
+title: "Building regexps in JavaScript"
 date: 2012-01-05 22:43
 comments: false
 categories: javascript regexp regular-expressions
@@ -54,4 +54,3 @@ var table = new Table(
 # > console.log(table.row_ids());
 # => [ '1', '22', '23' ]
 ```
-

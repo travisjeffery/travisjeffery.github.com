@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "On Visibility with Microservices and Monoliths"
+title: "On visibility with microservices and monoliths"
 date: 2015-10-08 03:12
 comments: false
 draft: true

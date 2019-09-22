@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Outbound Connections From Docker With VirtualBox Not Working?"
+title: "Outbound connections from Docker with VirtualBox not working?"
 date: 2015-11-17 01:32
 comments: false
 categories: docker virtualbox

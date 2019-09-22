@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "EC2’S Magical Address to Get Instance Metadata"
+title: "EC2’S magical address to get instance metadata"
 date: 2016-11-29 10:27
 comments: true
 categories: aws ec2 docker

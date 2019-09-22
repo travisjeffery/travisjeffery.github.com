@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "What is this? i don't even... bind this to your object in javascript!"
+title: "What is this? I don't even... bind this to your object in JavaScript!"
 date: 2012-03-29 01:08
 comments: false
 categories: scope this javascript bind trigger events context
@@ -113,4 +113,3 @@ $("div#js-my-div").trigger("kungfu:fight")
 ```
 
 ![what is this i don't even](http://i0.kym-cdn.com/photos/images/newsfeed/000/228/647/tumblr_ll9huqRApq1qbfddao1_500.jpg)
-

@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Saving Files in Nonexistent Directories With Vim"
+title: "Saving files in nonexistent directories with Vim"
 date: 2011-11-28 23:09
 comments: false
 categories: vim automation

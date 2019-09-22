@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Mess up a rebase? reflog your problems away"
+title: "Mess up a rebase? Reflog your problems away"
 date: 2011-10-31 22:47
 comments: false
 categories: git rebase reflog

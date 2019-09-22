@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Server-sent event event source api client in objc for ios and mac using nsurlsession"
+title: "Server-sent event event source API client in ObjC for iOS and Mac using NSURLSession"
 date: 2013-10-12 19:33
 comments: true
 categories: ios mac objc server-sent-event eventsource api client nsurlsession html5 http
@@ -38,4 +38,3 @@ data: {"id": 1, "body":"1381466575460", "author_id": 1, "conversation_id": 1}
 event: message
 data: {"id": 2, "body":"1381466577463", "author_id": 1, "conversation_id": 1}
 ```
-

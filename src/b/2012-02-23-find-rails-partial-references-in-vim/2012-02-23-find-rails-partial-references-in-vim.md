@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Find Rails Partial References in Vim"
+title: "Find Rails partial references in Vim"
 date: 2012-02-23 09:12
 comments: false
 categories: rails grep vim

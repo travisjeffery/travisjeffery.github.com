@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Building Infrastructure with Docker, AWS ECS, and Hashicorp's Terraform"
+title: "Building infrastructure with Docker, AWS ECS, and Hashicorp's Terraform"
 date: 2015-10-07 02:17
 comments: false
 categories: docker aws ecs hashicorp terraform infrastructure

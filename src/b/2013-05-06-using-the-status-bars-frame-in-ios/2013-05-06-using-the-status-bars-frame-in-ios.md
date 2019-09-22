@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Getting the status bar's height in ios"
+title: "Getting the status bar's height in iOS"
 date: 2013-05-06 20:02
 comments: false
 categories: ios status-bar orientation

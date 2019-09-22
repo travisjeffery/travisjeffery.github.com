@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "URL Linking in a Non-Editable NSTextView"
+title: "URL linking in a non-editable NSTextView"
 date: 2013-11-09 01:39
 comments: true
 categories: appkit detection link mac nstextview

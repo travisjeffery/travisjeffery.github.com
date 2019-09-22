@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Installing ruby with rbenv and homebrew on os x mavericks"
+title: "Installing Ruby with rbenv and Homebrew on OS X Mavericks"
 date: 2013-06-24 23:36
 comments: true
 categories: mac osx 10.9 rbenv ruby homebrew

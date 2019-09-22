@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Keeping your git repo clean of .orig files! "
+title: "Keeping your git repo clean of .orig files!"
 date: 2011-12-03 17:19
 comments: false
 categories: git automation rebase
@@ -58,5 +58,3 @@ for your Development environment e.g. tags, logs, or config files then you just
 need to stipulate the path you want cleaned so they aren't removed:
 
     git clean -fdx app
-
-

@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Basic authentication with afnetworking 2"
+title: "Basic authentication with AFNetworking 2"
 date: 2013-09-27 23:39
 comments: true
 categories: ios objc c mac afnetworking authentication
@@ -23,4 +23,3 @@ For example, in your AFHTTPSessionManager subclass:
 
 @end
 ```
-

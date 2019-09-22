@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Hello. yes, this is blog."
+title: "Hello. Yes, this is blog."
 date: 2011-10-29 23:34
 ---
 

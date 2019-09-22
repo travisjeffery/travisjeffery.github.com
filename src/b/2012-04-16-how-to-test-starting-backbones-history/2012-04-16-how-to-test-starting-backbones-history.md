@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "How-to test starting backbone's history"
+title: "How-to test starting Backbone's history"
 date: 2012-04-16 03:32
 comments: false
 categories: backbone backbonejs history start testing

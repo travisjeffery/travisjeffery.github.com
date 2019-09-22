@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: Graphing Kafka Offset Lags With StatsD
+title: Graphing Kafka offset lags with StatsD
 date: 2016-03-26 02:14
 comments: false
 draft: false
@@ -15,4 +15,3 @@ can graph them in Grafana or something similar.
 It's written in Golang and there's a Docker image too, so it's easy to deploy and use.
 
 [Check it out on GitHub.](https://github.com/travisjeffery/kafka-statsd)
-

@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Library and Lambda function to show your Rdio Heavy Rotation on your website"
+title: "Library and Lambda function to show your Rdio heavy rotation on your website"
 date: 2015-10-24 21:57
 comments: false
 categories: rdio js lambda node

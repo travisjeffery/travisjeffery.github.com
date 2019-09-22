@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Piping into a docker container"
+title: "Piping into a Docker container"
 date: 2015-09-25 20:16
 comments: false
 categories: docker shell unix pipes

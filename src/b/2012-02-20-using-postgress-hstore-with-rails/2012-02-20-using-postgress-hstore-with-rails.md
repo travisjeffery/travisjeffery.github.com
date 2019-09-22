@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Using postgresql's hstore with rails"
+title: "Using PostgreSQL's Hstore with Rails"
 date: 2012-02-20 18:27
 comments: false
 categories: hstore postgresql rails
@@ -136,4 +136,3 @@ It's an exciting time to be PostgreSQL and Rails developer!
 - PostgreSQL's [reference documentation](http://www.postgresql.org/docs/9.1/static/hstore.html) on hstore
 - More on PostgreSQL's template databases and how creating a database in
 PostgreSQL works [here](http://www.postgresql.org/docs/8.1/static/manage-ag-templatedbs.html).
-

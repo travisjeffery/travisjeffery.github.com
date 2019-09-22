@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "errors.js - Client Side Errors Object"
+title: "errors.js: client side errors object"
 date: 2012-03-30 02:05
 comments: false
 categories: javascript errors rails client errors.js jquery.errors.js

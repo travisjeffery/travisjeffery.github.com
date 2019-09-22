@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Converting AVFoundation's Power Levels to/From Logarithmic and Linear Scale"
+title: "Converting AVFoundation's power levels to/from logarithmic and linear scale"
 date: 2013-02-08 17:09
 comments: true
 categories: ios avfoundation audio video core-audio

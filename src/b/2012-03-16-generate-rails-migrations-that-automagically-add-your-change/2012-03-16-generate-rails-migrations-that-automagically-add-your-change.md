@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Generate rails migrations that automagically add your change"
+title: "Generate Rails migrations that automagically add your change"
 date: 2012-03-16 02:56
 comments: false
 categories: rails migrations generators
@@ -73,4 +73,3 @@ end
 Notice that the specified index will not be added or removed.
 
 Edit: I fixed this issue and it's [merged in Rails](https://github.com/rails/rails/commit/b2a59388b2ad281ccce1f72dd5fda09ca746dc32).
-

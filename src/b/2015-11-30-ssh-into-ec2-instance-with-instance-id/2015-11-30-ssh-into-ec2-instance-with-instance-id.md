@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "SSH into EC2 Instances By Instance ID"
+title: "SSH into EC2 instances by instance ID"
 date: 2015-11-30 22:05
 comments: true
 categories: ec2 aws

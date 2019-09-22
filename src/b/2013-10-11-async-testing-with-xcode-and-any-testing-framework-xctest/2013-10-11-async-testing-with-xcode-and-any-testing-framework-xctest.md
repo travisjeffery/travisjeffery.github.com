@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Async testing with xcode and any testing framework such as xctest, sentestingkit, expecta, etc."
+title: "Async testing with Xcode and any testing framework such as XCTest, SenTestingKit, Expecta, etc."
 date: 2013-10-11 17:54
 comments: true
 categories: objc ios mac async testing xctest

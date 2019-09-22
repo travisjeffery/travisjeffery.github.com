@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Modern Grep"
+title: "Modern grep"
 date: 2012-02-09 03:27
 comments: false
 categories: grep regexp posix perl

@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Zsh's Extended Glob, and Octopress's new_post Script"
+title: "Zsh's extended glob, and Octopress's new_post script"
 date: 2012-01-30 06:44
 comments: false
 categories: zsh octopress shell

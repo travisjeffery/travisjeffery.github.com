@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Overriding uiviewcontroller's view property, done right"
+title: "Overriding UIViewController's view property, done right"
 date: 2012-12-28 10:47
 categories: uiviewcontroller ios view loadview
 ---
