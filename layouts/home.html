@@ -35,16 +35,16 @@
 
                     <h3 class="section-header" id="tech-writing"><span class="tech-writing">writing:</span></h3>
 
-                    <ul class="plain col-xs-12"> {{#each collections.medium}}
-                        <li> <span class="article-title col-xs-9 pull-xs-left">
-                            <strong><a target="_blank"
-                                       href="{{medium_link}}">{{title}}</a></strong> </span>
-                            <span class="article-date col-xs-3 push-xs-left
-                                         pull-xs-right"> {{dateShort}} </span> </li> {{/each}}
-
+                    <ul class="plain col-xs-12">
                         {{#each collections.articles}}
                         <li>
-                            <span class="article-title col-xs-9 pull-xs-left"><strong><a href="{{path}}">{{title}}</a></strong></span> <span class="article-date col-xs-3 push-xs-left pull-xs-right">{{dateShort}}</span>
+                            <span class="article-title col-xs-9 pull-xs-left"><strong>
+                                {{#if medium_link}}
+                                <a target="_blank" href="{{medium_link}}">{{title}}</a>
+                                {{else}}
+                                <a href="{{path}}">{{title}}</a>
+                                {{/if}}
+                            </strong></span><span class="article-date col-xs-3 push-xs-left pull-xs-right">{{dateShort}}</span>
                         </li>
                         {{/each}}
                     </ul>

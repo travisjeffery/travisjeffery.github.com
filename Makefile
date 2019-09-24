@@ -15,3 +15,8 @@ deploy: build
 	@git commit -m 'update'
 	@git push
 	@git checkout src
+
+.PHONY: new
+new:
+	@cd src/b && touch "$$(date +%F).md"
+	@echo "$$(date +%F).md"

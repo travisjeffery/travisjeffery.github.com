@@ -8,7 +8,6 @@ var rename = require('metalsmith-rename')
 var markdown = require('metalsmith-markdown')
 var partials = require('./lib/metalsmith-handlebars-partials')
 var sass = require('metalsmith-sass')
-var templates = require('metalsmith-templates')
 var bower = require('./lib/metalsmith-bower')
 var collections = require('metalsmith-collections')
 var date = require('./lib/metalsmith-date-formatter')
@@ -31,11 +30,6 @@ var pipe = metalsmith(__dirname)
   }))
   .use(categories())
   .use(collections({
-    medium: {
-      pattern: 'm/**/*.md',
-      sortBy: 'date',
-      reverse: true
-    },
     articles: {
       pattern: 'b/**/*.md',
       sortBy: 'date',
