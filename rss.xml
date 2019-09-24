@@ -1,0 +1,1677 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>http://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Tue, 24 Sep 2019 23:51:12 GMT</lastBuildDate><atom:link href="http://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Keep passwords and secrets out of your logs with Go</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Keep passwords and secrets out of your logs with Go</h1>
+            </header>
+
+            
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: June 4th, 2018<br>
+              Tags: articles, go, ops, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2018/06/keep-passwords-and-secrets-out-of-your-logs-with-go</link><guid isPermaLink="true">http://travisjeffery.com/b/2018/06/keep-passwords-and-secrets-out-of-your-logs-with-go</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Mon, 04 Jun 2018 07:14:00 GMT</pubDate></item><item><title><![CDATA[The best books I read in 2017]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>The best books I read in 2017</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">The best books I read in 2017</h1>
+            </header>
+
+            
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: February 1st, 2018<br>
+              Tags: articles, books, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2018/02/the-best-books-i-read-in-2017</link><guid isPermaLink="true">http://travisjeffery.com/b/2018/02/the-best-books-i-read-in-2017</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Thu, 01 Feb 2018 07:14:00 GMT</pubDate></item><item><title><![CDATA[“username or password incorrect” is bullshit]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>“username or password incorrect” is bullshit</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">“username or password incorrect” is bullshit</h1>
+            </header>
+
+            
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: December 21st, 2017<br>
+              Tags: articles, design, engineering, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2017/12/username-or-password-incorrect-is-bullshit</link><guid isPermaLink="true">http://travisjeffery.com/b/2017/12/username-or-password-incorrect-is-bullshit</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Thu, 21 Dec 2017 07:14:00 GMT</pubDate></item><item><title><![CDATA[Hiring woes: the costs of bad hires and how to avoid them]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Hiring woes: the costs of bad hires and how to avoid them</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Hiring woes: the costs of bad hires and how to avoid them</h1>
+            </header>
+
+            
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: October 4th, 2017<br>
+              Tags: articles, companies, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2017/10/hiring-woes-the-costs-of-bad-hires-and-how-to-avoid-them</link><guid isPermaLink="true">http://travisjeffery.com/b/2017/10/hiring-woes-the-costs-of-bad-hires-and-how-to-avoid-them</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Wed, 04 Oct 2017 07:14:00 GMT</pubDate></item><item><title><![CDATA[Manage Datadog with Terraform]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Manage Datadog with Terraform</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Manage Datadog with Terraform</h1>
+            </header>
+
+            
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: September 7th, 2017<br>
+              Tags: articles, ops, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2017/09/manage-datadog-with-terraform</link><guid isPermaLink="true">http://travisjeffery.com/b/2017/09/manage-datadog-with-terraform</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Thu, 07 Sep 2017 07:14:00 GMT</pubDate></item><item><title><![CDATA[How to persuade in online discussions]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>How to persuade in online discussions</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">How to persuade in online discussions</h1>
+            </header>
+
+            
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: June 14th, 2017<br>
+              Tags: articles, communication, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2017/06/how-to-persuade-in-online-discussions</link><guid isPermaLink="true">http://travisjeffery.com/b/2017/06/how-to-persuade-in-online-discussions</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Wed, 14 Jun 2017 07:14:00 GMT</pubDate></item><item><title><![CDATA[Building a Kafka that doesn’t depend on ZooKeeper]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Building a Kafka that doesn’t depend on ZooKeeper</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Building a Kafka that doesn’t depend on ZooKeeper</h1>
+            </header>
+
+            
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: January 19th, 2017<br>
+              Tags: articles, kafka, opensource, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2017/01/building-a-kafka-that-doesn-t-depend-on-zookeeper</link><guid isPermaLink="true">http://travisjeffery.com/b/2017/01/building-a-kafka-that-doesn-t-depend-on-zookeeper</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Thu, 19 Jan 2017 07:14:00 GMT</pubDate></item><item><title><![CDATA[EC2’S magical address to get instance metadata]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>EC2’S magical address to get instance metadata</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">EC2’S magical address to get instance metadata</h1>
+            </header>
+
+            <p>There’s a magical address in EC2 that you can query to get metadata on that instance (<code>http://169.254.169.254</code>). What’s especially awesome about it, is that you can use it inside Docker containers which makes it an easy
+way to find the host IP from inside the container without having to pass it in via an env var or equivalent.</p>
+<p>Behold! I’m curling inside a Docker container and from the host and
+getting the host’s IP address both times:</p>
+<pre><code class="hljs sh">travis@ip-10–0–8–119:~$ docker <span class="hljs-built_in">exec</span> -t 80dd8ce35ca0 curl http://169.254.169.254/latest/meta-data/<span class="hljs-built_in">local</span>-ipv4; <span class="hljs-built_in">echo</span>
+10.0.8.119
+travis@ip-10–0–8–119:~$ curl http://169.254.169.254/latest/meta-data/<span class="hljs-built_in">local</span>-ipv4; <span class="hljs-built_in">echo</span>
+10.0.8.119
+travis@ip-10–0–8–119:~$ <span class="hljs-built_in">echo</span> OMG!
+OMG!</code></pre>
+
+<p>This is useful for stats and monitoring. So you can track stats by the host,
+and have your alerts include the host’s IP so you know exactly where to go to fix your issue.</p>
+<p>Aside from the hostname and local IP address, there’s plenty of other metadata:</p>
+<pre><code class="hljs">travis@ip-10–0–8–119:~$ curl http://169.254.169.254/latest/meta-data/
+ami-id
+ami-launch-index
+ami-manifest-path
+block-device-mapping/
+hostname
+iam/<span class="hljs-built_in">
+instance-action
+</span>instance-id<span class="hljs-built_in">
+instance-type
+</span>local-hostname
+local-ipv4
+mac
+metrics/
+network/
+placement/
+profile<span class="hljs-keyword">
+public</span>-hostname<span class="hljs-keyword">
+public</span>-ipv4<span class="hljs-keyword">
+public</span>-keys/
+reservation-id
+security-groups</code></pre>
+
+<p>Let me know on Twitter if you found this post useful.</p>
+<ul>
+<li><a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">AWS’s documentation on instance metadata</a></li>
+<li><a href="https://github.com/travisjeffery/go-ec2-metadata">Go lib I wrote to wrap the metadata</a></li>
+</ul>
+
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: November 29th, 2016<br>
+              Tags: articles, ops, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2016/11/ec2-s-magical-address-to-get-instance-metadata</link><guid isPermaLink="true">http://travisjeffery.com/b/2016/11/ec2-s-magical-address-to-get-instance-metadata</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Tue, 29 Nov 2016 15:27:00 GMT</pubDate></item><item><title><![CDATA[How Kafka’s Storage Internals Work]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>How Kafka’s Storage Internals Work</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">How Kafka’s Storage Internals Work</h1>
+            </header>
+
+            
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: October 13th, 2016<br>
+              Tags: articles, kafka, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2016/10/how-kafka-s-storage-internals-work</link><guid isPermaLink="true">http://travisjeffery.com/b/2016/10/how-kafka-s-storage-internals-work</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Thu, 13 Oct 2016 07:14:00 GMT</pubDate></item><item><title><![CDATA[Monitoring with InfluxData's TICK stack]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Monitoring with InfluxData's TICK stack</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Monitoring with InfluxData's TICK stack</h1>
+            </header>
+
+            
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: September 23rd, 2016<br>
+              Tags: articles, ops, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2016/09/monitoring-with-influxdata-s-tick-stack</link><guid isPermaLink="true">http://travisjeffery.com/b/2016/09/monitoring-with-influxdata-s-tick-stack</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Fri, 23 Sep 2016 07:14:00 GMT</pubDate></item><item><title><![CDATA[Techniques to Achieve High Write Throughput With Elasticsearch]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Techniques to Achieve High Write Throughput With Elasticsearch</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Techniques to Achieve High Write Throughput With Elasticsearch</h1>
+            </header>
+
+            
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: June 8th, 2016<br>
+              Tags: articles, ops, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2016/06/techniques-to-achieve-high-write-throughput-with-elasticsearch</link><guid isPermaLink="true">http://travisjeffery.com/b/2016/06/techniques-to-achieve-high-write-throughput-with-elasticsearch</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Wed, 08 Jun 2016 07:14:00 GMT</pubDate></item><item><title><![CDATA[Using Golang and JSON for Kafka Consumption With High Throughput]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Using Golang and JSON for Kafka Consumption With High Throughput</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Using Golang and JSON for Kafka Consumption With High Throughput</h1>
+            </header>
+
+            
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: May 9th, 2016<br>
+              Tags: articles, kafka, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2016/05/using-golang-and-json-for-kafka-consumption-with-high-throughput</link><guid isPermaLink="true">http://travisjeffery.com/b/2016/05/using-golang-and-json-for-kafka-consumption-with-high-throughput</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Mon, 09 May 2016 07:14:00 GMT</pubDate></item><item><title><![CDATA[Graphing Kafka offset lags with StatsD]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Graphing Kafka offset lags with StatsD</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Graphing Kafka offset lags with StatsD</h1>
+            </header>
+
+            <p>I wrote a <a href="https://github.com/travisjeffery/kafka-statsd">worker</a> to track consumer offset lags with StatsD so that you
+can graph them in Grafana or something similar.</p>
+<img class="img-fluid" src="images/graph.png" alt="Grafana example" />
+
+<p>It’s written in Golang and there’s a Docker image too, so it’s easy to deploy and use.</p>
+<p><a href="https://github.com/travisjeffery/kafka-statsd">Check it out on GitHub.</a></p>
+
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: March 26th, 2016<br>
+              Tags: articles, opensource, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2016/03/graphing-kafka-offset-lags-with-statsd</link><guid isPermaLink="true">http://travisjeffery.com/b/2016/03/graphing-kafka-offset-lags-with-statsd</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Sat, 26 Mar 2016 07:14:00 GMT</pubDate></item><item><title><![CDATA[Writing your own Emacs interactive functions with completion]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Writing your own Emacs interactive functions with completion</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Writing your own Emacs interactive functions with completion</h1>
+            </header>
+
+            <p>Here’s how to use <a href="http://emacswiki.org/emacs/InteractivelyDoThings">Ido</a> in Emacs to write your own interactive functions with completion. In this example, we’ll make a function that completes directories but Ido provides functions for reading files, buffers, and more.</p>
+<p>This function will go to the given repo in my dev directory, and if that repo isn’t cloned yet, will clone it from my GitHub first.</p>
+<pre><code class="hljs scheme">(<span class="hljs-name">defun</span> tj-goto (<span class="hljs-name">repo</span>)
+  <span class="hljs-string">"Go to or clone the given dev `repo'."</span>
+  (<span class="hljs-name">interactive</span>
+   (<span class="hljs-name"><span class="hljs-builtin-name">list</span></span>
+    (<span class="hljs-name">ido-read-directory-name</span> <span class="hljs-string">"Directory: "</span> <span class="hljs-string">"~/dev/"</span>)))
+  (<span class="hljs-name"><span class="hljs-builtin-name">let*</span></span> ((<span class="hljs-name">dev-dir</span> <span class="hljs-string">"~/dev/"</span>)
+         (<span class="hljs-name">repo-dir</span> repo))
+    (<span class="hljs-name"><span class="hljs-builtin-name">if</span></span> (<span class="hljs-name">file-exists-p</span> repo-dir)
+        (<span class="hljs-name">projectile-find-file-in-directory</span> repo)
+      (<span class="hljs-name">shell-command</span> (<span class="hljs-name">format</span> <span class="hljs-string">"cd %s; git clone git@github.com:travisjeffery/%s.git"</span> dev-dir repo))
+      (<span class="hljs-name">projectile-find-file-in-directory</span> repo))))</code></pre>
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: September 10th, 2015<br>
+              Tags: articles, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2015/09/writing-your-own-emacs-interactive-functions-with-completion</link><guid isPermaLink="true">http://travisjeffery.com/b/2015/09/writing-your-own-emacs-interactive-functions-with-completion</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Fri, 11 Sep 2015 00:00:00 GMT</pubDate></item><item><title><![CDATA[SSH into EC2 instances by instance ID]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>SSH into EC2 instances by instance ID</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">SSH into EC2 instances by instance ID</h1>
+            </header>
+
+            <p>Make sure you’ve got the <a href="https://github.com/aws/aws-cl">aws-cli</a> and <a href="https://github.com/stedolan/jq">jq</a> installed and configured.</p>
+<p>Drop this into your .zshrc or .bashrc:</p>
+<pre><code class="hljs sh"><span class="hljs-keyword">function</span> ec2-<span class="hljs-function"><span class="hljs-title">ssh</span></span> () {
+  ssh $(aws ec2 describe-instances --filter Name=instance-id,Values=<span class="hljs-variable">$1</span> | jq <span class="hljs-string">'.Reservations[0].Instances[0].PrivateIpAddress'</span> | tr -d <span class="hljs-string">'"'</span>)
+}</code></pre>
+
+<p>And now you can ssh into your EC2 instance with:</p>
+<pre><code class="hljs sh">ec2-ssh i-6g5c7ed4</code></pre>
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: November 30th, 2015<br>
+              Tags: articles, ops, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2015/11/ssh-into-ec2-instances-by-instance-id</link><guid isPermaLink="true">http://travisjeffery.com/b/2015/11/ssh-into-ec2-instances-by-instance-id</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Tue, 01 Dec 2015 03:05:00 GMT</pubDate></item><item><title><![CDATA[Outbound connections from Docker with VirtualBox not working?]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Outbound connections from Docker with VirtualBox not working?</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Outbound connections from Docker with VirtualBox not working?</h1>
+            </header>
+
+            <p>Using Docker and VirtualBox and having trouble making outbound
+connections? For instance, you might be getting errors like:</p>
+<pre><code class="hljs">curl: (7) Failed connect <span class="hljs-keyword">to</span> 10.0.2.224:8000; <span class="hljs-literal">No</span><span class="hljs-built_in"> route </span><span class="hljs-keyword">to</span> host</code></pre>
+
+<p>Or:</p>
+<pre><code class="hljs">Error: Redis<span class="hljs-built_in"> connection </span><span class="hljs-keyword">to</span> redis:6379 failed - connect EHOSTUNREACH</code></pre>
+
+<p>Here’s what I did to fix it. First I ssh’d into the Docker machine:</p>
+<pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine ssh dev</code></pre>
+
+<p>And took a look at the network config:</p>
+<pre><code class="hljs">$ ifconfig eth0
+eth0      Link encap:Ethernet  HWaddr <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:C8:C7:<span class="hljs-number">50</span>
+inet addr:<span class="hljs-number">10.254</span><span class="hljs-number">.0</span><span class="hljs-number">.15</span>  Bcast:<span class="hljs-number">10.254</span><span class="hljs-number">.0</span><span class="hljs-number">.255</span>  Mask:<span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span>
+inet6 addr: fe80::a00:<span class="hljs-number">27f</span>f:fec8:c750/<span class="hljs-number">64</span> Scope:Link
+UP BROADCAST RUNNING MULTICAST  MTU:<span class="hljs-number">1500</span>  Metric:<span class="hljs-number">1</span>
+RX packets:<span class="hljs-number">230796</span> errors:<span class="hljs-number">0</span> dropped:<span class="hljs-number">0</span> overruns:<span class="hljs-number">0</span> frame:<span class="hljs-number">0</span>
+TX packets:<span class="hljs-number">62400</span> errors:<span class="hljs-number">0</span> dropped:<span class="hljs-number">0</span> overruns:<span class="hljs-number">0</span> carrier:<span class="hljs-number">0</span>
+collisions:<span class="hljs-number">0</span> txqueuelen:<span class="hljs-number">1000</span>
+RX bytes:<span class="hljs-number">238029328</span> (<span class="hljs-number">227.0</span> MiB)  TX bytes:<span class="hljs-number">4768029</span> (<span class="hljs-number">4.5</span> MiB)</code></pre>
+
+<p>Where I see eth0 is configured on this subnet and doesn’t seem to be
+modifiable. So I fixed this via:</p>
+<pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine stop dev
+<span class="hljs-variable">$ </span>VBoxManage modifyvm dev --natnet1 <span class="hljs-string">"10.254.0.0/24"</span>
+<span class="hljs-variable">$ </span>docker-machine restart dev</code></pre>
+
+<p>And boom, just like that it works:</p>
+<pre><code class="hljs">$ <span class="hljs-symbol">docker@</span>dev:~$ curl http:<span class="hljs-comment">//10.0.2.224:8000</span>
+HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> OK</code></pre>
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: November 17th, 2015<br>
+              Tags: articles, ops, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2015/11/outbound-connections-from-docker-with-virtualbox-not-working</link><guid isPermaLink="true">http://travisjeffery.com/b/2015/11/outbound-connections-from-docker-with-virtualbox-not-working</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Tue, 17 Nov 2015 06:32:00 GMT</pubDate></item><item><title><![CDATA[Building a custom Zendesk app]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Building a custom Zendesk app</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Building a custom Zendesk app</h1>
+            </header>
+
+            <p><a href="https://segment.com/blog/make-data-actionable-in-zendesk/">Here’s a post on Segment’s blog</a> on a custom Zendesk app I wrote to help our support team.</p>
+
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: November 10th, 2015<br>
+              Tags: articles, javascript, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2015/11/building-a-custom-zendesk-app</link><guid isPermaLink="true">http://travisjeffery.com/b/2015/11/building-a-custom-zendesk-app</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Tue, 10 Nov 2015 13:42:00 GMT</pubDate></item><item><title><![CDATA[Library and Lambda function to show your Rdio heavy rotation on your website]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Library and Lambda function to show your Rdio heavy rotation on your website</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Library and Lambda function to show your Rdio heavy rotation on your website</h1>
+            </header>
+
+            <p>I thought it’d be cool to show what albums I’m listening to lately on my site, so I wrote a client lib and
+and Amazon Lambbda function to get the albums from your Rdio Heavy Rotation and put them on your site.</p>
+<p>You can check it out on my <a href="http://travisjeffery.com">site</a> under “the heavy rotation”.</p>
+<img src="images/the-heavy-rotation.png" />
+
+<p>The Lambda function authenticates with Rdio and fetches the data for the client, and the client
+adds the imgs to the web page.</p>
+<p>Here’s the <a href="https://github.com/travisjeffery/thr-client">client code</a> on GitHub, and here’s the <a href="https://github.com/travisjeffery/thr-lambda">Lambda code</a> on GitHub.</p>
+
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: October 24th, 2015<br>
+              Tags: articles, javascript, opensource, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2015/10/library-and-lambda-function-to-show-your-rdio-heavy-rotation-on-your-website</link><guid isPermaLink="true">http://travisjeffery.com/b/2015/10/library-and-lambda-function-to-show-your-rdio-heavy-rotation-on-your-website</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Sun, 25 Oct 2015 02:57:00 GMT</pubDate></item><item><title><![CDATA[Error responses on Node.js with Koa]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Error responses on Node.js with Koa</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Error responses on Node.js with Koa</h1>
+            </header>
+
+            <p>Koa is a web framework that’s the next generation Express in that it’s built by
+the same team, and aims to be smaller, more expressive, and more robust for
+building web applications and APIs. It accomplishes this in large part by
+using generators which enables writing asynchronous JS without callbacks and
+greatly simplifies flow control and handling errors.</p>
+<p>In this article I’m gonna show how you can use Koa to simplify sending error
+responses. If you get lost with the
+terminology here I recommend skimming over the Koa <a href="http://koajs.com/">docs</a> or
+<a href="https://twitter.com/travisjeffery">asking me a question</a>.</p>
+<p>A Koa application is an object containing an array of middleware generator
+functions that are composed and ran in a stack-like manner upon request. The
+most basic error response middleware would look something like this:</p>
+<pre><code class="hljs js">app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *(<span class="hljs-params">next</span>) </span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-comment">// yield downstream</span>
+    <span class="hljs-keyword">yield</span> next;
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">this</span>.status = err.status || <span class="hljs-number">500</span>;
+    <span class="hljs-keyword">this</span>.body = err.message;
+  }
+});</code></pre>
+
+<p>Somewhere downstream you’d have a call to a generator like <code>findByEmail</code> below that would
+throw. For example, we’re throwing an error here when the given user isn’t found.</p>
+<pre><code class="hljs js">Users.prototype.findByEmail = <span class="hljs-function"><span class="hljs-keyword">function</span>*(<span class="hljs-params">email</span>) </span>{
+  <span class="hljs-keyword">let</span> user = <span class="hljs-keyword">yield</span> <span class="hljs-keyword">this</span>.db.findOne({ <span class="hljs-attr">email</span>: email });
+  <span class="hljs-keyword">if</span> (!user) {
+    <span class="hljs-keyword">let</span> err = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'User not found'</span>);
+    err.status = <span class="hljs-number">404</span>;
+    err.message = <span class="hljs-string">`User not found with email: <span class="hljs-subst">${email}</span>`</span>;
+    <span class="hljs-keyword">throw</span> err;
+  }
+  <span class="hljs-keyword">return</span> user;
+}</code></pre>
+
+<p>With this implementation, you’d have to do something similar for each of your
+APIs and error responses. E.g. 401 for when the user isn’t logged-in, 403 for
+bad attributes, etc.</p>
+<p>Let’s find another way to have a well contained and clean way to send back those
+error responses and even share those responses between code bases with different
+languages.</p>
+<p>First we put our error response schema in YAML. This makes for a very clean and
+nicely structured schema, and also means that you could use the same error
+schema in another language.</p>
+<pre><code class="hljs yaml"><span class="hljs-attr">user_not_found:</span>
+<span class="hljs-attr">  message:</span> <span class="hljs-string">User</span> <span class="hljs-string">not</span> <span class="hljs-string">found</span> <span class="hljs-string">with</span> <span class="hljs-string">":email"</span>
+<span class="hljs-attr">  status:</span> <span class="hljs-number">404</span></code></pre>
+
+<p>Our <code>findByEmail</code> implementation looks like this now:</p>
+<pre><code class="hljs js">Users.prototype.findByEmail = <span class="hljs-function"><span class="hljs-keyword">function</span>*(<span class="hljs-params">email</span>) </span>{
+  <span class="hljs-keyword">let</span> query = { <span class="hljs-attr">email</span>: email };
+  <span class="hljs-keyword">let</span> user = <span class="hljs-keyword">yield</span> <span class="hljs-keyword">this</span>.db.findOne(query);
+  <span class="hljs-keyword">if</span> (!user) {
+    <span class="hljs-keyword">this</span>.thrower.throw(<span class="hljs-string">'user_not_found'</span>, query);
+  }
+  <span class="hljs-keyword">return</span> user;
+}</code></pre>
+
+<p>Here’s <code>thrower.throw</code>, which is used to add the key/values from <code>extra</code> onto
+the error which will then be used to fill in the user’s email into the error
+message.</p>
+<pre><code class="hljs js">Thrower.prototype.throw = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">msg, extra</span>) </span>{
+  <span class="hljs-keyword">let</span> err = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(msg);
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> k <span class="hljs-keyword">in</span> extra) {
+    err[k] = extra[k];
+  }
+  <span class="hljs-keyword">throw</span> err;
+}</code></pre>
+
+<p>And for our error middleware we have:</p>
+<pre><code class="hljs js"><span class="hljs-keyword">let</span> fmt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'format-string'</span>);
+
+app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *(<span class="hljs-params">next</span>) </span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">yield</span> next;
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">let</span> schema = schemas[err.message];
+    <span class="hljs-keyword">if</span> (schema) {
+      <span class="hljs-keyword">this</span>.status = schema.status;
+      <span class="hljs-keyword">this</span>.body = fmt(schema.message, err);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">this</span>.status = err.status || <span class="hljs-number">500</span>;
+      <span class="hljs-keyword">this</span>.body = err.message;
+    }
+  }
+});</code></pre>
+
+<p>And voila you have a scalable and simple system for sending back error responses.</p>
+<p>This is also makes adding error tracking very easy too, since you have a single
+point of contact where all errors with go through. So you can make a single call
+to Sentry, or some other JS error tracker here.</p>
+<pre><code class="hljs js"><span class="hljs-keyword">let</span> fmt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'format-string'</span>);
+
+app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *(<span class="hljs-params">next</span>) </span>{
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">yield</span> next;
+  } <span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-keyword">let</span> schema = schemas[err.message];
+    <span class="hljs-keyword">this</span>.errorTracker.track(err); <span class="hljs-comment">// Send error to sentry or wherever</span>
+    <span class="hljs-keyword">if</span> (schema) {
+      <span class="hljs-keyword">this</span>.status = schema.status;
+      <span class="hljs-keyword">this</span>.body = fmt(schema.message, err);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">this</span>.status = err.status || <span class="hljs-number">500</span>;
+      <span class="hljs-keyword">this</span>.body = err.message;
+    }
+  }
+});</code></pre>
+
+<p>I’ll be open sourcing a lib to help bootstrap this setup shortly.</p>
+
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: October 21st, 2015<br>
+              Tags: articles, javascript, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2015/10/error-responses-on-node-js-with-koa</link><guid isPermaLink="true">http://travisjeffery.com/b/2015/10/error-responses-on-node-js-with-koa</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Wed, 21 Oct 2015 07:08:00 GMT</pubDate></item><item><title><![CDATA[Building infrastructure with Docker, AWS ECS, and Hashicorp's Terraform]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Building infrastructure with Docker, AWS ECS, and Hashicorp's Terraform</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Building infrastructure with Docker, AWS ECS, and Hashicorp's Terraform</h1>
+            </header>
+
+            <p><a href="https://segment.com/blog/rebuilding-our-infrastructure/">Here’s a post on Segment’s blog</a> on our new infrastructure setup I’ve been working on.</p>
+
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: October 7th, 2015<br>
+              Tags: articles, ops, recent
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>http://travisjeffery.com/b/2015/10/building-infrastructure-with-docker-aws-ecs-and-hashicorp-s-terraform</link><guid isPermaLink="true">http://travisjeffery.com/b/2015/10/building-infrastructure-with-docker-aws-ecs-and-hashicorp-s-terraform</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Wed, 07 Oct 2015 07:17:00 GMT</pubDate></item></channel></rss>
