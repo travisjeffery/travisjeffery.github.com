@@ -3,7 +3,7 @@ layout: post.html
 title: "Building regexps in JavaScript"
 date: 2012-01-05 22:43
 comments: false
-categories: javascript regexp regular-expressions
+collection: javascript
 ---
 
 Let's say you want to put together a JavaScript RegExp wherein you want, or

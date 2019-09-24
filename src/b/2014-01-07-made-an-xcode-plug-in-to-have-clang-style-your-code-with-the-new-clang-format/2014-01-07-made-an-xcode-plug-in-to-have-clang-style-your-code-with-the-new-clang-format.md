@@ -3,7 +3,9 @@ layout: post.html
 title: "My Xcode plug-in to have Clang format/style your code using the new clang-format"
 date: 2014-01-07 09:50
 comments: true
-categories: xcode objc clang llvm code
+collection:
+    - ios
+    - xcode
 ---
 
 Recently added to Clang v3.4 are [awesome tools for formatting your code](http://clang.llvm.org/docs/ClangFormat.html) and a new command `clang-format`.

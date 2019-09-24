@@ -3,7 +3,7 @@ layout: post.html
 title: "Comments, and automatically folding them in Vim"
 date: 2012-01-17 22:47
 comments: false
-categories: vim ruby comments documentation automation
+collection: vim
 ---
 
 In general, I tend to side with Robert Martin when it comes to comments, as he puts:

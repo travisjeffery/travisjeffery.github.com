@@ -3,7 +3,7 @@ layout: post.html
 title: "Using PostgreSQL's Hstore with Rails"
 date: 2012-02-20 18:27
 comments: false
-categories: hstore postgresql rails
+collection: postgres
 ---
 
 ## Prelude

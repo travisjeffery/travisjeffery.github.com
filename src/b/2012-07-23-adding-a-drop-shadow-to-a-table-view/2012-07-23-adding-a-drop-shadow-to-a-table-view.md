@@ -3,7 +3,7 @@ layout: post.html
 title: "Adding a drop shadow to a table view"
 date: 2012-07-23 04:51
 comments: false
-categories: ios table-view drop-shadow table-view-cell core-animation
+collection: ios
 ---
 
 Recently I was implementing a view where the last

@@ -4,7 +4,7 @@ title: "On visibility with microservices and monoliths"
 date: 2015-10-08 03:12
 comments: false
 draft: true
-categories: microservices architecture
+collection: engineering
 ---
 
 <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">We replaced our monolith with micro services so that every outage could be more like a murder mystery.</p>&mdash; Honest Status Page (@honest_update) <a href="https://twitter.com/honest_update/status/651897353889259520">October 7, 2015</a></blockquote>

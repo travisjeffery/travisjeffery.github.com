@@ -20,6 +20,19 @@ $font_12: Courier New;
 $font_13: monospace;
 
 @import "bower_components/bootstrap/scss/bootstrap";
+
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+h3 {
+    font-size: 1rem;
+}
+
 html {
     font-size: 20px;
 }
@@ -28,7 +41,7 @@ body {
     font-weight: 300;
 }
 pre, code {
-    font-size: .8em;
+    font-size: .8rem;
     font-family: $font_9, $font_10, $font_11, $font_12, $font_13;
 }
 pre {
@@ -43,24 +56,40 @@ a {
     }
 }
 p {
+    margin-bottom: 1em;
+}
+
+.half-margin-bottom {
+    margin-bottom: .5em;
+}
+
+.one-margin-bottom {
+    margin-bottom: 1em;
+}
+
+.three-quarter-margin-bottom {
+    margin-bottom: .75em;
+}
+
+.one-and-half-margin-bottom {
     margin-bottom: 1.5em;
 }
+
 ul {
     list-style-type: none;
-    margin-bottom: 1.5em;
+    margin-bottom: .5em;
     &.plain {
-	margin-bottom: 0;
 	margin-left: 0;
 	padding-left: 0;
 	padding-right: 0;
     }
     li {
-	margin-bottom: 1.5em;
-	.article-title {
+	margin-bottom: .5em;
+	.list-title {
 	    padding-left: 0;
 	    padding-right: 0;
 	}
-	.article-date {
+	.list-date {
 	    text-align: right;
 	    padding-right: 0;
 	    padding-left: 0;
@@ -93,7 +122,7 @@ hr {
     margin: 0;
     margin-left: 0;
     margin-right: 0;
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
     height: 0;
     width: auto;
 }
@@ -102,7 +131,7 @@ hr {
     align-items: center;
     margin-top: 1.5em;
     margin-bottom: .5em;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     h1 {
 	font-weight: bold;
     }
@@ -120,7 +149,7 @@ hr {
 	}
     }
     .logo {
-	font-size: 1.5em;
+	font-size: 2.25rem;
 	padding-left: 0;
     }
     .social {
@@ -130,8 +159,8 @@ hr {
     }
 }
 .section-header {
-    margin-bottom: 1em;
-    font-size: 1.2em;
+    margin-bottom: .5em;
+    font-size: 1.2rem;
     a {
 	border: none;
     }
@@ -154,11 +183,23 @@ hr {
     margin-bottom: 1.5em;
 }
 
-h2.article-title {
+.article-title {
     font-weight: 300;
     margin-bottom: 1em;
     margin-top: 1em;
-    font-size: 1.5em;
+    font-size: 1.5rem;
+}
+
+article {
+    margin-bottom: 1.5em;
+
+    p {
+        margin-bottom: 1em;
+    }
+
+    img {
+        margin-bottom: 1em;
+    }
 }
 
 article footer {

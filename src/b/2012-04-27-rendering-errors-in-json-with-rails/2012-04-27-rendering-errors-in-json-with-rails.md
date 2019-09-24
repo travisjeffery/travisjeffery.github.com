@@ -3,7 +3,7 @@ layout: post.html
 title: "Rendering errors in JSON with Rails"
 date: 2012-04-27 14:58
 comments: false
-categories: rails json errors javascript
+collection: rails
 ---
 
 Having seen a lot of bad practices when it comes to handling and rendering

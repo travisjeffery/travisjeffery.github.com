@@ -3,7 +3,7 @@ layout: post.html
 title: "URL linking in a non-editable NSTextView"
 date: 2013-11-09 01:39
 comments: true
-categories: appkit detection link mac nstextview
+collection: mac
 ---
 
 You’re likely here because you thought you could just do this:

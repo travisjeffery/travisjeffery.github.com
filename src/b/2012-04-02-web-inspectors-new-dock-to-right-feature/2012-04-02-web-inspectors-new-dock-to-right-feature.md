@@ -3,7 +3,7 @@ layout: post.html
 title: "Web Inspector's new dock to right feature"
 date: 2012-04-01 21:14
 comments: false
-categories: webinspector webkit chrome safari
+collection: googlechrome
 ---
 
 Chrome recently got a sweet new Web Inspector feature called Dock to right.

@@ -3,7 +3,7 @@ layout: post.html
 title: "Alias in Zsh with completion"
 date: 2012-08-08 03:56
 comments: false
-categories: zsh git shell alias completion compdef
+collection: zsh
 ---
 
 I use the shell. I use the shell a lot. I type `git` so often it's

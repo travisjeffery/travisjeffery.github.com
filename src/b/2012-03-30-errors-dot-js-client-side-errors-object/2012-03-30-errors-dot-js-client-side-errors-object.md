@@ -3,7 +3,9 @@ layout: post.html
 title: "errors.js: client side errors object"
 date: 2012-03-30 02:05
 comments: false
-categories: javascript errors rails client errors.js jquery.errors.js
+collection:
+    - javascript
+    - opensource
 ---
 
 Despite my opinions of ActiveModel::Validations (a post/patch for another day),

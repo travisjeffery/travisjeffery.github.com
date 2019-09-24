@@ -3,7 +3,7 @@ layout: post.html
 title: "Getting the index path of a table view cell via a subview event"
 date: 2012-07-22 16:55
 comments: false
-categories: ios uitableviewcell table-view-cell indexpath
+collection: ios
 ---
 
 Let's say you've subclassed UITableViewCell such that you have added a UIButton as a

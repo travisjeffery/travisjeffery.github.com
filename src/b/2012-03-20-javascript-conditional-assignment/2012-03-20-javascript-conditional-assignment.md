@@ -3,7 +3,7 @@ layout: post.html
 title: "JavaScript conditional assignment"
 date: 2012-03-20 03:18
 comments: false
-categories: javascript namespaces "conditional assignment"
+collection: javascript
 ---
 
 A common idiom with in programming is conditional assignment, usually to

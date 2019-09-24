@@ -3,7 +3,7 @@ layout: post.html
 title: "When Google Chrome won't open iTunes links"
 date: 2013-06-04 19:54
 comments: true
-categories: google-chrome itunes
+collection: googlechrome
 ---
 
 Recently ran into this issue where Google Chrome wouldn't open iTunes links

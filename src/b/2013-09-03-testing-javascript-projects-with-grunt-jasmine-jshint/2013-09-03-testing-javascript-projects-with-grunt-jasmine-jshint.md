@@ -3,7 +3,7 @@ layout: post.html
 title: "Testing JavaScript projects with Grunt, Jasmine, and JSHint"
 date: 2013-09-03 22:30
 comments: false
-categories: javascript jshint grunt jasmine jasmine-jquery travis-ci github ci npm node
+collection: javascript
 ---
 
 I maintain jasmine-jquery, a library providing jquery matchers and fixture loading for jasmine. Recently, I setup jasmine-jquery with [grunt](http://gruntjs.com/), a javascript task runner. This way, I can run the test suite from the command-line, and have continuous integration with travis-ci — so collaborators know when they broke something. In the process of setting all this up, I learned about grunt, and using grunt with jshint and jasmine.

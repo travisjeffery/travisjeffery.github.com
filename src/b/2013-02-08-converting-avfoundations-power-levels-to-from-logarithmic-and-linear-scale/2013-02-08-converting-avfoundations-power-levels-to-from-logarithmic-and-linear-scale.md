@@ -3,7 +3,7 @@ layout: post.html
 title: "Converting AVFoundation's power levels to/from logarithmic and linear scale"
 date: 2013-02-08 17:09
 comments: true
-categories: ios avfoundation audio video core-audio
+collection: ios
 ---
 
 When using AVFoundation, you'll notice that the numbers returned when checking the audio channel power levels may look kind of strange. The audio levels returned to you when calling `AVCaptureSession-averagePowerLevel` or `AVCaptureAudioChannel-averagePowerLevel`, etc. are in a logarithmic scale from -160dB to 0dB, similar to how we perceive sound.

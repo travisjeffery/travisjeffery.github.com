@@ -3,7 +3,7 @@ layout: post.html
 title: "What is this? I don't even... bind this to your object in JavaScript!"
 date: 2012-03-29 01:08
 comments: false
-categories: scope this javascript bind trigger events context
+collection: javascript
 ---
 
 In JavaScript, a function's `this` keyword is always bound to an object, what

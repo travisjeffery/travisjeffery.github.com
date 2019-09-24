@@ -3,7 +3,7 @@ layout: post.html
 title: "Mess up a rebase? Reflog your problems away"
 date: 2011-10-31 22:47
 comments: false
-categories: git rebase reflog
+collection: git
 ---
 
 There is no reason not to rebase your topic branches onto the mainline

@@ -4,7 +4,7 @@ title: Graphing Kafka offset lags with StatsD
 date: 2016-03-26 02:14
 comments: false
 draft: false
-categories: kafka statsd
+collection: opensource
 ---
 
 I wrote a [worker](https://github.com/travisjeffery/kafka-statsd) to track consumer offset lags with StatsD so that you

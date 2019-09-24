@@ -3,7 +3,7 @@ layout: post.html
 title: "Using git's include for private configuration information (like github tokens)"
 date: 2012-03-09 03:21
 comments: false
-categories: github git
+collection: git
 ---
 
 Recently Git added an [amazingly needed feature](https://github.com/git/git/commit/9b25a0b52e09400719366f0a33d0d0da98bbf7b0),

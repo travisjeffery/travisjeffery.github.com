@@ -3,7 +3,7 @@ layout: post.html
 title: "SSH into EC2 instances by instance ID"
 date: 2015-11-30 22:05
 comments: true
-categories: ec2 aws
+collection: ops
 ---
 
 Make sure you've got the [aws-cli](https://github.com/aws/aws-cl) and [jq](https://github.com/stedolan/jq) installed and configured.

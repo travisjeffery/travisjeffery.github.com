@@ -3,7 +3,7 @@ layout: post.html
 title: "Text processing with NSLinguisticTagger: implementing Writer Pro's syntax control"
 date: 2013-12-25 02:02
 comments: true
-categories: NSLinguisticTagger text-processing
+collection: ios
 ---
 
 Here's how to implement Writer Pro's syntax highlighting feature using attributed strings and NSLinguisticTagger.

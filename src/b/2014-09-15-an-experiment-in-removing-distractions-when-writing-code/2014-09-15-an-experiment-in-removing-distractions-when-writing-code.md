@@ -3,7 +3,7 @@ layout: post.html
 title: "An experiment in removing distractions when writing code"
 date: 2014-09-15 03:00
 comments: true
-categories: code
+collection: journal
 draft: true
 ---
 

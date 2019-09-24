@@ -2,7 +2,7 @@
 layout: post.html
 title: "Notify yourself of successful/failed Xcode builds by email"
 date: 2013-01-17 23:24
-categories: ios mac xcode email
+categories: ios
 ---
 
 Compiling sucks, for the most part, and while it's getting better with smarter compilers and faster computers this is what it often feels like:

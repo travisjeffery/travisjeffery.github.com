@@ -3,7 +3,7 @@ layout: post.html
 title: "Saving files in nonexistent directories with Vim"
 date: 2011-11-28 23:09
 comments: false
-categories: vim automation
+collection: vim
 ---
 
 Quite often you may find yourself editing a file in a nonexistent directory.

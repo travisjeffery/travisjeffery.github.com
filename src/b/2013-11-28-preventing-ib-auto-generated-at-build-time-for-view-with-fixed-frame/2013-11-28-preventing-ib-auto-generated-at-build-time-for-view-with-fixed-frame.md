@@ -3,7 +3,7 @@ layout: post.html
 title: "Preventing 'IB auto generated at build time for view with fixed frame' when using Auto Layout"
 date: 2013-11-28 01:41
 comments: true
-categories: auto-layout interface-builder ios
+collection: ios
 ---
 
 If you’re using Interface Builder with auto layout and go to write some layout constraints in code you may run into the following error - where the constraints you’ve added in code conflict with layout constraints ‘IB auto generated at build time for view with fixed frame’.

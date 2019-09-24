@@ -3,7 +3,7 @@ layout: post.html
 title: "Piping into a Docker container"
 date: 2015-09-25 20:16
 comments: false
-categories: docker shell unix pipes
+collection: ops
 ---
 
 Here's how you can write docker images that you can pipe into:

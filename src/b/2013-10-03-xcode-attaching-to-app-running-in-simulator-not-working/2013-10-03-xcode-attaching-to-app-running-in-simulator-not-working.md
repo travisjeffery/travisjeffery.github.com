@@ -3,7 +3,7 @@ layout: post.html
 title: "Xcode attaching to app running in simulator not working"
 date: 2013-10-03 21:15
 comments: true
-categories: ios simulator xcode target
+collection: ios
 ---
 
 If you're running your app in Xcode and the simulator, they may hang saying `Attaching to your app name...`.

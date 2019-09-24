@@ -3,7 +3,7 @@ layout: post.html
 title: "M-x occur for Vim"
 date: 2011-10-31 02:11
 comments: false
-categories: vim emacs grep
+collection: vim
 ---
 
 Emacs has a pretty great feature called "Occur" and to use it you do the ol'

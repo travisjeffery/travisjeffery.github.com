@@ -3,7 +3,7 @@ layout: post.html
 title: "Expressive domain specific languages (DSL) in Ruby"
 date: 2011-12-28 23:21
 comments: false
-categories: ruby domain-specific-languages dsl
+collection: ruby
 ---
 
 In this example, I'm creating a User object such that I can set the name using

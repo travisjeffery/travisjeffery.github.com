@@ -3,7 +3,9 @@ layout: post.html
 title: "NSURLSession and NSOperationQueue working together = TRVSURLSessionOperation"
 date: 2014-06-17 01:41
 comments: true
-categories: ios mac nsurlsession nsoperationqueue
+collection:
+    - opensource
+    - ios
 ---
 
 Been meaning on shipping this project for a while now.

@@ -1,9 +1,9 @@
 ---
 layout: post.html
-title: "Making custom transitions between UIViewControllers"
+title: "Making Custom Transitions Between UIViewControllers"
 date: 2012-10-22 18:10
 comments: false
-categories:  ios objective-c uiviewcontroller uinavigationcontroller core-animation animations transitions
+collection:  ios
 ---
 
 <strong>Note: iOS 7 has awesome APIs that make this sort of thing a lot funner, easier and powerful. When the SDK's NDA is over I'll be releasing some open source code and blog posts about them.</strong>

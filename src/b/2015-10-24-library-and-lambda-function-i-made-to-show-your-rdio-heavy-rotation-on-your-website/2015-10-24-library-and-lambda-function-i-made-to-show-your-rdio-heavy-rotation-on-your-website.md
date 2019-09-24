@@ -3,7 +3,9 @@ layout: post.html
 title: "Library and Lambda function to show your Rdio heavy rotation on your website"
 date: 2015-10-24 21:57
 comments: false
-categories: rdio js lambda node
+collection:
+    - javascript
+    - opensource
 ---
 
 I thought it'd be cool to show what albums I'm listening to lately on my site, so I wrote a client lib and

@@ -3,7 +3,7 @@ layout: post.html
 title: "Writing @ prefixed macros"
 date: 2014-01-10 11:26
 comments: true
-categories: objc c macros
+collection: ios
 ---
 
 While writing my own debugging lib, an idea I was toying with was having a debug macro look like one of the built-in @ compiler directives, e.g. @selector, @encode, etc.

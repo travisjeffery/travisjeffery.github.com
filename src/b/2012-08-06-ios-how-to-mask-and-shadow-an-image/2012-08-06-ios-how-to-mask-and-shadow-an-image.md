@@ -3,7 +3,7 @@ layout: post.html
 title: "iOS how-to mask and shadow an image"
 date: 2012-08-06 17:12
 comments: false
-categories: ios mask shadow image how-to
+collection: ios
 ---
 
 Two common techniques for making a visually appealing app are a liberal use

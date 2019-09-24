@@ -3,7 +3,7 @@ layout: post.html
 title: "`git author sha`: get author info for a given sha in git"
 date: 2013-10-05 05:33
 comments: true
-categories: git sha author open-source
+collection: git
 ---
 
 When i'm hacking on open source libs i maintain, i often have to clean up the

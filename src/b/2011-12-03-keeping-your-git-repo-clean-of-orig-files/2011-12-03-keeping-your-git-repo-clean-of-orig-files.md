@@ -3,7 +3,7 @@ layout: post.html
 title: "Keeping your git repo clean of .orig files!"
 date: 2011-12-03 17:19
 comments: false
-categories: git automation rebase
+tagsString: git
 ---
 
 For teams building projects with git, a good habit is to rebase and merge

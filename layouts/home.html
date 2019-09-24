@@ -33,21 +33,25 @@
 
                     <hr>
 
-                    <h3 class="section-header" id="tech-writing"><span class="tech-writing">writing:</span></h3>
+                    {{#each collections}}
+                    {{#if metadata.homepage}}
+                    <h3 class="section-header" id="tech-writing"><span style="background-color: {{metadata.color}}">{{metadata.name}}:</span></h3>
 
                     <ul class="plain col-xs-12">
-                        {{#each collections.articles}}
+                        {{#each this}}
                         <li>
-                            <span class="article-title col-xs-9 pull-xs-left"><strong>
+                            <span class="list-title col-xs-9 pull-xs-left"><strong>
                                 {{#if medium_link}}
                                 <a target="_blank" href="{{medium_link}}">{{title}}</a>
                                 {{else}}
                                 <a href="{{path}}">{{title}}</a>
                                 {{/if}}
-                            </strong></span><span class="article-date col-xs-3 push-xs-left pull-xs-right">{{dateShort}}</span>
+                            </strong></span><span class="list-date col-xs-3 push-xs-left pull-xs-right">{{dateShort}}</span>
                         </li>
                         {{/each}}
                     </ul>
+                    {{/if}}
+                    {{/each}}
 
                     {{> footer}}
                 </div>

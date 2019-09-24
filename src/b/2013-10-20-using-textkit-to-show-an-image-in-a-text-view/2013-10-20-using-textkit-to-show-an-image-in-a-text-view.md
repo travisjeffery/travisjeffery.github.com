@@ -3,7 +3,7 @@ layout: post.html
 title: "Using TextKit to put an image in a text view"
 date: 2013-10-20 01:23
 comments: true
-categories: ios textkit uitextview uiimage image text kit
+collection: ios
 ---
 
 Boom goes the dynamite.

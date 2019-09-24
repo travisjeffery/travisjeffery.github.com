@@ -3,7 +3,7 @@ layout: post.html
 title: "Markdown headers in Vim"
 date: 2011-11-18 02:06
 comments: false
-categories: vim markdown
+categories: vim
 ---
 
 One nice feature that TextMate's Markdown bundle has is being able to easily

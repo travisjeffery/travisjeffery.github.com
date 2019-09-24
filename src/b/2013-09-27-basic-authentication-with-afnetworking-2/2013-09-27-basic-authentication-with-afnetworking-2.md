@@ -3,7 +3,7 @@ layout: post.html
 title: "Basic authentication with AFNetworking 2"
 date: 2013-09-27 23:39
 comments: true
-categories: ios objc c mac afnetworking authentication
+collection: ios
 ---
 
 Use `-[AFHTTPRequestSerializer setAuthorizationHeaderFieldWithUsername:password:]` on `-[AFHTTPSessionManager requestSerializer]`.

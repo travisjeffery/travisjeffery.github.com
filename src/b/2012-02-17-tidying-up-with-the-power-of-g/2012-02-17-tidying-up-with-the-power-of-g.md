@@ -3,7 +3,7 @@ layout: post.html
 title: "Tidying up with the power of :g"
 date: 2012-02-17 16:37
 comments: false
-categories: vim
+collection: vim
 ---
 
 Vim's :g takes two inputs, a pattern and an operation, and it runs that operation on

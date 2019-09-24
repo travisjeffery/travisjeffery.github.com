@@ -3,7 +3,7 @@ layout: post.html
 title: "Modern grep"
 date: 2012-02-09 03:27
 comments: false
-categories: grep regexp posix perl
+collection: tools
 ---
 
 We read a lot more code than we write, and more often than not we have some

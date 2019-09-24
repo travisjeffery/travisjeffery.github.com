@@ -3,7 +3,7 @@ layout: post.html
 title: "Async testing with Xcode and any testing framework such as XCTest, SenTestingKit, Expecta, etc."
 date: 2013-10-11 17:54
 comments: true
-categories: objc ios mac async testing xctest
+collection: ios
 ---
 
 I wrote [TRVSMonitor](https://github.com/travisjeffery/TRVSMonitor), a synchronization construct with the ability to wait until signalled that a condition was met.

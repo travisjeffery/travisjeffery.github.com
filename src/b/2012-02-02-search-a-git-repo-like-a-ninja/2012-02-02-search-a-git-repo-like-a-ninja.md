@@ -3,7 +3,7 @@ layout: post.html
 title: "Search a git repo like a ninja"
 date: 2012-02-02 21:34
 comments: false
-categories: git vim grep ack
+collection: git
 ---
 
 `git grep <regexp>`

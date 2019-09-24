@@ -11,7 +11,7 @@
 
           <article>
             <header>
-              <h2 class="article-title">{{{title}}}</h2>
+              <h1 class="article-title three-quarter-margin-bottom">{{{title}}}</h1>
             </header>
 
             {{{contents}}}
@@ -21,17 +21,15 @@
           <hr>
 
           <footer>
-            <p>
+            <p class="half-margin-bottom">
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: {{{dateLong}}}<br>
-              Categories: {{{categories}}}
+              Tags: {{{tagsString}}}
             </p>
 
+            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
           </footer>
-
-          <p><a href="/#tech-writing">Read more posts &#8230;</a></p>
-
           {{> footer}}
         </div>
       </div>

@@ -3,7 +3,7 @@ layout: post.html
 title: "Generate Rails migrations that automagically add your change"
 date: 2012-03-16 02:56
 comments: false
-categories: rails migrations generators
+collection: rails
 ---
 
 Rails's generators can be pretty cool, and by knowing some simple tricks

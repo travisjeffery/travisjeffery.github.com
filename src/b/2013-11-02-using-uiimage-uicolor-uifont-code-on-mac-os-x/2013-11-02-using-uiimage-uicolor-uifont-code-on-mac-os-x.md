@@ -3,7 +3,7 @@ layout: post.html
 title: "Using UIImage, UIColor, UIFont Code on Mac OS X"
 date: 2013-11-02 20:40
 comments: true
-categories: ios mac uikit appkit
+collection: ios
 ---
 
 This week I switched from working on iOS apps at 37signals to working on a similar mac app. I wanted to shared code between the ios and mac app, this is easy to do with foundation classes - my model and networking code. But doesn't work right out of the box for stuff like images, colors, fonts, since they're either in UIKit or AppKit. Thankfully you can adapt code for images, colors, and bezier paths using #define. Like so:

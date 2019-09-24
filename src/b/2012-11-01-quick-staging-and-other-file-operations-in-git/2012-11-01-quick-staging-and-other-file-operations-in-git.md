@@ -3,7 +3,7 @@ layout: post.html
 title: "Quick staging and other file operations in git"
 date: 2012-11-01 07:17
 comments: false
-categories: git shell zsh bash
+collection: git
 ---
 
 ## Introduction

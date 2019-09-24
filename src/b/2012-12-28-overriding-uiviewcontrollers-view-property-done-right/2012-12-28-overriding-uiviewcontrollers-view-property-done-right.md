@@ -2,7 +2,7 @@
 layout: post.html
 title: "Overriding UIViewController's view property, done right"
 date: 2012-12-28 10:47
-categories: uiviewcontroller ios view loadview
+collection: ios
 ---
 
 I read ***a lot*** of code, and some of the most common mistakes I see is how people override `UIViewController`'s view property.
