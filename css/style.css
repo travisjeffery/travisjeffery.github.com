@@ -6161,6 +6161,7 @@ p {
 ul {
   list-style-type: none;
   margin-bottom: .5rem;
+  padding-left: 1.5rem;
 }
 
 ul.plain {
@@ -6188,6 +6189,10 @@ ul li:after {
   content: " ";
   display: block;
   clear: both;
+}
+
+article ul {
+  padding-left: 1.5rem;
 }
 
 article ul li:before {
