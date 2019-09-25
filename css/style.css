@@ -6290,6 +6290,10 @@ article {
   margin-bottom: 1.5em;
 }
 
+article h2, article h3 {
+  margin-top: 1em;
+}
+
 article p {
   margin-bottom: 1em;
 }
