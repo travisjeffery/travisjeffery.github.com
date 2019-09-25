@@ -6139,28 +6139,28 @@ a.js-judy {
 }
 
 p {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 .half-margin-bottom {
-  margin-bottom: .5em;
+  margin-bottom: .5rem;
 }
 
 .one-margin-bottom {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 .three-quarter-margin-bottom {
-  margin-bottom: .75em;
+  margin-bottom: .75rem;
 }
 
 .one-and-half-margin-bottom {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.5rem;
 }
 
 ul {
   list-style-type: none;
-  margin-bottom: .5em;
+  margin-bottom: .5rem;
 }
 
 ul.plain {
@@ -6170,7 +6170,7 @@ ul.plain {
 }
 
 ul li {
-  margin-bottom: .5em;
+  margin-bottom: .5rem;
 }
 
 ul li .list-title {
@@ -6194,8 +6194,8 @@ article ul li:before {
   content: "•";
   color: #373a3c;
   display: inline-block;
-  width: 1em;
-  margin-left: -1em;
+  width: 1rem;
+  margin-left: -1rem;
 }
 
 hr {
@@ -6206,7 +6206,7 @@ hr {
   margin: 0;
   margin-left: 0;
   margin-right: 0;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
   height: 0;
   width: auto;
 }
@@ -6214,8 +6214,8 @@ hr {
 #header {
   display: flex;
   align-items: center;
-  margin-top: 1.5em;
-  margin-bottom: .5em;
+  margin-top: 1.5rem;
+  margin-bottom: .5rem;
   font-size: 1.5rem;
 }
 
@@ -6250,7 +6250,7 @@ hr {
 }
 
 .section-header {
-  margin-bottom: .5em;
+  margin-bottom: .5rem;
   font-size: 1.2rem;
 }
 
@@ -6275,35 +6275,35 @@ hr {
 }
 
 .footer {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .article-title {
   font-weight: 300;
-  margin-bottom: 1em;
-  margin-top: 1em;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
   font-size: 1.5rem;
 }
 
 article {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.5rem;
 }
 
 article h2, article h3 {
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
 article p {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 article img {
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 article footer {
-  margin-top: 1.5em;
+  margin-top: 1.5rem;
 }
 
 .mc-field-group {
