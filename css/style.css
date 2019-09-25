@@ -6299,6 +6299,7 @@ article p {
 }
 
 article img {
+  width: 100%;
   margin-bottom: 1rem;
 }
 
