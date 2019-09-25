@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Wed, 25 Sep 2019 01:58:36 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Wed, 25 Sep 2019 02:06:33 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -58,7 +58,7 @@
               Tags: articles, go, ops, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -131,7 +131,7 @@
               Tags: articles, books, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -204,7 +204,7 @@
               Tags: articles, design, engineering, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -277,7 +277,7 @@
               Tags: articles, companies, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -350,7 +350,7 @@
               Tags: articles, ops, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -423,7 +423,7 @@
               Tags: articles, communication, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -496,7 +496,7 @@
               Tags: articles, kafka, opensource, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -611,7 +611,7 @@ security-groups</code></pre>
               Tags: articles, ops, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -684,7 +684,7 @@ security-groups</code></pre>
               Tags: articles, kafka, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -757,7 +757,7 @@ security-groups</code></pre>
               Tags: articles, ops, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -830,7 +830,7 @@ security-groups</code></pre>
               Tags: articles, ops, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -903,7 +903,7 @@ security-groups</code></pre>
               Tags: articles, kafka, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -982,7 +982,7 @@ can graph them in Grafana or something similar.</p>
               Tags: articles, opensource, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -1067,7 +1067,7 @@ can graph them in Grafana or something similar.</p>
               Tags: articles, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -1147,7 +1147,7 @@ can graph them in Grafana or something similar.</p>
               Tags: articles, ops, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -1249,7 +1249,7 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
               Tags: articles, ops, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -1323,7 +1323,7 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
               Tags: articles, javascript, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -1404,7 +1404,7 @@ adds the imgs to the web page.</p>
               Tags: articles, javascript, opensource, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -1587,7 +1587,7 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
               Tags: articles, javascript, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
@@ -1661,7 +1661,7 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
               Tags: articles, ops, recent
             </p>
 
-            <p class="one-margin-bottom"><a href="/#tech-writing">Read more posts &#8230;</a></p>
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           <hr>
           
