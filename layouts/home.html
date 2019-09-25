@@ -35,7 +35,7 @@
 
                     {{#each collections}}
                     {{#if metadata.homepage}}
-                    <h3 class="section-header" id="tech-writing"><span style="background-color: {{metadata.color}}">{{metadata.name}}:</span></h3>
+                    <h3 class="section-header" id="{{@key}}"><span style="background-color: {{metadata.color}}">{{metadata.name}}:</span></h3>
 
                     <ul class="plain col-xs-12">
                         {{#each this}}
@@ -50,6 +50,10 @@
                         </li>
                         {{/each}}
                     </ul>
+                    {{/if}}
+
+                    {{#if metadata.recent}}
+                    <p>and all posts by category:</p>
                     {{/if}}
                     {{/each}}
 

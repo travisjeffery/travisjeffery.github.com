@@ -61,7 +61,8 @@ var pipe = metalsmith(__dirname)
         reverse: true,
         limit: 10,
         metadata: {
-          name: 'most recent',
+          name: 'most recent posts',
+          recent: true,
           homepage: true,
           color: colors.next(),
         }
