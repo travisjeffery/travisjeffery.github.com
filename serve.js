@@ -27,11 +27,13 @@ var colors = {
   }
 }
 
+var url = process.env.URL || 'https://travisjeffery.com'
+
 var pipe = metalsmith(__dirname)
     .metadata({
       site: {
         title: 'travis jeffery',
-        url: 'http://travisjeffery.com',
+        url: url,
         author: 'Travis Jeffery'
       }
     })

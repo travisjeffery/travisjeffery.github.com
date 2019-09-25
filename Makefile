@@ -4,7 +4,7 @@ build:
 
 .PHONY: serve
 serve:
-	@cd build && python3 -m http.server 8000
+	@cd build && URL='' python3 -m http.server 8000
 
 .PHONY: deploy
 deploy: build
