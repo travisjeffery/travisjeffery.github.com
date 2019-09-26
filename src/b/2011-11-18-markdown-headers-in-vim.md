@@ -30,6 +30,4 @@ Here's the equivalent feature in Vim:
 :t.|s/./#/g
 ```
 
-Don't know what those commands do? Find out with Vim's built-in help (:h, use it!).
-
-`:t.` copies the current line to the next line and `s/./#/g` substitutes any character on that line with a #.
+`:t.` copies the current line to the next line and `s/./#/g` substitutes any character on that line with a #. Use Vim's built-in help command, e.g. `:h :t`, for more details.
