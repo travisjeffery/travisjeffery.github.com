@@ -44,42 +44,32 @@
               <h1 class="article-title three-quarter-margin-bottom">Keeping your git repo clean of .orig files!</h1>
             </header>
 
-            <p>For teams building projects with git, a good habit is to rebase and merge
-often. This way, conflicts are less frequent and easier to resolve. Also, this
-helps keeps your branching hierarchy simpler. When people have trouble with
-git, often it’s because their branching hierarchy has become complex.</p>
+            <p>For teams building projects with git, a good habit is to rebase and merge often so conflicts are
+less frequent and easier to resolve. Also, this helps keeps your branching hierarchy simple. When
+people have to make complicated merges, it’s often because their branching hierarchy is complex.</p>
 <p>Keep things simple!</p>
-<p>This post’s topic: how to clean up .orig files that may occur and build-up in
-your project’s repository.</p>
+<p>This post’s topic: How to clean up .orig files that have built up in your project’s repository from merges.</p>
 <ol>
-<li><p><code>git clean</code></p>
-<p> One command that you’ll find quite useful is <code>git clean</code>, it removes untracked
- files from the working tree of your project. Most often you’ll use it like so:</p>
-<pre><code> git clean -fd</code></pre></li>
-</ol>
-<pre><code>The reason for this is that `git clean` won&#39;t even run unless you give it the
-`-f` argument and `-d` will also remove directories that not under version
-control.
-
-Another useful argument is `-n` which will do a dry-run and show you what would
-be removed:
-
-    git clean -nd</code></pre><ol start="2">
+<li><p>git clean</p>
+<p> <code>git clean</code> removes untracked files from the working tree of your project. You’ll usually run it
+ like so:</p>
+<pre><code> git clean -fd</code></pre><p> <code>git clean</code> won’t even remove any files unless you give it the
+ <code>-f</code> argument and <code>-d</code> tells git to remove the directories that aren’t under version
+ control — along with the files.</p>
+<p> With the <code>-n</code> arg, <code>git clean</code> will do a dry-run and show you what it will remove:</p>
+<pre><code> git clean -nd</code></pre></li>
 <li><p>Configure your mergetool</p>
-<p> You can also configure you mergetool to not preserve the .orig files, however
- not all Git mergetool’s support this feature and still preserve the .orig files
+<p> You can configure you mergetool to not preserve the .orig files, however
+ not all Git mergetool’s support this feature and some still preserve the .orig files
  even with this configuration:</p>
 <pre><code> git config --global mergetool.keepBackup false</code></pre></li>
 <li><p>Just ignore them!</p>
 <p> Add this to your project’s .gitignore file:</p>
-<pre><code> *.orig</code></pre><p> This is the most simplest of all solutions and ultimately probably the best, if
- this what you choose to do the <code>git clean</code> will still be able to clean them but
- you will have to invoke it with the <code>-x</code> argument:</p>
+<pre><code> *.orig</code></pre><p> With this setup, you don’t have to worry about checking these files into your repo. The files will still be on your disk though, and when you want to clean them you’ll need to pass the <code>-x</code> arg:</p>
 <pre><code> git clean -fdx</code></pre></li>
 </ol>
-<p>If you’re already ignoring a lot of files or have files ignored that you need
-for your Development environment e.g. tags, logs, or config files then you just
-need to stipulate the path you want cleaned so they aren’t removed:</p>
+<p>If you have files ignored that you need
+for your Development environment e.g. tags, logs, or config files then make sure you stipulate the path you want cleaned so the files you need aren’t removed:</p>
 <pre><code>git clean -fdx app</code></pre>
 
           </article>
@@ -91,7 +81,7 @@ need to stipulate the path you want cleaned so they aren’t removed:</p>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: December 3rd, 2011<br>
-              Tags: 
+              Tags: git
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>

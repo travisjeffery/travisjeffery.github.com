@@ -44,13 +44,11 @@
               <h1 class="article-title three-quarter-margin-bottom">Saving files in nonexistent directories with Vim</h1>
             </header>
 
-            <p>Quite often you may find yourself editing a file in a nonexistent directory.</p>
-<p>If you’re a Rails developer, you may have used:</p>
-<pre><code>:Rview show.html.erb</code></pre><p>This creates the show page for the current controller you’re working on,
-however the app/views/controller directory may not exist yet, and Vim will not
-let you save a file in a nonexistent directory. So this what you do:</p>
-<pre><code>:!mkdir %:p:h</code></pre><p><code>:h expand</code> to the see the meaning of the modifiers used if you’re interested.</p>
-<p>An aside, this is what I previously used:</p>
+            <p>I often open a file in a directory that doesn’t exist yet. However, Vim will not let you save a file
+in a nonexistent directory. You can create the directory by running the following command:</p>
+<pre><code class="hljs">:!<span class="hljs-selector-tag">mkdir</span> %<span class="hljs-selector-pseudo">:p</span><span class="hljs-selector-pseudo">:h</span></code></pre>
+
+<p>You can automate creating the directory with the following autocommand:</p>
 <pre><code class="hljs vim"><span class="hljs-keyword">augroup</span> vimrc-auto-<span class="hljs-built_in">mkdir</span>
   autocmd!
   <span class="hljs-keyword">autocmd</span> BufWritePre * <span class="hljs-keyword">call</span> <span class="hljs-variable">s:auto_mkdir</span>(<span class="hljs-built_in">expand</span>(<span class="hljs-string">'&lt;afile&gt;:p:h'</span>), <span class="hljs-variable">v:cmdbang</span>)
@@ -63,10 +61,7 @@ let you save a file in a nonexistent directory. So this what you do:</p>
   <span class="hljs-keyword">endfunction</span>
 <span class="hljs-keyword">augroup</span> END</code></pre>
 
-<p>This has the benefit of prompting of me when I try to save a file in
-non-existent directory. However, I feel like the less configuration I have to
-rely on the better, and also, <code>:!mkdir %:p:%</code> feels, and looks much more
-badass.</p>
+<p>With this command, when you save a file in nonexistent directory, Vim will ask you if you want the directory created and then create it.</p>
 
 
           </article>
