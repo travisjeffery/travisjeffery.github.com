@@ -44,15 +44,15 @@
               <h1 class="article-title three-quarter-margin-bottom">Mess up a rebase? Reflog your problems away</h1>
             </header>
 
-            <p>I’m going to show you how to use the reflog to fix mistakes you’ve made, where you seemingly can’t recover the history.</p>
-<p>People fear Git, fear making a mistake that ruins their repo, and fear the ensuing embarrassment. For example, rebasing puts the fear in people so much that they only merge instead. I’m going to use a botched rebase as an example of how you can recover from anything with the reflog.</p>
-<p>Let’s say you’ve just finished working on a feature — that you have in a topic branch — and then you accidentally rebased your topic branch onto dev when you meant to rebase onto release. Furthermore, you messed up a merge conflict and no longer have access to the commit you need reset to.</p>
+            <p>I’m going to show you how to use the reflog to fix mistakes you’ve made with Git, where you seemingly can’t recover the history.</p>
+<p>People fear Git, fear making a mistake that ruins their repo, and fear the ensuing embarrassment. Some people fear rebasing so much that they only merge. I’m going to use a botched rebase as an example of how you can recover from anything with the reflog.</p>
+<p>Let’s say you’ve just finished working on a feature that you have in a topic branch and then you accidentally rebased your topic branch onto dev when you meant to rebase onto release. Furthermore, you messed up a merge conflict and no longer have access to the commit you need reset to.</p>
 <p>With the reflog you can find commits that seem to be unrecoverable. Run the following to see the reflog:</p>
 <pre><code class="hljs">$ git <span class="hljs-built_in">ref</span>log</code></pre>
 
 <p>Here’s an example of the reflog’s output — reading from the bottom to the top, you can follow the
 history of the repo and the actions I made.</p>
-<p><a href="http://i.imgur.com/4763S.png"><img src="http://media.tumblr.com/tumblr_ltynbgl5vG1qck115.png" alt="Reflog"></a></p>
+<p><img src="http://i.imgur.com/4763S.png" alt="Reflog"></p>
 <ol>
 <li>I made a new repo and initial commit with the message: “Initial commit in master.” (@{10})</li>
 <li>I make a couple of branches, dev and my_topic_branch (@{9}-@{6})</li>
@@ -63,12 +63,12 @@ with the commit I just made in dev. The commit in my topic branch has the messag
 the rebase. (@{3}-@{0})</li>
 </ol>
 <p>This is what the history looks like in my topic branch after rebasing onto dev:</p>
-<p><a href="http://i.imgur.com/5TLp5.png"><img src="http://media.tumblr.com/tumblr_ltynbxR4Mt1qck115.png" alt="After rebasing"></a></p>
+<p><img src="http://i.imgur.com/5TLp5.png" alt="After rebasing"></p>
 <p>This is the point where you would have realized that you made a mistake by rebasing your topic branch onto dev and that you want to go back to the commit prior to rebasing. By looking at the reflog, we see that commit is HEAD@{5}. All that’s left is to reset our topic branch back to that commit by running the following:</p>
 <pre><code class="hljs">$ git reset --hard <span class="hljs-symbol">HEAD@</span>{<span class="hljs-number">5</span>}</code></pre>
 
 <p>And my topic branch is back to the commit before I rebased:</p>
-<p><a href="http://i.imgur.com/ptL10.png"><img src="http://media.tumblr.com/tumblr_ltyncagHDc1qck115.png" alt="Before rebasing"></a></p>
+<p><img src="http://i.imgur.com/ptL10.png" alt="Before rebasing"></p>
 <p>Crisis averted.</p>
 
 
@@ -81,7 +81,7 @@ the rebase. (@{3}-@{0})</li>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: October 31st, 2011<br>
-              Tags: articles, git, recent
+              Tags: git
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>

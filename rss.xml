@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Thu, 26 Sep 2019 03:46:49 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Thu, 26 Sep 2019 04:06:21 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -55,7 +55,7 @@
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: June 4th, 2018<br>
-              Tags: articles, go, ops, recent
+              Tags: go, ops
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -128,7 +128,7 @@
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: February 1st, 2018<br>
-              Tags: articles, books, recent
+              Tags: books
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -201,7 +201,7 @@
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: December 21st, 2017<br>
-              Tags: articles, design, engineering, recent
+              Tags: design, engineering
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -274,7 +274,7 @@
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: October 4th, 2017<br>
-              Tags: articles, companies, recent
+              Tags: companies
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -347,7 +347,7 @@
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: September 7th, 2017<br>
-              Tags: articles, ops, recent
+              Tags: ops
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -420,7 +420,7 @@
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: June 14th, 2017<br>
-              Tags: articles, communication, recent
+              Tags: communication
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -493,7 +493,7 @@
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: January 19th, 2017<br>
-              Tags: articles, kafka, opensource, recent
+              Tags: kafka, opensource
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -608,7 +608,7 @@ security-groups</code></pre>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: November 29th, 2016<br>
-              Tags: articles, ops, recent
+              Tags: ops
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -681,7 +681,7 @@ security-groups</code></pre>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: October 13th, 2016<br>
-              Tags: articles, kafka, recent
+              Tags: kafka
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -754,7 +754,7 @@ security-groups</code></pre>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: September 23rd, 2016<br>
-              Tags: articles, ops, recent
+              Tags: ops
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -827,7 +827,7 @@ security-groups</code></pre>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: June 8th, 2016<br>
-              Tags: articles, ops, recent
+              Tags: ops
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -900,7 +900,7 @@ security-groups</code></pre>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: May 9th, 2016<br>
-              Tags: articles, kafka, recent
+              Tags: kafka
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -979,7 +979,7 @@ can graph them in Grafana or something similar.</p>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: March 26th, 2016<br>
-              Tags: articles, opensource, recent
+              Tags: opensource
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -1064,7 +1064,7 @@ can graph them in Grafana or something similar.</p>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: September 10th, 2015<br>
-              Tags: articles, recent
+              Tags: 
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -1144,7 +1144,7 @@ can graph them in Grafana or something similar.</p>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: November 30th, 2015<br>
-              Tags: articles, ops, recent
+              Tags: ops
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -1246,7 +1246,7 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: November 17th, 2015<br>
-              Tags: articles, ops, recent
+              Tags: ops
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -1320,7 +1320,7 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: November 10th, 2015<br>
-              Tags: articles, javascript, recent
+              Tags: javascript
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -1401,7 +1401,7 @@ adds the imgs to the web page.</p>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: October 24th, 2015<br>
-              Tags: articles, javascript, opensource, recent
+              Tags: javascript, opensource
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -1584,7 +1584,7 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: October 21st, 2015<br>
-              Tags: articles, javascript, recent
+              Tags: javascript
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
@@ -1658,7 +1658,7 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: October 7th, 2015<br>
-              Tags: articles, ops, recent
+              Tags: ops
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
