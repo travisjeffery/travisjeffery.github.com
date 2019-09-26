@@ -41,7 +41,7 @@ This is the point where you would have realized that you made a mistake by rebas
 $ git reset --hard HEAD@{5}
 ```
 
-After running the command, my topic branch is back to the commit before I rebased:
+Now my topic branch is back to the commit before I rebased:
 
 ![Before rebasing](http://i.imgur.com/ptL10.png)
 
