@@ -45,7 +45,8 @@
             </header>
 
             <p>I often open a file in a directory that doesn’t exist yet. However, Vim will not let you save a file
-in a nonexistent directory. You can create the directory by running the following command:</p>
+in a nonexistent directory.</p>
+<p>You can manually create the directory by running the following command:</p>
 <pre><code class="hljs">:!<span class="hljs-selector-tag">mkdir</span> %<span class="hljs-selector-pseudo">:p</span><span class="hljs-selector-pseudo">:h</span></code></pre>
 
 <p>You can automate creating the directory with the following autocommand:</p>
