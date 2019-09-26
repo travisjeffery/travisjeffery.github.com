@@ -44,23 +44,17 @@
               <h1 class="article-title three-quarter-margin-bottom">M-x occur for Vim</h1>
             </header>
 
-            <p>Emacs has a pretty great feature called “Occur” and to use it you do the ol’
-M-x occur. But I’m a Vim user, and so this is the solution I’ve come up with:</p>
-<pre><code>nmap g/ :vimgrep /&lt;C-R&gt;//j %&lt;CR&gt;\|:cw&lt;CR&gt;</code></pre>
+            <p>Emacs has a feature named “occur” that lists the lines in the current buffer that match a given regexp. I’ve created the equivalent feature in Vim:</p>
+<pre><code class="hljs">nmap g/ :vimgrep /&amp;<span class="hljs-keyword">lt</span>;C-R&amp;<span class="hljs-keyword">gt</span>;//j %&amp;<span class="hljs-keyword">lt</span>;CR&amp;<span class="hljs-keyword">gt</span>;\|:cw&amp;<span class="hljs-keyword">lt</span>;CR&amp;<span class="hljs-keyword">gt</span>;</code></pre>
 
-<p>So my work flow is as follows:</p>
+<p>With this mapped, here’s how you’d use it:</p>
 <ol>
-<li><p>I search for what I’m trying to find with the usual <code>/my query&lt;CR&gt;</code>.</p>
-</li>
-<li><p>If I didn’t hit what I was looking for then I hit <code>g/</code> and find the line
-containing what I’m looking for and hit <CR> to be taken there.</p>
-</li>
+<li>Search for you’re looking for with <code>/my query&lt;CR&gt;</code>.</li>
+<li>Press <code>g/</code> to open the quickfix list containing the matched lines.</li>
+<li>Navigate to the line you’re interested in and press <code>&lt;CR&gt;</code>.</li>
 </ol>
-<p>If this isn’t your work flow, you could create a function that takes your query
-as input and uses that as your pattern instead of what you last searched for
-(the <code>&lt;C-R&gt;/</code> part). Or if you’re not a fan of the QuickFix buffer, what I
-previously used was <code>nmap g/ global//print</code>, but I feel what I have now is
-superior.</p>
+<p>You could create a function to combine the steps; taking the query as input, running the search, and
+opening the quickfix list. But I prefer having them separate.</p>
 
 
           </article>
