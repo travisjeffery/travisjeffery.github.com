@@ -7,7 +7,9 @@ collection: vim
 ---
 
 I often open a file in a directory that doesn't exist yet. However, Vim will not let you save a file
-in a nonexistent directory. You can create the directory by running the following command:
+in a nonexistent directory.
+
+You can manually create the directory by running the following command:
 
 ```
 :!mkdir %:p:h
