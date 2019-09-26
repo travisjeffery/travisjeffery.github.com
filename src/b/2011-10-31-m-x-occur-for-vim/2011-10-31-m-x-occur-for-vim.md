@@ -6,20 +6,17 @@ comments: false
 collection: vim
 ---
 
-Emacs has a pretty great feature called "Occur" and to use it you do the ol'
-M-x occur. But I'm a Vim user, and so this is the solution I've come up with:
+Emacs has a feature named "occur" that lists the lines in the current buffer that match a given regexp. I've created the equivalent feature in Vim:
 
-<pre><code>nmap g/ :vimgrep /&lt;C-R&gt;//j %&lt;CR&gt;\|:cw&lt;CR&gt;</code></pre>
+```
+nmap g/ :vimgrep /&lt;C-R&gt;//j %&lt;CR&gt;\|:cw&lt;CR&gt;
+```
 
-So my work flow is as follows:
+With this mapped, here's how you'd use it:
 
-1. I search for what I'm trying to find with the usual `/my query<CR>`.
+1. Search for you're looking for with `/my query<CR>`.
+2. Press `g/` to open the quickfix list containing the matched lines.
+3. Navigate to the line you're interested in and press `<CR>`.
 
-2. If I didn't hit what I was looking for then I hit `g/` and find the line
-   containing what I'm looking for and hit <CR> to be taken there.
-
-If this isn't your work flow, you could create a function that takes your query
-as input and uses that as your pattern instead of what you last searched for
-(the `<C-R>/` part). Or if you're not a fan of the QuickFix buffer, what I
-previously used was `nmap g/ global//print`, but I feel what I have now is
-superior.
+You could create a function to combine the steps; taking the query as input, running the search, and
+opening the quickfix list. But I prefer having them separate.
