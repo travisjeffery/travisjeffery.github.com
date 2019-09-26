@@ -67,7 +67,7 @@ the rebase. (@{3}-@{0})</li>
 <p>This is the point where you would have realized that you made a mistake by rebasing your topic branch onto dev and that you want to go back to the commit prior to rebasing. By looking at the reflog, we see that commit is HEAD@{5}. All that’s left is to reset our topic branch back to that commit by running the following:</p>
 <pre><code class="hljs">$ git reset --hard <span class="hljs-symbol">HEAD@</span>{<span class="hljs-number">5</span>}</code></pre>
 
-<p>And my topic branch is back to the commit before I rebased:</p>
+<p>After running the command, my topic branch is back to the commit before I rebased:</p>
 <p><img src="http://i.imgur.com/ptL10.png" alt="Before rebasing"></p>
 <p>Crisis averted.</p>
 
