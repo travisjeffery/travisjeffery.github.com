@@ -44,21 +44,22 @@
               <h1 class="article-title three-quarter-margin-bottom">Markdown headers in Vim</h1>
             </header>
 
-            <p>One nice feature that TextMate’s Markdown bundle has is being able to easily
-mark a header by going to the line after a header, typing # followed by <Tab>,
-and having TextMate insert #’s until the last # lines up with the last
-character of the title.</p>
+            <p>With TextMate’s Markdown bundle, you can mark headers by moving your cursor to the line
+following the intended header, typing # and pressing <Tab>. The Textmate bundle insert #’s until the
+last # aligns with the header’s last character.</p>
+<p>For example:</p>
 <pre><code class="hljs">This Will Be My <span class="hljs-built_in">Header</span>
 <span class="hljs-meta">#&lt;Tab&gt;</span></code></pre>
 
-<p>Turns into this:</p>
+<p>Turns into:</p>
 <pre><code class="hljs">This Will Be My Header
 ######################</code></pre>
-<p>Here’s how to do this in Vim:</p>
-<pre><code>:t.|s/./#/g</code></pre><p>Don’t know what those commands do? Find out with Vim’s built-in help (:h, use it!).</p>
-<p>In nutshell, <code>:t.</code> copies the text of the current line to to the line below
-the line given, and then <code>s/./#/g</code> substitutes any character on that line with
-a ‘#’.</p>
+
+<p>Here’s the equivalent feature in Vim:</p>
+<pre><code class="hljs">:t.|<span class="hljs-regexp">s/./#/g</span></code></pre>
+
+<p>Don’t know what those commands do? Find out with Vim’s built-in help (:h, use it!).</p>
+<p><code>:t.</code> copies the current line to the next line and <code>s/./#/g</code> substitutes any character on that line with a #.</p>
 
 
           </article>
@@ -70,7 +71,7 @@ a ‘#’.</p>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: November 18th, 2011<br>
-              Tags: 
+              Tags: vim
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>

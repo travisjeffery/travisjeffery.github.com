@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Thu, 26 Sep 2019 05:05:36 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Thu, 26 Sep 2019 05:25:56 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -995,92 +995,7 @@ can graph them in Grafana or something similar.</p>
     </div>
   </body>
 </html>
-]]></description><link>https://travisjeffery.com/b/2016/03/graphing-kafka-offset-lags-with-statsd</link><guid isPermaLink="true">https://travisjeffery.com/b/2016/03/graphing-kafka-offset-lags-with-statsd</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Sat, 26 Mar 2016 07:14:00 GMT</pubDate></item><item><title><![CDATA[Writing your own Emacs interactive functions with completion]]></title><description><![CDATA[<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Travis Jeffery">
-    <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
-    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
-    <script>
-     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  
-     ga('create', 'UA-8462120-1', 'travisjeffery.com');
-      ga('send', 'pageview');
-    </script>
-    <title>Writing your own Emacs interactive functions with completion</title>
-  </head>
-  <body>
-    <div class="container-fluid container">
-      <div class="row">
-        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo col-xs-6">
-              <a class="" href="/">travis jeffery</a>
-            </h1>
-          
-            <div class="social col-xs-6 pull-xs-right">
-                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            </div>
-          </hgroup>
-
-          <hr>
-
-          <article>
-            <header>
-              <h1 class="article-title three-quarter-margin-bottom">Writing your own Emacs interactive functions with completion</h1>
-            </header>
-
-            <p>Here’s how to use <a href="http://emacswiki.org/emacs/InteractivelyDoThings">Ido</a> in Emacs to write your own interactive functions with completion. In this example, we’ll make a function that completes directories but Ido provides functions for reading files, buffers, and more.</p>
-<p>This function will go to the given repo in my dev directory, and if that repo isn’t cloned yet, will clone it from my GitHub first.</p>
-<pre><code class="hljs scheme">(<span class="hljs-name">defun</span> tj-goto (<span class="hljs-name">repo</span>)
-  <span class="hljs-string">"Go to or clone the given dev `repo'."</span>
-  (<span class="hljs-name">interactive</span>
-   (<span class="hljs-name"><span class="hljs-builtin-name">list</span></span>
-    (<span class="hljs-name">ido-read-directory-name</span> <span class="hljs-string">"Directory: "</span> <span class="hljs-string">"~/dev/"</span>)))
-  (<span class="hljs-name"><span class="hljs-builtin-name">let*</span></span> ((<span class="hljs-name">dev-dir</span> <span class="hljs-string">"~/dev/"</span>)
-         (<span class="hljs-name">repo-dir</span> repo))
-    (<span class="hljs-name"><span class="hljs-builtin-name">if</span></span> (<span class="hljs-name">file-exists-p</span> repo-dir)
-        (<span class="hljs-name">projectile-find-file-in-directory</span> repo)
-      (<span class="hljs-name">shell-command</span> (<span class="hljs-name">format</span> <span class="hljs-string">"cd %s; git clone git@github.com:travisjeffery/%s.git"</span> dev-dir repo))
-      (<span class="hljs-name">projectile-find-file-in-directory</span> repo))))</code></pre>
-
-          </article>
-
-          <hr>
-
-          <footer>
-            <p class="half-margin-bottom">
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: September 10th, 2015<br>
-              Tags: 
-            </p>
-
-            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
-          </footer>
-          <hr>
-          
-          <footer class="footer">
-            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
-          </footer>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
-]]></description><link>https://travisjeffery.com/b/2015/09/writing-your-own-emacs-interactive-functions-with-completion</link><guid isPermaLink="true">https://travisjeffery.com/b/2015/09/writing-your-own-emacs-interactive-functions-with-completion</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Fri, 11 Sep 2015 00:00:00 GMT</pubDate></item><item><title><![CDATA[SSH into EC2 instances by instance ID]]></title><description><![CDATA[<!DOCTYPE html>
+]]></description><link>https://travisjeffery.com/b/2016/03/graphing-kafka-offset-lags-with-statsd</link><guid isPermaLink="true">https://travisjeffery.com/b/2016/03/graphing-kafka-offset-lags-with-statsd</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Sat, 26 Mar 2016 07:14:00 GMT</pubDate></item><item><title><![CDATA[SSH into EC2 instances by instance ID]]></title><description><![CDATA[<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -1674,4 +1589,96 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
     </div>
   </body>
 </html>
-]]></description><link>https://travisjeffery.com/b/2015/10/building-infrastructure-with-docker-aws-ecs-and-hashicorp-s-terraform</link><guid isPermaLink="true">https://travisjeffery.com/b/2015/10/building-infrastructure-with-docker-aws-ecs-and-hashicorp-s-terraform</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Wed, 07 Oct 2015 07:17:00 GMT</pubDate></item></channel></rss>
+]]></description><link>https://travisjeffery.com/b/2015/10/building-infrastructure-with-docker-aws-ecs-and-hashicorp-s-terraform</link><guid isPermaLink="true">https://travisjeffery.com/b/2015/10/building-infrastructure-with-docker-aws-ecs-and-hashicorp-s-terraform</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Wed, 07 Oct 2015 07:17:00 GMT</pubDate></item><item><title><![CDATA[Piping into a Docker container]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code|Josefin+Sans:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Piping into a Docker container</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header">
+            <h1 class="logo col-xs-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social col-xs-6 pull-xs-right">
+                  <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            </div>
+          </hgroup>
+
+          <hr>
+
+          <article>
+            <header>
+              <h1 class="article-title three-quarter-margin-bottom">Piping into a Docker container</h1>
+            </header>
+
+            <p>Here’s how you can write docker images that you can pipe into:</p>
+<p>Dockerfile, here I’m installing the go programs I’m going to run and pipe into:</p>
+<pre><code class="hljs sh">FROM golang
+RUN go get github.com/segmentio/throttle
+RUN go get github.com/segmentio/json_to_nsq
+COPY entrypoint.sh /entrypoint.sh
+CMD [<span class="hljs-string">"/bin/sh"</span>, <span class="hljs-string">"/entrypoint.sh"</span>]</code></pre>
+
+<p>entrypoint.sh, here I’m reading from stdin and piping into the programs I want to run:</p>
+<pre><code class="hljs sh">rate=<span class="hljs-variable">${2:-50}</span>
+addr=<span class="hljs-variable">${3:-nsqd:4150}</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Sending events to <span class="hljs-variable">$addr</span> at the rate of <span class="hljs-variable">$rate</span>/s"</span>
+
+cat - \
+    | throttle <span class="hljs-variable">$rate</span> \
+    | json_to_nsq -t events -a <span class="hljs-string">"<span class="hljs-variable">$addr</span>"</span></code></pre>
+
+<p>And here’s how to run it (assuming the image is called <code>events</code>):</p>
+<pre><code class="hljs sh">cat events.json | docker run -it events</code></pre>
+
+          </article>
+
+          <hr>
+
+          <footer>
+            <p class="half-margin-bottom">
+              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              Written: September 25th, 2015<br>
+              Tags: ops
+            </p>
+
+            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
+          </footer>
+          <hr>
+          
+          <footer class="footer">
+            <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>https://travisjeffery.com/b/2015/09/piping-into-a-docker-container</link><guid isPermaLink="true">https://travisjeffery.com/b/2015/09/piping-into-a-docker-container</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Sat, 26 Sep 2015 01:16:00 GMT</pubDate></item></channel></rss>
