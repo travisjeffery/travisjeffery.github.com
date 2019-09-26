@@ -7,7 +7,7 @@ collection: vim
 ---
 
 With TextMate's Markdown bundle, you can mark headers by moving your cursor to the line
-following the intended header, typing # and pressing <Tab>. The Textmate bundle insert #'s until the
+after the intended header, typing # and pressing <Tab>. The Textmate bundle insert #'s until the
 last # aligns with the header's last character.
 
 For example:
