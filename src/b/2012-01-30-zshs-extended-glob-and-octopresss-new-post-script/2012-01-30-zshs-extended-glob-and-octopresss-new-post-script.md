@@ -3,7 +3,7 @@ layout: post.html
 title: "Zsh's extended glob, and Octopress's new_post script"
 date: 2012-01-30 06:44
 comments: false
-categories: zsh
+collection: zsh
 ---
 
 If you're here it's because you're a Zsh user, maybe you use Octopress and have

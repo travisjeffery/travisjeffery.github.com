@@ -3,7 +3,9 @@ layout: post.html
 title: "Jasmine-jQuery v2 adding support for Jasmine v2"
 date: 2014-01-13 20:25
 comments: true
-categories: javascript, open-source
+collection:
+    - javascript
+    - opensource
 ---
 
 I released Jasmine-jQuery v2.0.0 which adds support for Jasmine v2.0.0.
