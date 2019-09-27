@@ -1,6 +1,6 @@
 ---
 layout: post.html
-title: "Comments, and automatically folding them in Vim"
+title: "Hide comments with Vim folding"
 date: 2012-01-17 22:47
 comments: false
 collection: vim
