@@ -238,6 +238,15 @@ var pipe = metalsmith(__dirname)
           color: colors.next(),
         }
       },
+      zsh: {
+        sortBy: 'date',
+        reverse: true,
+        metadata: {
+          name: 'zsh',
+          homepage: true,
+          color: colors.next(),
+        }
+      },
       xcode: {
         sortBy: 'date',
         reverse: true,

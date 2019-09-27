@@ -1,42 +1,41 @@
 ---
 layout: post.html
-title: "Zsh's extended glob, and Octopress's new_post script"
+title: "ZSH's extended glob breaking commands"
 date: 2012-01-30 06:44
 comments: false
 collection: zsh
 ---
 
-If you're here it's because you're a Zsh user, maybe you use Octopress and have
-come across the following error (or something similar):
+After running a command like `$ rake new_post["hello world"]`, you may have seen an error like the following:
 
-`zsh: no matches found: new_post[...] `
+```
+zsh: no matches found: new_post[...]
+```
 
-Octopress's documentation is Bash oriented, and so in the example above; the
-user would have likely read the documentation and tried something like this:
+The issue is that you have ZSH's extended glob turned on. If you look in your ZSH config you'll see the following line:
 
-`$ rake new_post["..."]`
+```
+setopt extended_glob
+```
 
-So here's the problem, ...other than you throwing junk into your Zsh configuration
-that before understanding what it all meant! ...the problem is that you have
-something like this in your `~/.zshrc`, or equivalent file:
+This options enables globbing patterns in ZSH. And in the previous example, the `["hello world"]` in
+`$ rake new_post["hello world"]` acts like a regexp rather than a literal string. For more info,
+this [blog](https://www.refining-linux.org/archives/37-ZSH-Gem-2-Extended-globbing-and-expansion.html)
+introduces ZSH globbing and expansion, and this
+[page](http://zsh.sourceforge.net/Doc/Release/Expansion.html) comprehensively documents globbing and expansion.
 
-`setopt extended_glob`
+You have a couple ways to fix this problem:
 
-By setting this option you is turn on all kinds of globbing patterns that Zsh will
-expand and match against your files.
+- Disable globbing by aliasing the command, for example:
 
-For some more in-depth info on Zsh's expansion and globbing, I'd start
-[here](http://www.refining-linux.org/archives/37/ZSH-Gem-2-Extended-globbing-and-expansion/),
-and then later check out [this](http://zsh.sourceforge.net/Doc/Release/Expansion.html).
+    ```
+    alias rake="noglob rake"
+    ```
 
-So, here are a couple of solutions:
+- Quote the command's arguments:
 
-Alias `rake` such that globbing is disabled with:
+    ```
+    rake 'new_post["hello world"]'
+    ```
 
-`alias rake="noglob rake"`
-
-Or always quote arguments given to `rake`:
-
-`rake "new_post[...]"`
-
-Note that I do not have quotes inside my square brackets. This was intentional.
+Till next time, keep calm and ZSH on.
