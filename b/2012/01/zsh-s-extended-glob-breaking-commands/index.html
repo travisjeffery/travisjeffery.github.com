@@ -55,17 +55,12 @@
 this <a href="https://www.refining-linux.org/archives/37-ZSH-Gem-2-Extended-globbing-and-expansion.html">blog</a>
 introduces ZSH globbing and expansion, and this
 <a href="http://zsh.sourceforge.net/Doc/Release/Expansion.html">page</a> comprehensively documents globbing and expansion.</p>
-<p>You have a couple ways to fix this problem:</p>
+<p>You have a couple ways to fix this problem and I prefer the first way:</p>
 <ul>
-<li><p>Disable globbing by aliasing the command, for example:</p>
-  <pre><code class="hljs"><span class="hljs-keyword">alias</span> <span class="hljs-title">rake</span>=<span class="hljs-string">"noglob rake"</span></code></pre>
-</li>
-<li><p>Quote the command’s arguments:</p>
-  <pre><code class="hljs">rake <span class="hljs-symbol">'new_post</span>[<span class="hljs-string">"hello world"</span>]'</code></pre>
-
-</li>
+<li>Disable globbing by aliasing the command, for example:  <pre><code class="hljs"><span class="hljs-keyword">alias</span> <span class="hljs-title">rake</span>=<span class="hljs-string">"noglob rake"</span></code></pre></li>
+<li>Quote the command’s arguments:  <pre><code class="hljs">rake <span class="hljs-symbol">'new_post</span>[<span class="hljs-string">"hello world"</span>]'</code></pre>
+Till next time, keep calm and ZSH on.</li>
 </ul>
-<p>Till next time, keep calm and ZSH on.</p>
 
 
           </article>
