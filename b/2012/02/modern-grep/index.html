@@ -44,52 +44,51 @@
               <h1 class="article-title three-quarter-margin-bottom">Modern grep</h1>
             </header>
 
-            <p>We read a lot more code than we write, and more often than not we have some
-notion of what we’re looking for. There have been many programs and algorithms
-developed in-order to enhance our ability to find text and be productive, but really the
-giant whose usage has been strong from its inception in 1973 till today is
-grep.</p>
-<p>grep is an essential tool to know, but unfortunately it has not kept up with the
-times in terms of its usage in respect to how we build and version our
-applications. For example, the majority of data contained within the folder
-of a git repo are unreadable binary large objects. It doesn’t make sense to
-search these files but grep doesn’t know this, a more recent program called ack
-does.</p>
-<p>On average, a search by a newbie ack user will be faster than the same search by
-a newbie grep user. This is because ack conveniently ignores folders and files
-you probably don’t want to be searched, these ignored folders include .git,
-the folder that git uses as a database for your repository.</p>
-<blockquote>I feel the need...the need for speed!</blockquote>
+            <p>We read a lot more code than we write, and more often than not we have some notion of what we’re
+looking for. There have been many programs and algorithms developed in order to enhance our ability
+to find text and be productive, but the giant whose remained a staple since its inception in 1973
+till today is grep.</p>
+<p>By not providing useful defaults, Grep has allowed other search tools – like ack, the silver
+searcher, and ripgrep – to encroach on its territory. For example, the git stores unreadable blobs under the .git directory in your repos and it doesn’t make sense to search
+these files. However, grep doesn’t ignore this files by default unlike ack and ripgrep.</p>
+<p>On average, a search by a newbie ack user will be faster than the same search by a newbie grep user,
+despite the fact that ack is written in Perl, because ack conveniently ignores folders and files you
+probably don’t want searched — like .git or the files listed in your .gitignore.</p>
+<blockquote>
+<p>I feel the need…the need for speed!</p>
+</blockquote>
+<p>With some grep know-how, we can make grep faster and behave like these modern search tools.</p>
+<h2 id="exclude-directories">Exclude Directories</h2>
+<p>grep can exclude directories that it searches, increasing its speed substantially. The following excludes the .git directory from its search:</p>
+<pre><code class="hljs">$ <span class="hljs-keyword">grep</span> --<span class="hljs-keyword">exclude</span>-dir=.git</code></pre>
 
-<p>grep can also exclude searching directories, including .git, to increase its speed
-remarkedly:</p>
-<p><code>grep --exclude-dir=.git</code></p>
-<p>This can be tremendous boon for speeding up searches, I did two uncached searches in rails’s repo:</p>
-<p><code>grep -r &quot;class &lt;&lt; self&quot; .</code></p>
-<p><code>grep -rIPs --exclude-dir=.[a-zA-Z0-9]* --exclude=.* --exclude=*~ &quot;class &lt;&lt; self&quot; .</code></p>
-<p>With the former, non-excluding grep search I had a time of 6.009s and with the
-latter, excluding grep search 2.235s. In general the speed increase is in
-the range of 2-3x faster.</p>
-<p>Another benefit to using ack is being able to use the widely known and copied
-Perl regular expressions rather than the older and now less known POSIX regular
-expressions.</p>
-<p>For example, let’s say we want to match phone numbers and capture the area
-code:</p>
-<p>Here it is in a Perl regular expression:</p>
-<p><code>(\d{3})-\d{3}-\d{4}</code></p>
-<p>And the equivalent POSIX:</p>
-<p><code>\([0-9]\{3\}\)-[0-9]\{3\}-[0-9]\{4\}</code></p>
-<p>Thankfully, you can actually use Perl regular expressions with grep, by giving
-either a <code>-P</code> or <code>--perl-regexp</code> argument.</p>
-<p><code>grep -P &quot;(\d{3})-\d{3}-\d{4}&quot;</code></p>
-<p>To configure grep such that you don’t need to call grep with these arguments
-each time, you can set the shell variable <code>GREP_OPTIONS</code> by putting into your
-.zshrc or .bashrc:</p>
+<p>This speeds up searches by a lot, I ran two uncached searches in Rails’s repo:</p>
+<pre><code class="hljs">$ grep -r <span class="hljs-string">"class &lt;&lt; self"</span> .
+
+$ grep -rIPs <span class="hljs-attribute">--exclude-dir</span>=.[a-zA-Z0-9]* <span class="hljs-attribute">--exclude</span>=.* <span class="hljs-attribute">--exclude</span>=*~ <span class="hljs-string">"class &lt;&lt; self"</span> .</code></pre>
+
+<p>He former, non-excluding, grep took 6.009s. The
+latter, excluding, grep took 2.235s.</p>
+<h2 id="perl-regular-expressions">Perl Regular Expressions</h2>
+<p>Modern search tools like ack support the popular Perl regular expressions. By default, grep uses
+the less known POSIX regular expressions.</p>
+<p>For example, let’s say we want to match a phone number and capture its area
+codes.</p>
+<p>The Perl regular expression:</p>
+<pre><code class="hljs">(<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{3}</span></span>)-<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{3}</span></span>-<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{4}</span></span></code></pre>
+
+<p>The POSIX regular expression:</p>
+<pre><code class="hljs">\([<span class="hljs-number">0</span><span class="hljs-number">-9</span>]\{<span class="hljs-number">3</span>\}\)-[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]\{<span class="hljs-number">3</span>\}-[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]\{<span class="hljs-number">4</span>\}</code></pre>
+
+<p>Fortunately, you can use Perl regular expressions with grep by giving it the
+<code>-P</code> or <code>--perl-regexp</code> argument.</p>
+<pre><code class="hljs">grep -P "(<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{3}</span></span>)-<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{3}</span></span>-<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{4}</span></span>"</code></pre>
+
+<h2 id="useful-defaults">Useful Defaults</h2>
+<p>Having to give grep all these arguments would be a drag, to configure grep to exclude hidden directories and use Perl regular expressions by default, set the shell variable <code>GREP_OPTIONS</code>:</p>
 <p><code>export GREP_OPTIONS=&#39;-rIPs --exclude-dir=.[a-zA-Z0-9]* --exclude=.* --exclude=*~ --color=auto&#39;</code></p>
-<p>The biggest downfall with grep vs. ack that really can’t be fixed by arguments,
-is how ack nicely organizes its output, also neither integrates with git…</p>
-<p>git users should check out my <a href="/b/2012/02/search-a-git-repo-like-a-ninja/">post</a> on searching repos with git grep! I show
-how you can have the best of both grep and ack!</p>
+<p>There’s no argument to make grep organize its output like ack. Also, neither
+integrates with git, but git has its own grep for searching your repos. You can read my post on <a href="/b/2012/02/search-a-git-repo-like-a-ninja/">searching git like a ninja</a> to learn about <code>git grep</code> and get the best of both grep and ack.</p>
 <h2 id="sources-and-further-reading">Sources and further reading</h2>
 <ul>
 <li><a href="http://lists.freebsd.org/pipermail/freebsd-current/2010-August/019310.html">why GNU grep is fast</a></li>
