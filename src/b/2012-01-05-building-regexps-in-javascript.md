@@ -6,20 +6,14 @@ comments: false
 collection: javascript
 ---
 
-Let's say you want to put together a JavaScript RegExp wherein you want, or
-need, to put together multiple strings or regexps then here's the short version
-to get you on your way:
+If you need to build a JavaScript RegExp from multiple strings or regexps, dynamically, here's how:
 
 ``` js
 var re = new RegExp("some string" + /some.*(re)/.source);
 "some string some        re".match(re);
 ```
 
-Here's a longer example showing a more in-depth and possibly practical example:
-
-In this example let's say you have something like an HTML table whose rows
-contain some information that you need to parse out, like ids,
-
+This example shows how to use this technique to parse out information:
 
 ``` js
 var _ = require('underscore');

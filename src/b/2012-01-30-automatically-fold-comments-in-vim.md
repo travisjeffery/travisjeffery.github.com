@@ -6,7 +6,7 @@ comments: false
 collection: vim
 ---
 
-In general, I tend to side with Robert Martin when it comes to comments, as he puts:
+No matter how clean your code is, you need to document your code.
 
 > Nothing can be quite so helpful as a well-placed comment. Nothing can clutter up a module more than frivolous dogmatic comments. Nothing can be quite so damaging as an old crufty comment that propagates lies and misinformation.
 
@@ -15,9 +15,11 @@ comments very much—perhaps not at all.
 
 — Robert Martin (Clean Code, p. 53)
 
-Obviously, no matter how expressive you code is, when is comes to public APIs they need to properly documented. Most documentation systems today, such as rdoc; TomDoc; Docco; etc., are implemented such that you need to have many, many lines of comments in your source code. This can cause clutter and difficulty traversing the source code during the times when that's all you care about.
+However, when you're focused on coding a feature in a code base that you know well then the comments
+can get in your way. Most documentation systems today --- rdoc, TomDoc, Docco, and so forth ---
+require many lines of comments and slow down how fast you can move through the code. Sometimes it's nice to hide the comments.
 
-Here's what you can do when editing Ruby with Vim, add this to your .vimrc:
+Vim has a folding feature that you can use to temporarily hide comments. This configuration tells Vim how to fold Ruby comments:
 
 ``` vim
 autocmd FileType ruby,eruby
@@ -25,17 +27,11 @@ autocmd FileType ruby,eruby
       \ set foldexpr=getline(v:lnum)=~'^\\s*#'
 ```
 
-Then when you want to tidy up the comments, fold them away and get out your sight hit `zM`, this will close *all* the folds, your comments, in the file.
+There's a handful of folding keybinds, the binds I use in order of most-to-least often:
 
-Boom! All the comments are neatly tucked away and you can resume programming.
+- `zM`: close all folds in the current file;
+- `zR`: open all folds in the current file;
+- `zc`: close the fold under the cursor;
+- `zo`: open the fold under the cursor.
 
-The reason why I don't automatically run the `zM` is because it's possible that Vim may become unresponsive for a short time; each time you open a Ruby file, but you can try for yourself with:
-
-``` vim
-autocmd FileType ruby,eruby
-      \ set foldmethod=expr |
-      \ set foldexpr=getline(v:lnum)=~'^\\s*#' |
-      \ exe "normal zM``"
-```
-
-For more details on Vim's folding, see the Vim Reference Manual's entry with `:h folding`.
+Read Vim's reference manual by running `:h folding` for the complete documentation.

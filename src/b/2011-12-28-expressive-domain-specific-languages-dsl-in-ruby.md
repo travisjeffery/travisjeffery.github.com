@@ -6,8 +6,7 @@ comments: false
 collection: ruby
 ---
 
-In this example, I'm creating a User object such that I can set the name using
-my own DSL:
+I've experimented with making DSLs in Ruby and here's an example:
 
 ``` ruby
 class User
@@ -32,23 +31,22 @@ class User
   end
 end
 
-u = User.new do
+---
+
+> u = User.new do
   name       "Travis Jeffery"
   location   "Toronto, Ontario"
   occupation "Mathematician, Software Engineer"
 end
-
-###
-#
-# > u.name
-# => "Travis Jeffery"
-# > u.location
-# => "Toronto, Ontario"
-# > u.occupation
-# => "Mathematician, Software Engineer"
+> u.name
+=> "Travis Jeffery"
+> u.location
+=> "Toronto, Ontario"
+> u.occupation
+=> "Mathematician, Software Engineer"
 ```
 
-The reason for checking the arity of the block given is so you can support the case when a user of our API would use it like so:
+By checking the arity of the block, we support this API too:
 
 ``` ruby
 u = User.new do |u|
@@ -56,4 +54,4 @@ u = User.new do |u|
 end
 ```
 
-Personally, I'd be inclined to support only one interface—my preference being the first one.
+I prefer the first example but I wouldn't use either in a real project. But the idea could be useful for something useful.

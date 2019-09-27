@@ -6,9 +6,9 @@ comments: false
 collection: git
 ---
 
-For teams building projects with git, a good habit is to rebase and merge often so conflicts are
-less frequent and easier to resolve. Also, this helps keeps your branching hierarchy simple. When
-people have to make complicated merges, it's often because their branching hierarchy is complex.
+For teams building projects with Git, a good habit is to rebase and merge often so conflicts are
+less frequent and easier to resolve. Also, this helps keeps your branch graph simple. When
+people have to make complicated merges, it's often because their branch graph is complex.
 
 Keep things simple!
 
@@ -22,7 +22,7 @@ This post's topic: How to clean up .orig files that have built up in your projec
 	    git clean -fd
 
 	`git clean` won't even remove any files unless you give it the
-	`-f` argument and `-d` tells git to remove the directories that aren't under version
+	`-f` argument and `-d` tells Git to remove the directories that aren't under version
 	control --- along with the files.
 
     With the `-n` arg, `git clean` will do a dry-run and show you what it will remove:
