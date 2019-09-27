@@ -24,18 +24,14 @@ this [blog](https://www.refining-linux.org/archives/37-ZSH-Gem-2-Extended-globbi
 introduces ZSH globbing and expansion, and this
 [page](http://zsh.sourceforge.net/Doc/Release/Expansion.html) comprehensively documents globbing and expansion.
 
-You have a couple ways to fix this problem:
+You have a couple ways to fix this problem and I prefer the first way:
 
 - Disable globbing by aliasing the command, for example:
-
     ```
     alias rake="noglob rake"
     ```
-
 - Quote the command's arguments:
-
     ```
     rake 'new_post["hello world"]'
     ```
-
 Till next time, keep calm and ZSH on.
