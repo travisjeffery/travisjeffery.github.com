@@ -20,3 +20,6 @@ deploy: build
 new:
 	@cd src/b && touch "$$(date +%F).md"
 	@echo "$$(date +%F).md"
+
+.PHONY: all
+all: build deploy
