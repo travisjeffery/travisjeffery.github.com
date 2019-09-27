@@ -6,12 +6,12 @@ comments: false
 collection: vim
 ---
 
-Vim's :g takes two inputs, a pattern and an operation, and it runs that operation on
+Vim's :g takes two inputs: a pattern and an operation, and it runs that operation on
 each line that matches the pattern in the current file. :g is a tool whose usage isn't imposed on
-you nor even readily apparent, so its usefulness is proportional to your
+you, nor even readily apparent, so its usefulness depends on your
 creativity.
 
-One cool way I like to use :g is to bundle up related lines that are currently
+For example, I like to use :g to group related lines that are currently
 scattered across a file.
 
 Here's an example:
@@ -32,13 +32,14 @@ Bundle 'git@github.com:travisjeffery/vim-unimpaired.git'
 " Bundle 'https://github.com/thinca/vim-poslist.git'
 ```
 
-The lines that I care about are the lines that are commented out, in one fell
-swoop I'd like to bundle those lines together and put them neatly at the top.
-Here's how to do it:
+The lines that I care about are the commented out lines. In one fell swoop I can group those lines
+and put them at the top by running the following:
 
-`:g/^"/m 0`
+```
+:g/^"/m 0
+```
 
-Now our set of lines is nicely bundled together:
+The result with our lines grouped together:
 
 ``` vim
 " Bundle 'https://github.com/thinca/vim-poslist.git'
@@ -56,17 +57,4 @@ Bundle 'https://github.com/kien/ctrlp.vim.git'
 Bundle 'git@github.com:travisjeffery/vim-unimpaired.git'
 ```
 
-:g is one of the most underrated features in Vim, read more about it with `:h :g`.
-
-Here's another way to do the same thing, delete and store the lines into the
-register q and the put the contents of the register in line 0:
-
-`:g/^"/d Q`
-
-`:0pu q`
-
-Use lowercase named registers, a-z, to have the register's previous contents replaced
-and use uppercase named registers, A-Z, to have the register's previous contents
-appended to.
-
-Read more about registers with `:h registers`!
+:g is one of the most underrated features in Vim. You can read more about it by running `:h :g`.
