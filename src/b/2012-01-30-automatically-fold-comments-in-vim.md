@@ -29,9 +29,9 @@ autocmd FileType ruby,eruby
 
 There's a handful of folding keybinds, the binds I use in order of most-to-least often:
 
-- `zM`: close all folds in the current file;
-- `zR`: open all folds in the current file;
-- `zc`: close the fold under the cursor;
-- `zo`: open the fold under the cursor.
+- `zM` closes all folds in the current file;
+- `zR` opens all folds in the current file;
+- `zc` closes the fold under the cursor;
+- `zo` opens the fold under the cursor.
 
 Read Vim's reference manual by running `:h folding` for the complete documentation.
