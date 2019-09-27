@@ -100,7 +100,7 @@ class User
 end
 ```
 
-Then we could get these results:
+Then we'd get these results:
 
 <img class="img-fluid" alt="git grep example" src="images/combination.jpg" />
 
