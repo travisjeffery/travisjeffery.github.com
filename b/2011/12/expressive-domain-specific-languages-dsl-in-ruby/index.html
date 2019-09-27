@@ -44,8 +44,7 @@
               <h1 class="article-title three-quarter-margin-bottom">Expressive domain specific languages (DSL) in Ruby</h1>
             </header>
 
-            <p>In this example, I’m creating a User object such that I can set the name using
-my own DSL:</p>
+            <p>I’ve experimented with making DSLs in Ruby and here’s an example:</p>
 <pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>
   <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">initialize</span> <span class="hljs-title">&amp;</span><span class="hljs-title">block</span></span>
     <span class="hljs-keyword">if</span> block.arity == <span class="hljs-number">1</span>
@@ -68,27 +67,26 @@ my own DSL:</p>
   <span class="hljs-keyword">end</span>
 <span class="hljs-keyword">end</span>
 
-u = User.new <span class="hljs-keyword">do</span>
+---
+
+&gt; u = User.new <span class="hljs-keyword">do</span>
   name       <span class="hljs-string">"Travis Jeffery"</span>
   location   <span class="hljs-string">"Toronto, Ontario"</span>
   occupation <span class="hljs-string">"Mathematician, Software Engineer"</span>
 <span class="hljs-keyword">end</span>
+&gt; u.name
+=&gt; <span class="hljs-string">"Travis Jeffery"</span>
+&gt; u.location
+=&gt; <span class="hljs-string">"Toronto, Ontario"</span>
+&gt; u.occupation
+=&gt; <span class="hljs-string">"Mathematician, Software Engineer"</span></code></pre>
 
-<span class="hljs-comment">###</span>
-<span class="hljs-comment">#</span>
-<span class="hljs-comment"># &gt; u.name</span>
-<span class="hljs-comment"># =&gt; "Travis Jeffery"</span>
-<span class="hljs-comment"># &gt; u.location</span>
-<span class="hljs-comment"># =&gt; "Toronto, Ontario"</span>
-<span class="hljs-comment"># &gt; u.occupation</span>
-<span class="hljs-comment"># =&gt; "Mathematician, Software Engineer"</span></code></pre>
-
-<p>The reason for checking the arity of the block given is so you can support the case when a user of our API would use it like so:</p>
+<p>By checking the arity of the block, we support this API too:</p>
 <pre><code class="hljs ruby">u = User.new <span class="hljs-keyword">do</span> <span class="hljs-params">|u|</span>
   u.name <span class="hljs-string">"Travis Jeffery"</span>
 <span class="hljs-keyword">end</span></code></pre>
 
-<p>Personally, I’d be inclined to support only one interface—my preference being the first one.</p>
+<p>I prefer the first example but I wouldn’t use either in a real project. But the idea could be useful for something useful.</p>
 
 
           </article>

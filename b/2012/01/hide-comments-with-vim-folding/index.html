@@ -20,7 +20,7 @@
      ga('create', 'UA-8462120-1', 'travisjeffery.com');
       ga('send', 'pageview');
     </script>
-    <title>Building regexps in JavaScript</title>
+    <title>Hide comments with Vim folding</title>
   </head>
   <body>
     <div class="container-fluid container">
@@ -41,45 +41,35 @@
 
           <article>
             <header>
-              <h1 class="article-title three-quarter-margin-bottom">Building regexps in JavaScript</h1>
+              <h1 class="article-title three-quarter-margin-bottom">Hide comments with Vim folding</h1>
             </header>
 
-            <p>If you need to build a JavaScript RegExp from multiple strings or regexps, dynamically, here’s how:</p>
-<pre><code class="hljs js"><span class="hljs-keyword">var</span> re = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">"some string"</span> + <span class="hljs-regexp">/some.*(re)/</span>.source);
-<span class="hljs-string">"some string some        re"</span>.match(re);</code></pre>
+            <p>No matter how clean your code is, you need to document your code.</p>
+<blockquote>
+<p>Nothing can be quite so helpful as a well-placed comment. Nothing can clutter up a module more than frivolous dogmatic comments. Nothing can be quite so damaging as an old crufty comment that propagates lies and misinformation.</p>
+</blockquote>
+<blockquote>
+<p>Comments are not like Schindler’s List. They are not “pure good.” Indeed, comments are, at best, a necessary evil. If our programming languages were expressive enough, or if we had the talent to subtly wield those languages to express our intent, we would not need
+comments very much—perhaps not at all.</p>
+</blockquote>
+<p>— Robert Martin (Clean Code, p. 53)</p>
+<p>However, when you’re focused on coding a feature in a code base that you know well then the comments
+can get in your way. Most documentation systems today — rdoc, TomDoc, Docco, and so forth —
+require many lines of comments and slow down how fast you can move through the code. Sometimes it’s nice to hide the comments.</p>
+<p>Vim has a folding feature that you can use to temporarily hide comments. This configuration tells Vim how to fold Ruby comments:</p>
+<pre><code class="hljs vim"><span class="hljs-keyword">autocmd</span> FileType <span class="hljs-keyword">ruby</span>,eruby
+      \ <span class="hljs-keyword">set</span> foldmethod=expr |
+      \ <span class="hljs-keyword">set</span> foldexpr=<span class="hljs-built_in">getline</span>(<span class="hljs-variable">v:lnum</span>)=~<span class="hljs-string">'^\\s*#'</span></code></pre>
 
-<p>This example shows how to use this technique to parse out information:</p>
-<pre><code class="hljs js">var _ = require('underscore');
+<p>There’s a handful of folding keybinds, the binds I use in order of most-to-least often:</p>
+<ul>
+<li><code>zM</code>: close all folds in the current file;</li>
+<li><code>zR</code>: open all folds in the current file;</li>
+<li><code>zc</code>: close the fold under the cursor;</li>
+<li><code>zo</code>: open the fold under the cursor.</li>
+</ul>
+<p>Read Vim’s reference manual by running <code>:h folding</code> for the complete documentation.</p>
 
-function Table(rows, options){
-    if (!(this instanceof Table)){
-        return new Table(rows, options);
-    }
-
-    var self = this;
-
-    self.rows = rows;
-    self.options = options;
-
-    self._id_for_row = function(row){
-        var re = new RegExp(self.options.field_name + /_(\d+)/.source);
-        return row.match(re)[1];
-    }
-
-    self.row_ids = function(){
-        return _.map(self.rows, self._id_for_row);
-    };
-}
-
-var table = new Table(
-    ["user_name_field_1", "user_name_field_22", "user_name_field_23"],
-    {"field_name":"user_name_field"}
-);
-
-###
-#
-# &gt; console.log(table.row_ids());
-# =&gt; [ '1', '22', '23' ]</code></pre>
 
           </article>
 
@@ -89,8 +79,8 @@ var table = new Table(
             <p class="half-margin-bottom">
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: January 5th, 2012<br>
-              Tags: javascript
+              Written: January 17th, 2012<br>
+              Tags: vim
             </p>
 
             <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
