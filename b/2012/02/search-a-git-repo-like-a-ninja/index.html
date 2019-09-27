@@ -66,33 +66,33 @@ git commands, plus g is nice and short.</p>
 <p>To this much more readable output, with grouping:</p>
 <img class="img-fluid" alt="With grouping" src="images/grouping.jpg" />
 
-<p>The speed of git grep, which is basically a product of it being implemented in
+<p>The speed of git grep, which is a product of it being implemented in
 C and only searching your project files, i.e. not files in .git, is
-alone very compelling, but where git grep becomes really interesting and
-powerful is allowing you to interface with your repo’s git database…</p>
+alone compelling — but where git grep becomes unique and
+powerful is how it connects you with your repo’s git database…</p>
 <h2 id="practical-examples">Practical examples</h2>
 <p>Here’s a list of commands made up of different arguments and concepts of git
-grep and git log that you will be able to reuse/use as instruction to
-reformulate later:</p>
+grep and git log that you will be able to reuse and learn from to
+reformulate later for your own use cases:</p>
 <p><strong>Search for our regexp in JavaScript files from another branch</strong></p>
 <p><code>git grep -e &lt;regexp&gt; my_other_branch -- &#39;*.js&#39;</code></p>
-<p>The <code>--</code> signals the end of options, that the rest of the paramaters are
+<p>The <code>--</code> signals the end of options and the rest of the paramaters are
 <pathspec> limiters.</p>
 <p><strong>Search files registered in the index, rather than the working tree</strong></p>
 <p><code>git grep --cached -e &lt;regexp&gt;</code></p>
-<p>Note that we’re searching what’s registered in the index rather than what is staged…</p>
+<p>Note that we’re searching what’s registered in the index rather than what’s staged.</p>
 <p><strong>Search for staged files containing a regexp that was either added or removed</strong></p>
 <p><code>git diff-index --cached -G&lt;regexp&gt; HEAD | cut -f2</code></p>
 <p><strong>Search through previous revisions whose contents contain a given regexp</strong></p>
 <p><code>git grep &lt;regexp&gt; $(git rev-list --all)</code></p>
 <p>I tried the above on one project large enough that git complained about the
-argument size, so if you run into this problem, do something like:</p>
+argument size, so if you run into this problem do something like this command:</p>
 <p><code>git rev-list --all | (while read rev; do git grep -e &lt;regexp&gt; $rev; done)</code></p>
 <p><strong>Search for commits whose changes include your regexp</strong></p>
 <p><code>git log -G &lt;regexp&gt;</code></p>
 <p><strong>Combine regexps and filter results via boolean logic</strong></p>
 <p><code>git grep -e &#39;include&#39; --or &#39;extend&#39; --and \( -e &#39;Specification&#39; -e &#39;Factory&#39; \)</code></p>
-<p>Here we search for places that we extend <em>or</em> include, either specifications <em>or</em> factories.</p>
+<p>With this command, we search for lines where we extend <em>or</em> include, either specifications <em>or</em> factories. For example, let’s say we ran this command on this file:</p>
 <pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">UserSpecification</span>;</span> <span class="hljs-keyword">end</span>
 <span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">UserFactory</span>;</span> <span class="hljs-keyword">end</span>
 <span class="hljs-class"><span class="hljs-keyword">module</span> <span class="hljs-title">Bad</span>;</span> <span class="hljs-keyword">end</span>
@@ -103,37 +103,35 @@ argument size, so if you run into this problem, do something like:</p>
   <span class="hljs-keyword">include</span> Bad
 <span class="hljs-keyword">end</span></code></pre>
 
-<p>Given this file, after running the command above we get:</p>
+<p>Then we could get these results:</p>
 <img class="img-fluid" alt="git grep example" src="images/combination.jpg" />
 
 <p><strong>Find files that contain some terms, not necessarily on the same line</strong></p>
 <p><code>git grep -e &lt;regexp&gt; --and -e &lt;regexp&gt;</code></p>
-<p>…is not what you want, as it will search for <em>lines</em> that contain both those
-regular expressions, this is what we want to search for all matches occurring
-<em>somewhere in the file</em>:</p>
+<p>…is not what you want, as it will search for lines that contain both those
+regular expressions. Instead, this is how we search for files with the matches occurring
+somewhere in the file:</p>
 <p><code>git grep --all-matches -e &lt;regexp&gt; -e &lt;regexp&gt;</code></p>
 <p><strong>Find commits whose message mention login and were authored by Travis in the last month</strong></p>
 <p><code>git log --grep=login --author=travis --since=1.month</code></p>
 <h2 id="text-editor-integration">Text editor integration</h2>
 <p>Inevitably we will want to be able to search and use these programs from within
 our text editors.</p>
-<p>Vim users have it pretty good, with both
-<a href="https://github.com/mileszs/ack.vim">ack.vim</a> and Tim Pope’s
-<a href="https://github.com/tpope/vim-fugitive">Fugitive</a> which includes <code>:Ggrep</code> to
-interface with git grep by being to search and have your results listed and
-linked in the quickfix window. By listing the results in the quickfix window
-this mean you have the usual quickfix navigation keybindings, if you’re
-unfamiliar, see <code>:h quickfix</code></p>
+<p>Vim users have it pretty good, with both <a href="https://github.com/mileszs/ack.vim">ack.vim</a> and Tim
+Pope’s <a href="https://github.com/tpope/vim-fugitive">Fugitive</a> which includes <code>:Ggrep</code> to interface with
+git grep by being to search and have your results listed and linked in the quickfix window. By
+listing the results in the quickfix window, you have the usual quickfix navigation keybindings, if
+you’re unfamiliar, see <code>:h quickfix</code></p>
 <img class="img-fluid" alt="Using :Ggrep in Vim" src="images/editor.jpg" />
 
 <p>If your project is not under git version control than you can use ack.vim in a
 similar manner:</p>
 <p><code>:Ack &lt;args&gt;</code></p>
-<p>Emacs user’s have had <code>vc-git-grep</code> built-in since v22.1 and it’s very similar
-to <code>:Ggrep</code>. And for acking there is <a href="http://www.emacswiki.org/emacs/FullAck">full-ack</a>.
-See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Compilation-Mode.html">this</a> page (or <code>C-h f compliation-mode</code>) for info on navigating in compilation-mode (the mode that both vc-git-grep and full-ack output into).</p>
-<p>By now you are comfortable with git grep and git log, and can get more
-details on each of these commands via <code>git help &lt;command&gt;</code>, and have some useful tools in your repertoire, now have fun!</p>
+<p>Emacs user’s have had <code>vc-git-grep</code> built in since v22.1 and it’s very similar
+to <code>:Ggrep</code>. For acking, use <a href="http://www.emacswiki.org/emacs/FullAck">full-ack</a>.
+See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Compilation-Mode.html">the complation-mode help</a> page (or <code>C-h f compliation-mode</code>) for info on navigating in compilation-mode (the mode that both vc-git-grep and full-ack output into).</p>
+<p>By now you are comfortable with git grep and git log and you can get more
+details on each of these commands by running <code>git help &lt;command&gt;</code>. And you have some useful tools in your repertoire — have fun!</p>
 <h2 id="sources-and-further-reading">Sources and further reading</h2>
 <ul>
 <li><a href="http://book.git-scm.com/4_finding_with_git_grep.html">Finding with Git Grep</a></li>
