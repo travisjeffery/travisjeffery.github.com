@@ -8,16 +8,15 @@ $green: lime;
 $pink_flamingo: #ff66ff;
 
 //fonts
-$font_1: Josefin Sans;
-$font_2: Helvetica Neue;
-$font_3: Helvetica;
-$font_4: Arial;
-$font_5: sans-serif;
-$font_9: Fira Code;
-$font_10: Menlo;
-$font_11: Consolas;
-$font_12: Courier New;
-$font_13: monospace;
+$text_font_0: IBM Plex Serif;
+$text_font_1: Helvetica;
+$text_font_2: Arial;
+$text_font_3: serif;
+
+$code_font_0: IBM Plex Mono;
+$code_font_1: Menlo;
+$code_font_2: Consolas;
+$code_font_3: monospace;
 
 @import "bower_components/bootstrap/scss/bootstrap";
 
@@ -37,12 +36,12 @@ html {
     font-size: 20px;
 }
 body {
-    font-family: $font_1, $font_2, $font_3, $font_4, $font_5 !important;
+    font-family: $text_font_0, $text_font_1, $text_font_2, $text_font_3 !important;
     font-weight: 300;
 }
 pre, code {
     font-size: .8rem;
-    font-family: $font_9, $font_10, $font_11, $font_12, $font_13;
+    font-family: $code_font_0, $code_font_1, $code_font_1, $code_font_2, $code_font_3;
 }
 pre {
     white-space:pre-wrap;
@@ -151,7 +150,7 @@ hr {
 	}
     }
     .logo {
-	font-size: 2.25rem;
+	font-size: 2rem;
 	padding-left: 0;
     }
     .social {

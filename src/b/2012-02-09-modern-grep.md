@@ -6,18 +6,15 @@ comments: false
 collection: tools
 ---
 
-We read a lot more code than we write, and more often than not we have some notion of what we're
-looking for. There have been many programs and algorithms developed in order to enhance our ability
-to find text and be productive, but the giant whose remained a staple since its inception in 1973
-till today is grep.
-
-By not providing useful defaults, Grep has allowed other search tools -- like ack, the silver
-searcher, and ripgrep -- to encroach on its territory. For example, the git stores unreadable blobs under the .git directory in your repos and it doesn't make sense to search
+While grep reigned as the preeminent text search tool for a long time, its overly unopinionated
+approach to defaults and maintaining backwards compatibility has allowed new tools --- like ack, the
+silver searcher, and ripgrep --- to gain users and encroach on grep's territory. For example, git
+stores unreadable blobs under the .git directory in your repos and it doesn't make sense to search
 these files. However, grep doesn't ignore this files by default unlike ack and ripgrep.
 
 On average, a search by a newbie ack user will be faster than the same search by a newbie grep user,
-despite the fact that ack is written in Perl, because ack conveniently ignores folders and files you
-probably don't want searched --- like .git or the files listed in your .gitignore.
+despite the fact that grep is written in C and ack in Perl, because ack conveniently ignores folders
+and files you probably don't want searched --- like .git or the files listed in your .gitignore.
 
 > I feel the need...the need for speed!
 
