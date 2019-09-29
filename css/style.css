@@ -6115,13 +6115,13 @@ html {
 }
 
 body {
-  font-family: Josefin Sans, Helvetica Neue, Helvetica, Arial, sans-serif !important;
+  font-family: IBM Plex Serif, Helvetica, Arial, serif !important;
   font-weight: 300;
 }
 
 pre, code {
   font-size: .8rem;
-  font-family: Fira Code, Menlo, Consolas, Courier New, monospace;
+  font-family: IBM Plex Mono, Menlo, Menlo, Consolas, monospace;
 }
 
 pre {
@@ -6244,7 +6244,7 @@ hr {
 }
 
 #header .logo {
-  font-size: 2.25rem;
+  font-size: 2rem;
   padding-left: 0;
 }
 
