@@ -6098,6 +6098,18 @@ a.bg-danger:focus, a.bg-danger:hover {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  html {
+    font-size: 18px;
+  }
+}
+
 h1 {
   font-size: 1.5rem;
 }
@@ -6110,12 +6122,8 @@ h3 {
   font-size: 1rem;
 }
 
-html {
-  font-size: 20px;
-}
-
 body {
-  font-family: IBM Plex Serif, Helvetica, Arial, serif !important;
+  font-family: IBM Plex Serif, Times New Roman, Georgia, serif !important;
   font-weight: 300;
 }
 
