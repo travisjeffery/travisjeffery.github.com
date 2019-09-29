@@ -6098,16 +6098,8 @@ a.bg-danger:focus, a.bg-danger:hover {
   }
 }
 
-@media only screen and (max-width: 600px) {
-  html {
-    font-size: 14px;
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  html {
-    font-size: 18px;
-  }
+html {
+  font-size: 18px;
 }
 
 h1 {
