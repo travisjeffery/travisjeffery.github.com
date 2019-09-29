@@ -9,8 +9,8 @@ $pink_flamingo: #ff66ff;
 
 //fonts
 $text_font_0: IBM Plex Serif;
-$text_font_1: Helvetica;
-$text_font_2: Arial;
+$text_font_1: Times New Roman;
+$text_font_2: Georgia;
 $text_font_3: serif;
 
 $code_font_0: IBM Plex Mono;
@@ -19,6 +19,18 @@ $code_font_2: Consolas;
 $code_font_3: monospace;
 
 @import "bower_components/bootstrap/scss/bootstrap";
+
+@media only screen and (max-width: 600px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    html {
+        font-size: 18px;
+    }
+}
 
 h1 {
     font-size: 1.5rem;
@@ -32,9 +44,6 @@ h3 {
     font-size: 1rem;
 }
 
-html {
-    font-size: 20px;
-}
 body {
     font-family: $text_font_0, $text_font_1, $text_font_2, $text_font_3 !important;
     font-weight: 300;
