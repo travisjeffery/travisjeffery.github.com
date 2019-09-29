@@ -11,7 +11,7 @@ approach to defaults and maintaining backwards compatibility has allowed new too
 the silver searcher, and ripgrep --- to gain users and encroach on grep's territory.
 
 For example, git stores unreadable blobs under the .git directory in your repos and it doesn't make
-sense to search these files. However, grep doesn't ignore this files by default unlike ack and
+sense to search these files. However, grep doesn't ignore these files by default unlike ack and
 ripgrep.
 
 On average, a search by a newbie ack user will be faster than the same search by a newbie grep user,
