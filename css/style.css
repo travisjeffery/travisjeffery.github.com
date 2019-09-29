@@ -6099,7 +6099,7 @@ a.bg-danger:focus, a.bg-danger:hover {
 }
 
 html {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 h1 {
@@ -6112,6 +6112,10 @@ h2 {
 
 h3 {
   font-size: 1rem;
+}
+
+blockquote {
+  font-style: italic;
 }
 
 body {
