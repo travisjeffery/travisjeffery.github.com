@@ -1,4 +1,9 @@
-.PHONY: build
+.PHONY: commit
+commit:
+	git add --all
+	git commit -m update
+
+.PHONY: commit build
 build:
 	@node serve.js
 
@@ -22,4 +27,4 @@ new:
 	@echo "$$(date +%F).md"
 
 .PHONY: all
-all: build deploy
+all: commit build deploy

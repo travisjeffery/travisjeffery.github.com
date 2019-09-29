@@ -7,7 +7,7 @@ collection: tools
 ---
 
 While grep reigned as the preeminent text search tool for a long time, its overly unopinionated
-approach to defaults and maintaining backwards compatibility has allowed new tools --- namely; ack,
+approach to defaults and maintaining backwards compatibility allowed new tools --- namely; ack,
 the silver searcher, and ripgrep --- to gain users and encroach on grep's territory.
 
 For example, git stores unreadable blobs under the .git directory in your repos and it doesn't make
