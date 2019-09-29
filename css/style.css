@@ -6220,7 +6220,6 @@ hr {
   display: flex;
   align-items: center;
   margin-top: 1.5rem;
-  margin-bottom: .5rem;
   font-size: 1.5rem;
 }
 
@@ -6238,7 +6237,7 @@ hr {
   content: "travis jeffery";
   color: blue;
   position: absolute;
-  left: 3px;
+  left: 2px;
   top: 2px;
   z-index: -1;
 }
