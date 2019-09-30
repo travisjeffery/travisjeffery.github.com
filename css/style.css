@@ -6135,12 +6135,12 @@ blockquote {
 }
 
 body {
-  font-family: "Libre Caslon Text", Times New Roman, Georgia, serif !important;
+  font-family: "Libre Caslon Text", serif !important;
   font-weight: 300;
 }
 
 pre, code {
-  font-family: "Anonymous Pro", Menlo, Menlo, Consolas, monospace;
+  font-family: "Anonymous Pro", monospace;
   background: none;
   color: #373a3c;
   font-size: 1rem;
@@ -6251,6 +6251,7 @@ hr {
 
 #header h1 {
   font-weight: bold;
+  text-align: left;
 }
 
 #header a {
@@ -6281,6 +6282,7 @@ hr {
 
 .section-header {
   font-size: 1.2rem;
+  text-align: left;
 }
 
 .section-header a {
@@ -6302,6 +6304,7 @@ hr {
 
 h1, h2, h3 {
   margin-top: 1.5rem;
+  text-align: center;
 }
 
 h1 + ul,
