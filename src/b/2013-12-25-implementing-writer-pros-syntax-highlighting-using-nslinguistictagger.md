@@ -7,7 +7,9 @@ collection: ios
 redirectFrom: /b/2013/12/implementing-writer-pros-syntax-highlighting-using-nslinguistictagger/
 ---
 
-Here's how to implement Writer Pro's syntax highlighting feature using attributed strings and NSLinguisticTagger.
+Update: I wrote this code to show that iA was patenting a feature based on a feature baked into iOS' frameworks. Any iOS developer could build the same feature with ten lines of code. John Gruber [linked my project](https://daringfireball.net/linked/2013/12/26/patent-before-christmas) on Daring Fireball. iA dropped their pending patents.
+
+Here's how to implement Writer Pro's syntax highlighting feature with attributed strings and NSLinguisticTagger.
 
 [Project](https://github.com/travisjeffery/LingusticTaggerDemo) on GitHub.
 
@@ -36,3 +38,5 @@ Here's how to implement Writer Pro's syntax highlighting feature using attribute
     return text;
 }
 ```
+
+Doesn't take much, does it?
