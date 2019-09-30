@@ -6105,7 +6105,7 @@ a.bg-danger:focus, a.bg-danger:hover {
 
 @media screen and (min-width: 600px) {
   html {
-    font-size: 20px;
+    font-size: 21px;
   }
 }
 
@@ -6292,20 +6292,24 @@ hr {
 }
 
 .article-title {
-  font-weight: 300;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 h1, h2, h3 {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  font-weight: bold;
 }
 
-h1 + ul, h2 + ul, h3 + ul {
+h1 + ul,
+h2 + ul,
+h3 + ul {
   margin-top: 0rem;
 }
 
-article p {
-  margin-top: 1rem;
+h1 + p,
+h2 + p,
+h3 + p {
+  margin-top: .5rem;
 }
 
 article img {
