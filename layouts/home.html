@@ -8,14 +8,14 @@
                     {{> header}}
 
 
-                    <h3 class="section-header"><span class="on-the-web">on the web:</span></h3>
+                    <h3 class="section-header no-gutters col-xs-12"><span class="on-the-web">on the web:</span></h3>
 
                     <ul class="plain col-xs-12 col-md-6">
                         <li><a class="js-judy" href="https://twitter.com/travisjeffery">twitter</a></li>
                         <li><a class="js-judy" href="https://github.com/travisjeffery">github</a></li>
                     </ul>
 
-                    <ul class="plain col-xs-12 col-md-6">
+                    <ul class="plain col-xs-12 zero-margin col-md-6">
                         <li><a class="js-judy" href="https://medium.com/@travisjeffery">medium</a></li>
                         <li><a id="email" class="js-judy" href="mailto:tj@travisjeffery.com">email</a></li>
                     </ul>
@@ -30,12 +30,12 @@
 
                     {{#each collections}}
                     {{#if metadata.homepage}}
-                    <h3 class="section-header" id="{{@key}}"><span style="background-color: {{metadata.color}}">{{metadata.name}}:</span></h3>
+                    <h3 class="section-header no-gutters col-xs-12" id="{{@key}}"><span style="background-color: {{metadata.color}}">{{metadata.name}}:</span></h3>
 
                     <ul class="plain col-xs-12">
                         {{#each this}}
                         <li>
-                            <span class="list-title col-xs-9 pull-xs-left"><strong>
+                            <span class="list-title col-xs-9"><strong>
                                 {{#if medium_link}}
                                 <a target="_blank" href="{{medium_link}}">{{title}}</a>
                                 {{else}}
@@ -48,7 +48,7 @@
                     {{/if}}
 
                     {{#if metadata.recent}}
-                    <p>and all posts by category:</p>
+                    <p class="no-gutters col-xs-12">and all posts by category:</p>
                     {{/if}}
                     {{/each}}
 

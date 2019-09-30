@@ -20,6 +20,15 @@ $code_font_3: monospace;
 
 @import "bower_components/bootstrap/scss/bootstrap";
 
+.no-gutters {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+* {
+    margin-bottom: 0 !important;
+}
+
 html {
     font-size: 20px;
 }
@@ -49,7 +58,8 @@ pre, code {
     font-family: $code_font_0, $code_font_1, $code_font_1, $code_font_2, $code_font_3;
 }
 pre {
-    white-space:pre-wrap;
+    white-space: pre-wrap;
+    margin-top: 1rem;
 }
 a {
     color: $blue;
@@ -60,36 +70,46 @@ a {
     }
 }
 p {
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
 }
 
-.half-margin-bottom {
-    margin-bottom: .5rem;
+.zero-margin {
+    margin-top: 0;
 }
 
-.one-margin-bottom {
-    margin-bottom: 1rem;
+.quarter-margin {
+    margin-top: .25rem;
 }
 
-.three-quarter-margin-bottom {
-    margin-bottom: .75rem;
+.half-margin {
+    margin-top: .5rem;
 }
 
-.one-and-half-margin-bottom {
-    margin-bottom: 1.5rem;
+.one-margin {
+    margin-top: 1rem;
+}
+
+.three-quarter-margin {
+    margin-top: .75rem;
+}
+
+.one-and-half-margin {
+    margin-top: 1.5rem;
+}
+
+.plain {
+    margin-left: 0;
+    padding-left: 0;
+    padding-right: 0;
+    list-style-type: none;
 }
 
 ul {
-    list-style-type: none;
-    margin-bottom: .5rem;
+    margin-top: .5rem;
     padding-left: 1.5rem;
-    &.plain {
-	margin-left: 0;
-	padding-left: 0;
-	padding-right: 0;
-    }
     li {
-	margin-bottom: .5rem;
+	margin-top: .5rem;
 	.list-title {
 	    padding-left: 0;
 	    padding-right: 0;
@@ -109,15 +129,6 @@ ul {
 article {
     ul {
         padding-left: 1.5rem;
-        li {
-            &:before {
-                content: "•";
-                color: #373a3c;
-                display: inline-block;
-                width: 1rem;
-                margin-left: -1rem;
-            }
-        }
     }
 }
 hr {
@@ -128,14 +139,13 @@ hr {
     margin: 0;
     margin-left: 0;
     margin-right: 0;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
     height: 0;
     width: auto;
 }
 #header {
     display: flex;
     align-items: center;
-    margin-top: 1.5rem;
     font-size: 1.5rem;
     h1 {
 	font-weight: bold;
@@ -155,16 +165,15 @@ hr {
     }
     .logo {
 	font-size: 2rem;
-	padding-left: 0;
     }
     .social {
 	display: inline;
 	text-align: right;
 	padding-right: 0;
+        margin-top: 1rem;
     }
 }
 .section-header {
-    margin-bottom: .5rem;
     font-size: 1.2rem;
     a {
 	border: none;
@@ -172,43 +181,34 @@ hr {
     .on-the-web {
 	background-color: $yellow;
     }
-    .open-source {
-	background-color: $cyan_aqua;
-    }
-    .work {
-	background-color: $green;
-    }
-    .tech-writing {
-	background-color: $pink_flamingo;
-    }
 }
 
 .footer {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem !important;
 }
 
 .article-title {
     font-weight: 300;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
     font-size: 1.5rem;
 }
 
+h1, h2, h3 {
+    margin-top: 1rem;
+}
+
+h1 + ul, h2 + ul, h3 + ul {
+    margin-top: 0rem;
+}
+
 article {
-    margin-bottom: 1.5rem;
-
-    h2, h3 {
-        margin-top: 1rem;
-    }
-
     p {
-        margin-bottom: 1rem;
+        margin-top: 1rem;
     }
 
     img {
         width: 100%;
-        margin-bottom: 1rem;
+        margin-top: 1rem;
     }
 }
 

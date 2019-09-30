@@ -7,26 +7,25 @@
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           {{> header}}
 
-          <article>
+          <article class="col-xs-12 no-gutters">
             <header>
-              <h1 class="article-title three-quarter-margin-bottom">{{{title}}}</h1>
+              <h1 class="article-title">{{{title}}}</h1>
             </header>
 
             {{{contents}}}
 
           </article>
 
-          <hr>
+          <hr class="col-xs-12 no-gutters">
 
-          <footer>
-            <p class="half-margin-bottom">
+          <footer class="col-xs-12 no-gutters">
+            <p>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: {{{dateLong}}}<br>
-              Tags: {{{tagsString}}}
+              Tags: {{{tagsString}}}<br>
+              <a href="/#recent">Read more posts &#8230;</a>
             </p>
-
-            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
           {{> footer}}
         </div>

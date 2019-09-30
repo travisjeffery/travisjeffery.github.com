@@ -7,7 +7,10 @@ collection: ios
 redirectFrom: /b/2013/12/implementing-writer-pros-syntax-highlighting-using-nslinguistictagger/
 ---
 
-Update: I wrote this code to show that iA was patenting a feature that Apple had baked into their frameworks. Any iOS developer could build the same feature with ten lines of code. John Gruber [linked my project](https://daringfireball.net/linked/2013/12/26/patent-before-christmas) on Daring Fireball. iA dropped their pending patents.
+Update: I wrote this code to show that iA was patenting a feature built into Apple's frameworks. Any
+iOS developer could build the same feature with ten lines of code. John Gruber [linked my
+project](https://daringfireball.net/linked/2013/12/26/patent-before-christmas) on Daring
+Fireball. iA dropped their pending patents.
 
 Here's how to implement Writer Pro's syntax highlighting feature with attributed strings and NSLinguisticTagger.
 
