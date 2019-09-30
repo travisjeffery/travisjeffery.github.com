@@ -282,7 +282,10 @@ var pipe = metalsmith(__dirname)
          }))
         )
     .use(redirect({
-      '/b/2012/12/overriding-uiviewcontrollers-view-property-done-right': '/b/2012/12/overriding-uiviewcontroller-s-view-property-done-right/'
+      frontmatter: true,
+      redirections: {
+        '/b/2012/12/overriding-uiviewcontrollers-view-property-done-right': '/b/2012/12/overriding-uiviewcontroller-s-view-property-done-right/'
+      }
     }))
     .use(layouts({
       directory: 'layouts',

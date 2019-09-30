@@ -4,6 +4,7 @@ title: "Text processing with NSLinguisticTagger: implementing Writer Pro's synta
 date: 2013-12-25 02:02
 comments: true
 collection: ios
+redirectFrom: /b/2013/12/implementing-writer-pros-syntax-highlighting-using-nslinguistictagger/
 ---
 
 Here's how to implement Writer Pro's syntax highlighting feature using attributed strings and NSLinguisticTagger.
@@ -35,6 +36,3 @@ Here's how to implement Writer Pro's syntax highlighting feature using attribute
     return text;
 }
 ```
-
-
-

@@ -6,9 +6,9 @@ comments: true
 collection: ops
 ---
 
-Make sure you've got the [aws-cli](https://github.com/aws/aws-cl) and [jq](https://github.com/stedolan/jq) installed and configured.
+Make sure you've installed and configured the [aws-cli](https://github.com/aws/aws-cl) and [jq](https://github.com/stedolan/jq).
 
-Drop this into your .zshrc or .bashrc:
+Drop this function into your .zshrc or .bashrc:
 
 ``` sh
 function ec2-ssh () {
@@ -16,8 +16,8 @@ function ec2-ssh () {
 }
 ```
 
-And now you can ssh into your EC2 instance with:
+And now you can ssh into your EC2 instance:
 
 ``` sh
-ec2-ssh i-6g5c7ed4
+$ ec2-ssh i-6g5c7ed4
 ```
