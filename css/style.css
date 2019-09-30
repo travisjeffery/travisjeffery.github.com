@@ -6119,15 +6119,15 @@ a.bg-danger:focus, a.bg-danger:hover {
 }
 
 h1 {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 h2 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 h3 {
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 blockquote {
@@ -6135,13 +6135,15 @@ blockquote {
 }
 
 body {
-  font-family: IBM Plex Serif, Times New Roman, Georgia, serif !important;
+  font-family: "Libre Caslon Text", Times New Roman, Georgia, serif !important;
   font-weight: 300;
 }
 
 pre, code {
-  font-size: .8rem;
-  font-family: IBM Plex Mono, Menlo, Menlo, Consolas, monospace;
+  font-family: "Anonymous Pro", Menlo, Menlo, Consolas, monospace;
+  background: none;
+  color: #373a3c;
+  font-size: 1rem;
 }
 
 pre {
@@ -6195,8 +6197,11 @@ p {
   list-style-type: none;
 }
 
-ul {
+ol, ul, dl {
   margin-top: .5rem;
+}
+
+ul {
   padding-left: 1.5rem;
 }
 
@@ -6297,7 +6302,6 @@ hr {
 
 h1, h2, h3 {
   margin-top: 1.5rem;
-  font-weight: bold;
 }
 
 h1 + ul,

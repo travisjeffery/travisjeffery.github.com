@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Mon, 30 Sep 2019 12:03:49 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Mon, 30 Sep 2019 13:50:12 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -82,7 +82,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -158,7 +158,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -234,7 +234,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -310,7 +310,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -386,7 +386,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -462,7 +462,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -538,7 +538,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -656,7 +656,7 @@ security-groups</code></pre>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -732,7 +732,7 @@ security-groups</code></pre>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -808,7 +808,7 @@ security-groups</code></pre>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -884,7 +884,7 @@ security-groups</code></pre>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -960,7 +960,7 @@ security-groups</code></pre>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -1042,7 +1042,7 @@ can graph them in Grafana or something similar.</p>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -1125,7 +1125,7 @@ can graph them in Grafana or something similar.</p>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -1233,7 +1233,7 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -1310,7 +1310,7 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -1394,7 +1394,7 @@ adds the imgs to the web page.</p>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -1580,7 +1580,7 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
@@ -1657,7 +1657,7 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="Travis Jeffery">
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Serif:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
