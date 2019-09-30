@@ -48,48 +48,37 @@
               <h1 class="article-title">Modern grep</h1>
             </header>
 
-            <p>While grep reigned as the preeminent text search tool for a long time, its overly unopinionated
+            <p>Update: I updated the post for ripgrep.</p>
+<p>grep reigned as the preeminent text search tool for a long time. Yet grep’s overly unopinionated
 approach to defaults and maintaining backwards compatibility allowed new tools — namely; ack,
-the silver searcher, and ripgrep — to gain users and encroach on grep’s territory.</p>
-<p>For example, git stores unreadable blobs under the .git directory in your repos and it doesn’t make
-sense to search these files. However, grep doesn’t ignore these files by default unlike ack and
-ripgrep.</p>
-<p>On average, a search by a newbie ack user will be faster than the same search by a newbie grep user,
-despite the fact that grep is written in C and ack in Perl, because ack conveniently ignores folders
-and files you probably don’t want searched — like .git or the files listed in your .gitignore.</p>
-<blockquote>
-<p>I feel the need…the need for speed!</p>
-</blockquote>
+the silver searcher, and ripgrep — to encroach on its territory.</p>
+<p>grep is ubiquitous. unix-like systems come with grep installed and you can install grep on Windows. I search with ripgrep on my computer because I can install it once and use its features day-to-day. When I work on remote systems, it’s more efficient to just know grep.</p>
+<p>In a large project, a search by a newbie ack user takes less time than the same search by a newbie
+grep user. ack conveniently ignores folders and files you probably don’t want searched —
+like .git or the files listed in your .gitignore.</p>
 <p>With some grep know-how, we can make grep faster and behave like these modern search tools.</p>
-<h2 id="exclude-directories">Exclude Directories</h2>
-<p>grep can exclude directories that it searches, increasing its speed substantially. The following excludes the .git directory from its search:</p>
-<pre><code class="hljs">$ <span class="hljs-keyword">grep</span> --<span class="hljs-keyword">exclude</span>-dir=.git</code></pre>
-
-<p>This speeds up searches by a lot, I ran two uncached searches in Rails’s repo:</p>
-<pre><code class="hljs">$ grep -r <span class="hljs-string">"class &lt;&lt; self"</span> .
-
-$ grep -rIPs <span class="hljs-attribute">--exclude-dir</span>=.[a-zA-Z0-9]* <span class="hljs-attribute">--exclude</span>=.* <span class="hljs-attribute">--exclude</span>=*~ <span class="hljs-string">"class &lt;&lt; self"</span> .</code></pre>
-
-<p>He former, non-excluding, grep took 6.009s. The
+<h2 id="exclude-directories">Exclude directories</h2>
+<p>grep can exclude directories that it searches, increasing its speed substantially. The following excludes the .git directory from the grep search:</p>
+<pre><code>$ grep --exclude-dir=.git</code></pre><p>This speeds up searches by a lot, I ran two uncached searches in Rails’s repo:</p>
+<pre><code>$ grep -r &quot;class &lt;&lt; self&quot; .
+$ grep -rIPs --exclude-dir=.[a-zA-Z0-9]* --exclude=.* --exclude=*~ &quot;class &lt;&lt; self&quot; .</code></pre><p>He former, non-excluding, grep took 6.009s. The
 latter, excluding, grep took 2.235s.</p>
-<h2 id="perl-regular-expressions">Perl Regular Expressions</h2>
+<h2 id="perl-regular-expressions">Perl regular expressions</h2>
 <p>Modern search tools like ack support the popular Perl regular expressions. By default, grep uses
 the less known POSIX regular expressions.</p>
 <p>For example, let’s say we want to match a phone number and capture its area
 codes.</p>
-<p>The Perl regular expression:</p>
-<pre><code class="hljs">(<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{3}</span></span>)-<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{3}</span></span>-<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{4}</span></span></code></pre>
-
-<p>The POSIX regular expression:</p>
-<pre><code class="hljs">\([<span class="hljs-number">0</span><span class="hljs-number">-9</span>]\{<span class="hljs-number">3</span>\}\)-[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]\{<span class="hljs-number">3</span>\}-[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]\{<span class="hljs-number">4</span>\}</code></pre>
-
+<ul>
+<li><p>The Perl regular expression:</p>
+<pre><code>  (\d{3})-\d{3}-\d{4}</code></pre></li>
+<li><p>The POSIX regular expression:</p>
+<pre><code>  \([0-9]\{3\}\)-[0-9]\{3\}-[0-9]\{4\}</code></pre></li>
+</ul>
 <p>Fortunately, you can use Perl regular expressions with grep by giving it the
 <code>-P</code> or <code>--perl-regexp</code> argument.</p>
-<pre><code class="hljs">grep -P "(<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{3}</span></span>)-<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{3}</span></span>-<span class="hljs-tag">\<span class="hljs-name">d</span><span class="hljs-string">{4}</span></span>"</code></pre>
-
-<h2 id="useful-defaults">Useful Defaults</h2>
+<pre><code>grep -P &quot;(\d{3})-\d{3}-\d{4}&quot;</code></pre><h2 id="useful-defaults">Useful defaults</h2>
 <p>Having to give grep all these arguments would be a drag, to configure grep to exclude hidden directories and use Perl regular expressions by default, set the shell variable <code>GREP_OPTIONS</code>:</p>
-<p><code>export GREP_OPTIONS=&#39;-rIPs --exclude-dir=.[a-zA-Z0-9]* --exclude=.* --exclude=*~ --color=auto&#39;</code></p>
+<pre><code>export GREP_OPTIONS=&#39;-rIPs --exclude-dir=.[a-zA-Z0-9]* --exclude=.* --exclude=*~ --color=auto&#39;</code></pre><h2 id="git-grep">Git grep</h2>
 <p>There’s no argument to make grep organize its output like ack. Also, neither
 integrates with git, but git has its own grep for searching your repos. You can read my post on <a href="/b/2012/02/search-a-git-repo-like-a-ninja/">searching git like a ninja</a> to learn about <code>git grep</code> and get the best of both grep and ack.</p>
 <h2 id="sources-and-further-reading">Sources and further reading</h2>
