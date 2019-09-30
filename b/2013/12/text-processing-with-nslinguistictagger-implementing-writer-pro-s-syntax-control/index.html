@@ -48,7 +48,8 @@
               <h1 class="article-title three-quarter-margin-bottom">Text processing with NSLinguisticTagger: implementing Writer Pro's syntax control</h1>
             </header>
 
-            <p>Here’s how to implement Writer Pro’s syntax highlighting feature using attributed strings and NSLinguisticTagger.</p>
+            <p>Update: I wrote this code to show that iA was patenting a feature based on a feature baked into iOS’ frameworks. Any iOS developer could build the same feature with ten lines of code. John Gruber <a href="https://daringfireball.net/linked/2013/12/26/patent-before-christmas">linked my project</a> on Daring Fireball. iA dropped their pending patents.</p>
+<p>Here’s how to implement Writer Pro’s syntax highlighting feature with attributed strings and NSLinguisticTagger.</p>
 <p><a href="https://github.com/travisjeffery/LingusticTaggerDemo">Project</a> on GitHub.</p>
 <p><img src="https://raw.github.com/travisjeffery/LingusticTaggerDemo/master/linguistictagger.gif" alt="demo gif"></p>
 <pre><code class="hljs objc">- (<span class="hljs-keyword">void</span>)highlightLinguisticTag:(<span class="hljs-built_in">NSString</span> *)tag {
@@ -72,6 +73,9 @@
 
     <span class="hljs-keyword">return</span> text;
 }</code></pre>
+
+<p>Doesn’t take much, does it?</p>
+
 
           </article>
 
