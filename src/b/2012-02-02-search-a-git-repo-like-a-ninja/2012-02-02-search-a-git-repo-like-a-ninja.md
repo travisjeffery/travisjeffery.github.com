@@ -6,45 +6,45 @@ comments: false
 collection: git
 ---
 
-`git grep <regexp>`
+    $ git grep <regexp>
 
 Try it out on a project, then try the same search with ack and grep and you see
-that we have speed that's better than either grep or ack. First, we'll make some
+that we have speed that's better than either grep or ack. But we can make some
 improvements:
 
-**Allow extended regular expressions**
+- **Allow extended regular expressions**
 
-`git config --global grep.extendRegexp true`
+        $ git config --global grep.extendRegexp true
 
-git can also support full blown Perl regular expressions as well, by compiling
-git with libpcre. Easy for [homebrew](https://github.com/mxcl/homebrew)
-users:
+    git can also support full blown Perl regular expressions as well, by compiling
+    git with libpcre. Easy for [homebrew](https://github.com/mxcl/homebrew)
+    users:
 
-`brew install git --with-pcre`
+        $ brew install git --with-pcre
 
-**Always include line numbers**
+- **Always include line numbers**
 
-`git config --global grep.lineNumber true`
+        $ git config --global grep.lineNumber true
 
-**Group output like ack!**
+- **Group output like ack!**
 
-`git config --global alias.g "grep --break --heading --line-number"`
+        $ git config --global alias.g "grep --break --heading --line-number"
 
-As far as I know there is no non-trivial way to add default arguments/override
-git commands, plus g is nice and short.
+    As far as I know there is no non-trivial way to add default arguments/override
+    git commands, plus g is nice and short.
 
-Compare this output, without grouping:
+    Compare this output, without grouping:
 
-<img class="img-fluid" alt="Without grouping" src="images/without-grouping.jpg" />
+    <img class="img-fluid" alt="Without grouping" src="images/without-grouping.jpg" />
 
-To this much more readable output, with grouping:
+    To this much more readable output, with grouping:
 
-<img class="img-fluid" alt="With grouping" src="images/grouping.jpg" />
+    <img class="img-fluid" alt="With grouping" src="images/grouping.jpg" />
 
-The speed of git grep, which is a product of it being implemented in
-C and only searching your project files, i.e. not files in .git, is
-alone compelling --- but where git grep becomes unique and
-powerful is how it connects you with your repo's git database...
+    The speed of git grep, which is a product of it being implemented in
+    C and only searching your project files, i.e. not files in .git, is
+    alone compelling --- but where git grep becomes unique and
+    powerful is how it connects you with your repo's git database...
 
 ## Practical examples
 
@@ -52,71 +52,69 @@ Here's a list of commands made up of different arguments and concepts of git
 grep and git log that you will be able to reuse and learn from to
 reformulate later for your own use cases:
 
-**Search for our regexp in JavaScript files from another branch**
+- **Search for our regexp in JavaScript files from another branch**
 
-`git grep -e <regexp> my_other_branch -- '*.js'`
+        $ git grep -e <regexp> my_other_branch -- '*.js'
 
-The `--` signals the end of options and the rest of the paramaters are
-<pathspec> limiters.
+    The `--` signals the end of options and the rest of the paramaters are
+    <pathspec> limiters.
 
-**Search files registered in the index, rather than the working tree**
+- **Search files registered in the index, rather than the working tree**
 
-`git grep --cached -e <regexp>`
+        $ git grep --cached -e <regexp>
 
-Note that we're searching what's registered in the index rather than what's staged.
+    Note that we're searching what's registered in the index rather than what's staged.
 
-**Search for staged files containing a regexp that was either added or removed**
+- **Search for staged files containing a regexp that was either added or removed**
 
-`git diff-index --cached -G<regexp> HEAD | cut -f2`
+        $ git diff-index --cached -G<regexp> HEAD | cut -f2
 
-**Search through previous revisions whose contents contain a given regexp**
+- **Search through previous revisions whose contents contain a given regexp**
 
-`git grep <regexp> $(git rev-list --all)`
+        $ git grep <regexp> $(git rev-list --all)
 
-I tried the above on one project large enough that git complained about the
-argument size, so if you run into this problem do something like this command:
+    I tried the above on one project large enough that git complained about the
+    argument size, so if you run into this problem do something like this command:
 
-`git rev-list --all | (while read rev; do git grep -e <regexp> $rev; done)`
+        $ git rev-list --all | (while read rev; do git grep -e <regexp> $rev; done)
 
-**Search for commits whose changes include your regexp**
+- **Search for commits whose changes include your regexp**
 
-`git log -G <regexp>`
+        $ git log -G <regexp>
 
-**Combine regexps and filter results via boolean logic**
+- **Combine regexps and filter results via boolean logic**
 
-`git grep -e 'include' --or 'extend' --and \( -e 'Specification' -e 'Factory' \)`
+        $ git grep -e 'include' --or 'extend' --and \( -e 'Specification' -e 'Factory' \)
 
-With this command, we search for lines where we extend *or* include, either specifications *or* factories. For example, let's say we ran this command on this file:
+    With this command, we search for lines where we extend *or* include, either specifications *or* factories. For example, let's say we ran this command on this file:
 
-``` ruby
-module UserSpecification; end
-module UserFactory; end
-module Bad; end
+        module UserSpecification; end
+        module UserFactory; end
+        module Bad; end
 
-class User
-  extend UserSpecification
-  include UserFactory
-  include Bad
-end
-```
+        class User
+            extend UserSpecification
+            include UserFactory
+            include Bad
+        end
 
-Then we'd get these results:
+    Then we'd get these results:
 
-<img class="img-fluid" alt="git grep example" src="images/combination.jpg" />
+    <img class="img-fluid" alt="git grep example" src="images/combination.jpg" />
 
-**Find files that contain some terms, not necessarily on the same line**
+- **Find files that contain some terms, not necessarily on the same line**
 
-`git grep -e <regexp> --and -e <regexp>`
+        $ git grep -e <regexp> --and -e <regexp>
 
-...is not what you want, as it will search for lines that contain both those
-regular expressions. Instead, this is how we search for files with the matches occurring
-somewhere in the file:
+    ...is not what you want, as it will search for lines that contain both those
+    regular expressions. Instead, this is how we search for files with the matches occurring
+    somewhere in the file:
 
-`git grep --all-matches -e <regexp> -e <regexp>`
+        $ git grep --all-matches -e <regexp> -e <regexp>
 
-**Find commits whose message mention login and were authored by Travis in the last month**
+- **Find commits whose message mention login and were authored by Travis in the last month**
 
-`git log --grep=login --author=travis --since=1.month`
+        $ git log --grep=login --author=travis --since=1.month
 
 ## Text editor integration
 
@@ -134,7 +132,7 @@ you're unfamiliar, see `:h quickfix`
 If your project is not under git version control than you can use ack.vim in a
 similar manner:
 
-`:Ack <args>`
+    :Ack <args>
 
 Emacs user's have had `vc-git-grep` built in since v22.1 and it's very similar
 to `:Ggrep`. For acking, use [full-ack](http://www.emacswiki.org/emacs/FullAck).

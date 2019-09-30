@@ -8,12 +8,12 @@ $green: lime;
 $pink_flamingo: #ff66ff;
 
 //fonts
-$text_font_0: IBM Plex Serif;
+$text_font_0: 'Libre Caslon Text';
 $text_font_1: Times New Roman;
 $text_font_2: Georgia;
 $text_font_3: serif;
 
-$code_font_0: IBM Plex Mono;
+$code_font_0: 'Anonymous Pro';
 $code_font_1: Menlo;
 $code_font_2: Consolas;
 $code_font_3: monospace;
@@ -42,15 +42,15 @@ $code_font_3: monospace;
 }
 
 h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 h2 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
 }
 
 h3 {
-    font-size: 1rem;
+    font-size: 1.25rem;
 }
 
 blockquote {
@@ -62,8 +62,10 @@ body {
     font-weight: 300;
 }
 pre, code {
-    font-size: .8rem;
     font-family: $code_font_0, $code_font_1, $code_font_1, $code_font_2, $code_font_3;
+    background: none;
+    color: $body-color;
+    font-size: 1rem;
 }
 pre {
     white-space: pre-wrap;
@@ -113,8 +115,11 @@ p {
     list-style-type: none;
 }
 
-ul {
+ol, ul, dl {
     margin-top: .5rem;
+}
+
+ul {
     padding-left: 1.5rem;
     li {
 	margin-top: .5rem;
@@ -138,6 +143,7 @@ article {
     ul {
         padding-left: 1.5rem;
     }
+
 }
 hr {
     border-style: dashed;
@@ -202,7 +208,6 @@ hr {
 
 h1, h2, h3 {
     margin-top: 1.5rem;
-    font-weight: bold;
 }
 
 h1 + ul,
