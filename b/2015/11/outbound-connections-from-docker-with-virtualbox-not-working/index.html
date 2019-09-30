@@ -27,7 +27,7 @@
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo col-xs-6">
+            <h1 class="logo no-gutters col-xs-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
@@ -37,28 +37,29 @@
             </div>
           </hgroup>
           
-          <p>
+          <p class="half-margin col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
-          <hr>
+          <hr class="col-xs-12 no-gutters">
 
-          <article>
+          <article class="col-xs-12 no-gutters">
             <header>
-              <h1 class="article-title three-quarter-margin-bottom">Outbound connections from Docker with VirtualBox not working?</h1>
+              <h1 class="article-title">Outbound connections from Docker with VirtualBox not working?</h1>
             </header>
 
             <p>Using Docker and VirtualBox and having trouble making outbound
-connections? For instance, you might be getting errors like:</p>
-<pre><code class="hljs">curl: (7) Failed connect <span class="hljs-keyword">to</span> 10.0.2.224:8000; <span class="hljs-literal">No</span><span class="hljs-built_in"> route </span><span class="hljs-keyword">to</span> host</code></pre>
-
-<p>Or:</p>
-<pre><code class="hljs">Error: Redis<span class="hljs-built_in"> connection </span><span class="hljs-keyword">to</span> redis:6379 failed - connect EHOSTUNREACH</code></pre>
-
-<p>Here’s what I did to fix it. First I ssh’d into the Docker machine:</p>
-<pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine ssh dev</code></pre>
-
-<p>And took a look at the network config:</p>
+connections? You may have errors similar to:</p>
+<ul>
+<li><code>curl: (7) Failed connect to 10.0.2.224:8000; No route to host</code></li>
+<li><code>Error: Redis connection to redis:6379 failed - connect EHOSTUNREACH</code></li>
+</ul>
+<p>Here’s what I did to fix it:</p>
+<ul>
+<li><p>I ssh’d into the Docker machine:</p>
+  <pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine ssh dev</code></pre>
+</li>
+<li><p>Checked eth0’s subnet:</p>
 <pre><code class="hljs">$ ifconfig eth0
 eth0      Link encap:Ethernet  HWaddr <span class="hljs-number">08</span>:<span class="hljs-number">00</span>:<span class="hljs-number">27</span>:C8:C7:<span class="hljs-number">50</span>
 inet addr:<span class="hljs-number">10.254</span><span class="hljs-number">.0</span><span class="hljs-number">.15</span>  Bcast:<span class="hljs-number">10.254</span><span class="hljs-number">.0</span><span class="hljs-number">.255</span>  Mask:<span class="hljs-number">255.255</span><span class="hljs-number">.255</span><span class="hljs-number">.0</span>
@@ -68,36 +69,37 @@ RX packets:<span class="hljs-number">230796</span> errors:<span class="hljs-numb
 TX packets:<span class="hljs-number">62400</span> errors:<span class="hljs-number">0</span> dropped:<span class="hljs-number">0</span> overruns:<span class="hljs-number">0</span> carrier:<span class="hljs-number">0</span>
 collisions:<span class="hljs-number">0</span> txqueuelen:<span class="hljs-number">1000</span>
 RX bytes:<span class="hljs-number">238029328</span> (<span class="hljs-number">227.0</span> MiB)  TX bytes:<span class="hljs-number">4768029</span> (<span class="hljs-number">4.5</span> MiB)</code></pre>
-
-<p>Where I see eth0 is configured on this subnet and doesn’t seem to be
-modifiable. So I fixed this via:</p>
-<pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine stop dev
+</li>
+<li><p>Modified the NAT’s subnet to match:</p>
+  <pre><code class="hljs"><span class="hljs-variable">$ </span>docker-machine stop dev
 <span class="hljs-variable">$ </span>VBoxManage modifyvm dev --natnet1 <span class="hljs-string">"10.254.0.0/24"</span>
 <span class="hljs-variable">$ </span>docker-machine restart dev</code></pre>
 
-<p>And boom, just like that it works:</p>
+
+</li>
+</ul>
+<p>And just like that, it works:</p>
 <pre><code class="hljs">$ <span class="hljs-symbol">docker@</span>dev:~$ curl http:<span class="hljs-comment">//10.0.2.224:8000</span>
 HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> OK</code></pre>
 
           </article>
 
-          <hr>
+          <hr class="col-xs-12 no-gutters">
 
-          <footer>
-            <p class="half-margin-bottom">
+          <footer class="col-xs-12 no-gutters">
+            <p>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               Written: November 17th, 2015<br>
-              Tags: ops
+              Tags: ops<br>
+              <a href="/#recent">Read more posts &#8230;</a>
             </p>
-
-            <p class="one-margin-bottom"><a href="/#recent">Read more posts &#8230;</a></p>
           </footer>
-          <hr>
+          <hr class="col-xs-12 no-gutters">
           
-          <footer class="footer">
+          <footer class="footer col-xs-12 no-gutters">
             <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>  
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
           </footer>
         </div>
       </div>
