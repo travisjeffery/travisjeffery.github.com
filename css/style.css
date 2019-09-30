@@ -6097,6 +6097,18 @@ a.bg-danger:focus, a.bg-danger:hover {
   }
 }
 
+@media screen and (max-width: 600px) {
+  html {
+    font-size: 19px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  html {
+    font-size: 20px;
+  }
+}
+
 .no-gutters {
   padding-left: 0;
   padding-right: 0;
@@ -6104,10 +6116,6 @@ a.bg-danger:focus, a.bg-danger:hover {
 
 * {
   margin-bottom: 0 !important;
-}
-
-html {
-  font-size: 20px;
 }
 
 h1 {

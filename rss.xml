@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Mon, 30 Sep 2019 10:22:15 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Mon, 30 Sep 2019 11:49:07 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -37,7 +37,7 @@
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -113,7 +113,7 @@
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -189,7 +189,7 @@
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -265,7 +265,7 @@
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -341,7 +341,7 @@
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -417,7 +417,7 @@
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -493,7 +493,7 @@
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -569,7 +569,7 @@
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -687,7 +687,7 @@ security-groups</code></pre>
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -763,7 +763,7 @@ security-groups</code></pre>
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -839,7 +839,7 @@ security-groups</code></pre>
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -915,7 +915,7 @@ security-groups</code></pre>
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -991,7 +991,7 @@ security-groups</code></pre>
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -1073,7 +1073,7 @@ can graph them in Grafana or something similar.</p>
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -1156,7 +1156,7 @@ can graph them in Grafana or something similar.</p>
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -1264,7 +1264,7 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -1341,7 +1341,7 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -1425,7 +1425,7 @@ adds the imgs to the web page.</p>
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -1611,7 +1611,7 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
@@ -1688,7 +1688,7 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
             </div>
           </hgroup>
           
-          <p class="half-margin col-xs-12 no-gutters">
+          <p class="col-xs-12 no-gutters">
             Software maker and writer.
           </p>
           
