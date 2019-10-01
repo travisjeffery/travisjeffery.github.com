@@ -11,7 +11,7 @@ example, masking an image to have round corners, or adding a drop shadow to an i
 depth. Implementing these techniques separately is trivial, implementing these techniques together
 is tricksy.
 
-The overview of how to both mask and shadow something --- an image for, example --- you:
+To both mask and shadow any view, let's use an image as an example, you:
 
 - create a new layer whose layer has a shadow.
 - mask the image's layer.
