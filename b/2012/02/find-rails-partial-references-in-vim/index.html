@@ -54,9 +54,7 @@
               <h1 class="article-title">Find Rails partial references in Vim</h1>
             </header>
 
-            <p>Every so often when I’m about to change a partial I need to know how this change
-may affect other parts of the application by seeing where and how the partial
-is called and used. I’ve written a Vim command to do this (put in your .vimrc):</p>
+            <p>Before I change a Rails partial that’s shared across the project, I check what effect my change will have by looking at where and how the partial’s used. In Vim, I find the references to  partials with the following function:</p>
 <pre><code class="hljs vim"><span class="hljs-function"><span class="hljs-keyword">function</span>! <span class="hljs-title">GrepPartial</span><span class="hljs-params">(partial)</span></span>
   <span class="hljs-keyword">if</span> (<span class="hljs-variable">a:partial</span>)
     <span class="hljs-keyword">let</span> pattern = <span class="hljs-string">"partial.*"</span> . partial
@@ -78,19 +76,13 @@ is called and used. I’ve written a Vim command to do this (put in your .vimrc)
 command! -nargs=? GrepPartial
       \ <span class="hljs-keyword">call</span> GrepPartial(<span class="hljs-symbol">&lt;q-args&gt;</span>)</code></pre>
 
-<p>Now while editing a partial just use <code>:GrepPartial</code>.</p>
-<p>You can also pass in a partial:</p>
-<p><code>:GrepPartial accounts/show</code></p>
-<p>Note that if you have Fugitive installed then you’ll want to compile git with
-the PCRE library, easy for Homebrew users:</p>
-<p><code>brew install git --with-pcre</code></p>
-<p>If you don’t install PCRE then you’ll need to get rid of the <code>\b</code>, though your
-results may be less accurate.</p>
-<h2 id="improvements">Improvements</h2>
-<p>Right now the function is good-enough for how I use it, though at some point I
-may automatically scope partial references when given a non-scoped partial
-pattern.</p>
-
+<p>Here’s how the command works:</p>
+<ul>
+<li><code>:GrepPartial</code> finds references to the current partial you’re editing.</li>
+<li><code>:GrepPartial accounts/show</code> find references to the accounts/show partial.</li>
+</ul>
+<p>The function uses Fugitive if you have it installed, and if you do then you’ll want to install git with the PCRE library. Homebrew users can install git with PCRE by running:</p>
+<pre><code>brew install git --with-pcre</code></pre>
 
           </article>
 
