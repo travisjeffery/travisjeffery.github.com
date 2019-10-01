@@ -9,9 +9,7 @@ collection:
 published: true
 ---
 
-Every so often when I'm about to change a partial I need to know how this change
-may affect other parts of the application by seeing where and how the partial
-is called and used. I've written a Vim command to do this (put in your .vimrc):
+Before I change a Rails partial that's shared across the project, I check what effect my change will have by looking at where and how the partial's used. In Vim, I find the references to  partials with the following function:
 
 ``` vim
 function! GrepPartial(partial)
@@ -36,22 +34,11 @@ command! -nargs=? GrepPartial
       \ call GrepPartial(<q-args>)
 ```
 
-Now while editing a partial just use `:GrepPartial`.
+Here's how the command works:
 
-You can also pass in a partial:
+- `:GrepPartial` finds references to the current partial you're editing.
+- `:GrepPartial accounts/show` find references to the accounts/show partial.
 
-`:GrepPartial accounts/show`
+The function uses Fugitive if you have it installed, and if you do then you'll want to install git with the PCRE library. Homebrew users can install git with PCRE by running:
 
-Note that if you have Fugitive installed then you'll want to compile git with
-the PCRE library, easy for Homebrew users:
-
-`brew install git --with-pcre`
-
-If you don't install PCRE then you'll need to get rid of the `\b`, though your
-results may be less accurate.
-
-## Improvements
-
-Right now the function is good-enough for how I use it, though at some point I
-may automatically scope partial references when given a non-scoped partial
-pattern.
+    brew install git --with-pcre
