@@ -1,9 +1,10 @@
 ---
 layout: post.html
-title: "iOS how-to: mask and shadow an image"
+title: "iOS how-to: mask and shadow views"
 date: 2012-08-06 17:12
 comments: false
 collection: ios
+redirectFrom: /b/2012/08/ios-how-to-mask-and-shadow-an-image/
 ---
 
 Two techniques that iOS developers use to make visually appealing app are masks and shadows; for
