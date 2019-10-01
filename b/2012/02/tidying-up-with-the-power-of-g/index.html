@@ -20,7 +20,7 @@
      ga('create', 'UA-8462120-1', 'travisjeffery.com');
       ga('send', 'pageview');
     </script>
-    <title></title>
+    <title>Tidying up with the power of :g</title>
   </head>
   <body>
     <div class="container-fluid container">
@@ -51,20 +51,50 @@
 
           <article class="col-xs-12 no-gutters">
             <header>
-              <h1 class="article-title"></h1>
+              <h1 class="article-title">Tidying up with the power of :g</h1>
             </header>
 
-            <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="robots" content="noindex">
-    <meta http-equiv="refresh" content="0;url=/b/2012/02/vim-and-the-power-of-g/index.html">
-    <link rel="canonical" href="/b/2012/02/vim-and-the-power-of-g/index.html">
-    <script>window.location.replace('/b/2012/02/vim-and-the-power-of-g/index.html');</script>
-  </head>
-  <body>This page has been moved to <a href="/b/2012/02/vim-and-the-power-of-g/index.html">/b/2012/02/vim-and-the-power-of-g/index.html</a></body>
-</html>
+            <p>Vim’s :g takes two inputs: a pattern and an operation, and it runs that operation on
+each line that matches the pattern in the current file. :g is a tool whose usage isn’t imposed on
+you, nor even readily apparent, so its usefulness depends on your
+creativity.</p>
+<p>For example, I like to use :g to group related lines that are currently
+scattered across a file.</p>
+<p>Here’s an example:</p>
+<pre><code class="hljs vim">Bundle <span class="hljs-string">'git@github.com:travisjeffery/IndexedSearch.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/Shougo/neocomplcache.git'</span>
+Bundle <span class="hljs-string">'https://github.com/tpope/vim-fugitive.git'</span>
+Bundle <span class="hljs-string">'https://github.com/travisjeffery/vim-help'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/Lokaltog/vim-powerline.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/jiangmiao/auto-pairs.git'</span>
+Bundle <span class="hljs-string">'https://github.com/tpope/vim-ragtag.git'</span>
+Bundle <span class="hljs-string">'git@github.com:travisjeffery/vim-rails.git'</span>
+<span class="hljs-comment">" Bundle 'git@github.com:travisjeffery/vim-rails-fork.git'</span>
+Bundle <span class="hljs-string">'https://github.com/tpope/vim-repeat.git'</span>
+Bundle <span class="hljs-string">'https://github.com/kien/ctrlp.vim.git'</span>
+Bundle <span class="hljs-string">'git@github.com:travisjeffery/vim-unimpaired.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/thinca/vim-poslist.git'</span></code></pre>
+
+<p>The lines that I care about are the commented out lines. In one fell swoop I can group those lines
+and put them at the top by running the following:</p>
+<pre><code class="hljs"><span class="hljs-symbol">:g/^<span class="hljs-string">"/m 0</span></span></code></pre>
+
+<p>The result with our lines grouped together:</p>
+<pre><code class="hljs vim"><span class="hljs-comment">" Bundle 'https://github.com/thinca/vim-poslist.git'</span>
+<span class="hljs-comment">" Bundle 'git@github.com:travisjeffery/vim-rails-fork.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/jiangmiao/auto-pairs.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/Lokaltog/vim-powerline.git'</span>
+<span class="hljs-comment">" Bundle 'https://github.com/Shougo/neocomplcache.git'</span>
+Bundle <span class="hljs-string">'git@github.com:travisjeffery/IndexedSearch.git'</span>
+Bundle <span class="hljs-string">'https://github.com/tpope/vim-fugitive.git'</span>
+Bundle <span class="hljs-string">'https://github.com/travisjeffery/vim-help'</span>
+Bundle <span class="hljs-string">'https://github.com/tpope/vim-ragtag.git'</span>
+Bundle <span class="hljs-string">'git@github.com:travisjeffery/vim-rails.git'</span>
+Bundle <span class="hljs-string">'https://github.com/tpope/vim-repeat.git'</span>
+Bundle <span class="hljs-string">'https://github.com/kien/ctrlp.vim.git'</span>
+Bundle <span class="hljs-string">'git@github.com:travisjeffery/vim-unimpaired.git'</span></code></pre>
+
+<p>:g is one of the most underrated features in Vim. You can read more about it by running <code>:h :g</code>.</p>
 
 
           </article>
@@ -75,8 +105,8 @@
             <p>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: <br>
-              Tags: <br>
+              Written: February 17th, 2012<br>
+              Tags: vim<br>
               <a href="/#recent">Read more posts &#8230;</a>
             </p>
           </footer>

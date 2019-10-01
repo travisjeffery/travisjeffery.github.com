@@ -20,7 +20,7 @@
      ga('create', 'UA-8462120-1', 'travisjeffery.com');
       ga('send', 'pageview');
     </script>
-    <title>iOS how-to mask and shadow an image</title>
+    <title></title>
   </head>
   <body>
     <div class="container-fluid container">
@@ -51,154 +51,20 @@
 
           <article class="col-xs-12 no-gutters">
             <header>
-              <h1 class="article-title">iOS how-to mask and shadow an image</h1>
+              <h1 class="article-title"></h1>
             </header>
 
-            <p>Two common techniques for making a visually appealing app are a liberal use
-of masking and shadows, e.g. masking an image to be a circle or have round
-corners, or adding a drop shadow to images or text to give them more
-depth. Both of these techniques are pretty trivial in iOS on their own, but
-are a bit of a intellectual leap to combine them at the same time. This post
-will hopefully lessen that leap.</p>
-<p>To summarize the technique we’re going to use, we’re going to mask the
-image into a circle using its layer property, then add that layer to a
-new container layer that will also shadow the image, and then add that container
-layer with the masked and shadowed image as a sublayer of our view.</p>
-<p>I’ve created a <a href="https://github.com/travisjeffery/ios-how-to-mask-and-shadow">project on
-GitHub</a>, and
-<a href="https://github.com/travisjeffery/ios-how-to-mask-and-shadow/commits/master/">wrote my
-commits</a>
-in such a way as to see the stages of building our final result.</p>
-<p>Initially we just start with an image as a subview of our view with no
-modifications other than centering it.</p>
-<img src="images/mask-and-shadow-1.png">
-
-<pre><code class="hljs objc"><span class="hljs-comment">//</span>
-<span class="hljs-comment">//  TJViewController.m</span>
-<span class="hljs-comment">//  MaskAndShadow</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">//  Created by Travis Jeffery on 2012-08-06.</span>
-<span class="hljs-comment">//  Copyright (c) 2012 Travis Jeffery. All rights reserved.</span>
-<span class="hljs-comment">//</span>
-
-<span class="hljs-meta">#import <span class="hljs-meta-string">"TJViewController.h"</span></span>
-
-<span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">TJViewController</span> ()</span>
-
-<span class="hljs-keyword">@end</span>
-
-<span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">TJViewController</span></span>
-
-- (<span class="hljs-keyword">void</span>)viewDidLoad
-{
-    [<span class="hljs-keyword">super</span> viewDidLoad];
-
-    <span class="hljs-comment">// white bg to see the shadow easier</span>
-    <span class="hljs-keyword">self</span>.view.backgroundColor = [<span class="hljs-built_in">UIColor</span> whiteColor];
-
-    <span class="hljs-comment">// the image we're going to mask and shadow</span>
-    <span class="hljs-built_in">UIImageView</span>* image = [[<span class="hljs-built_in">UIImageView</span> alloc] initWithImage:[<span class="hljs-built_in">UIImage</span> imageNamed:<span class="hljs-string">@"sj.jpeg"</span>]];
-    image.center = <span class="hljs-keyword">self</span>.view.center;
-
-    [<span class="hljs-keyword">self</span>.view addSubview:image];
-}
-
-<span class="hljs-keyword">@end</span></code></pre>
-
-<p>Then we manipulate our image into a circle by rounding and masking its
-corners.</p>
-<img src="images/mask-and-shadow-2.png">
-
-<pre><code class="hljs objc"><span class="hljs-comment">//</span>
-<span class="hljs-comment">//  TJViewController.m</span>
-<span class="hljs-comment">//  MaskAndShadow</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">//  Created by Travis Jeffery on 2012-08-06.</span>
-<span class="hljs-comment">//  Copyright (c) 2012 Travis Jeffery. All rights reserved.</span>
-<span class="hljs-comment">//</span>
-
-<span class="hljs-meta">#import <span class="hljs-meta-string">"TJViewController.h"</span></span>
-
-<span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">TJViewController</span> ()</span>
-
-<span class="hljs-keyword">@end</span>
-
-<span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">TJViewController</span></span>
-
-- (<span class="hljs-keyword">void</span>)viewDidLoad
-{
-    [<span class="hljs-keyword">super</span> viewDidLoad];
-
-    <span class="hljs-comment">// white bg to see the shadow easier</span>
-    <span class="hljs-keyword">self</span>.view.backgroundColor = [<span class="hljs-built_in">UIColor</span> whiteColor];
-
-    <span class="hljs-comment">// the image we're going to mask and shadow</span>
-    <span class="hljs-built_in">UIImageView</span>* image = [[<span class="hljs-built_in">UIImageView</span> alloc] initWithImage:[<span class="hljs-built_in">UIImage</span> imageNamed:<span class="hljs-string">@"sj.jpeg"</span>]];
-    image.center = <span class="hljs-keyword">self</span>.view.center;
-
-    <span class="hljs-comment">// use the image's layer to mask the image into a circle</span>
-    image.layer.cornerRadius = roundf(image.frame.size.width/<span class="hljs-number">2.0</span>);
-    image.layer.masksToBounds = <span class="hljs-literal">YES</span>;
-
-    [<span class="hljs-keyword">self</span>.view addSubview:image];
-}
-
-<span class="hljs-keyword">@end</span></code></pre>
-
-<p>Since our shadow will also be masked if we just tried to add to the image as it
-is now, we add the masked image’s layer to an unmasked container layer that
-will also add shadow the image, and then we add that container layer with the
-masked and shadowed image as a sublayer of our view.</p>
-<img src="images/mask-and-shadow-3.png">
-
-<pre><code class="hljs objc"><span class="hljs-comment">//</span>
-<span class="hljs-comment">//  TJViewController.m</span>
-<span class="hljs-comment">//  MaskAndShadow</span>
-<span class="hljs-comment">//</span>
-<span class="hljs-comment">//  Created by Travis Jeffery on 2012-08-06.</span>
-<span class="hljs-comment">//  Copyright (c) 2012 Travis Jeffery. All rights reserved.</span>
-<span class="hljs-comment">//</span>
-
-<span class="hljs-meta">#import <span class="hljs-meta-string">"TJViewController.h"</span></span>
-<span class="hljs-meta">#import <span class="hljs-meta-string">&lt;QuartzCore/QuartzCore.h&gt;</span></span>
-
-<span class="hljs-class"><span class="hljs-keyword">@interface</span> <span class="hljs-title">TJViewController</span> ()</span>
-
-<span class="hljs-keyword">@end</span>
-
-<span class="hljs-class"><span class="hljs-keyword">@implementation</span> <span class="hljs-title">TJViewController</span></span>
-
-- (<span class="hljs-keyword">void</span>)viewDidLoad
-{
-    [<span class="hljs-keyword">super</span> viewDidLoad];
-
-    <span class="hljs-comment">// white bg to see the shadow easier</span>
-    <span class="hljs-keyword">self</span>.view.backgroundColor = [<span class="hljs-built_in">UIColor</span> whiteColor];
-
-    <span class="hljs-comment">// the image we're going to mask and shadow</span>
-    <span class="hljs-built_in">UIImageView</span>* image = [[<span class="hljs-built_in">UIImageView</span> alloc] initWithImage:[<span class="hljs-built_in">UIImage</span> imageNamed:<span class="hljs-string">@"sj.jpeg"</span>]];
-    image.center = <span class="hljs-keyword">self</span>.view.center;
-
-    <span class="hljs-comment">// make new layer to contain shadow and masked image</span>
-    <span class="hljs-built_in">CALayer</span>* containerLayer = [<span class="hljs-built_in">CALayer</span> layer];
-    containerLayer.shadowColor = [<span class="hljs-built_in">UIColor</span> blackColor].CGColor;
-    containerLayer.shadowRadius = <span class="hljs-number">10.</span>f;
-    containerLayer.shadowOffset = <span class="hljs-built_in">CGSizeMake</span>(<span class="hljs-number">0.</span>f, <span class="hljs-number">5.</span>f);
-    containerLayer.shadowOpacity = <span class="hljs-number">1.</span>f;
-
-    <span class="hljs-comment">// use the image's layer to mask the image into a circle</span>
-    image.layer.cornerRadius = roundf(image.frame.size.width/<span class="hljs-number">2.0</span>);
-    image.layer.masksToBounds = <span class="hljs-literal">YES</span>;
-
-    <span class="hljs-comment">// add masked image layer into container layer so that it's shadowed</span>
-    [containerLayer addSublayer:image.layer];
-
-    <span class="hljs-comment">// add container including masked image and shadow into view</span>
-    [<span class="hljs-keyword">self</span>.view.layer addSublayer:containerLayer];
-}
-
-<span class="hljs-keyword">@end</span></code></pre>
-
+            <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <meta http-equiv="refresh" content="0;url=/b/2012/08/ios-how-to-mask-and-shadow-an-image/index.html">
+    <link rel="canonical" href="/b/2012/08/ios-how-to-mask-and-shadow-an-image/index.html">
+    <script>window.location.replace('/b/2012/08/ios-how-to-mask-and-shadow-an-image/index.html');</script>
+  </head>
+  <body>This page has been moved to <a href="/b/2012/08/ios-how-to-mask-and-shadow-an-image/index.html">/b/2012/08/ios-how-to-mask-and-shadow-an-image/index.html</a></body>
+</html>
 
 
           </article>
@@ -209,8 +75,8 @@ masked and shadowed image as a sublayer of our view.</p>
             <p>
               Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: August 6th, 2012<br>
-              Tags: ios<br>
+              Written: <br>
+              Tags: <br>
               <a href="/#recent">Read more posts &#8230;</a>
             </p>
           </footer>
