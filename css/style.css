@@ -6254,13 +6254,13 @@ hr {
   text-align: left;
 }
 
-#header a {
+#header h1 a {
   color: red;
   text-decoration: none;
   border: none;
 }
 
-#header a:after {
+#header h1 a:after {
   content: "travis jeffery";
   color: blue;
   position: absolute;
@@ -6278,6 +6278,9 @@ hr {
   text-align: right;
   padding-right: 0;
   margin-top: 1rem;
+  position: relative;
+  top: 1rem;
+  font-size: 1rem;
 }
 
 .section-header {
@@ -6291,6 +6294,18 @@ hr {
 
 .section-header .on-the-web {
   background-color: yellow;
+}
+
+.left {
+  text-align: left;
+}
+
+input.email {
+  padding-left: .5rem;
+}
+
+.center {
+  text-align: center;
 }
 
 .footer {
