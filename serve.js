@@ -21,7 +21,7 @@ var tags = require('./lib/metalsmith-tags')
 
 var colors = {
   calls: 0,
-  colors: ['cyan', 'lime', 'fuchsia', 'yellow', 'mintcream', 'coral', 'pink', 'lavender'],
+  colors: ['pink', 'lightcyan', 'lightgreen', 'yellow', 'peachpuff', 'aquamarine', 'paleturquoise', 'lavender', 'coral'],
   next: function() {
     return this.colors[this.calls++%this.colors.length]
   }
