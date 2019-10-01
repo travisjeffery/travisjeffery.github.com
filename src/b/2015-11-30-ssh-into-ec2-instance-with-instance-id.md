@@ -6,7 +6,7 @@ comments: true
 collection: ops
 ---
 
-Make sure you've installed and configured the [aws-cli](https://github.com/aws/aws-cl) and [jq](https://github.com/stedolan/jq).
+Make sure you've installed and configured the [aws-cli](https://github.com/aws/aws-cli) and [jq](https://github.com/stedolan/jq).
 
 Drop this function into your .zshrc or .bashrc:
 

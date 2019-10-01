@@ -160,8 +160,8 @@ hr {
     h1 {
 	font-weight: bold;
         text-align: left;
-    }
-    a {
+
+        a {
 	color: $red;
 	text-decoration: none;
 	border: none;
@@ -174,6 +174,7 @@ hr {
 	    z-index: -1;
 	}
     }
+    }
     .logo {
 	font-size: 2rem;
     }
@@ -182,6 +183,9 @@ hr {
 	text-align: right;
 	padding-right: 0;
         margin-top: 1rem;
+        position:relative;
+        top: 1rem;
+        font-size: 1rem;
     }
 }
 .section-header {
@@ -193,6 +197,18 @@ hr {
     .on-the-web {
 	background-color: $yellow;
     }
+}
+
+.left {
+    text-align: left;
+}
+
+input.email {
+    padding-left: .5rem;
+}
+
+.center {
+    text-align: center;
 }
 
 .footer {

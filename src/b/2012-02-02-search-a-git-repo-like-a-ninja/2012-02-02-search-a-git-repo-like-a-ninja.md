@@ -143,7 +143,7 @@ details on each of these commands by running `git help <command>`. And you have 
 
 ## Sources and further reading
 
-- [Finding with Git Grep](http://book.git-scm.com/4_finding_with_git_grep.html)
+- [Git Tools - Search](https://git-scm.com/book/en/v2/Git-Tools-Searching)
 - [Junio C Hamano, current maintainer of git: Fun with "git grep"](http://gitster.livejournal.com/27674.html)
 - [Junio C Hamano: Fun with "git log --grep"](http://gitster.livejournal.com/30195.html)
 - [How to grep in the git history?](http://stackoverflow.com/questions/2928584/how-to-grep-in-the-git-history)
