@@ -54,13 +54,10 @@
               <h1 class="article-title">Tidying up with the power of :g</h1>
             </header>
 
-            <p>Vim’s :g takes two inputs: a pattern and an operation, and it runs that operation on
-each line that matches the pattern in the current file. :g is a tool whose usage isn’t imposed on
-you, nor even readily apparent, so its usefulness depends on your
-creativity.</p>
-<p>For example, I like to use :g to group related lines that are currently
-scattered across a file.</p>
-<p>Here’s an example:</p>
+            <p>Vim’s <code>:g</code> takes two inputs: a pattern and an operation, and it runs that operation on each line
+that matches the pattern in the current file. <code>:g</code> is a tool whose usage isn’t imposed on you, nor
+obvious — its usefulness depends on your creativity.</p>
+<p>Here’s an example of what <code>:g</code> can do: grouping related lines. Take this file:</p>
 <pre><code class="hljs vim">Bundle <span class="hljs-string">'git@github.com:travisjeffery/IndexedSearch.git'</span>
 <span class="hljs-comment">" Bundle 'https://github.com/Shougo/neocomplcache.git'</span>
 Bundle <span class="hljs-string">'https://github.com/tpope/vim-fugitive.git'</span>
@@ -75,11 +72,8 @@ Bundle <span class="hljs-string">'https://github.com/kien/ctrlp.vim.git'</span>
 Bundle <span class="hljs-string">'git@github.com:travisjeffery/vim-unimpaired.git'</span>
 <span class="hljs-comment">" Bundle 'https://github.com/thinca/vim-poslist.git'</span></code></pre>
 
-<p>The lines that I care about are the commented out lines. In one fell swoop I can group those lines
-and put them at the top by running the following:</p>
-<pre><code class="hljs"><span class="hljs-symbol">:g/^<span class="hljs-string">"/m 0</span></span></code></pre>
-
-<p>The result with our lines grouped together:</p>
+<p>I want the commented lines grouped and moved up top. I run:</p>
+<pre><code>:g/^&quot;/m 0</code></pre><p>And <code>:g</code> groups the lines. Now this is our file:</p>
 <pre><code class="hljs vim"><span class="hljs-comment">" Bundle 'https://github.com/thinca/vim-poslist.git'</span>
 <span class="hljs-comment">" Bundle 'git@github.com:travisjeffery/vim-rails-fork.git'</span>
 <span class="hljs-comment">" Bundle 'https://github.com/jiangmiao/auto-pairs.git'</span>
@@ -94,7 +88,7 @@ Bundle <span class="hljs-string">'https://github.com/tpope/vim-repeat.git'</span
 Bundle <span class="hljs-string">'https://github.com/kien/ctrlp.vim.git'</span>
 Bundle <span class="hljs-string">'git@github.com:travisjeffery/vim-unimpaired.git'</span></code></pre>
 
-<p>:g is one of the most underrated features in Vim. You can read more about it by running <code>:h :g</code>.</p>
+<p><code>:g</code> is one of the most underrated features in Vim. You can learn more about it by running <code>:h :g</code>.</p>
 
 
           </article>
