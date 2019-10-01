@@ -12,7 +12,7 @@ grep reigned as the preeminent text search tool for a long time. Yet grep's over
 approach to defaults and maintaining backwards compatibility allowed new tools --- namely; ack,
 the silver searcher, and ripgrep --- to encroach on its territory.
 
-grep is ubiquitous. Unix-like systems come with grep installed and you can install grep on Windows. I search with ripgrep on my computer because I can install it once and use its features day-to-day. But when I work on remote systems, it's more efficient to search with grep.
+grep is ubiquitous. Unix-like systems come with grep installed and you can install grep on Windows. I search with ripgrep on my computer because I can install it once and use its features day-to-day. But when I work on remote systems, it's more efficient to search with grep. It's worth knowing how to use grep and how to improve it.
 
 With some grep know-how, we can make grep faster and behave like these modern search tools.
 
