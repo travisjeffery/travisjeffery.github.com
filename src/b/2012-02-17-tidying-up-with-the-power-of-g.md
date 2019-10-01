@@ -6,15 +6,11 @@ comments: false
 collection: vim
 ---
 
-Vim's :g takes two inputs: a pattern and an operation, and it runs that operation on
-each line that matches the pattern in the current file. :g is a tool whose usage isn't imposed on
-you, nor even readily apparent, so its usefulness depends on your
-creativity.
+Vim's `:g` takes two inputs: a pattern and an operation, and it runs that operation on each line
+that matches the pattern in the current file. `:g` is a tool whose usage isn't imposed on you, nor
+obvious --- its usefulness depends on your creativity.
 
-For example, I like to use :g to group related lines that are currently
-scattered across a file.
-
-Here's an example:
+Here's an example of what `:g` can do: grouping related lines. Take this file:
 
 ``` vim
 Bundle 'git@github.com:travisjeffery/IndexedSearch.git'
@@ -32,14 +28,11 @@ Bundle 'git@github.com:travisjeffery/vim-unimpaired.git'
 " Bundle 'https://github.com/thinca/vim-poslist.git'
 ```
 
-The lines that I care about are the commented out lines. In one fell swoop I can group those lines
-and put them at the top by running the following:
+I want the commented lines grouped and moved up top. I run:
 
-```
-:g/^"/m 0
-```
+    :g/^"/m 0
 
-The result with our lines grouped together:
+And `:g` groups the lines. Now this is our file:
 
 ``` vim
 " Bundle 'https://github.com/thinca/vim-poslist.git'
@@ -57,4 +50,4 @@ Bundle 'https://github.com/kien/ctrlp.vim.git'
 Bundle 'git@github.com:travisjeffery/vim-unimpaired.git'
 ```
 
-:g is one of the most underrated features in Vim. You can read more about it by running `:h :g`.
+`:g` is one of the most underrated features in Vim. You can learn more about it by running `:h :g`.
