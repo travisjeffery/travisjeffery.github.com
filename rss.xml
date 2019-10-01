@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Tue, 01 Oct 2019 02:02:54 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Tue, 01 Oct 2019 02:25:55 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -27,11 +27,11 @@
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -72,11 +72,11 @@
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -129,11 +129,11 @@
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -174,11 +174,11 @@
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -231,11 +231,11 @@
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -276,11 +276,11 @@
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -333,11 +333,11 @@
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -378,11 +378,11 @@
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -435,11 +435,11 @@
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -480,11 +480,11 @@
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -537,11 +537,11 @@
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -582,11 +582,11 @@
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -639,11 +639,11 @@
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -684,11 +684,11 @@
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -741,11 +741,11 @@
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -828,11 +828,11 @@ security-groups</code></pre>
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -885,11 +885,11 @@ security-groups</code></pre>
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -930,11 +930,11 @@ security-groups</code></pre>
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -987,11 +987,11 @@ security-groups</code></pre>
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -1032,11 +1032,11 @@ security-groups</code></pre>
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1089,11 +1089,11 @@ security-groups</code></pre>
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -1134,11 +1134,11 @@ security-groups</code></pre>
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1191,11 +1191,11 @@ security-groups</code></pre>
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -1236,11 +1236,11 @@ security-groups</code></pre>
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1293,11 +1293,11 @@ security-groups</code></pre>
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -1344,11 +1344,11 @@ can graph them in Grafana or something similar.</p>
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1401,11 +1401,11 @@ can graph them in Grafana or something similar.</p>
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -1453,11 +1453,11 @@ can graph them in Grafana or something similar.</p>
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1510,11 +1510,11 @@ can graph them in Grafana or something similar.</p>
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -1587,11 +1587,11 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1644,11 +1644,11 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -1690,11 +1690,11 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1747,11 +1747,11 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -1800,11 +1800,11 @@ adds the imgs to the web page.</p>
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1857,11 +1857,11 @@ adds the imgs to the web page.</p>
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -2012,11 +2012,11 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -2069,11 +2069,11 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -2115,11 +2115,11 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -2172,11 +2172,11 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
           <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-9">
+            <h1 class="logo no-gutters col-xs-12 col-sm-8">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-3">
+            <div class="social no-gutters col-xs-12 col-sm-4">
               <div>
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -2236,11 +2236,11 @@ cat - \
           <hr class="col-xs-12 no-gutters">
           
           <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-3 pull-xs-left no-gutters">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
             </div>
-            <div class="col-xs-9 no-gutters pull-xs-right">
+            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
