@@ -1,61 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-    {{> head}}
-    <body>
-        <div class="container-fluid container">
-            <div class="row">
-                <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-                    {{> header}}
+  {{> head}}
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          {{> header}}
 
+          <p class="col-xs-12 no-gutters">I work at Confluent hacking on Kafka, its streaming platform, and its cloud service. Previously, I worked at Segment and Basecamp.</p>
 
-                    <h3 class="section-header no-gutters col-xs-12"><span class="on-the-web">on the web:</span></h3>
+          <p class="col-xs-12 no-gutters">I write and maintain open-source software, namely: Jocko, Timecop, Mocha, ClangFormat for Xcode, and <a href="https://github.com/travisjeffery">more</a>.</p>
 
-                    <ul class="plain col-xs-12 col-md-6">
-                        <li><a class="js-judy" href="https://twitter.com/travisjeffery">twitter</a></li>
-                        <li><a class="js-judy" href="https://github.com/travisjeffery">github</a></li>
-                    </ul>
+          <hr class="col-xs-12 no-gutters">
 
-                    <ul class="plain col-xs-12 zero-margin col-md-6">
-                        <li><a class="js-judy" href="https://medium.com/@travisjeffery">medium</a></li>
-                        <li><a id="email" class="js-judy" href="mailto:tj@travisjeffery.com">email</a></li>
-                    </ul>
+          <h3 class="section-header no-gutters col-xs-12"><span class="on-the-web">on the web:</span></h3>
 
-                    <div style="clear:both;"></div>
+          <ul class="plain col-xs-12 col-md-6">
+            <li><a class="js-judy" href="https://twitter.com/travisjeffery">twitter</a></li>
+            <li><a class="js-judy" href="https://github.com/travisjeffery">github</a></li>
+          </ul>
 
-                    <p>
-                        Want to reach me? Send me an <a href="mailto:tj@travisjeffery.com">email</a> or message me on <a href="https://twitter.com/travisjeffery">Twitter</a>.
-                    </p>
+          <ul class="plain col-xs-12 zero-margin col-md-6">
+            <li><a class="js-judy" href="https://medium.com/@travisjeffery">medium</a></li>
+            <li><a id="email" class="js-judy" href="mailto:tj@travisjeffery.com">email</a></li>
+          </ul>
 
-                    <hr>
+          <div style="clear:both;"></div>
 
-                    {{#each collections}}
-                    {{#if metadata.homepage}}
-                    <h3 class="section-header no-gutters col-xs-12" id="{{@key}}"><span style="background-color: {{metadata.color}}">{{metadata.name}}:</span></h3>
+          <p>
+            Want to reach me? Send me an <a href="mailto:tj@travisjeffery.com">email</a> or message me on <a href="https://twitter.com/travisjeffery">Twitter</a>.
+          </p>
 
-                    <ul class="plain col-xs-12">
-                        {{#each this}}
-                        <li>
-                            <span class="list-title col-xs-9"><strong>
-                                {{#if medium_link}}
-                                <a target="_blank" href="{{medium_link}}">{{title}}</a>
-                                {{else}}
-                                <a href="{{path}}">{{title}}</a>
-                                {{/if}}
-                            </strong></span><span class="list-date col-xs-3 push-xs-left pull-xs-right">{{dateShort}}</span>
-                        </li>
-                        {{/each}}
-                    </ul>
-                    {{/if}}
+          <hr>
 
-                    {{#if metadata.recent}}
-                    <p class="no-gutters col-xs-12">and all posts by category:</p>
-                    {{/if}}
-                    {{/each}}
+          {{#each collections}}
+          {{#if metadata.homepage}}
+          <h3 class="section-header no-gutters col-xs-12" id="{{@key}}"><span style="background-color: {{metadata.color}}">{{metadata.name}}:</span></h3>
 
-                    {{> footer}}
-                </div>
-            </div>
+          <ul class="plain col-xs-12">
+            {{#each this}}
+            <li>
+              <span class="list-title col-xs-9"><strong>
+                  {{#if medium_link}}
+                  <a target="_blank" href="{{medium_link}}">{{title}}</a>
+                  {{else}}
+                  <a href="{{path}}">{{title}}</a>
+                  {{/if}}
+              </strong></span><span class="list-date col-xs-3 push-xs-left pull-xs-right">{{dateShort}}</span>
+            </li>
+            {{/each}}
+          </ul>
+          {{/if}}
+
+          {{#if metadata.recent}}
+          <p class="no-gutters col-xs-12">and all posts by category:</p>
+          {{/if}}
+          {{/each}}
+
+          {{> footer}}
         </div>
+      </div>
+    </div>
 
-    </body>
+  </body>
 </html>
