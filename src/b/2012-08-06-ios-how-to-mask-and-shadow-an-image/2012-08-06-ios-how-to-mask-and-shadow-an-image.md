@@ -1,22 +1,23 @@
 ---
 layout: post.html
-title: "iOS how-to mask and shadow an image"
+title: "iOS how-to: mask and shadow an image"
 date: 2012-08-06 17:12
 comments: false
 collection: ios
+redirectFrom: /b/2012/08/ios-how-to-mask-and-shadow-an-image/
 ---
 
-Two common techniques for making a visually appealing app are a liberal use
-of masking and shadows, e.g. masking an image to be a circle or have round
-corners, or adding a drop shadow to images or text to give them more
-depth. Both of these techniques are pretty trivial in iOS on their own, but
-are a bit of a intellectual leap to combine them at the same time. This post
-will hopefully lessen that leap.
+Two techniques that iOS developers use to make visually appealing app are masks and shadows; for
+example, masking an image to have round corners, or adding a drop shadow to an image to have
+depth. Implementing these techniques separately is trivial, implementing these techniques together
+is tricksy.
 
-To summarize the technique we're going to use, we're going to mask the
-image into a circle using its layer property, then add that layer to a
-new container layer that will also shadow the image, and then add that container
-layer with the masked and shadowed image as a sublayer of our view.
+The overview of how to both mask and shadow something --- an image for, example --- you:
+
+- create a new layer whose layer has a shadow.
+- mask the image's layer.
+- add the image's layer as a sublayer of the shadow layer.
+- add the shadow layer as a sublayer of the view that you want to show the image in.
 
 I've created a [project on
 GitHub](https://github.com/travisjeffery/ios-how-to-mask-and-shadow), and
@@ -24,8 +25,8 @@ GitHub](https://github.com/travisjeffery/ios-how-to-mask-and-shadow), and
 commits](https://github.com/travisjeffery/ios-how-to-mask-and-shadow/commits/master/)
 in such a way as to see the stages of building our final result.
 
-Initially we just start with an image as a subview of our view with no
-modifications other than centering it.
+We start with an image as a subview of our view with no
+changes other than centering it.
 
 <img src="images/mask-and-shadow-1.png">
 
@@ -63,8 +64,7 @@ modifications other than centering it.
 @end
 ```
 
-Then we manipulate our image into a circle by rounding and masking its
-corners.
+Then we turn our image into a circle by masking its corners.
 
 <img src="images/mask-and-shadow-2.png">
 
@@ -106,10 +106,7 @@ corners.
 @end
 ```
 
-Since our shadow will also be masked if we just tried to add to the image as it
-is now, we add the masked image's layer to an unmasked container layer that
-will also add shadow the image, and then we add that container layer with the
-masked and shadowed image as a sublayer of our view.
+If we added the shadow to the image's layer, the mask on the image's layer would cut off the shadow. Instead, we add the shadow to the parent layer of the image. And then we add that shadow layer to the view controller's view layer.
 
 <img src="images/mask-and-shadow-3.png">
 
@@ -162,4 +159,3 @@ masked and shadowed image as a sublayer of our view.
 
 @end
 ```
-
