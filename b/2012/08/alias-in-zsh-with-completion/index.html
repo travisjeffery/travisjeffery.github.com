@@ -20,7 +20,7 @@
      ga('create', 'UA-8462120-1', 'travisjeffery.com');
       ga('send', 'pageview');
     </script>
-    <title>Alias in Zsh with completion</title>
+    <title>Alias in ZSH with completion</title>
   </head>
   <body>
     <div class="container-fluid container">
@@ -51,18 +51,14 @@
 
           <article class="col-xs-12 no-gutters">
             <header>
-              <h1 class="article-title">Alias in Zsh with completion</h1>
+              <h1 class="article-title">Alias in ZSH with completion</h1>
             </header>
 
-            <p>I use the shell. I use the shell a lot. I type <code>git</code> so often it’s
-ridiculous. We have shell aliases to make stuff like this a bit shorter, but
-often with less functionality. In particular, an alias in itself won’t maintain
-the completion function, but this is easy to fix:</p>
-<pre><code class="hljs sh"><span class="hljs-built_in">alias</span> g=git
-compdef g=git</code></pre>
-
-<p>And boom! You can now do <code>g st&lt;TAB&gt;</code> to complete <code>status</code> or whatever,
-this technique will also work any other alias/completion function as well.</p>
+            <p>I use git in a terminal all day, every day. 3 characters adds up if you type them enough, <code>g i t</code>, so let’s shorten what we have to type.</p>
+<p>You shorten a command by making a shorter alias. So I alias <code>g</code> to <code>git</code>:</p>
+<pre><code>alias g=git</code></pre><p>I like terminal commands with completion, especially a command like git with a many, long arguments. Aliases do not automatically assume the original command’s completion. Here’s how we add completion to our alias:</p>
+<pre><code>compdef g=git</code></pre><p>And boom! You can do <code>g st&lt;TAB&gt;</code> to complete <code>status</code>. The <code>compdef</code> makes the g alias complete as if ZSH was completing git instead.</p>
+<p>Now I git away by typing <code>g</code>.</p>
 
 
           </article>
