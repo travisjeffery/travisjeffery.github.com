@@ -10,7 +10,7 @@ redirectFrom: /b/2012/08/ios-how-to-mask-and-shadow-an-image/
 Two techniques that iOS developers use to make visually appealing app are masks and shadows; for
 example, masking an image to have round corners, or adding a drop shadow to an image to have
 depth. Implementing these techniques separately is trivial, implementing these techniques together
-is tricksy.
+is tricky.
 
 To both mask and shadow any view, let's use an image as an example, you:
 
