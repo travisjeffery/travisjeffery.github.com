@@ -6,69 +6,53 @@ comments: false
 collection: git
 ---
 
-Recently Git added an [amazingly needed feature](https://github.com/git/git/commit/9b25a0b52e09400719366f0a33d0d0da98bbf7b0),
-include for gitconfig files.
+Git added a [feature](https://github.com/git/git/commit/9b25a0b52e09400719366f0a33d0d0da98bbf7b0)
+that enables you to split your Git config across multiple files.
 
-This means that you can split your gitconfig configurations across multiple
-files, e.g. you can have a .gitconfig file for your nonsensitive information and a
-git ignored .githubconfig file containing your private github token.
+I store my dotfiles in a public Git repo but I had to exclude my .gitconfig file because it contained by GitHub access token. With this feature, I have a .gitconfig file that contains the config I'd like public and a .githubconfig file that contains the config I don't want public. I add .githubconfig to the .gitignore file to make sure I don't check it in by accident.
 
-Storing GitHub tokens doesn't [seem to be](https://github.com/search?q=token+path%3A.gitconfig&repo=&langOverride=&start_value=1&type=Code&language=)
-all that uncommon, so hopefully with Git's include feature this will change.
+[A lot of people have checked in their GitHub access tokens](https://github.com/search?q=token+path%3A.gitconfig&repo=&langOverride=&start_value=1&type=Code&language=). I hope people will use this feature to prevent that.
 
-This what you'll have in your .gitconfig file:
+## How to use the include directive
 
-```
-[include]
-  path = .githubconfig
-```
+You set up your config files like so:
 
-And in your .githubconfig file:
+- .gitconfig:
 
-```
-[github]
-  user = travisjeffery
-  token = secret!
-```
+		[include]
+		  path = .githubconfig
 
-Then in your .gitignore file have:
+- .githubconfig:
 
-```
-.githubconfig
-```
+		[github]
+		  user = travisjeffery
+		  token = secret!
 
-As an aside, to include multiple config files the directive is the same:
+- .gitignore:
 
-```
-[include]
-  path = .githubconfig
-  path = .anotherconfig
-  path = .yetanotherconfig
-```
+        .githubconfig
 
-The path can be either relative from the gitconfig file or absolute.
+The path can be relative from the .gitconfig file or absolute.
 
-If you've been silly enough to have put sensitive information into your
-gitconfig on the assumption it wouldn't come back at you, now Git has the
-functionality so use it!
+You include multiple config files like this:
 
-Read this [page](http://help.github.com/remove-sensitive-data/) on how to purge
-a file from your history.
+	[include]
+	  path = .githubconfig
+	  path = .anotherconfig
+	  path = .yetanotherconfig
 
-Purge your gitconfig file from your history (below), put the sensitive information into
-another file that you've git ignored, include that file in your gitconfig and
-add your newly desensitized gitconfig back under version control.
+## What if you've already checked in sensitive info?
 
-```
-git filter-branch --index-filter 'git rm --cached --ignore-unmatch .gitconfig' --prune-empty -- --all
-```
+If you're one of those people who checked in their GitHub access tokens --- or some other config you don't want public --- then you need a fresh access token and set up your configs files like the section above so you don't make the same mistake again.
 
-Git's include will be in version 1.7.10, but if you don't want to wait
-homebrewers will [soon](https://github.com/mxcl/homebrew/pull/10806) be able to easily
-install Git's latest development version via:
+If you have many configs and you can't roll them, then you should purge your config file from your history. This process will rebuild your repo's history, so if other people rely on the repo, they must reclone it. This command purges your .gitconfig file from your history:
 
-`brew install git --HEAD`
+    git filter-branch --index-filter 'git rm --cached --ignore-unmatch .gitconfig' --prune-empty -- --all
 
-Or just git the repo and build it yourself:
+After purging your .gitconfig, set up your config files like the section above. You still want to roll your configs as soon as you can because you don't know if someone malicious has already saved them. Read this [page](http://help.github.com/remove-sensitive-data/) for more info on removing sensitive data.
 
-`git clone git://github.com/gitster/git.git`
+## When you can use it
+
+Git's include directive is in version 1.7.10. If you don't want to wait for the release, you can install the latest:
+
+    git clone git://github.com/gitster/git.git
