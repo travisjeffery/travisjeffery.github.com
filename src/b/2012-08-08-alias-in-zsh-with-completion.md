@@ -1,20 +1,21 @@
 ---
 layout: post.html
-title: "Alias in Zsh with completion"
+title: "Alias in ZSH with completion"
 date: 2012-08-08 03:56
 comments: false
 collection: zsh
 ---
 
-I use the shell. I use the shell a lot. I type `git` so often it's
-ridiculous. We have shell aliases to make stuff like this a bit shorter, but
-often with less functionality. In particular, an alias in itself won't maintain
-the completion function, but this is easy to fix:
+I use git in a terminal all day, every day. 3 characters adds up if you type them enough, `g i t`, so let's shorten what we have to type.
 
-```sh
-alias g=git
-compdef g=git
-```
+You shorten a command by making a shorter alias. So I alias `g` to `git`:
 
-And boom! You can now do `g st<TAB>` to complete `status` or whatever,
-this technique will also work any other alias/completion function as well.
+    alias g=git
+
+I like terminal commands with completion, especially a command like git with a many, long arguments. Aliases do not automatically assume the original command's completion. Here's how we add completion to our alias:
+
+    compdef g=git
+
+And boom! You can do `g st<TAB>` to complete `status`. The `compdef` makes the g alias complete as if ZSH was completing git instead.
+
+Now I git away by typing `g`.

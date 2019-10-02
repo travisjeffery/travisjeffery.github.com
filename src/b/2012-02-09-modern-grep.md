@@ -22,13 +22,13 @@ grep can exclude directories that it searches, increasing its speed substantiall
 
     $ grep --exclude-dir=.git
 
-This speeds up searches by a lot, I ran two uncached searches in Rails's repo:
+This arg speeds up searches by a lot, I ran two uncached searches in Rails's repo:
 
     $ grep -r "class << self" .
     $ grep -rIPs --exclude-dir=.[a-zA-Z0-9]* --exclude=.* --exclude=*~ "class << self" .
 
-He former, non-excluding, grep took 6.009s. The
-latter, excluding, grep took 2.235s.
+The non-excluding grep took 6.009s. The
+excluding grep took 2.235s.
 
 ## Perl regular expressions
 
