@@ -39,6 +39,4 @@ Here's how the command works:
 - `:GrepPartial` finds references to the current partial you're editing.
 - `:GrepPartial accounts/show` find references to the accounts/show partial.
 
-The function uses Fugitive if you have it installed, and if you do then you'll want to install git with the PCRE library. Homebrew users can install git with PCRE by running:
-
-    brew install git --with-pcre
+This function doesn't depend on any plugins. But if you've installed Fugitive or the Ack plugins, then the function uses them.
