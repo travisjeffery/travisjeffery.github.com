@@ -81,8 +81,8 @@ command! -nargs=? GrepPartial
 <li><code>:GrepPartial</code> finds references to the current partial you’re editing.</li>
 <li><code>:GrepPartial accounts/show</code> find references to the accounts/show partial.</li>
 </ul>
-<p>The function uses Fugitive if you have it installed, and if you do then you’ll want to install git with the PCRE library. Homebrew users can install git with PCRE by running:</p>
-<pre><code>brew install git --with-pcre</code></pre>
+<p>This function doesn’t depend on any plugins. But if you’ve installed Fugitive or the Ack plugins, then the function uses them.</p>
+
 
           </article>
 
