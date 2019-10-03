@@ -6,70 +6,60 @@ comments: false
 collection:  ios
 ---
 
-<strong>Note: iOS 7 has awesome APIs that make this sort of thing a lot funner, easier and powerful. When the SDK's NDA is over I'll be releasing some open source code and blog posts about them.</strong>
-
-I just released a project called [TRVSNavigationControllerTransition](https://github.com/travisjeffery/TRVSNavigationControllerTransition) that adds convenience methods to
-UINavigationControllers to push/pop UIViewControllers that translate the entire
-UINavigationController's view rather than its viewController's view (which is
-how UINavigationController's pushViewController:animated: behaves).
+I released a project called
+[TRVSNavigationControllerTransition](https://github.com/travisjeffery/TRVSNavigationControllerTransition).
+The project adds convenient methods to translate the entire UINavigationController's view while
+pushing and popping UIViewControllers to and from UINavigationControllers, rather than translating
+the viewController's view --- which is how UINavigationController's pushViewController:animated:
+works.
 
 ## Example
 
-In the top example of the images below, only the view controller's view is translated so if the
-pushed view controller hide's the navigation bar then the navigation bar in the
-current view will suddenly disappear. In the bottom example using TRVSNavigationControllerTransition, the whole
-navigation controller's view is translated in, and the navigation bar remains
-correctly in the current view until the animation completes.
+These images illustrate the difference. In the first image, the navigation controller translate's the view controller's view. The problem: if the view controller that's pushed hides the navigation bar, then the navigation bar will suddenly and awkwardly hide during the push.
 
-![Bad](https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Bad.gif) ![Good](https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Good.gif)
+![Bad](https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Bad.gif)
 
-## Development and alternatives
+In the second image, using TRVSNavigationControllerTransition, the navigation controller translate's the navigation controller's view. So the navigation bar remains view until the animation's finished.
 
-Before, I tried and saw others using a CATransition, like so:
+![Good](https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Good.gif)
 
-``` objective-c
-CATransition* animation = [CATransition animation];
-animation.duration = 0.3f;
-animation.type = kCATransitionPush;
-animation.subtype = kCATransitionFromRight;
-```
+## How to make your own transition
 
-The problem is that kCATransitionPush not only animates the
-translations like you'd expect, but also the opacities of the views so the
-transition looks differently from UINavigationController's pushViewController:animated:.
+TRVSNavigationControllerTransition works like this:
 
-## Basic idea
-
-The basic idea on how to make your own is pretty simple though,
-
-1. take a snapshot of the current view in the form of a CALayer and add it as a sublayer
-of the current view
-2. push/pop the next view without animation
-3. take a
-snapshot of the new view in the form of a CALayer
-4. add whatever animations you want to those layers to form their transition
-5. remove the layers from their superlayer once the transition animation is complete
+1. Take a snapshot of the current view in the form of a CALayer and add it as a sublayer
+of the current view.
+2. Push or pop the next view without animation.
+3. Take a snapshot of the new view in the form of a CALayer.
+4. Add whatever animations you want to those layers for their transition.
+5. Remove the layers from their superlayer once the transition animation finishes.
 
 See
 [UINavigationController+TRVSNavigationControllerTransition.m](https://github.com/travisjeffery/TRVSNavigationControllerTransition/blob/master/UINavigationController%2BTRVSNavigationControllerTransition.m) for more
 details.
 
-## Installing
+## Rejected Alternative
 
-You can grab the project via the [GitHub
+I saw others using a CATransition, like so:
+
+    CATransition* animation = [CATransition animation];
+    animation.duration = 0.3f;
+    animation.type = kCATransitionPush;
+    animation.subtype = kCATransitionFromRight;
+
+The problem is that kCATransitionPush's animation looks different from UINavigationController's pushViewController:animated:. It doesn't fit.
+
+## Install
+
+Grab the project at [GitHub
 repo](http://github.com/travisjeffery/TRVSNavigationControllerTransition), or
-just via the [CocoaPod spec](https://github.com/travisjeffery/TRVSNavigationControllerTransition/blob/master/TRVSNavigationControllerTransition.podspec) with the name: `TRVSNavigationControllerTransition`,
-but make sure you check for what the latest version is.
+with the [CocoaPod spec](https://github.com/travisjeffery/TRVSNavigationControllerTransition/blob/master/TRVSNavigationControllerTransition.podspec) using the name: `TRVSNavigationControllerTransition`.
 
-## Usage
+## Use
 
-To use TRVSNavigationControllerTransition just make sure your binary is linked
-with the QuartzCore.framework library, and then to use:
+To use TRVSNavigationControllerTransition, link your binary
+with the QuartzCore.framework library. Then in your code write:
 
-``` objective-c
-# to push, called just as you would with pushviewcontroller:animated:
-[self.navigationController pushViewControllerWithNavigationControllerTransition:viewController];
+	[self.navigationController pushViewControllerWithNavigationControllerTransition:viewController];
 
-# to pop called just as you would with popviewcontrolleranimated:
-[self.navigationController popViewControllerWithNavigationControllerTransition];
-```
+	[self.navigationController popViewControllerWithNavigationControllerTransition];
