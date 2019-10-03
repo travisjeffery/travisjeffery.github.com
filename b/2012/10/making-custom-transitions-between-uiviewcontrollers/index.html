@@ -54,55 +54,46 @@
               <h1 class="article-title">Making Custom Transitions Between UIViewControllers</h1>
             </header>
 
-            <p><strong>Note: iOS 7 has awesome APIs that make this sort of thing a lot funner, easier and powerful. When the SDK’s NDA is over I’ll be releasing some open source code and blog posts about them.</strong></p>
-<p>I just released a project called <a href="https://github.com/travisjeffery/TRVSNavigationControllerTransition">TRVSNavigationControllerTransition</a> that adds convenience methods to
-UINavigationControllers to push/pop UIViewControllers that translate the entire
-UINavigationController’s view rather than its viewController’s view (which is
-how UINavigationController’s pushViewController:animated: behaves).</p>
+            <p>I released a project called
+<a href="https://github.com/travisjeffery/TRVSNavigationControllerTransition">TRVSNavigationControllerTransition</a>.
+The project adds convenient methods to translate the entire UINavigationController’s view while
+pushing and popping UIViewControllers to and from UINavigationControllers, rather than translating
+the viewController’s view — which is how UINavigationController’s pushViewController:animated:
+works.</p>
 <h2 id="example">Example</h2>
-<p>In the top example of the images below, only the view controller’s view is translated so if the
-pushed view controller hide’s the navigation bar then the navigation bar in the
-current view will suddenly disappear. In the bottom example using TRVSNavigationControllerTransition, the whole
-navigation controller’s view is translated in, and the navigation bar remains
-correctly in the current view until the animation completes.</p>
-<p><img src="https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Bad.gif" alt="Bad"> <img src="https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Good.gif" alt="Good"></p>
-<h2 id="development-and-alternatives">Development and alternatives</h2>
-<p>Before, I tried and saw others using a CATransition, like so:</p>
-<pre><code>CATransition* <span class="hljs-built_in">animation</span> = [CATransition <span class="hljs-built_in">animation</span>];
-<span class="hljs-built_in">animation</span>.duration = <span class="hljs-number">0.</span>3f;
-<span class="hljs-built_in">animation</span>.type = kCATransitionPush;
-<span class="hljs-built_in">animation</span>.subtype = kCATransitionFromRight;</code></pre>
-
-<p>The problem is that kCATransitionPush not only animates the
-translations like you’d expect, but also the opacities of the views so the
-transition looks differently from UINavigationController’s pushViewController:animated:.</p>
-<h2 id="basic-idea">Basic idea</h2>
-<p>The basic idea on how to make your own is pretty simple though,</p>
+<p>These images illustrate the difference. In the first image, the navigation controller translate’s the view controller’s view. The problem: if the view controller that’s pushed hides the navigation bar, then the navigation bar will suddenly and awkwardly hide during the push.</p>
+<p><img src="https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Bad.gif" alt="Bad"></p>
+<p>In the second image, using TRVSNavigationControllerTransition, the navigation controller translate’s the navigation controller’s view. So the navigation bar remains view until the animation’s finished.</p>
+<p><img src="https://raw.github.com/travisjeffery/TRVSNavigationControllerTransition/master/Good.gif" alt="Good"></p>
+<h2 id="how-to-make-your-own-transition">How to make your own transition</h2>
+<p>TRVSNavigationControllerTransition works like this:</p>
 <ol>
-<li>take a snapshot of the current view in the form of a CALayer and add it as a sublayer
-of the current view</li>
-<li>push/pop the next view without animation</li>
-<li>take a
-snapshot of the new view in the form of a CALayer</li>
-<li>add whatever animations you want to those layers to form their transition</li>
-<li>remove the layers from their superlayer once the transition animation is complete</li>
+<li>Take a snapshot of the current view in the form of a CALayer and add it as a sublayer
+of the current view.</li>
+<li>Push or pop the next view without animation.</li>
+<li>Take a snapshot of the new view in the form of a CALayer.</li>
+<li>Add whatever animations you want to those layers for their transition.</li>
+<li>Remove the layers from their superlayer once the transition animation finishes.</li>
 </ol>
 <p>See
 <a href="https://github.com/travisjeffery/TRVSNavigationControllerTransition/blob/master/UINavigationController%2BTRVSNavigationControllerTransition.m">UINavigationController+TRVSNavigationControllerTransition.m</a> for more
 details.</p>
-<h2 id="installing">Installing</h2>
-<p>You can grab the project via the <a href="http://github.com/travisjeffery/TRVSNavigationControllerTransition">GitHub
+<h2 id="rejected-alternative">Rejected Alternative</h2>
+<p>I saw others using a CATransition, like so:</p>
+<pre><code>CATransition* animation = [CATransition animation];
+animation.duration = 0.3f;
+animation.type = kCATransitionPush;
+animation.subtype = kCATransitionFromRight;</code></pre><p>The problem is that kCATransitionPush’s animation looks different from UINavigationController’s pushViewController:animated:. It doesn’t fit.</p>
+<h2 id="install">Install</h2>
+<p>Grab the project at <a href="http://github.com/travisjeffery/TRVSNavigationControllerTransition">GitHub
 repo</a>, or
-just via the <a href="https://github.com/travisjeffery/TRVSNavigationControllerTransition/blob/master/TRVSNavigationControllerTransition.podspec">CocoaPod spec</a> with the name: <code>TRVSNavigationControllerTransition</code>,
-but make sure you check for what the latest version is.</p>
-<h2 id="usage">Usage</h2>
-<p>To use TRVSNavigationControllerTransition just make sure your binary is linked
-with the QuartzCore.framework library, and then to use:</p>
-<pre><code><span class="hljs-comment"># to push, called just as you would with pushviewcontroller:animated:</span>
-<span class="hljs-section">[self.navigationController pushViewControllerWithNavigationControllerTransition:viewController]</span><span class="hljs-comment">;</span>
+with the <a href="https://github.com/travisjeffery/TRVSNavigationControllerTransition/blob/master/TRVSNavigationControllerTransition.podspec">CocoaPod spec</a> using the name: <code>TRVSNavigationControllerTransition</code>.</p>
+<h2 id="use">Use</h2>
+<p>To use TRVSNavigationControllerTransition, link your binary
+with the QuartzCore.framework library. Then in your code write:</p>
+<pre><code>[self.navigationController pushViewControllerWithNavigationControllerTransition:viewController];
 
-<span class="hljs-comment"># to pop called just as you would with popviewcontrolleranimated:</span>
-<span class="hljs-section">[self.navigationController popViewControllerWithNavigationControllerTransition]</span><span class="hljs-comment">;</span></code></pre>
+[self.navigationController popViewControllerWithNavigationControllerTransition];</code></pre>
 
           </article>
 
