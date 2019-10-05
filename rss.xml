@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Sat, 05 Oct 2019 06:33:41 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Sat, 05 Oct 2019 12:36:55 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -26,26 +26,24 @@
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -128,26 +126,24 @@
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -230,26 +226,24 @@
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -332,26 +326,24 @@
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -434,26 +426,24 @@
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -536,26 +526,24 @@
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -638,26 +626,24 @@
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -740,26 +726,24 @@
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -884,26 +868,24 @@ security-groups</code></pre>
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -986,26 +968,24 @@ security-groups</code></pre>
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -1088,26 +1068,24 @@ security-groups</code></pre>
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -1190,26 +1168,24 @@ security-groups</code></pre>
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -1292,26 +1268,24 @@ security-groups</code></pre>
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -1400,26 +1374,24 @@ can graph them in Grafana or something similar.</p>
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -1509,26 +1481,24 @@ can graph them in Grafana or something similar.</p>
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -1643,26 +1613,24 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -1746,26 +1714,24 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -1856,26 +1822,24 @@ adds the imgs to the web page.</p>
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -2068,26 +2032,24 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 
@@ -2171,26 +2133,24 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
     <div class="container-fluid container">
       <div class="row">
         <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header">
-            <h1 class="logo no-gutters col-xs-12 col-sm-8">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-12 col-sm-4">
-              <div>
+            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
+              <div class="no-gutters col-xs-12">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
               </div>
           
-              <div>
+              <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
               </div>
             </div>
           </hgroup>
-          
-          <p class="col-xs-12 no-gutters">
-            Software maker and writer.
-          </p>
           
           <hr class="col-xs-12 no-gutters">
 

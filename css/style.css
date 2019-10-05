@@ -6107,6 +6107,9 @@ a.bg-danger:focus, a.bg-danger:hover {
   html {
     font-size: 21px;
   }
+  #header h1 {
+    margin-left: 1rem;
+  }
 }
 
 .no-gutters {
@@ -6244,9 +6247,11 @@ hr {
 }
 
 #header {
-  display: flex;
-  align-items: center;
   font-size: 1.5rem;
+}
+
+#header img {
+  margin-top: 1rem;
 }
 
 #header h1 {
@@ -6279,8 +6284,6 @@ hr {
   padding-right: 0;
   margin-top: 1rem;
   font-size: 1rem;
-  top: 1rem;
-  position: relative;
 }
 
 .section-header {
@@ -6298,6 +6301,10 @@ hr {
 
 .section-header .who {
   background-color: paleturquoise;
+}
+
+.tagline {
+  margin-left: 1rem;
 }
 
 .left {
