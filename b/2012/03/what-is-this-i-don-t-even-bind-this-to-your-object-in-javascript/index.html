@@ -54,93 +54,58 @@
               <h1 class="article-title">What is this? I don't even... bind this to your object in JavaScript!</h1>
             </header>
 
-            <p>In JavaScript, a function’s <code>this</code> keyword is always bound to an object, what
-object that is depends on how the current function was called, so it could be
-different each time the function is called.</p>
-<p>In this example, as we and anyone else would expect after reading this code,
-<code>this</code> refers to MyObject,</p>
-<pre><code class="hljs js"><span class="hljs-keyword">var</span> MyObject = {
-  <span class="hljs-attr">my_method</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>)
-  },
+            <p>In JavaScript, the <code>this</code> keyword refers to the object it belongs to, and the object depends on where you use it.</p>
+<ul>
+<li>In a method: <code>this</code> refers to the owner object.</li>
+<li>In a function: <code>this</code> refers to the global object.</li>
+<li>In a function with strict mode: <code>this</code> is <code>undefined</code>.</li>
+<li>In an event: <code>this</code> refers to the element that received the event.</li>
+<li>On its own: <code>this</code> refers to the global object.</li>
+</ul>
+<p>The way events behave trip up JavaScript developers most. Developers expect <code>this</code> to be the global object or the owner of the method handling the event, but <code>this</code> refers to the element that received the event. Here’s an example:</p>
+<pre><code>var myDiv = $(&quot;body&quot;).append(&quot;&lt;div id=&#39;js-my-div&#39;&gt;&lt;/div&gt;&quot;)
 
-  <span class="hljs-attr">inspect</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-    <span class="hljs-keyword">return</span> <span class="hljs-string">"I'm MyObject!"</span>
+var CarlDouglas = {
+  lyrics: &quot;OhohOhoOh... Everybody was Kung fu fighting! Ha!&quot;,
+
+  sing: function(){
+    this.lyrics || (this.lyrics = &quot;Where are Carl Douglas&#39;s lyrics?! What this is _this_??&quot;)
+
+    console.log(this.lyrics)
   }
 }
 
-MyObject.my_method()
+myDiv.bind(&quot;kungfu:fight&quot;, CarlDouglas.sing)
 
-<span class="hljs-comment">// &gt; I'm MyObject!</span></code></pre>
+$(&quot;div#js-my-div&quot;).trigger(&quot;kungfu:fight&quot;)
 
-<p>The next example is a little weird. As you can see my_method is now being
-called within the context of the global object.</p>
-<p>In the previous case my <code>console.log(this)</code> was equivalent to
-<code>console.log(MyObject)</code> and here it is equivalent to <code>console.log(global)</code>.</p>
-<pre><code class="hljs js"><span class="hljs-keyword">var</span> MyObject = {
-  <span class="hljs-comment">// ...</span>
-}
+// &gt; Where are Carl Douglas&#39;s lyrics?! What this is _this_??</code></pre><p>If <code>this</code> had referred to the <code>CarlDouglas</code> object, then the sing function would have logged
+Carl Douglas’ “OhohOhoOh… Everybody was Kung fu fighting! Ha!” lyrics. But <code>this</code> referred to the element, which has no lyrics.</p>
+<p>You can make it so that in your object’s method’s <code>this</code> always refers to the object by using a
+technique called binding. You bind your object’s methods to that object and ensure that <code>this</code>
+always refers to object, even when called by an event.</p>
+<p>Underscore.js provides the <a href="http://documentcloud.github.com/underscore/#bindAll"><code>bindAll</code></a> function to bind all of an object’s methods to itself. Let’s update our previous example to use <code>bindAll</code> and see the effect:</p>
+<pre><code>_.bindAll(CarlDouglas)
 
-global.inspect = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-  <span class="hljs-keyword">return</span> <span class="hljs-string">"I'm the Global Object!"</span>
-}
+var myDiv = $(&quot;body&quot;).append(&quot;&lt;div id=&#39;js-my-div&#39;&gt;&lt;/div&gt;&quot;)
 
-<span class="hljs-keyword">var</span> my_same_method = MyObject.my_method
-my_same_method()
+var CarlDouglas = {
+  lyrics: &quot;OhohOhoOh... Everybody was Kung fu fighting! Ha!&quot;,
 
-<span class="hljs-comment">// &gt; I'm the Global Object!</span></code></pre>
+  sing: function(){
+    this.lyrics || (this.lyrics = &quot;Where are Carl Douglas&#39;s lyrics?! What this is _this_??&quot;)
 
-<p>But the really interesting stuff happens when using something like jQuery’s
-Events with <code>bind/trigger</code>. I’ve seen this be a fairly common gotcha. You
-expect <code>this</code> to refer to your object, but it’s actually the object you
-triggered your event on,</p>
-<pre><code class="hljs js"><span class="hljs-keyword">var</span> myDiv = $(<span class="hljs-string">"body"</span>).append(<span class="hljs-string">"&lt;div id='js-my-div'&gt;&lt;/div&gt;"</span>)
-
-<span class="hljs-keyword">var</span> CarlDouglas = {
-  <span class="hljs-attr">lyrics</span>: <span class="hljs-string">"OhohOhoOh... Everybody was Kung fu fighting! Ha!"</span>,
-
-  <span class="hljs-attr">sing</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-    <span class="hljs-keyword">this</span>.lyrics || (<span class="hljs-keyword">this</span>.lyrics = <span class="hljs-string">"Where are Carl Douglas's lyrics?! What this is _this_??"</span>)
-
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.lyrics)
-  }
-}
-
-myDiv.bind(<span class="hljs-string">"kungfu:fight"</span>, CarlDouglas.sing)
-
-$(<span class="hljs-string">"div#js-my-div"</span>).trigger(<span class="hljs-string">"kungfu:fight"</span>)
-
-<span class="hljs-comment">// &gt; Where are Carl Douglas's lyrics?! What this is _this_??</span></code></pre>
-
-<p>Thankfully, this is fixable! All we have to do in bind our object’s methods to
-that object, to be run in the context of our object whenever they are invoked.</p>
-<p>Underscore.js provides this functionality with its <code>bind/bindAll</code> functions, check out
-the <a href="http://documentcloud.github.com/underscore/#bind">docs</a> and <a href="http://documentcloud.github.com/underscore/docs/underscore.html#section-52">annotated
-sources</a> for more detail.</p>
-<p>So we add this after defining our object,</p>
-<pre><code class="hljs js">_.bindAll(CarlDouglas)</code></pre>
-
-<p>And <code>this</code> behaves as we expect! Everybody was Kung fu fighting! Ha!</p>
-<pre><code class="hljs js"><span class="hljs-keyword">var</span> myDiv = $(<span class="hljs-string">"body"</span>).append(<span class="hljs-string">"&lt;div id='js-my-div'&gt;&lt;/div&gt;"</span>)
-
-<span class="hljs-keyword">var</span> CarlDouglas = {
-  <span class="hljs-attr">lyrics</span>: <span class="hljs-string">"OhohOhoOh... Everybody was Kung fu fighting! Ha!"</span>,
-
-  <span class="hljs-attr">sing</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-    <span class="hljs-keyword">this</span>.lyrics || (<span class="hljs-keyword">this</span>.lyrics = <span class="hljs-string">"Where are Carl Douglas's lyrics?! What this is _this_??"</span>)
-
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.lyrics)
+    console.log(this.lyrics)
   }
 }
 
 _.bindAll(CarlDouglas)
 
-myDiv.bind(<span class="hljs-string">"kungfu:fight"</span>, CarlDouglas.sing)
+myDiv.bind(&quot;kungfu:fight&quot;, CarlDouglas.sing)
 
-$(<span class="hljs-string">"div#js-my-div"</span>).trigger(<span class="hljs-string">"kungfu:fight"</span>)
+$(&quot;div#js-my-div&quot;).trigger(&quot;kungfu:fight&quot;)
 
-<span class="hljs-comment">// &gt; OhohOhoOh... Everybody was Kung fu fighting! Ha!</span></code></pre>
-
+// &gt; OhohOhoOh... Everybody was Kung fu fighting! Ha!</code></pre><p>And <code>this</code> is <code>CarlDouglas</code> as we expected. Everybody was Kung fu fighting! Ha!</p>
 <p><img src="http://i0.kym-cdn.com/photos/images/newsfeed/000/228/647/tumblr_ll9huqRApq1qbfddao1_500.jpg" alt="what is this i don&#39;t even"></p>
 
 
