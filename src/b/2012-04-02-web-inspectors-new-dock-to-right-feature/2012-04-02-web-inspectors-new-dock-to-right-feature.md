@@ -7,7 +7,7 @@ collection: googlechrome
 ---
 
 Chrome released a new Web Inspector feature called Dock to right. This feature allows you to
-vertically split your screen, with your web page on the left, and Web Inspector tools on the right. If you work on a widescreen, then I think you'll love this feature.
+vertically split your screen, with your web page on the left, and Web Inspector tools on the right. If you work on a widescreen, then you'll love this feature.
 
 <img src="images/web-inspector-dock-to-right.png">
 
