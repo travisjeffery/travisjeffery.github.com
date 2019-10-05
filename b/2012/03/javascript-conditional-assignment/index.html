@@ -54,39 +54,27 @@
               <h1 class="article-title">JavaScript conditional assignment</h1>
             </header>
 
-            <p>A common idiom with in programming is conditional assignment, usually to
-set an undefined variable. Ruby has a nice operator, <code>||=</code> for this purpose,
-JavaScript doesn’t have such an operator. So often variables that are used
-across multiple files, like namespaces, have to be repeatedly conditionally
-assigned. By not doing so you may try to use the variable before it’s been
-declared and have a <code>ReferenceError</code> thrown.</p>
-<p>There
-<a href="http://stackoverflow.com/questions/881515/javascript-namespace-declaration">are</a>
-<a href="http://stackoverflow.com/questions/4401323/javascript-best-practice-define-variable-namespace-check-is-not-already-define">lots</a>
-<a href="http://blog.arc90.com/2008/06/06/an-easy-way-to-implement-namespaces-in-javascript/">of</a>
-<a href="http://stackoverflow.com/questions/7639268/nicer-way-of-checking-javascript-namespace">ways</a> to conditionally assign in JavaScript.
-This is the way I learned from Jeremy Ashkenas, and the way I like to do it:</p>
-<pre><code class="hljs js"><span class="hljs-keyword">var</span> Namespace;
-Namespace || (Namepace = {});</code></pre>
+            <p>Ruby has a conditional assignment operator: <code>||=</code>.
+JavaScript doesn’t have such an operator. Common use cases for conditional assignment that JavaScript developers use are lazily defining a namespace and defaulting function arguments.</p>
+<p>Since JavaScript has no built in conditional assignment operator, the language leaves conditional assignment as a stylistic choice for JavaScript developers. The following is the style I like, which I learned from Jeremy Ashkenas.</p>
+<ul>
+<li><p>Defining a namespace:</p>
+<pre><code>  var Namespace;
+  Namespace || (Namepace = {});</code></pre></li>
+<li><p>Function arguments:</p>
+<pre><code>  Namespace.Model = {};
 
-<p>This can also be used for arguments and local variables,</p>
-<pre><code class="hljs js">Namespace.Model = {};
+  _.extend(Namespace.Model, {
+    set: function(attrs, options) {
+      options || (options = {});
 
-_.extend(Namespace.Model, {
-  set: function(attrs, options) {
-    options || (options = {});
-
-    if (options.logger) {
-      return options.logger.log("Hello. Yes, This is log.")
+      if (options.logger) {
+        return options.logger.log(&quot;Hello. Yes, This is log.&quot;)
+      }
     }
-  }
-});
+  });</code></pre></li>
+</ul>
 
-Namespace.Model.set({});
-# =&gt; ...Nothing/no ReferenceError!
-
-Namespace.Model.set({}, {logger: console})
-# =&gt; "Hello. Yes, This is log."</code></pre>
 
           </article>
 
