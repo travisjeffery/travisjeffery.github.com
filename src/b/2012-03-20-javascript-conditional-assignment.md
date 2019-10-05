@@ -6,43 +6,26 @@ comments: false
 collection: javascript
 ---
 
-A common idiom with in programming is conditional assignment, usually to
-set an undefined variable. Ruby has a nice operator, `||=` for this purpose,
-JavaScript doesn't have such an operator. So often variables that are used
-across multiple files, like namespaces, have to be repeatedly conditionally
-assigned. By not doing so you may try to use the variable before it's been
-declared and have a `ReferenceError` thrown.
+Ruby has a conditional assignment operator: `||=`.
+JavaScript doesn't have such an operator. Common use cases for conditional assignment that JavaScript developers use are lazily defining a namespace and defaulting function arguments.
 
-There
-[are](http://stackoverflow.com/questions/881515/javascript-namespace-declaration)
-[lots](http://stackoverflow.com/questions/4401323/javascript-best-practice-define-variable-namespace-check-is-not-already-define)
-[of](http://blog.arc90.com/2008/06/06/an-easy-way-to-implement-namespaces-in-javascript/)
-[ways](http://stackoverflow.com/questions/7639268/nicer-way-of-checking-javascript-namespace) to conditionally assign in JavaScript.
-This is the way I learned from Jeremy Ashkenas, and the way I like to do it:
+Since JavaScript has no built in conditional assignment operator, the language leaves conditional assignment as a stylistic choice for JavaScript developers. The following is the style I like, which I learned from Jeremy Ashkenas.
 
-``` js
-var Namespace;
-Namespace || (Namepace = {});
-```
+- Defining a namespace:
 
-This can also be used for arguments and local variables,
+	    var Namespace;
+	    Namespace || (Namepace = {});
 
-``` js
-Namespace.Model = {};
+- Function arguments:
 
-_.extend(Namespace.Model, {
-  set: function(attrs, options) {
-    options || (options = {});
+        Namespace.Model = {};
 
-    if (options.logger) {
-      return options.logger.log("Hello. Yes, This is log.")
-    }
-  }
-});
+		_.extend(Namespace.Model, {
+		  set: function(attrs, options) {
+		    options || (options = {});
 
-Namespace.Model.set({});
-# => ...Nothing/no ReferenceError!
-
-Namespace.Model.set({}, {logger: console})
-# => "Hello. Yes, This is log."
-```
+		    if (options.logger) {
+		      return options.logger.log("Hello. Yes, This is log.")
+		    }
+		  }
+		});
