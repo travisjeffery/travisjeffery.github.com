@@ -26,6 +26,12 @@ $code_font_1: monospace;
     html {
         font-size: 21px;
     }
+
+    #header {
+        h1 {
+            margin-left: 1rem;
+        }
+    }
 }
 
 .no-gutters {
@@ -154,26 +160,29 @@ hr {
     width: auto;
 }
 #header {
-    display: flex;
-    align-items: center;
     font-size: 1.5rem;
+
+    img {
+        margin-top: 1rem;
+    }
+
     h1 {
 	font-weight: bold;
         text-align: left;
 
         a {
-	color: $red;
-	text-decoration: none;
-	border: none;
-	&:after {
-	    content: "travis jeffery";
-	    color: $blue;
-	    position: absolute;
-	    left: 2px;
-	    top: 2px;
-	    z-index: -1;
-	}
-    }
+	    color: $red;
+	    text-decoration: none;
+	    border: none;
+	    &:after {
+	        content: "travis jeffery";
+	        color: $blue;
+	        position: absolute;
+	        left: 2px;
+	        top: 2px;
+	        z-index: -1;
+	    }
+        }
     }
     .logo {
 	font-size: 2rem;
@@ -184,8 +193,6 @@ hr {
 	padding-right: 0;
         margin-top: 1rem;
         font-size: 1rem;
-        top: 1rem;
-        position: relative;
     }
 }
 .section-header {
@@ -200,6 +207,9 @@ hr {
     .who {
 	background-color: paleturquoise;
     }
+}
+.tagline {
+    margin-left: 1rem;
 }
 
 .left {
