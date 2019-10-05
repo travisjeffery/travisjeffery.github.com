@@ -54,128 +54,63 @@
               <h1 class="article-title">errors.js: client side errors object</h1>
             </header>
 
-            <p>Despite my opinions of ActiveModel::Validations (a post/patch for another day),
-I like ActiveModel’s Errors object. Errors’s simplicity, ubiquity, and
-consistency is a great boon for handling error messages of varying entities.</p>
-<p>The future of the web is asynchronous and client side computation is steadily becoming more
-sophisticated and well practiced.</p>
-<p>errors.js provides an Errors object similar to ActiveModel’s Errors object to
-provide a simple, ubiquitous, consistent interface to handle and use error
-messages on the client side.</p>
-<p><a href="http://github.com/travisjeffery/errors.js">errors.js is on GitHub</a>, here is the source,</p>
-<pre><code class="hljs js">(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$, _</span>)</span>{
-  $.widget(<span class="hljs-string">"travisjeffery.errors"</span>, {
-    <span class="hljs-attr">_create</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-      _.bindAll(<span class="hljs-keyword">this</span>)
-      <span class="hljs-keyword">this</span>.container = <span class="hljs-keyword">this</span>.element
-      <span class="hljs-keyword">this</span>.list = <span class="hljs-keyword">this</span>.element.find(<span class="hljs-string">"ul"</span>)
-    }
-  })
+            <p>I like ActiveModel’s Errors object. It simple, ubiquitous,
+consistent, and makes it easy to handle your models’ errors, server-side. However, we’re deep into the web developers’ great migration to the client-side. And developers used to handle errors server-side that they now handle client-side.</p>
+<p><a href="http://github.com/travisjeffery/errors.js">errors.js</a> is a library I wrote to provide an Errors
+object similar to ActiveModel’s Errors and provide a simple, consistent interface to handle errors,
+client-side.</p>
+<p>Here’s an end-to-end example showing how it’s used:</p>
+<h2 id="server-controller">Server controller</h2>
+<pre><code>class PeopleController &lt; ApplicationController
+  def show
+    @person = Person.find params[:id]
+  end
 
-  $.extend($.travisjeffery.errors.prototype, {
-    <span class="hljs-attr">add</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>)</span>{
-      <span class="hljs-keyword">var</span> errors = <span class="hljs-keyword">this</span>._buildErrorList(error)
+  def update
+    @person = Person.find params[:id]
+    @person.update_attributes params[:person]
 
-      <span class="hljs-keyword">this</span>.reset()
-      <span class="hljs-keyword">this</span>.show()
+    if @person.valid?
+      render :json =&gt; @person, :status =&gt; 200
+    else
+      render :json =&gt; {:errors =&gt; @person.errors.full_messages}, :status =&gt; 422
+    end
+  end
+end</code></pre><h2 id="client-javascript">Client JavaScript</h2>
+<pre><code>jQuery(function($){
+  App = window.App || (window.App = {})
 
-      <span class="hljs-keyword">this</span>.list.append(errors)
-    },
-
-    <span class="hljs-attr">show</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-      <span class="hljs-keyword">this</span>.container.show()
-    },
-
-    <span class="hljs-attr">hide</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-      <span class="hljs-keyword">this</span>.container.hide()
-    },
-
-    <span class="hljs-attr">reset</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
-      <span class="hljs-keyword">this</span>.hide()
-      <span class="hljs-keyword">this</span>.list.empty()
-    },
-
-    <span class="hljs-attr">handle</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">xhr, status, error</span>)</span>{
-      <span class="hljs-keyword">var</span> errors = $.parseJSON(xhr.responseText).errors
-      <span class="hljs-keyword">this</span>.add(errors)
-    },
-
-    <span class="hljs-attr">_buildErrorList</span>: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">errors</span>)</span>{
-      <span class="hljs-keyword">var</span> errorArray = $.makeArray(errors),
-      stringToItem = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">message</span>)</span>{<span class="hljs-keyword">return</span> <span class="hljs-string">"&lt;li&gt;"</span>+ message +<span class="hljs-string">"&lt;/li&gt;"</span>},
-      errorList = $.map(errorArray, stringToItem).join(<span class="hljs-string">"\n"</span>)
-
-      <span class="hljs-keyword">return</span> errorList
-    }
-  })
-}(jQuery, _));</code></pre>
-
-
-<p>It’s small and really simple, and only depends on jQuery/UI and Underscorejs. Using it looks
-like this,</p>
-<h2 id="controller">Controller</h2>
-<pre><code class="hljs ruby"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PeopleController</span> &lt; ApplicationController</span>
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">show</span></span>
-    @person = Person.find params[<span class="hljs-symbol">:id</span>]
-  <span class="hljs-keyword">end</span>
-
-  <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update</span></span>
-    @person = Person.find params[<span class="hljs-symbol">:id</span>]
-    @person.update_attributes params[<span class="hljs-symbol">:person</span>]
-
-    <span class="hljs-keyword">if</span> @person.valid?
-      render <span class="hljs-symbol">:json</span> =&gt; @person, <span class="hljs-symbol">:status</span> =&gt; <span class="hljs-number">200</span>
-    <span class="hljs-keyword">else</span>
-      render <span class="hljs-symbol">:json</span> =&gt; {<span class="hljs-symbol">:errors</span> =&gt; @person.errors.full_messages}, <span class="hljs-symbol">:status</span> =&gt; <span class="hljs-number">422</span>
-    <span class="hljs-keyword">end</span>
-  <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span></code></pre>
-
-<h2 id="javascript-asset">Javascript asset</h2>
-<pre><code class="hljs js">jQuery(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">$</span>)</span>{
-  App = <span class="hljs-built_in">window</span>.App || (<span class="hljs-built_in">window</span>.App = {})
+  // configure errors.js to fill in #js-errors with the errors in the response.
   App.Errors =
-    $(<span class="hljs-string">"div#js-errors"</span>)
+    $(&quot;div#js-errors&quot;)
       .errors()
-      .data(<span class="hljs-string">"errors"</span>)
+      .data(&quot;errors&quot;)
 
-  $(<span class="hljs-string">"a.js-person"</span>)
-    .on(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>)</span>{
+  $(&quot;a.js-person&quot;)
+    .on(&quot;click&quot;, function(event){
       event.preventDefault()
 
-      <span class="hljs-keyword">var</span> personId = $(<span class="hljs-string">"[data-person-id]"</span>).data(<span class="hljs-string">"person-id"</span>),
-      personURL = <span class="hljs-string">"/people/"</span> + personId
+      var personId = $(&quot;[data-person-id]&quot;).data(&quot;person-id&quot;),
+      personURL = &quot;/people/&quot; + personId
 
+      // when there&#39;s an error response, give the errors to errors.js to update the DOM
       $.ajax({
-        <span class="hljs-attr">url</span>: personURL,
-        <span class="hljs-comment">// =&gt; ["Name can't be blank"]</span>
-        data: {<span class="hljs-attr">id</span>: personId, <span class="hljs-attr">person</span>: {<span class="hljs-attr">name</span>: <span class="hljs-string">""</span>}},
-        <span class="hljs-attr">type</span>: <span class="hljs-string">"put"</span>,
-        <span class="hljs-attr">error</span>: App.Errors.handle
+        url: personURL,
+        // =&gt; [&quot;Name can&#39;t be blank&quot;]
+        data: {id: personId, person: {name: &quot;&quot;}},
+        type: &quot;put&quot;,
+        error: App.Errors.handle
       })
     })
-})</code></pre>
+})</code></pre><h2 id="view">View</h2>
+<pre><code>&lt;%= link_to @person.name, person_path(@person),
+  :method =&gt; &quot;put&quot;,
+  :remote =&gt; true,
+  :&quot;data-person-id&quot; =&gt; @person.id,
+  :class =&gt; &quot;js-person&quot;
+%&gt;
 
-<h2 id="view">View</h2>
-<pre><code class="hljs erb"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">%=</span></span></span><span class="ruby"> link_to @person.name, person_path(@person),
-  <span class="hljs-symbol">:method</span> =&gt; <span class="hljs-string">"put"</span>,
-  <span class="hljs-symbol">:remote</span> =&gt; <span class="hljs-literal">true</span>,
-  <span class="hljs-symbol">:<span class="hljs-string">"data-person-id"</span></span> =&gt; @person.id,
-  <span class="hljs-symbol">:class</span> =&gt; <span class="hljs-string">"js-person"</span>
-</span><span class="xml"><span class="hljs-tag">%&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"js-errors"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></code></pre>
-
-<h2 id="api-usable-without-handle-callback">Api (usable without #handle callback)</h2>
-<pre><code class="hljs js"><span class="hljs-keyword">var</span> Errors = $(<span class="hljs-string">"div#errors"</span>).errors().data(<span class="hljs-string">"errors"</span>)
-
-Errors.add(<span class="hljs-string">"You shall not pass!"</span>)
-
-Errors.show()
-
-Errors.hide()
-
-Errors.reset()</code></pre>
+&lt;div id=&quot;js-errors&quot;&gt;&lt;ul&gt;&lt;/ul&gt;&lt;/div&gt;</code></pre>
 
           </article>
 
