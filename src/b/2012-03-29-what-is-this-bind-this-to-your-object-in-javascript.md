@@ -6,110 +6,66 @@ comments: false
 collection: javascript
 ---
 
-In JavaScript, a function's `this` keyword is always bound to an object, what
-object that is depends on how the current function was called, so it could be
-different each time the function is called.
+In JavaScript, the `this` keyword refers to the object it belongs to, and the object depends on where you use it.
 
-In this example, as we and anyone else would expect after reading this code,
-`this` refers to MyObject,
+- In a method: `this` refers to the owner object.
+- In a function: `this` refers to the global object.
+- In a function with strict mode: `this` is `undefined`.
+- In an event: `this` refers to the element that received the event.
+- On its own: `this` refers to the global object.
 
-``` js
-var MyObject = {
-  my_method: function(){
-    console.log(this)
-  },
+The way events behave trip up JavaScript developers most. Developers expect `this` to be the global object or the owner of the method handling the event, but `this` refers to the element that received the event. Here's an example:
 
-  inspect: function(){
-    return "I'm MyObject!"
-  }
-}
+	var myDiv = $("body").append("<div id='js-my-div'></div>")
 
-MyObject.my_method()
+	var CarlDouglas = {
+	  lyrics: "OhohOhoOh... Everybody was Kung fu fighting! Ha!",
 
-// > I'm MyObject!
-```
+	  sing: function(){
+	    this.lyrics || (this.lyrics = "Where are Carl Douglas's lyrics?! What this is _this_??")
 
-The next example is a little weird. As you can see my_method is now being
-called within the context of the global object.
+	    console.log(this.lyrics)
+	  }
+	}
 
-In the previous case my `console.log(this)` was equivalent to
-`console.log(MyObject)` and here it is equivalent to `console.log(global)`.
+	myDiv.bind("kungfu:fight", CarlDouglas.sing)
 
-``` js
-var MyObject = {
-  // ...
-}
+	$("div#js-my-div").trigger("kungfu:fight")
 
-global.inspect = function(){
-  return "I'm the Global Object!"
-}
+	// > Where are Carl Douglas's lyrics?! What this is _this_??
 
-var my_same_method = MyObject.my_method
-my_same_method()
+If `this` had referred to the `CarlDouglas` object, then the sing function would have logged
+Carl Douglas' "OhohOhoOh... Everybody was Kung fu fighting! Ha!" lyrics. But `this` referred to the element, which has no lyrics.
 
-// > I'm the Global Object!
-```
+You can make it so that in your object's method's `this` always refers to the object by using a
+technique called binding. You bind your object's methods to that object and ensure that `this`
+always refers to object, even when called by an event.
 
-But the really interesting stuff happens when using something like jQuery's
-Events with `bind/trigger`. I've seen this be a fairly common gotcha. You
-expect `this` to refer to your object, but it's actually the object you
-triggered your event on,
+Underscore.js provides the [`bindAll`](http://documentcloud.github.com/underscore/#bindAll) function to bind all of an object's methods to itself. Let's update our previous example to use `bindAll` and see the effect:
 
-``` js
-var myDiv = $("body").append("<div id='js-my-div'></div>")
+    _.bindAll(CarlDouglas)
 
-var CarlDouglas = {
-  lyrics: "OhohOhoOh... Everybody was Kung fu fighting! Ha!",
+    var myDiv = $("body").append("<div id='js-my-div'></div>")
 
-  sing: function(){
-    this.lyrics || (this.lyrics = "Where are Carl Douglas's lyrics?! What this is _this_??")
+	var CarlDouglas = {
+	  lyrics: "OhohOhoOh... Everybody was Kung fu fighting! Ha!",
 
-    console.log(this.lyrics)
-  }
-}
+	  sing: function(){
+	    this.lyrics || (this.lyrics = "Where are Carl Douglas's lyrics?! What this is _this_??")
 
-myDiv.bind("kungfu:fight", CarlDouglas.sing)
+	    console.log(this.lyrics)
+	  }
+	}
 
-$("div#js-my-div").trigger("kungfu:fight")
+	_.bindAll(CarlDouglas)
 
-// > Where are Carl Douglas's lyrics?! What this is _this_??
-```
+	myDiv.bind("kungfu:fight", CarlDouglas.sing)
 
-Thankfully, this is fixable! All we have to do in bind our object's methods to
-that object, to be run in the context of our object whenever they are invoked.
+	$("div#js-my-div").trigger("kungfu:fight")
 
-Underscore.js provides this functionality with its `bind/bindAll` functions, check out
-the [docs](http://documentcloud.github.com/underscore/#bind) and [annotated
-sources](http://documentcloud.github.com/underscore/docs/underscore.html#section-52) for more detail.
+	// > OhohOhoOh... Everybody was Kung fu fighting! Ha!
 
-So we add this after defining our object,
 
-``` js
-_.bindAll(CarlDouglas)
-```
-
-And `this` behaves as we expect! Everybody was Kung fu fighting! Ha!
-
-``` js
-var myDiv = $("body").append("<div id='js-my-div'></div>")
-
-var CarlDouglas = {
-  lyrics: "OhohOhoOh... Everybody was Kung fu fighting! Ha!",
-
-  sing: function(){
-    this.lyrics || (this.lyrics = "Where are Carl Douglas's lyrics?! What this is _this_??")
-
-    console.log(this.lyrics)
-  }
-}
-
-_.bindAll(CarlDouglas)
-
-myDiv.bind("kungfu:fight", CarlDouglas.sing)
-
-$("div#js-my-div").trigger("kungfu:fight")
-
-// > OhohOhoOh... Everybody was Kung fu fighting! Ha!
-```
+And `this` is `CarlDouglas` as we expected. Everybody was Kung fu fighting! Ha!
 
 ![what is this i don't even](http://i0.kym-cdn.com/photos/images/newsfeed/000/228/647/tumblr_ll9huqRApq1qbfddao1_500.jpg)
