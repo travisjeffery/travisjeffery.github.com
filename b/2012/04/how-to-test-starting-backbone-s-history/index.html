@@ -52,21 +52,15 @@
               <h1 class="article-title">How-to test starting Backbone's history</h1>
             </header>
 
-            <p><code>Backbone.history.start()</code> can be only be called once, doing otherwise will
-<a href="http://documentcloud.github.com/backbone/docs/backbone.html#section-127">cause</a> an Error to be thrown with the message “Backbone.history has already been started”.</p>
-<p>This can be annoying when testing because it’s common practice to have an App
-namespace that contains a initializer method to setup your application,
-including starting Backbone’s history.</p>
-<pre><code class="hljs coffeescript">App =
-  initialize: <span class="hljs-function"><span class="hljs-params">(data)</span> -&gt;</span>
-    <span class="hljs-comment"># ...</span>
-    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> Backbone.history.started?
-      Backbone.history.start({pushState: <span class="hljs-literal">true</span>})
-      Backbone.history.started = <span class="hljs-literal">true</span></code></pre>
-
-<p>But each test case you write that calls this initializer method will also call
-<code>Backbone.history.start()</code>. The solution is use <code>Backbone.history.stop()</code> which
-will disable history temporarily.</p>
+            <p>You can call <code>Backbone.history.start()</code> once. Multiple calls
+<a href="http://documentcloud.github.com/backbone/docs/backbone.html#section-127">causes</a> Backbone to throw an Error saying: “Backbone.history has already been started”.</p>
+<p>You’ll hit this error when testing, if you have each test case set up your application, and your application’s setup includes starting Backbone:</p>
+<pre><code>App =
+  initialize: (data) -&gt;
+    # ...
+    if not Backbone.history.started?
+      Backbone.history.start({pushState: true})
+      Backbone.history.started = true</code></pre><p>You solve this by calling <code>Backbone.history.stop()</code> prior to initializing your application:</p>
 <pre><code class="hljs coffeescript">describe <span class="hljs-string">"App"</span>, <span class="hljs-function">-&gt;</span>
   describe <span class="hljs-string">"#initialize"</span>, <span class="hljs-function">-&gt;</span>
     it <span class="hljs-string">"starts Backbone.history"</span>, <span class="hljs-function">-&gt;</span>
