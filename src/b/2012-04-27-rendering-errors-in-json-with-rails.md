@@ -1,119 +1,90 @@
 ---
 layout: post.html
-title: "Rendering errors in JSON with Rails"
+title: "Rendering errors with JSON and Rails"
 date: 2012-04-27 14:58
 comments: false
 collection: rails
+redirectFrom: /b/2012/04/rendering-errors-in-json-with-rails/
 ---
 
-Having seen a lot of bad practices when it comes to handling and rendering
-errors in JSON, bad practices such as misusing HTTP statuses, success/error
-callbacks, and making building error messages harder than necessary, here are
-bad and good practices.
+I've seen bad practices for handling errors with JSON and Rails:
 
-Here's an example that is bad,
+- Not using proper HTTP statuses;
+- Not using the error callback; and
+- Making errors message building harder than necessary.
 
-JavaScript,
+Let's look at some examples and how to fix them.
 
-``` js
-$.ajax(
-  // ...
-    dataType: "json"
-  , success: function(data){
-    if (data.errors) {
-      // do something with errors
-    } else {
-      // do something with successful data
-    }
-  }
-)
-```
+## Not using proper HTTP statuses and the error callback
 
-Controller,
+Callers of your API should know whether their request worked by looking at the response's HTTP status, not by looking at the response's body. When you don't use status codes, every response looks like a successful response:
 
-``` ruby
-def create
-  @model = Model.new(params[:model])
-  if @model.save
-    render :json => @model.to_json
-  else
-    render :json => { :errors => @model.errors.full_messages }
-  end
-end
-```
+- Server's controller:
 
-The biggest concern in the example above is that we're not using HTTP statuses
-as they were intended which is bad both practically and semantically.
+		def create
+		  @model = Model.new(params[:model])
+		  if @model.save
+		    render :json => @model.to_json
+		  else
+		    render :json => { :errors => @model.errors.full_messages }
+		  end
+		end
 
-Semantically in the sense that with this implementation we have to mix error
-handling in a success callback. Practically since our browser and libraries can
-work together to extract the switch logic.
+- Client's JavaScript:
 
-This is a good example,
+		$.ajax(
+		  // ...
+		    dataType: "json"
+		  , success: function(data){
+		    if (data.errors) {
+		      // do something with errors
+		    } else {
+		      // do something with successful data
+		    }
+		  }
+		)
 
-JavaScript,
+Instead, tell your API's caller that their request failed by setting a status code for the error. If the error is the client's fault, use a status code in the 400-499 range; if the error is the server's fault, use a status code in the 500-599 range. [Here's a list of status codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), with information on when to use each.
 
-``` js
-$.ajax({
-  // ...
-    dataType: "json"
-  , success: function(data){
-      // do something with successful data
-  }
-  , error: function(xhr){
-      var errors = $.parseJSON(xhr.responseText).errors
-      // do something with errors
-  }
-})
-```
+- Server's controller:
 
-Controller:
+		def create
+		  @model = Model.create(params[:model])
+		  if @model.save
+		    render :json => @model
+		  else
+		    render :json => { :errors => @model.errors.full_messages }, :status => 422
+		  end
+		end
 
-``` ruby
-def create
-  @model = Model.create(params[:model])
-  if @model.save
-    render :json => @model
-  else
-    render :json => { :errors => @model.errors.full_messages }, :status => 422
-  end
-end
-```
+- Client's JavaScript:
 
-With an HTTP error status (e.g. 422 unprocessable entity) our error callback
-is called for us, our code is more declarative and without unnecessary logic.
+		$.ajax({
+		  // ...
+		    dataType: "json"
+		  , success: function(data){
+		      // do something with successful data
+		  }
+		  , error: function(xhr){
+		      var errors = $.parseJSON(xhr.responseText).errors
+		      // do something with errors
+		  }
+		})
 
-Another small nit-pick is that we're now letting Rails serialize our data according
-to our response type, i.e. it will call to\_json for us.
+By responding with the 422 status code, your client knows that the response failed. jQuery calls the error callback for you, removing unnecessary logic from your code.
 
-Another tip is to use full\_messages rather than serializing the errors object
-as it is,
+## Making error message building harder than it needs to be
 
-``` ruby
-render :json => { :errors => @model.errors }
-```
+I watched a "Backbone with Rails" screencast where the author responded with `@model.errors` and then spent 30 minutes manipulating the response client-side into a usable format. The format they finished with is the same format that they would have had if they'd responded with `@model.errors.full_messages`.
 
-The above will present the errors in a hash where the keys are attributes and the
-values are errors,
+- `render :json => { :errors => @model.errors }`
 
-``` ruby
-# => { name: ["is blank"], age: ["is not greater than 0"]}
-```
+    Responds with a object where the keys are your model's attributes with the associated errors:
 
-``` ruby
-render :json => { :errors => @model.errors.full_messages }
-```
+        { name: ["is blank"], age: ["is not greater than 0"]}
 
+-  `render :json => { :errors => @model.errors.full_messages }`
 
-full\_messages on the other hand will return an array of full messages,
+    Responds with an array of error messages, which you can render straight into a list in the DOM.
 
-``` ruby
-# => ["Name is blank", "Age is not greater than 0"]
-```
-
-I once watched a Rails/Backbone screencast where the author serialized the
-errors object as is and spent ~30 mins manipulating the data client-side into exactly what
-full\_messages returned.
-
-This is much easier to work with and I have never once needed the data given by
-serializing model.errors.
+        ["Name is blank", "Age is not greater than 0"]

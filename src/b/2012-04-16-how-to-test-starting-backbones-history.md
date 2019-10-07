@@ -6,25 +6,19 @@ comments: false
 collection: javascript
 ---
 
-`Backbone.history.start()` can be only be called once, doing otherwise will
-[cause](http://documentcloud.github.com/backbone/docs/backbone.html#section-127) an Error to be thrown with the message "Backbone.history has already been started".
+You can call `Backbone.history.start()` once. Multiple calls
+[causes](http://documentcloud.github.com/backbone/docs/backbone.html#section-127) Backbone to throw an Error saying: "Backbone.history has already been started".
 
-This can be annoying when testing because it's common practice to have an App
-namespace that contains a initializer method to setup your application,
-including starting Backbone's history.
+You'll hit this error when testing, if you have each test case set up your application, and your application's setup includes starting Backbone:
 
-``` coffeescript
-App =
-  initialize: (data) ->
-    # ...
-    if not Backbone.history.started?
-      Backbone.history.start({pushState: true})
-      Backbone.history.started = true
-```
+	App =
+	  initialize: (data) ->
+	    # ...
+	    if not Backbone.history.started?
+	      Backbone.history.start({pushState: true})
+	      Backbone.history.started = true
 
-But each test case you write that calls this initializer method will also call
-`Backbone.history.start()`. The solution is use `Backbone.history.stop()` which
-will disable history temporarily.
+You solve this by calling `Backbone.history.stop()` prior to initializing your application:
 
 ``` coffeescript
 describe "App", ->
