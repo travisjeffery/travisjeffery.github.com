@@ -110,7 +110,7 @@
 </ul>
 <p>By responding with the 422 status code, your client knows that the response failed. jQuery calls the error callback for you, removing unnecessary logic from your code.</p>
 <h2 id="making-error-message-building-harder-than-it-needs-to-be">Making error message building harder than it needs to be</h2>
-<p>I watched a “Backbone with Rails” screencast where the author responded with <code>@model.errors</code> and then spent 30 minutes manipulating the response client-side into a usable format. The format they finished with is the same format that they would have had if they’d responded with <code>@model.errors.full_messages</code>.</p>
+<p>I watched a “Backbone with Rails” screencast where the author had his server respond with <code>@model.errors</code>. Then he began to work on his client and he spent 30 minutes working on transforming the <code>@model.errors</code> data into the data that <code>@model.errors.full_messages</code> would have given him, free.</p>
 <ul>
 <li><p><code>render :json =&gt; { :errors =&gt; @model.errors }</code></p>
 <p>  Responds with a object where the keys are your model’s attributes with the associated errors:</p>
