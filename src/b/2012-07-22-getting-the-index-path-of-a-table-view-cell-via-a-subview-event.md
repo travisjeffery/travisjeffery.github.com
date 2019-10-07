@@ -6,36 +6,24 @@ comments: false
 collection: ios
 ---
 
-Let's say you've subclassed UITableViewCell such that you have added a UIButton as a
-subview, and whenever you touch that button you want to perform some action on
-the data source of your UITableView. To do that you probably want to figure
-out what index path is associated with the pressed button.
+You've subclassed UITableViewCell and you've added a UIButton as a subview. Whenever you touch that
+button, you want to act on the data of your UITableView. To act on the data, you need to know the
+index path of the cell containing the button. Here's how.
 
-Here's one way, the idea is to add a target and action to the
-button of the cell for when it's pressed, and then in that action get the index
-path by having the table view tell us what index path is associated with
-the point that was touched.
+To find the index path of a touched subview; You add a touched event handler, then use the event to find the touch point in the table view, and then look up the index path at that point.
 
-Add the target and action to the button of the cell for when it's pressed,
+	- (UITableViewCell *)tableView:(UITableView *)tableView
+	  cellForRowAtIndexPath:(NSIndexPath *)indexPath
+	{
+	  // ...
+	  [cell.myButton addTarget:self action:@selector(touchMyButton:event:) forControlEvents:UIControlEventTouchUpInside];
+	  // ...
+	}
 
-```objective-c
-- (UITableViewCell *)tableView:(UITableView *)tableView
-  cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  // ...
-  [cell.myButton addTarget:self action:@selector(touchMyButton:event:) forControlEvents:UIControlEventTouchUpInside];
-  // ...
-}
-```
-
-Have the table view tell us what index path is associated with the point that was touched,
-
-```objective-c
-- (void)touchMyButton:(UIButton*)button event:(UIEvent*)event
-{
-    NSIndexPath* indexPath = [_tableView indexPathForRowAtPoint:
-                                  [[[event touchesForView:button] anyObject]
-                                  locationInView:_tableView]];
-    // ... 
-}
-```
+	- (void)touchMyButton:(UIButton*)button event:(UIEvent*)event
+	{
+	    NSIndexPath* indexPath = [_tableView indexPathForRowAtPoint:
+	                                  [[[event touchesForView:button] anyObject]
+	                                  locationInView:_tableView]];
+	    // ...
+	}
