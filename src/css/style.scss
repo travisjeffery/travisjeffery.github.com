@@ -161,14 +161,18 @@ hr {
 }
 #header {
     font-size: 1.5rem;
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
 
     img {
-        margin-top: 1.5rem;
+        margin-top: 1rem;
     }
 
     h1 {
 	font-weight: bold;
         text-align: left;
+        margin-top: 1rem;
 
         a {
 	    color: $red;
