@@ -17,7 +17,7 @@ Let's look at some examples and how to fix them.
 
 ## Not using proper HTTP statuses and the error callback
 
-Callers of your API should know whether their request worked by looking at the response's HTTP status, not by looking at the response's body. When you don't use status codes, every response looks like a successful response:
+Callers of your API should know whether their request worked by looking at the response's status code, not by looking at the response's body. When you don't use status codes, every response looks like a successful response:
 
 - Server's controller:
 
