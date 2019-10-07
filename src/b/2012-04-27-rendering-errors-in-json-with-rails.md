@@ -75,7 +75,7 @@ By responding with the 422 status code, your client knows that the response fail
 
 ## Making error message building harder than it needs to be
 
-I watched a "Backbone with Rails" screencast where the author responded with `@model.errors` and then spent 30 minutes manipulating the response client-side into a usable format. The format they finished with is the same format that they would have had if they'd responded with `@model.errors.full_messages`.
+I watched a "Backbone with Rails" screencast where the author had his server respond with `@model.errors`. Then he began to work on his client and he spent 30 minutes working on transforming the `@model.errors` data into the data that `@model.errors.full_messages` would have given him, free.
 
 - `render :json => { :errors => @model.errors }`
 
