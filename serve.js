@@ -287,18 +287,18 @@ var pipe = metalsmith(__dirname)
         '/b/2012/12/overriding-uiviewcontrollers-view-property-done-right': '/b/2012/12/overriding-uiviewcontroller-s-view-property-done-right/'
       }
     }))
-    .use(layouts({
-      directory: 'layouts',
-      engine: 'handlebars',
-      pattern: '**/*.html',
-      default: 'post.html'
-    }))
     .use(feed({
       collection: 'articles',
       preprocess: function(file) {
         file.categories = file.collections
         return file
       }
+    }))
+    .use(layouts({
+      directory: 'layouts',
+      engine: 'handlebars',
+      pattern: '**/*.html',
+      default: 'post.html'
     }))
 
 if (process.env.WATCH) {
