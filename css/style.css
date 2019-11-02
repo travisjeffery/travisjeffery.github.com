@@ -6110,9 +6110,6 @@ a.bg-danger:focus, a.bg-danger:hover {
   html {
     font-size: 21px;
   }
-  #header h1 {
-    margin-left: 1rem;
-  }
 }
 
 .no-gutters {
@@ -6264,6 +6261,7 @@ hr {
   font-weight: bold;
   text-align: left;
   margin-top: 1rem;
+  margin-left: 1rem;
 }
 
 #header h1 a {
