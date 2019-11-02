@@ -30,12 +30,6 @@ $code_font_1: monospace;
     html {
         font-size: 21px;
     }
-
-    #header {
-        h1 {
-            margin-left: 1rem;
-        }
-    }
 }
 
 .no-gutters {
@@ -177,6 +171,7 @@ hr {
 	font-weight: bold;
         text-align: left;
         margin-top: 1rem;
+        margin-left: 1rem;
 
         a {
 	    color: $red;
