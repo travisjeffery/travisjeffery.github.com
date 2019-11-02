@@ -1,4 +1,141 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Mon, 07 Oct 2019 14:42:58 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[travis jeffery]]></title><description><![CDATA[travis jeffery]]></description><link>https://travisjeffery.com</link><generator>metalsmith-feed</generator><lastBuildDate>Sat, 02 Nov 2019 18:08:39 GMT</lastBuildDate><atom:link href="https://travisjeffery.com/rss.xml" rel="self" type="application/rss+xml"/><author><![CDATA[Travis Jeffery]]></author><item><title><![CDATA[I'll take pkg over internal]]></title><description><![CDATA[<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Travis Jeffery">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  
+     ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>I'll take pkg over internal</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+          
+            <h1 class="logo no-gutters col-xs-6 col-sm-6">
+              <a class="" href="/">travis jeffery</a>
+            </h1>
+          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
+              <div class="no-gutters col-xs-12">
+                <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+            </div>
+          </hgroup>
+          
+          <hr class="col-xs-12 no-gutters">
+
+          <article class="col-xs-12 no-gutters">
+            <header>
+              <h1 class="article-title">I'll take pkg over internal</h1>
+            </header>
+
+            <p>Most people who would bother with the matter at all would admit that the layout of Go projects is in a bad way. To pkg, or not to pkg, that is the question.</p>
+<p>The pkg convention started when, prior to Go 1, the Go team put the stdlib in $GOROOT/src/pkg. Later they deleted the pkg directory and moved the stdlib to $GOROOT/src. (Brad Fitzpatrick talked about the history on <a href="https://twitter.com/bradfitz/status/1039512487538970624">Twitter</a>.) By that time, projects like Kubernetes, Docker, Etcd had adopted pkg in their own projects.</p>
+<p>Go doesn’t have an official project layout so the choices popular projects make are as close as the community gets to having a standard. These projects are often the first projects that Go programmers learn from. A GitHub repo called golang-standards/project-layout with 11K stars recommends pkg. Most of the most popular Go projects use pkg. New Go programmers ask why I don’t use pkg. I don’t see pkg going away unless the Go team publishes a doc that recommends not to.</p>
+<p>I didn’t use pkg. Three factors caused me to reevaluate:</p>
+<ol>
+<li>The widespread use of pkg that isn’t slowing down.</li>
+<li>The community using internal as a replacement for pkg.</li>
+<li>The inconsistencies in a project’s structure that doesn’t use pkg.</li>
+</ol>
+<p>You use internal directories to make packages private. If you put a package inside an internal directory, then other packages can’t import it unless they share a common ancestor. Internal packages enable you to export code for reuse in your project while reducing your public API. Russ Cox, in his proposal for internal packages, used the standard library as an example of where you want them. In the standard library, you:</p>
+<ul>
+<li>Have a large API that warrants limiting;</li>
+<li>Need to share your helpers across packages; and</li>
+<li>Can’t export helpers.</li>
+</ul>
+<p>Most projects don’t share these properties.</p>
+<p>Many projects using internal packages have a single internal directory that encompass all the project’s packages with a command to make their code executable. These developers use internal to organize their projects, reducing their public API is incidental. They use internal for the same reasons people use the pkg directory. But internal is official: it’s the only directory named in Go’s documentation and has special compiler treatment. And using internal avoids the stigma of pkg. When I began writing Go, I noticed two things that are relevant that I liked: there were many quality libraries and it was super easy to use them. Deprived by internal.</p>
+<p>There are people who don’t use pkg directories and do use cmd and internal directories. They call pkg empty: directories containing directories with Go code are empty, directories containing Go files are not empty. Less useful than the other <em>empty</em> directories—cmd and internal. We use cmd directories because compiled commands take their names from their source directories and we use internal directories for the compiler’s rules for importing internal packages and these are compiler idiosyncrasies.</p>
+<p>The pkg people don’t use the pkg directory because of the compiler’s idiosyncrasies. The pkg people say the directory is useful boilerplate that clarifies the project’s layout for people. Useful boilerplate for clarity sounds like a Go tagline. In non-trivial projects, you have directories that don’t contain Go code—namely hack, docs, build, examples, vendor, scripts, website, assets. With pkg directories, developers know to find the project’s Go code in the cmd, internal, and pkg directories: developers know that the docs directory contains the documentation and not a docs Go package.</p>
+<p>The cmd, internal, and pkg directories group packages. cmd groups command packages, internal groups internal packages, and pkg groups public packages. A pkg directory beside the cmd directory is more consistent than a cmd directory beside your regular packages.</p>
+<p>You don’t want other to rely on code that may change. People want your code because it solves a problem they have. They still have the problem after you make your packages internal. They solve it by copying your code if it’s open source, or by reimplementing if not. The copy or reimplementation doesn’t depend on the original version, the relationship is in someone’s head and they lack the tools to handle when your changes. If the codes implement a third-party’s spec, that’s OK, not ideal. When the original code is the spec, that’s a problem.</p>
+<p>The Go team wrote the module mechanics in internal packages. “For the initial development of module support,” Russ Cox <a href="https://github.com/golang/go/issues/31761#issue-438852898">said</a>, “we’ve kept everything in internal directories to make it easier to make changes as our understanding of what the pieces should look like becomes clearer.” Easier for the developers: who’ve <a href="https://github.com/rogpeppe/go-internal/tree/master/modfile">reimplemented</a> the <a href="https://github.com/uudashr/go-module">mechanics</a> <a href="https://github.com/sirkon/goproxy/tree/master/gomod">already</a>. Who’ve followed the Go team’s changes and will throw out their code when the Go team exports the mechanics. Who, along with the people depending on these reimplementations, will migrate to the exported packages. Easier for the Go team: who will update their own code for the export changes. This was easier than exporting a package at the beginning for people to depend on, with APIs shielding people from the internal changes, and with versions protecting them from breaking API changes.</p>
+<p>With that said: I’ve begun using pkg. pkg is consistent with cmd and internal and other non-package directories. You know what packages contain Go code and which don’t. You structure your project without making all your packages internal. And I need not explain why I don’t use pkg anymore.</p>
+
+
+          </article>
+
+          <hr class="col-xs-12 no-gutters">
+
+          <footer id="post-footer" class="col-xs-12 no-gutters">
+            <p>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 01/11/19</span>
+              <span class="post-footer-item">Tags go</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
+            </p>
+          </footer>
+          <hr class="col-xs-12 no-gutters">
+          
+          <footer class="footer col-xs-12 no-gutters left">
+            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
+              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
+            </div>
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
+              <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
+          
+              <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
+                <div id="mc_embed_signup_scroll">
+                  <div class="mc-field-group">
+          	  <input placeholder="Your email address" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                  </div>
+          	<div id="mce-responses" class="clear">
+          	  <div class="response" id="mce-error-response" style="display:none"></div>
+          	  <div class="response" id="mce-success-response" style="display:none"></div>
+          	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
+                  <p class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></p>
+                </div>
+                <p>
+              </form>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+]]></description><link>https://travisjeffery.com/b/2019/11/i-ll-take-pkg-over-internal</link><guid isPermaLink="true">https://travisjeffery.com/b/2019/11/i-ll-take-pkg-over-internal</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Fri, 01 Nov 2019 13:42:00 GMT</pubDate></item><item><title><![CDATA[Keep passwords and secrets out of your logs with Go]]></title><description><![CDATA[<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -33,14 +170,15 @@
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -58,13 +196,13 @@
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: June 4th, 2018<br>
-              Tags: go, ops<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 04/06/18</span>
+              <span class="post-footer-item">Tags go, ops</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -73,8 +211,21 @@
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -133,14 +284,15 @@
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -158,13 +310,13 @@
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: February 1st, 2018<br>
-              Tags: books<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 01/02/18</span>
+              <span class="post-footer-item">Tags books</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -173,8 +325,21 @@
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -233,14 +398,15 @@
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -258,13 +424,13 @@
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: December 21st, 2017<br>
-              Tags: design, engineering<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 21/12/17</span>
+              <span class="post-footer-item">Tags design, engineering</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -273,8 +439,21 @@
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -333,14 +512,15 @@
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -358,13 +538,13 @@
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: October 4th, 2017<br>
-              Tags: companies<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 04/10/17</span>
+              <span class="post-footer-item">Tags companies</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -373,8 +553,21 @@
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -433,14 +626,15 @@
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -458,13 +652,13 @@
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: September 7th, 2017<br>
-              Tags: ops<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 07/09/17</span>
+              <span class="post-footer-item">Tags ops</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -473,8 +667,21 @@
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -533,14 +740,15 @@
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -558,13 +766,13 @@
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: June 14th, 2017<br>
-              Tags: communication<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 14/06/17</span>
+              <span class="post-footer-item">Tags communication</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -573,8 +781,21 @@
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -633,14 +854,15 @@
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -658,13 +880,13 @@
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: January 19th, 2017<br>
-              Tags: kafka, opensource<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 19/01/17</span>
+              <span class="post-footer-item">Tags kafka, opensource</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -673,8 +895,21 @@
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -733,14 +968,15 @@
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -800,13 +1036,13 @@ security-groups</code></pre>
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: November 29th, 2016<br>
-              Tags: ops<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 29/11/16</span>
+              <span class="post-footer-item">Tags ops</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -815,8 +1051,21 @@ security-groups</code></pre>
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -875,14 +1124,15 @@ security-groups</code></pre>
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -900,13 +1150,13 @@ security-groups</code></pre>
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: October 13th, 2016<br>
-              Tags: kafka<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 13/10/16</span>
+              <span class="post-footer-item">Tags kafka</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -915,8 +1165,21 @@ security-groups</code></pre>
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -975,14 +1238,15 @@ security-groups</code></pre>
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -1000,13 +1264,13 @@ security-groups</code></pre>
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: September 23rd, 2016<br>
-              Tags: ops<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 23/09/16</span>
+              <span class="post-footer-item">Tags ops</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -1015,8 +1279,21 @@ security-groups</code></pre>
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1075,14 +1352,15 @@ security-groups</code></pre>
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -1100,13 +1378,13 @@ security-groups</code></pre>
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: June 8th, 2016<br>
-              Tags: ops<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 08/06/16</span>
+              <span class="post-footer-item">Tags ops</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -1115,8 +1393,21 @@ security-groups</code></pre>
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1175,14 +1466,15 @@ security-groups</code></pre>
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -1200,13 +1492,13 @@ security-groups</code></pre>
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: May 9th, 2016<br>
-              Tags: kafka<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 09/05/16</span>
+              <span class="post-footer-item">Tags kafka</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -1215,8 +1507,21 @@ security-groups</code></pre>
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1275,14 +1580,15 @@ security-groups</code></pre>
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -1306,13 +1612,13 @@ can graph them in Grafana or something similar.</p>
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: March 26th, 2016<br>
-              Tags: opensource<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 26/03/16</span>
+              <span class="post-footer-item">Tags opensource</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -1321,8 +1627,21 @@ can graph them in Grafana or something similar.</p>
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1381,14 +1700,15 @@ can graph them in Grafana or something similar.</p>
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -1413,13 +1733,13 @@ can graph them in Grafana or something similar.</p>
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: November 30th, 2015<br>
-              Tags: ops<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 30/11/15</span>
+              <span class="post-footer-item">Tags ops</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -1428,8 +1748,21 @@ can graph them in Grafana or something similar.</p>
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1488,14 +1821,15 @@ can graph them in Grafana or something similar.</p>
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -1545,13 +1879,13 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: November 17th, 2015<br>
-              Tags: ops<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 17/11/15</span>
+              <span class="post-footer-item">Tags ops</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -1560,8 +1894,21 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1620,14 +1967,15 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -1646,13 +1994,13 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: November 10th, 2015<br>
-              Tags: javascript<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 10/11/15</span>
+              <span class="post-footer-item">Tags javascript</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -1661,8 +2009,21 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1721,14 +2082,15 @@ HTTP/<span class="hljs-number">1.1</span> <span class="hljs-number">200</span> O
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -1754,13 +2116,13 @@ adds the imgs to the web page.</p>
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: October 24th, 2015<br>
-              Tags: javascript, opensource<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 24/10/15</span>
+              <span class="post-footer-item">Tags javascript, opensource</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -1769,8 +2131,21 @@ adds the imgs to the web page.</p>
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -1829,14 +2204,15 @@ adds the imgs to the web page.</p>
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -1964,13 +2340,13 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: October 21st, 2015<br>
-              Tags: javascript<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 21/10/15</span>
+              <span class="post-footer-item">Tags javascript</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -1979,8 +2355,21 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -2039,14 +2428,15 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
               <a class="" href="/">travis jeffery</a>
             </h1>
           
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
+            <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
               <div class="no-gutters col-xs-12">
                 <a href="/subscribe">Subscribe</a>
+              </div>    
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
               </div>
             </div>
           </hgroup>
@@ -2065,13 +2455,13 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
 
           <hr class="col-xs-12 no-gutters">
 
-          <footer class="col-xs-12 no-gutters">
+          <footer id="post-footer" class="col-xs-12 no-gutters">
             <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: October 7th, 2015<br>
-              Tags: ops<br>
-              <a href="/#recent">Read more posts &#8230;</a>
+              <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+              <span class="post-footer-item">Written 07/10/15</span>
+              <span class="post-footer-item">Tags ops</span>
+              <span class="post-footer-item"><a href="/#recent">Read more posts&#8230;</a></span>
             </p>
           </footer>
           <hr class="col-xs-12 no-gutters">
@@ -2080,8 +2470,21 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
             <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
               <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+              <div class="no-gutters col-xs-12">
+                <a href="https://twitter.com/travisjeffery">Twitter</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://github.com/travisjeffery">GitHub</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="mailto:tj@travisjeffery.com">Email</a>
+              </div>
+              <div class="no-gutters col-xs-12">
+                <a href="https://travisjeffery.com">Home page</a>
+              </div>
             </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
+          
+            <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
               <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
           
               <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
@@ -2105,123 +2508,4 @@ app.use(<span class="hljs-function"><span class="hljs-keyword">function</span> *
     </div>
   </body>
 </html>
-]]></description><link>https://travisjeffery.com/b/2015/10/building-infrastructure-with-docker-aws-ecs-and-hashicorp-s-terraform</link><guid isPermaLink="true">https://travisjeffery.com/b/2015/10/building-infrastructure-with-docker-aws-ecs-and-hashicorp-s-terraform</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Wed, 07 Oct 2015 07:17:00 GMT</pubDate></item><item><title><![CDATA[Piping into a Docker container]]></title><description><![CDATA[<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="Travis Jeffery">
-    <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
-    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
-    <script>
-     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  
-     ga('create', 'UA-8462120-1', 'travisjeffery.com');
-      ga('send', 'pageview');
-    </script>
-    <title>Piping into a Docker container</title>
-  </head>
-  <body>
-    <div class="container-fluid container">
-      <div class="row">
-        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
-            <img class="no-gutters col-xs-12 col-sm-1 hidden-xs-down" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
-          
-            <h1 class="logo no-gutters col-xs-6 col-sm-6">
-              <a class="" href="/">travis jeffery</a>
-            </h1>
-          
-            <div class="social no-gutters col-xs-6 col-sm-4 pull-right">
-              <div class="no-gutters col-xs-12">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-              </div>
-          
-              <div class="no-gutters col-xs-12">
-                <a href="/subscribe">Subscribe</a>
-              </div>
-            </div>
-          </hgroup>
-          
-          <hr class="col-xs-12 no-gutters">
-
-          <article class="col-xs-12 no-gutters">
-            <header>
-              <h1 class="article-title">Piping into a Docker container</h1>
-            </header>
-
-            <p>Here’s how you can write docker images that you can pipe into:</p>
-<p>Dockerfile, here I’m installing the go programs I’m going to run and pipe into:</p>
-<pre><code class="hljs sh">FROM golang
-RUN go get github.com/segmentio/throttle
-RUN go get github.com/segmentio/json_to_nsq
-COPY entrypoint.sh /entrypoint.sh
-CMD [<span class="hljs-string">"/bin/sh"</span>, <span class="hljs-string">"/entrypoint.sh"</span>]</code></pre>
-
-<p>entrypoint.sh, here I’m reading from stdin and piping into the programs I want to run:</p>
-<pre><code class="hljs sh">rate=<span class="hljs-variable">${2:-50}</span>
-addr=<span class="hljs-variable">${3:-nsqd:4150}</span>
-
-<span class="hljs-built_in">echo</span> <span class="hljs-string">"Sending events to <span class="hljs-variable">$addr</span> at the rate of <span class="hljs-variable">$rate</span>/s"</span>
-
-cat - \
-    | throttle <span class="hljs-variable">$rate</span> \
-    | json_to_nsq -t events -a <span class="hljs-string">"<span class="hljs-variable">$addr</span>"</span></code></pre>
-
-<p>And here’s how to run it (assuming the image is called <code>events</code>):</p>
-<pre><code class="hljs sh">cat events.json | docker run -it events</code></pre>
-
-          </article>
-
-          <hr class="col-xs-12 no-gutters">
-
-          <footer class="col-xs-12 no-gutters">
-            <p>
-              Share: <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="travisjeffery" data-size="large">Tweet about this article</a><br>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-              Written: September 25th, 2015<br>
-              Tags: ops<br>
-              <a href="/#recent">Read more posts &#8230;</a>
-            </p>
-          </footer>
-          <hr class="col-xs-12 no-gutters">
-          
-          <footer class="footer col-xs-12 no-gutters left">
-            <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
-              <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            </div>
-            <div class="col-xs-12 col-sm-8 no-gutters pull-sm-right">
-              <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
-          
-              <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
-                <div id="mc_embed_signup_scroll">
-                  <div class="mc-field-group">
-          	  <input placeholder="Your email address" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
-                  </div>
-          	<div id="mce-responses" class="clear">
-          	  <div class="response" id="mce-error-response" style="display:none"></div>
-          	  <div class="response" id="mce-success-response" style="display:none"></div>
-          	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
-                  <p class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></p>
-                </div>
-                <p>
-              </form>
-            </div>
-          </footer>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
-]]></description><link>https://travisjeffery.com/b/2015/09/piping-into-a-docker-container</link><guid isPermaLink="true">https://travisjeffery.com/b/2015/09/piping-into-a-docker-container</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Sat, 26 Sep 2015 01:16:00 GMT</pubDate></item></channel></rss>
+]]></description><link>https://travisjeffery.com/b/2015/10/building-infrastructure-with-docker-aws-ecs-and-hashicorp-s-terraform</link><guid isPermaLink="true">https://travisjeffery.com/b/2015/10/building-infrastructure-with-docker-aws-ecs-and-hashicorp-s-terraform</guid><dc:creator><![CDATA[Travis Jeffery]]></dc:creator><pubDate>Wed, 07 Oct 2015 07:17:00 GMT</pubDate></item></channel></rss>

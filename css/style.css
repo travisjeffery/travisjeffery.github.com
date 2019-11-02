@@ -6101,6 +6101,9 @@ a.bg-danger:focus, a.bg-danger:hover {
   html {
     font-size: 19px;
   }
+  .subscribe {
+    margin-top: 1rem;
+  }
 }
 
 @media screen and (min-width: 600px) {
@@ -6359,4 +6362,18 @@ article footer {
 
 .mc-field-group {
   padding: 0;
+}
+
+#post-footer p {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.post-footer-item:not(:last-child) {
+  flex-basis: 1rem;
+}
+
+.post-footer-item:last-child {
+  flex-basis: 6rem;
 }
