@@ -53,7 +53,7 @@
               <h1 class="article-title">I'll take pkg over internal</h1>
             </header>
 
-            <p>Most people who would bother with the matter at all would admit that the layout of Go projects is in a bad way. To pkg, or not to pkg, that is the question.</p>
+            <p>Most people who would bother with the matter at all would admit that the layout of Go projects is in a bad way. To pkg, or not to pkg, that is the question. To put your project’s libraries under a directory named pkg, or not?</p>
 <p>The pkg convention started when, prior to Go 1, the Go team put the stdlib in $GOROOT/src/pkg. Later they deleted the pkg directory and moved the stdlib to $GOROOT/src. (Brad Fitzpatrick talked about the history on <a href="https://twitter.com/bradfitz/status/1039512487538970624">Twitter</a>.) By that time, projects like Kubernetes, Docker, Etcd had adopted pkg in their own projects.</p>
 <p>Go doesn’t have an official project layout so the choices popular projects make are as close as the community gets to having a standard. These projects are often the first projects that Go programmers learn from. A GitHub repo called golang-standards/project-layout with 11K stars recommends pkg. Most of the most popular Go projects use pkg. New Go programmers ask why I don’t use pkg. I don’t see pkg going away unless the Go team publishes a doc that recommends not to.</p>
 <p>I didn’t use pkg. Three factors caused me to reevaluate:</p>
