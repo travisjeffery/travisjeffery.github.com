@@ -6,12 +6,10 @@ comments: false
 collection: git
 ---
 
-## Introduction
-
 Having a modular and well-organized code is clearly great from an architectural
 standpoint, but it can make the actual filesystem layout and hierarchy of your
 project a little complex, now that text editors and IDEs also have good
-fuzzy finding capabilities you can largely not worry about this and still 
+fuzzy finding capabilities you can largely not worry about this and still
 code efficiently. But when working with Git as your version control it does
 help to be intimate with the filesystem layout of your project, or at least
 have some tricks up your sleeve. In this post I'd like to share some tricks I
