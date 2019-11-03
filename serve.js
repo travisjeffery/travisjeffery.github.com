@@ -18,7 +18,7 @@ var debug = require('./lib/metalsmith-debug')
 var redirect = require('metalsmith-redirect')
 var feed = require('metalsmith-feed')
 var tags = require('./lib/metalsmith-tags')
-var excerpt = require('metalsmith-excerptor')
+var excerpt = require('metalsmith-excerpts')
 
 var colors = {
   calls: 0,
