@@ -18,6 +18,7 @@ var debug = require('./lib/metalsmith-debug')
 var redirect = require('metalsmith-redirect')
 var feed = require('metalsmith-feed')
 var tags = require('./lib/metalsmith-tags')
+var siteurl = require('./lib/metalsmith-url')
 var excerpt = require('metalsmith-excerpts')
 
 var colors = {
@@ -292,6 +293,7 @@ var pipe = metalsmith(__dirname)
       maxLength: 160,
       ellipsis: '…'
     }))
+    .use(siteurl(url))
     .use(feed({
       collection: 'articles',
       preprocess: function(file) {
