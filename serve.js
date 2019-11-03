@@ -18,6 +18,7 @@ var debug = require('./lib/metalsmith-debug')
 var redirect = require('metalsmith-redirect')
 var feed = require('metalsmith-feed')
 var tags = require('./lib/metalsmith-tags')
+var excerpt = require('metalsmith-excerptor')
 
 var colors = {
   calls: 0,
@@ -286,6 +287,10 @@ var pipe = metalsmith(__dirname)
       redirections: {
         '/b/2012/12/overriding-uiviewcontrollers-view-property-done-right': '/b/2012/12/overriding-uiviewcontroller-s-view-property-done-right/'
       }
+    }))
+    .use(excerpt({
+      maxLength: 160,
+      ellipsis: '…'
     }))
     .use(feed({
       collection: 'articles',
