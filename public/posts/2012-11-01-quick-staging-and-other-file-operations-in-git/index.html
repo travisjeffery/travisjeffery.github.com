@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Hacker, writer, good guy.">
+
+    <link rel="alternate" type="application/rss+xml" title="Travis Jeffery's Blog Feed" href="https://travisjeffery.com/rss.xml">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Quick staging and other file operations in git">
+    <meta property="og:description" content="Having a modular and well-organized code is clearly great from an architectural
+standpoint, but it can make the actual filesystem layout and hierarchy of your
+project a little complex, now that text editors and IDEs also have good
+fuzzy finding capabilities you can largely not worry about this and still
+code efficiently. But when working with Git as your version control it does
+help to be intimate with the filesystem layout of your project, or at least
+have some tricks up your sleeve. In this post I&rsquo;d like to share some tricks I
+use.">
+    <meta property="article:published_time" content="2012-11-01T00:00:00Z">
+    <meta property="article:modified_time" content="2012-11-01T00:00:00Z">
+    
+    <meta property="og:url" content="http://localhost:1313/posts/2012-11-01-quick-staging-and-other-file-operations-in-git/">
+    <meta property="og:site_name" content="Travis Jeffery's Blog">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:site" content="@travisjeffery">
+    
+    <meta name="twitter:text:title" content="Quick staging and other file operations in git">
+    
+    <meta name="twitter:image" content="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39">
+    <meta name="twitter:card" content="summary">
+
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Quick staging and other file operations in git</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+  <img class="no-gutters col-xs-3 col-sm-1" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+
+  <h1 class="logo no-gutters col-xs-4 col-sm-6">
+    <a class="" href="/">travis jeffery</a>
+  </h1>
+
+  <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
+    <div class="no-gutters col-xs-12">
+      <a href="/subscribe">Subscribe</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://github.com/travisjeffery">GitHub</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://twitter.com/travisjeffery">Twitter</a>
+    </div>
+  </div>
+</hgroup>
+
+<hr class="col-xs-12 no-gutters">
+
+
+          
+<article class="col-xs-12 no-gutters">
+  <header>
+    <h1 class="article-title">Quick staging and other file operations in git</h1>
+  </header>
+
+  <p>Having a modular and well-organized code is clearly great from an architectural
+standpoint, but it can make the actual filesystem layout and hierarchy of your
+project a little complex, now that text editors and IDEs also have good
+fuzzy finding capabilities you can largely not worry about this and still
+code efficiently. But when working with Git as your version control it does
+help to be intimate with the filesystem layout of your project, or at least
+have some tricks up your sleeve. In this post I&rsquo;d like to share some tricks I
+use.</p>
+<h2 id="staging-files-filtered-matching-some-pattern">Staging files filtered matching some pattern</h2>
+<p>Most filenames in your project will be named after some convention, in Rails
+projects most of the code associated with a user will fall under
+<code>controllers/users_controller.rb</code>, <code>models/user.rb</code>, and
+<code>views/users/*.html.erb</code>. And similarly in an iOS project you may have
+something like <code>UsersViewController.{h,m}</code>, <code>User.{h,m}</code>.</p>
+<p>So let&rsquo;s say we want to stage all the modified files associated with a user
+really quickly, here&rsquo;s what I&rsquo;d do:</p>
+<pre tabindex="0"><code>git add `git ls-files --modified | grep -e &#34;user.*&#34;`
+</code></pre><p>You can use ack instead of grep too, and I&rsquo;d actually likely use ack myself.</p>
+<p><code>git ls-files</code> has the benefit of being very fast and smart since it already knows what
+files are under version control and which files are modified, so it be much
+faster than something like <code>find</code> which by default would search every file in
+your project.</p>
+<p>This technique can be used for a variety of things, let&rsquo;s say you staged all
+modified files in your project when didn&rsquo;t mean to stage your controllers you
+could do something like:</p>
+<pre tabindex="0"><code>git reset `git ls-files | ack &#34;.*_controller.rb&#34;`
+</code></pre><h2 id="staging-whole-directories">Staging whole directories</h2>
+<p>Another trick I&rsquo;ve found that people often don&rsquo;t know or take advantage of is
+being able to run Git operations on whole directories.</p>
+<p>So in the previous example where we unstaged all controller files, which would
+likely all be in the same directory, <code>app/controllers</code> we could instead just
+have done this:</p>
+<p><code>git reset app/controllers</code></p>
+<p>This technique works generally works with commands you&rsquo;ve seen take a single
+file.</p>
+<p>I also recommend checking out a post I made earlier on <a href="/b/2012/02/search-a-git-repo-like-a-ninja/">lots of tips for
+searching Git repos</a>.  Hopefully
+this post has made you a more efficient Gitter, and if you have any other tips
+please let me know.</p>
+
+
+</article>
+
+<hr class="col-xs-12 no-gutters">
+
+<footer id="post-footer" class="col-xs-12 no-gutters">
+  <p>
+    <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button" data-via="travisjeffery" data-size="large">Tweet about this article</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+    <span class="post-footer-item">Written Nov 1, 2012</span>
+    <span class="post-footer-item">Tags <a href="/tags/git/">git</a></span>
+    <span class="post-footer-item"><a href="/">Read more posts&#8230;</a></span>
+  </p>
+</footer>
+
+
+          <hr class="col-xs-12 no-gutters">
+
+<footer class="footer col-xs-12 no-gutters left">
+  <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
+    <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <div class="no-gutters col-xs-12">
+      <a href="https://twitter.com/travisjeffery">Twitter</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://github.com/travisjeffery">GitHub</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="mailto:tj@travisjeffery.com">Email</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://travisjeffery.com">Homepage</a>
+    </div>
+  </div>
+
+  <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
+    <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
+
+    <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
+      <div id="mc_embed_signup_scroll">
+        <div class="mc-field-group">
+	  <input placeholder="Your email address" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+        </div>
+	<div id="mce-responses" class="clear">
+	  <div class="response" id="mce-error-response" style="display:none"></div>
+	  <div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
+        <p class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></p>
+      </div>
+      <p>
+    </form>
+  </div>
+</footer>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

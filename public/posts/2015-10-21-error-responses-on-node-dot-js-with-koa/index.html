@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Hacker, writer, good guy.">
+
+    <link rel="alternate" type="application/rss+xml" title="Travis Jeffery's Blog Feed" href="https://travisjeffery.com/rss.xml">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Error responses on Node.js with Koa">
+    <meta property="og:description" content="Koa is a web framework that&rsquo;s the next generation Express in that it&rsquo;s built by
+the same team, and aims to be smaller, more expressive, and more robust for
+building web applications and APIs. It accomplishes this in large part by
+using generators which enables writing asynchronous JS without callbacks and
+greatly simplifies flow control and handling errors.
+In this article I&rsquo;m gonna show how you can use Koa to simplify sending error
+responses. If you get lost with the
+terminology here I recommend skimming over the Koa docs or
+asking me a question.">
+    <meta property="article:published_time" content="2015-10-21T00:00:00Z">
+    <meta property="article:modified_time" content="2015-10-21T00:00:00Z">
+    
+    <meta property="og:url" content="http://localhost:1313/posts/2015-10-21-error-responses-on-node-dot-js-with-koa/">
+    <meta property="og:site_name" content="Travis Jeffery's Blog">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:site" content="@travisjeffery">
+    
+    <meta name="twitter:text:title" content="Error responses on Node.js with Koa">
+    
+    <meta name="twitter:image" content="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39">
+    <meta name="twitter:card" content="summary">
+
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Error responses on Node.js with Koa</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+  <img class="no-gutters col-xs-3 col-sm-1" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+
+  <h1 class="logo no-gutters col-xs-4 col-sm-6">
+    <a class="" href="/">travis jeffery</a>
+  </h1>
+
+  <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
+    <div class="no-gutters col-xs-12">
+      <a href="/subscribe">Subscribe</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://github.com/travisjeffery">GitHub</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://twitter.com/travisjeffery">Twitter</a>
+    </div>
+  </div>
+</hgroup>
+
+<hr class="col-xs-12 no-gutters">
+
+
+          
+<article class="col-xs-12 no-gutters">
+  <header>
+    <h1 class="article-title">Error responses on Node.js with Koa</h1>
+  </header>
+
+  <p>Koa is a web framework that&rsquo;s the next generation Express in that it&rsquo;s built by
+the same team, and aims to be smaller, more expressive, and more robust for
+building web applications and APIs. It accomplishes this in large part by
+using generators which enables writing asynchronous JS without callbacks and
+greatly simplifies flow control and handling errors.</p>
+<p>In this article I&rsquo;m gonna show how you can use Koa to simplify sending error
+responses. If you get lost with the
+terminology here I recommend skimming over the Koa <a href="http://koajs.com/">docs</a> or
+<a href="https://twitter.com/travisjeffery">asking me a question</a>.</p>
+<p>A Koa application is an object containing an array of middleware generator
+functions that are composed and ran in a stack-like manner upon request. The
+most basic error response middleware would look something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#66d9ef">function</span> <span style="color:#f92672">*</span>(<span style="color:#a6e22e">next</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// yield downstream
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">yield</span> <span style="color:#a6e22e">next</span>;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">500</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">message</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>Somewhere downstream you&rsquo;d have a call to a generator like <code>findByEmail</code> below that would
+throw. For example, we&rsquo;re throwing an error here when the given user isn&rsquo;t found.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">Users</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">findByEmail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span><span style="color:#f92672">*</span>(<span style="color:#a6e22e">email</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">findOne</span>({ <span style="color:#a6e22e">email</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">email</span> });
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">user</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#39;User not found&#39;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">404</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`User not found with email: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">email</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">err</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">user</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>With this implementation, you&rsquo;d have to do something similar for each of your
+APIs and error responses. E.g. 401 for when the user isn&rsquo;t logged-in, 403 for
+bad attributes, etc.</p>
+<p>Let&rsquo;s find another way to have a well contained and clean way to send back those
+error responses and even share those responses between code bases with different
+languages.</p>
+<p>First we put our error response schema in YAML. This makes for a very clean and
+nicely structured schema, and also means that you could use the same error
+schema in another language.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">user_not_found</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">message</span>: <span style="color:#ae81ff">User not found with &#34;:email&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">status</span>: <span style="color:#ae81ff">404</span>
+</span></span></code></pre></div><p>Our <code>findByEmail</code> implementation looks like this now:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">Users</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">findByEmail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span><span style="color:#f92672">*</span>(<span style="color:#a6e22e">email</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">query</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">email</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">email</span> };
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">user</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">yield</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">findOne</span>(<span style="color:#a6e22e">query</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">user</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">thrower</span>.<span style="color:#66d9ef">throw</span>(<span style="color:#e6db74">&#39;user_not_found&#39;</span>, <span style="color:#a6e22e">query</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">user</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Here&rsquo;s <code>thrower.throw</code>, which is used to add the key/values from <code>extra</code> onto
+the error which will then be used to fill in the user&rsquo;s email into the error
+message.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">Thrower</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#66d9ef">throw</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">msg</span>, <span style="color:#a6e22e">extra</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#a6e22e">msg</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">k</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">extra</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span>[<span style="color:#a6e22e">k</span>] <span style="color:#f92672">=</span> <span style="color:#a6e22e">extra</span>[<span style="color:#a6e22e">k</span>];
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">err</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>And for our error middleware we have:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fmt</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;format-string&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#66d9ef">function</span> <span style="color:#f92672">*</span>(<span style="color:#a6e22e">next</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#a6e22e">next</span>;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">schema</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">schemas</span>[<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">message</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">schema</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">schema</span>.<span style="color:#a6e22e">status</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fmt</span>(<span style="color:#a6e22e">schema</span>.<span style="color:#a6e22e">message</span>, <span style="color:#a6e22e">err</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">500</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">message</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>And voila you have a scalable and simple system for sending back error responses.</p>
+<p>This is also makes adding error tracking very easy too, since you have a single
+point of contact where all errors with go through. So you can make a single call
+to Sentry, or some other JS error tracker here.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">fmt</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;format-string&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">app</span>.<span style="color:#a6e22e">use</span>(<span style="color:#66d9ef">function</span> <span style="color:#f92672">*</span>(<span style="color:#a6e22e">next</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> <span style="color:#a6e22e">next</span>;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">err</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">schema</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">schemas</span>[<span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">message</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">errorTracker</span>.<span style="color:#a6e22e">track</span>(<span style="color:#a6e22e">err</span>); <span style="color:#75715e">// Send error to sentry or wherever
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">schema</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">schema</span>.<span style="color:#a6e22e">status</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fmt</span>(<span style="color:#a6e22e">schema</span>.<span style="color:#a6e22e">message</span>, <span style="color:#a6e22e">err</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">||</span> <span style="color:#ae81ff">500</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">message</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>I&rsquo;ll be open sourcing a lib to help bootstrap this setup shortly.</p>
+
+
+</article>
+
+<hr class="col-xs-12 no-gutters">
+
+<footer id="post-footer" class="col-xs-12 no-gutters">
+  <p>
+    <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button" data-via="travisjeffery" data-size="large">Tweet about this article</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+    <span class="post-footer-item">Written Oct 21, 2015</span>
+    <span class="post-footer-item">Tags <a href="/tags/javascript/">javascript</a></span>
+    <span class="post-footer-item"><a href="/">Read more posts&#8230;</a></span>
+  </p>
+</footer>
+
+
+          <hr class="col-xs-12 no-gutters">
+
+<footer class="footer col-xs-12 no-gutters left">
+  <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
+    <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <div class="no-gutters col-xs-12">
+      <a href="https://twitter.com/travisjeffery">Twitter</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://github.com/travisjeffery">GitHub</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="mailto:tj@travisjeffery.com">Email</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://travisjeffery.com">Homepage</a>
+    </div>
+  </div>
+
+  <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
+    <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
+
+    <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
+      <div id="mc_embed_signup_scroll">
+        <div class="mc-field-group">
+	  <input placeholder="Your email address" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+        </div>
+	<div id="mce-responses" class="clear">
+	  <div class="response" id="mce-error-response" style="display:none"></div>
+	  <div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
+        <p class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></p>
+      </div>
+      <p>
+    </form>
+  </div>
+</footer>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

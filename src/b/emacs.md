@@ -2,9 +2,11 @@ Emacs in 2025 and beyond
 
 Next year Emacs turns 50. Pretty impressive for a text editor that's still widely used to this day. I've used Emacs for 25 years now and will probably use it until the day I die. The question is: do use Emacs out of momentum, or if I were new to it today - would I consider it a worthy investment?
 
-I know the upside of Vim. I used Vim for a year-ish early on. If life and computers were just about editing text in the fastest way, I would use Vim. On the computer, I write code, run tests, version control, read documentation, shell out (e.g. kubectl, aws cli), calculate math expressions, keep notes, track calendar events, manage accounting, and so on. And Emacs is the only software that does them all, and does them well.
+Early on when I began programming I did consider other editors. My first ed. I know the upside of Vim. I used Vim for a year or two-ish early on. If life and computers were just about editing text in the fastest way, I would use Vim. On the computer, I write code, run tests, version control, read documentation, shell out (e.g. kubectl, aws cli), calculate math expressions, keep notes, track calendar events, manage accounting, and so on. And Emacs is the only software that does them all, and does them well.
 
-Emacs is aesthetically superior to Vim. It has a feeling of being thought out rather than hacks on hacks. Emacs is fundamentally (Emacs) Lisp, nearly everything you encounter Elisp data structures you can inspect modify, like being The One in The Matrix. Vim is a C core with Vimscript bolted on top as an afterthought. 
+Emacs is aesthetic and thought out, Vim is haphazard. Emacs was designed by Lisp hackers to be a Lisp machine for text. Nearly everything you encounter in Emacs is a Lisp data structures you can inspect and modify. Emacs buffers are sophisticated objects with rich metadata - they have modes - which are just Lisp, local variables, overlays for text properties, and you can programatically manipulate them in Elisp. Emacs' extension language is its implementation language. Whereas, Vim is a C core with Vimscript bolted on top as an afterthought. In Neovim you can use Lua, another bolted on layer on top of the same underlying, awkward API. Vim buffers aren't much more than files in memory. The API for working with them are clunky, relying on ex commands, line operations, and substitions.
+
+
 
 Is Emacs still worth using? Absolutely I think. I don't
 

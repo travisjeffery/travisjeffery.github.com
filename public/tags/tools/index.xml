@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tools on Travis Jeffery</title>
+    <link>http://localhost:1313/tags/tools/</link>
+    <description>Recent content in Tools on Travis Jeffery</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Feb 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Modern grep</title>
+      <link>http://localhost:1313/posts/2012-02-09-modern-grep/</link>
+      <pubDate>Thu, 09 Feb 2012 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2012-02-09-modern-grep/</guid>
+      <description>&lt;p&gt;Update: I updated the post for ripgrep.&lt;/p&gt;&#xA;&lt;p&gt;grep reigned as the preeminent text search tool for a long time. Yet grep&amp;rsquo;s overly unopinionated&#xA;approach to defaults and maintaining backwards compatibility allowed new tools &amp;mdash; namely; ack,&#xA;the silver searcher, and ripgrep &amp;mdash; to encroach on its territory.&lt;/p&gt;&#xA;&lt;p&gt;grep is ubiquitous. Unix-like systems come with grep installed and you can install grep on Windows. I search with ripgrep on my computer because I can install it once and use its features day-to-day. But when I work on remote systems, it&amp;rsquo;s more efficient to search with grep. It&amp;rsquo;s worth knowing how to use grep and how to improve it.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

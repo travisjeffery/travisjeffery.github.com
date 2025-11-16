@@ -1,0 +1,31 @@
+{{ define "main" }}
+<h3 class="section-header no-gutters col-xs-12"><span class="who">who:</span></h3>
+
+<p class="col-xs-12 no-gutters">I authored <a href="https://pragprog.com/titles/tjgo/distributed-services-with-go/">Distributed Services with Go</a>. The book teaches you how to build distributed systems by walking you through building a real-world software project (a self-contained, persistent event-stream service) from start to finish. The book introduces distributed systems practically, explaining the pieces that make up a distributed system and showing how they fit together.</p>
+
+<p class="col-xs-12 no-gutters">I work at Confluent hacking on Kafka, its streaming platform, and its cloud service. Previously, I worked at Segment and Basecamp.</p>
+
+<p class="col-xs-12 no-gutters">I write and maintain open-source software, namely: Jocko, Timecop, Mocha, ClangFormat for Xcode, and <a href="https://github.com/travisjeffery">more on GitHub</a>.</p>
+
+<p class="col-xs-12 no-gutters">
+  Want to reach me? Send me an <a href="mailto:tj@travisjeffery.com">email</a> or message me on <a href="https://twitter.com/travisjeffery">Twitter</a>.
+</p>
+
+<div style="clear:both;"></div>
+
+<hr>
+
+<h3 class="section-header no-gutters col-xs-12" id="posts"><span style="background-color: paleturquoise">posts:</span></h3>
+
+<ul class="plain col-xs-12">
+  {{ range (where .Site.RegularPages "Type" "posts").ByDate.Reverse }}
+  <li>
+    <span class="list-title col-xs-9"><strong>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </strong></span>
+    <span class="list-date col-xs-3 push-xs-left pull-xs-right">{{ .Date.Format "Jan 2, 2006" }}</span>
+  </li>
+  {{ end }}
+</ul>
+
+{{ end }}

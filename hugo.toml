@@ -1,0 +1,14 @@
+baseURL = 'https://travisjeffery.com/'
+languageCode = 'en-us'
+title = 'Travis Jeffery'
+
+outputs = { home = ["HTML", "JSON"] }
+
+[params]
+  description = "Hacker, writer, good guy."
+  author = "Travis Jeffery"
+  email = "tj@travisjeffery.com"
+  url = "https://travisjeffery.com"
+
+[markup.goldmark.renderer]
+  unsafe = true

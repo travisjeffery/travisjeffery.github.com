@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Postgres on Travis Jeffery</title>
+    <link>http://localhost:1313/tags/postgres/</link>
+    <description>Recent content in Postgres on Travis Jeffery</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 20 Feb 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using PostgreSQL&#39;s Hstore with Rails</title>
+      <link>http://localhost:1313/posts/2012-02-20-using-postgress-hstore-with-rails/</link>
+      <pubDate>Mon, 20 Feb 2012 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2012-02-20-using-postgress-hstore-with-rails/</guid>
+      <description>&lt;h2 id=&#34;prelude&#34;&gt;Prelude&lt;/h2&gt;&#xA;&lt;p&gt;Recently I implemented a piece of functionality that used PostgreSQL&amp;rsquo;s hstore&#xA;data type in a Rails application and I&amp;rsquo;d like to share how we did it including&#xA;some improvements you can make to use data stored as an hstore easier.&lt;/p&gt;&#xA;&lt;p&gt;hstore is PostgreSQL data type similar to integer, date and text, but&#xA;unlike these atomic data types hstore stores key/value pairs within a single&#xA;PostgreSQL value.&lt;/p&gt;&#xA;&lt;p&gt;Hashes/dictionaries are the most used data structure in computer science and&#xA;programming so having them as a data type in a database is massively&#xA;powerful with many use cases, e.g. dynamic columns.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

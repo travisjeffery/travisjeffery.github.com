@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="Hacker, writer, good guy.">
+
+    <link rel="alternate" type="application/rss+xml" title="Travis Jeffery's Blog Feed" href="https://travisjeffery.com/rss.xml">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Rendering errors with JSON and Rails">
+    <meta property="og:description" content="I&rsquo;ve seen bad practices for handling errors with JSON and Rails:
+
+Not using proper HTTP statuses;
+Not using the error callback; and
+Making errors message building harder than necessary.
+
+Let&rsquo;s look at some examples and how to fix them.
+Not using proper HTTP statuses and the error callback
+Callers of your API should know whether their request worked by looking at the response&rsquo;s status code, not by looking at the response&rsquo;s body. When you don&rsquo;t use status codes, every response looks like a successful response:">
+    <meta property="article:published_time" content="2012-04-27T00:00:00Z">
+    <meta property="article:modified_time" content="2012-04-27T00:00:00Z">
+    
+    <meta property="og:url" content="http://localhost:1313/posts/2012-04-27-rendering-errors-in-json-with-rails/">
+    <meta property="og:site_name" content="Travis Jeffery's Blog">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:site" content="@travisjeffery">
+    
+    <meta name="twitter:text:title" content="Rendering errors with JSON and Rails">
+    
+    <meta name="twitter:image" content="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39">
+    <meta name="twitter:card" content="summary">
+
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
+    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                               m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                              })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-8462120-1', 'travisjeffery.com');
+      ga('send', 'pageview');
+    </script>
+    <title>Rendering errors with JSON and Rails</title>
+  </head>
+  <body>
+    <div class="container-fluid container">
+      <div class="row">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+          <hgroup id="header" class="col-xs-12 no-gutters clearfix">
+  <img class="no-gutters col-xs-3 col-sm-1" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80" />
+
+  <h1 class="logo no-gutters col-xs-4 col-sm-6">
+    <a class="" href="/">travis jeffery</a>
+  </h1>
+
+  <div class="social no-gutters col-xs-6 col-sm-5 pull-right">
+    <div class="no-gutters col-xs-12">
+      <a href="/subscribe">Subscribe</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://github.com/travisjeffery">GitHub</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://twitter.com/travisjeffery">Twitter</a>
+    </div>
+  </div>
+</hgroup>
+
+<hr class="col-xs-12 no-gutters">
+
+
+          
+<article class="col-xs-12 no-gutters">
+  <header>
+    <h1 class="article-title">Rendering errors with JSON and Rails</h1>
+  </header>
+
+  <p>I&rsquo;ve seen bad practices for handling errors with JSON and Rails:</p>
+<ul>
+<li>Not using proper HTTP statuses;</li>
+<li>Not using the error callback; and</li>
+<li>Making errors message building harder than necessary.</li>
+</ul>
+<p>Let&rsquo;s look at some examples and how to fix them.</p>
+<h2 id="not-using-proper-http-statuses-and-the-error-callback">Not using proper HTTP statuses and the error callback</h2>
+<p>Callers of your API should know whether their request worked by looking at the response&rsquo;s status code, not by looking at the response&rsquo;s body. When you don&rsquo;t use status codes, every response looks like a successful response:</p>
+<ul>
+<li>
+<p>Server&rsquo;s controller:</p>
+<pre><code>  def create
+    @model = Model.new(params[:model])
+    if @model.save
+      render :json =&gt; @model.to_json
+    else
+      render :json =&gt; { :errors =&gt; @model.errors.full_messages }
+    end
+  end
+</code></pre>
+</li>
+<li>
+<p>Client&rsquo;s JavaScript:</p>
+<pre><code>  $.ajax(
+    // ...
+      dataType: &quot;json&quot;
+    , success: function(data){
+      if (data.errors) {
+        // do something with errors
+      } else {
+        // do something with successful data
+      }
+    }
+  )
+</code></pre>
+</li>
+</ul>
+<p>Instead, tell your API&rsquo;s caller that their request failed by setting a status code for the error. If the error is the client&rsquo;s fault, use a status code in the 400-499 range; if the error is the server&rsquo;s fault, use a status code in the 500-599 range. <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">Here&rsquo;s a list of status codes</a>, with information on when to use each.</p>
+<ul>
+<li>
+<p>Server&rsquo;s controller:</p>
+<pre><code>  def create
+    @model = Model.create(params[:model])
+    if @model.save
+      render :json =&gt; @model
+    else
+      render :json =&gt; { :errors =&gt; @model.errors.full_messages }, :status =&gt; 422
+    end
+  end
+</code></pre>
+</li>
+<li>
+<p>Client&rsquo;s JavaScript:</p>
+<pre><code>  $.ajax({
+    // ...
+      dataType: &quot;json&quot;
+    , success: function(data){
+        // do something with successful data
+    }
+    , error: function(xhr){
+        var errors = $.parseJSON(xhr.responseText).errors
+        // do something with errors
+    }
+  })
+</code></pre>
+</li>
+</ul>
+<p>By responding with the 422 status code, your client knows that the response failed. jQuery calls the error callback for you, removing unnecessary logic from your code.</p>
+<h2 id="making-error-message-building-harder-than-it-needs-to-be">Making error message building harder than it needs to be</h2>
+<p>I watched a &ldquo;Backbone with Rails&rdquo; screencast where the author had his server respond with <code>@model.errors</code>. Then he began to work on his client and he spent 30 minutes working on transforming the <code>@model.errors</code> data into the data that <code>@model.errors.full_messages</code> would have given him, free.</p>
+<ul>
+<li>
+<p><code>render :json =&gt; { :errors =&gt; @model.errors }</code></p>
+<p>Responds with a object where the keys are your model&rsquo;s attributes with the associated errors:</p>
+<pre><code>  { name: [&quot;is blank&quot;], age: [&quot;is not greater than 0&quot;]}
+</code></pre>
+</li>
+<li>
+<p><code>render :json =&gt; { :errors =&gt; @model.errors.full_messages }</code></p>
+<p>Responds with an array of error messages, which you can render straight into a list in the DOM.</p>
+<pre><code> [&quot;Name is blank&quot;, &quot;Age is not greater than 0&quot;]
+</code></pre>
+</li>
+</ul>
+
+
+</article>
+
+<hr class="col-xs-12 no-gutters">
+
+<footer id="post-footer" class="col-xs-12 no-gutters">
+  <p>
+    <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button" data-via="travisjeffery" data-size="large">Tweet about this article</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
+    <span class="post-footer-item">Written Apr 27, 2012</span>
+    <span class="post-footer-item">Tags <a href="/tags/rails/">rails</a></span>
+    <span class="post-footer-item"><a href="/">Read more posts&#8230;</a></span>
+  </p>
+</footer>
+
+
+          <hr class="col-xs-12 no-gutters">
+
+<footer class="footer col-xs-12 no-gutters left">
+  <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
+    <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <div class="no-gutters col-xs-12">
+      <a href="https://twitter.com/travisjeffery">Twitter</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://github.com/travisjeffery">GitHub</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="mailto:tj@travisjeffery.com">Email</a>
+    </div>
+    <div class="no-gutters col-xs-12">
+      <a href="https://travisjeffery.com">Homepage</a>
+    </div>
+  </div>
+
+  <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
+    <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
+
+    <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
+      <div id="mc_embed_signup_scroll">
+        <div class="mc-field-group">
+	  <input placeholder="Your email address" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+        </div>
+	<div id="mce-responses" class="clear">
+	  <div class="response" id="mce-error-response" style="display:none"></div>
+	  <div class="response" id="mce-success-response" style="display:none"></div>
+	</div>    
+        <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8" tabindex="-1" value=""></div>
+        <p class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></p>
+      </div>
+      <p>
+    </form>
+  </div>
+</footer>
+
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
