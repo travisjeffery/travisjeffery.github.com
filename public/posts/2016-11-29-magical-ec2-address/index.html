@@ -30,9 +30,7 @@ getting the host’s IP address both times:">
     <link href="/css/style.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
-    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -74,18 +72,18 @@ getting the host’s IP address both times:">
           
 <article class="col-xs-12 no-gutters">
   <header>
-    <h1 class="article-title">EC2’S magical address to get instance metadata</h1>
+    <h1 class="article-title"><a href="http://localhost:1313/posts/2016-11-29-magical-ec2-address/">EC2’S magical address to get instance metadata</a></h1>
   </header>
 
   <p>There’s a magical address in EC2 that you can query to get metadata on that instance (<code>http://169.254.169.254</code>). What’s especially awesome about it, is that you can use it inside Docker containers which makes it an easy
 way to find the host IP from inside the container without having to pass it in via an env var or equivalent.</p>
 <p>Behold! I’m curling inside a Docker container and from the host and
 getting the host’s IP address both times:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>travis@ip-10–0–8–119:~$ docker exec -t 80dd8ce35ca0 curl http://169.254.169.254/latest/meta-data/local-ipv4; echo
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>travis@ip-10–0–8–119:~$ docker <span style="color:#6639ba">exec</span> -t 80dd8ce35ca0 curl http://169.254.169.254/latest/meta-data/local-ipv4<span style="color:#1f2328">;</span> <span style="color:#6639ba">echo</span>
 </span></span><span style="display:flex;"><span>10.0.8.119
-</span></span><span style="display:flex;"><span>travis@ip-10–0–8–119:~$ curl http://169.254.169.254/latest/meta-data/local-ipv4; echo
+</span></span><span style="display:flex;"><span>travis@ip-10–0–8–119:~$ curl http://169.254.169.254/latest/meta-data/local-ipv4<span style="color:#1f2328">;</span> <span style="color:#6639ba">echo</span>
 </span></span><span style="display:flex;"><span>10.0.8.119
-</span></span><span style="display:flex;"><span>travis@ip-10–0–8–119:~$ echo OMG!
+</span></span><span style="display:flex;"><span>travis@ip-10–0–8–119:~$ <span style="color:#6639ba">echo</span> OMG!
 </span></span><span style="display:flex;"><span>OMG!
 </span></span></code></pre></div><p>This is useful for stats and monitoring. So you can track stats by the host,
 and have your alerts include the host’s IP so you know exactly where to go to fix your issue.</p>

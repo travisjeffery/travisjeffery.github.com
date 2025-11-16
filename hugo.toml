@@ -10,5 +10,9 @@ outputs = { home = ["HTML", "JSON"] }
   email = "tj@travisjeffery.com"
   url = "https://travisjeffery.com"
 
+[markup]
+  [markup.highlight]
+    style = "github"
+
 [markup.goldmark.renderer]
   unsafe = true

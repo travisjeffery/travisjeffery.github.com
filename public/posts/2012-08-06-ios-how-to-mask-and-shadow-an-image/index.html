@@ -42,9 +42,7 @@ in such a way as to see the stages of building our final result.">
     <link href="/css/style.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
-    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -86,7 +84,7 @@ in such a way as to see the stages of building our final result.">
           
 <article class="col-xs-12 no-gutters">
   <header>
-    <h1 class="article-title">iOS how-to: mask and shadow views</h1>
+    <h1 class="article-title"><a href="http://localhost:1313/posts/2012-08-06-ios-how-to-mask-and-shadow-an-image/">iOS how-to: mask and shadow views</a></h1>
   </header>
 
   <p>Two techniques that iOS developers use to make visually appealing app are masks and shadows; for
@@ -108,123 +106,123 @@ in such a way as to see the stages of building our final result.</p>
 <p>We start with an image as a subview of our view with no
 changes other than centering it.</p>
 <img src="images/mask-and-shadow-1.png">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-objc" data-lang="objc"><span style="display:flex;"><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  TJViewController.m
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  MaskAndShadow
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  Created by Travis Jeffery on 2012-08-06.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  Copyright (c) 2012 Travis Jeffery. All rights reserved.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#import &#34;TJViewController.h&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">TJViewController</span> ()
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-objc" data-lang="objc"><span style="display:flex;"><span><span style="color:#57606a">//
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  TJViewController.m
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  MaskAndShadow
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  Created by Travis Jeffery on 2012-08-06.
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  Copyright (c) 2012 Travis Jeffery. All rights reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#import &#34;TJViewController.h&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@interface</span> <span style="color:#1f2328">TJViewController</span> <span style="color:#1f2328">()</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@end</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@end</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@implementation</span> <span style="color:#a6e22e">TJViewController</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@implementation</span> <span style="color:#1f2328">TJViewController</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">viewDidLoad</span>
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    [super viewDidLoad];
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">-</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">void</span><span style="color:#1f2328">)</span><span style="color:#6639ba">viewDidLoad</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#6639ba">super</span> viewDidLoad<span style="color:#1f2328">];</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// white bg to see the shadow easier
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    self.view.backgroundColor <span style="color:#f92672">=</span> [UIColor whiteColor];
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// white bg to see the shadow easier
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    <span style="color:#6639ba">self</span><span style="color:#1f2328">.</span>view<span style="color:#1f2328">.</span>backgroundColor <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>UIColor whiteColor<span style="color:#1f2328">];</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// the image we&#39;re going to mask and shadow
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    UIImageView<span style="color:#f92672">*</span> image <span style="color:#f92672">=</span> [[UIImageView alloc] initWithImage:[UIImage imageNamed:<span style="color:#e6db74">@&#34;sj.jpeg&#34;</span>]];
-</span></span><span style="display:flex;"><span>    image.center <span style="color:#f92672">=</span> self.view.center;
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// the image we&#39;re going to mask and shadow
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    UIImageView<span style="color:#0550ae">*</span> image <span style="color:#0550ae">=</span> <span style="color:#1f2328">[[</span>UIImageView alloc<span style="color:#1f2328">]</span> <span style="color:#900;font-weight:bold">initWithImage</span><span style="color:#1f2328">:[</span>UIImage <span style="color:#900;font-weight:bold">imageNamed</span><span style="color:#1f2328">:</span><span style="color:#0a3069">@&#34;sj.jpeg&#34;</span><span style="color:#1f2328">]];</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#1f2328">.</span>center <span style="color:#0550ae">=</span> <span style="color:#6639ba">self</span><span style="color:#1f2328">.</span>view<span style="color:#1f2328">.</span>center<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    [self.view addSubview:image];
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#6639ba">self</span><span style="color:#1f2328">.</span>view <span style="color:#900;font-weight:bold">addSubview</span><span style="color:#1f2328">:</span>image<span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@end</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@end</span>
 </span></span></code></pre></div><p>Then we turn our image into a circle by masking its corners.</p>
 <img src="images/mask-and-shadow-2.png">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-objc" data-lang="objc"><span style="display:flex;"><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  TJViewController.m
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  MaskAndShadow
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  Created by Travis Jeffery on 2012-08-06.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  Copyright (c) 2012 Travis Jeffery. All rights reserved.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#import &#34;TJViewController.h&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">TJViewController</span> ()
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-objc" data-lang="objc"><span style="display:flex;"><span><span style="color:#57606a">//
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  TJViewController.m
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  MaskAndShadow
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  Created by Travis Jeffery on 2012-08-06.
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  Copyright (c) 2012 Travis Jeffery. All rights reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#import &#34;TJViewController.h&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@interface</span> <span style="color:#1f2328">TJViewController</span> <span style="color:#1f2328">()</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@end</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@end</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@implementation</span> <span style="color:#a6e22e">TJViewController</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@implementation</span> <span style="color:#1f2328">TJViewController</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">viewDidLoad</span>
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    [super viewDidLoad];
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">-</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">void</span><span style="color:#1f2328">)</span><span style="color:#6639ba">viewDidLoad</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#6639ba">super</span> viewDidLoad<span style="color:#1f2328">];</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// white bg to see the shadow easier
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    self.view.backgroundColor <span style="color:#f92672">=</span> [UIColor whiteColor];
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// white bg to see the shadow easier
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    <span style="color:#6639ba">self</span><span style="color:#1f2328">.</span>view<span style="color:#1f2328">.</span>backgroundColor <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>UIColor whiteColor<span style="color:#1f2328">];</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// the image we&#39;re going to mask and shadow
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    UIImageView<span style="color:#f92672">*</span> image <span style="color:#f92672">=</span> [[UIImageView alloc] initWithImage:[UIImage imageNamed:<span style="color:#e6db74">@&#34;sj.jpeg&#34;</span>]];
-</span></span><span style="display:flex;"><span>    image.center <span style="color:#f92672">=</span> self.view.center;
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// the image we&#39;re going to mask and shadow
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    UIImageView<span style="color:#0550ae">*</span> image <span style="color:#0550ae">=</span> <span style="color:#1f2328">[[</span>UIImageView alloc<span style="color:#1f2328">]</span> <span style="color:#900;font-weight:bold">initWithImage</span><span style="color:#1f2328">:[</span>UIImage <span style="color:#900;font-weight:bold">imageNamed</span><span style="color:#1f2328">:</span><span style="color:#0a3069">@&#34;sj.jpeg&#34;</span><span style="color:#1f2328">]];</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#1f2328">.</span>center <span style="color:#0550ae">=</span> <span style="color:#6639ba">self</span><span style="color:#1f2328">.</span>view<span style="color:#1f2328">.</span>center<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// use the image&#39;s layer to mask the image into a circle
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    image.layer.cornerRadius <span style="color:#f92672">=</span> roundf(image.frame.size.width<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>);
-</span></span><span style="display:flex;"><span>    image.layer.masksToBounds <span style="color:#f92672">=</span> YES;
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// use the image&#39;s layer to mask the image into a circle
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    image<span style="color:#1f2328">.</span>layer<span style="color:#1f2328">.</span>cornerRadius <span style="color:#0550ae">=</span> roundf<span style="color:#1f2328">(</span>image<span style="color:#1f2328">.</span>frame<span style="color:#1f2328">.</span>size<span style="color:#1f2328">.</span>width<span style="color:#0550ae">/</span><span style="color:#0550ae">2.0</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#1f2328">.</span>layer<span style="color:#1f2328">.</span>masksToBounds <span style="color:#0550ae">=</span> <span style="color:#6639ba">YES</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    [self.view addSubview:image];
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#6639ba">self</span><span style="color:#1f2328">.</span>view <span style="color:#900;font-weight:bold">addSubview</span><span style="color:#1f2328">:</span>image<span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@end</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@end</span>
 </span></span></code></pre></div><p>If we added the shadow to the image&rsquo;s layer, the mask on the image&rsquo;s layer would cut off the shadow. Instead, we add the shadow to the parent layer of the image. And then we add that shadow layer to the view controller&rsquo;s view layer.</p>
 <img src="images/mask-and-shadow-3.png">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-objc" data-lang="objc"><span style="display:flex;"><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  TJViewController.m
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  MaskAndShadow
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  Created by Travis Jeffery on 2012-08-06.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//  Copyright (c) 2012 Travis Jeffery. All rights reserved.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#import &#34;TJViewController.h&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#import &lt;QuartzCore/QuartzCore.h&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@interface</span> <span style="color:#a6e22e">TJViewController</span> ()
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-objc" data-lang="objc"><span style="display:flex;"><span><span style="color:#57606a">//
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  TJViewController.m
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  MaskAndShadow
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  Created by Travis Jeffery on 2012-08-06.
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//  Copyright (c) 2012 Travis Jeffery. All rights reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">//
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">#import &#34;TJViewController.h&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#import &lt;QuartzCore/QuartzCore.h&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@interface</span> <span style="color:#1f2328">TJViewController</span> <span style="color:#1f2328">()</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@end</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@end</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@implementation</span> <span style="color:#a6e22e">TJViewController</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@implementation</span> <span style="color:#1f2328">TJViewController</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>- (<span style="color:#66d9ef">void</span>)<span style="color:#a6e22e">viewDidLoad</span>
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    [super viewDidLoad];
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">-</span> <span style="color:#1f2328">(</span><span style="color:#cf222e">void</span><span style="color:#1f2328">)</span><span style="color:#6639ba">viewDidLoad</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">[</span><span style="color:#6639ba">super</span> viewDidLoad<span style="color:#1f2328">];</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// white bg to see the shadow easier
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    self.view.backgroundColor <span style="color:#f92672">=</span> [UIColor whiteColor];
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// white bg to see the shadow easier
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    <span style="color:#6639ba">self</span><span style="color:#1f2328">.</span>view<span style="color:#1f2328">.</span>backgroundColor <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>UIColor whiteColor<span style="color:#1f2328">];</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// the image we&#39;re going to mask and shadow
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    UIImageView<span style="color:#f92672">*</span> image <span style="color:#f92672">=</span> [[UIImageView alloc] initWithImage:[UIImage imageNamed:<span style="color:#e6db74">@&#34;sj.jpeg&#34;</span>]];
-</span></span><span style="display:flex;"><span>    image.center <span style="color:#f92672">=</span> self.view.center;
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// the image we&#39;re going to mask and shadow
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    UIImageView<span style="color:#0550ae">*</span> image <span style="color:#0550ae">=</span> <span style="color:#1f2328">[[</span>UIImageView alloc<span style="color:#1f2328">]</span> <span style="color:#900;font-weight:bold">initWithImage</span><span style="color:#1f2328">:[</span>UIImage <span style="color:#900;font-weight:bold">imageNamed</span><span style="color:#1f2328">:</span><span style="color:#0a3069">@&#34;sj.jpeg&#34;</span><span style="color:#1f2328">]];</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#1f2328">.</span>center <span style="color:#0550ae">=</span> <span style="color:#6639ba">self</span><span style="color:#1f2328">.</span>view<span style="color:#1f2328">.</span>center<span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// make new layer to contain shadow and masked image
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    CALayer<span style="color:#f92672">*</span> containerLayer <span style="color:#f92672">=</span> [CALayer layer];
-</span></span><span style="display:flex;"><span>    containerLayer.shadowColor <span style="color:#f92672">=</span> [UIColor blackColor].CGColor;
-</span></span><span style="display:flex;"><span>    containerLayer.shadowRadius <span style="color:#f92672">=</span> <span style="color:#ae81ff">10.f</span>;
-</span></span><span style="display:flex;"><span>    containerLayer.shadowOffset <span style="color:#f92672">=</span> CGSizeMake(<span style="color:#ae81ff">0.f</span>, <span style="color:#ae81ff">5.f</span>);
-</span></span><span style="display:flex;"><span>    containerLayer.shadowOpacity <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.f</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// make new layer to contain shadow and masked image
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    CALayer<span style="color:#0550ae">*</span> containerLayer <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>CALayer layer<span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span>    containerLayer<span style="color:#1f2328">.</span>shadowColor <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>UIColor blackColor<span style="color:#1f2328">].</span>CGColor<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    containerLayer<span style="color:#1f2328">.</span>shadowRadius <span style="color:#0550ae">=</span> <span style="color:#0550ae">10.f</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>    containerLayer<span style="color:#1f2328">.</span>shadowOffset <span style="color:#0550ae">=</span> CGSizeMake<span style="color:#1f2328">(</span><span style="color:#0550ae">0.f</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">5.f</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>    containerLayer<span style="color:#1f2328">.</span>shadowOpacity <span style="color:#0550ae">=</span> <span style="color:#0550ae">1.f</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// use the image&#39;s layer to mask the image into a circle
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    image.layer.cornerRadius <span style="color:#f92672">=</span> roundf(image.frame.size.width<span style="color:#f92672">/</span><span style="color:#ae81ff">2.0</span>);
-</span></span><span style="display:flex;"><span>    image.layer.masksToBounds <span style="color:#f92672">=</span> YES;
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// use the image&#39;s layer to mask the image into a circle
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    image<span style="color:#1f2328">.</span>layer<span style="color:#1f2328">.</span>cornerRadius <span style="color:#0550ae">=</span> roundf<span style="color:#1f2328">(</span>image<span style="color:#1f2328">.</span>frame<span style="color:#1f2328">.</span>size<span style="color:#1f2328">.</span>width<span style="color:#0550ae">/</span><span style="color:#0550ae">2.0</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>    image<span style="color:#1f2328">.</span>layer<span style="color:#1f2328">.</span>masksToBounds <span style="color:#0550ae">=</span> <span style="color:#6639ba">YES</span><span style="color:#1f2328">;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// add masked image layer into container layer so that it&#39;s shadowed
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    [containerLayer addSublayer:image.layer];
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// add masked image layer into container layer so that it&#39;s shadowed
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    <span style="color:#1f2328">[</span>containerLayer <span style="color:#900;font-weight:bold">addSublayer</span><span style="color:#1f2328">:</span>image<span style="color:#1f2328">.</span>layer<span style="color:#1f2328">];</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// add container including masked image and shadow into view
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    [self.view.layer addSublayer:containerLayer];
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a">// add container including masked image and shadow into view
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span>    <span style="color:#1f2328">[</span><span style="color:#6639ba">self</span><span style="color:#1f2328">.</span>view<span style="color:#1f2328">.</span>layer <span style="color:#900;font-weight:bold">addSublayer</span><span style="color:#1f2328">:</span>containerLayer<span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">@end</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">@end</span>
 </span></span></code></pre></div>
 
 </article>

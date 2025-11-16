@@ -44,9 +44,7 @@ I want the commented lines grouped and moved up top. I run:">
     <link href="/css/style.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
-    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -88,43 +86,43 @@ I want the commented lines grouped and moved up top. I run:">
           
 <article class="col-xs-12 no-gutters">
   <header>
-    <h1 class="article-title">Vim and the power of :g</h1>
+    <h1 class="article-title"><a href="http://localhost:1313/posts/2012-02-17-tidying-up-with-the-power-of-g/">Vim and the power of :g</a></h1>
   </header>
 
   <p>Vim&rsquo;s <code>:g</code> takes two inputs: a pattern and an operation, and it runs that operation on each line
 that matches the pattern in the current file. <code>:g</code> is a tool whose usage isn&rsquo;t imposed on you, nor
 obvious &mdash; its usefulness depends on your creativity.</p>
 <p>Here&rsquo;s an example of what <code>:g</code> can do: grouping related lines. Take this file:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git@github.com:travisjeffery/IndexedSearch.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Bundle &#39;https://github.com/Shougo/neocomplcache.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;https://github.com/tpope/vim-fugitive.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;https://github.com/travisjeffery/vim-help&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Bundle &#39;https://github.com/Lokaltog/vim-powerline.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Bundle &#39;https://github.com/jiangmiao/auto-pairs.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;https://github.com/tpope/vim-ragtag.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git@github.com:travisjeffery/vim-rails.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Bundle &#39;git@github.com:travisjeffery/vim-rails-fork.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;https://github.com/tpope/vim-repeat.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;https://github.com/kien/ctrlp.vim.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git@github.com:travisjeffery/vim-unimpaired.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Bundle &#39;https://github.com/thinca/vim-poslist.git&#39;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;git@github.com:travisjeffery/IndexedSearch.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">&#34; Bundle &#39;https://github.com/Shougo/neocomplcache.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;https://github.com/tpope/vim-fugitive.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;https://github.com/travisjeffery/vim-help&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">&#34; Bundle &#39;https://github.com/Lokaltog/vim-powerline.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">&#34; Bundle &#39;https://github.com/jiangmiao/auto-pairs.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;https://github.com/tpope/vim-ragtag.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;git@github.com:travisjeffery/vim-rails.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">&#34; Bundle &#39;git@github.com:travisjeffery/vim-rails-fork.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;https://github.com/tpope/vim-repeat.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;https://github.com/kien/ctrlp.vim.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;git@github.com:travisjeffery/vim-unimpaired.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">&#34; Bundle &#39;https://github.com/thinca/vim-poslist.git&#39;</span>
 </span></span></code></pre></div><p>I want the commented lines grouped and moved up top. I run:</p>
 <pre><code>:g/^&quot;/m 0
 </code></pre>
 <p>And <code>:g</code> groups the lines. Now this is our file:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#75715e">&#34; Bundle &#39;https://github.com/thinca/vim-poslist.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Bundle &#39;git@github.com:travisjeffery/vim-rails-fork.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Bundle &#39;https://github.com/jiangmiao/auto-pairs.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Bundle &#39;https://github.com/Lokaltog/vim-powerline.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Bundle &#39;https://github.com/Shougo/neocomplcache.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git@github.com:travisjeffery/IndexedSearch.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;https://github.com/tpope/vim-fugitive.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;https://github.com/travisjeffery/vim-help&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;https://github.com/tpope/vim-ragtag.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git@github.com:travisjeffery/vim-rails.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;https://github.com/tpope/vim-repeat.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;https://github.com/kien/ctrlp.vim.git&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Bundle</span> <span style="color:#e6db74">&#39;git@github.com:travisjeffery/vim-unimpaired.git&#39;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#57606a">&#34; Bundle &#39;https://github.com/thinca/vim-poslist.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">&#34; Bundle &#39;git@github.com:travisjeffery/vim-rails-fork.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">&#34; Bundle &#39;https://github.com/jiangmiao/auto-pairs.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">&#34; Bundle &#39;https://github.com/Lokaltog/vim-powerline.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">&#34; Bundle &#39;https://github.com/Shougo/neocomplcache.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;git@github.com:travisjeffery/IndexedSearch.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;https://github.com/tpope/vim-fugitive.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;https://github.com/travisjeffery/vim-help&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;https://github.com/tpope/vim-ragtag.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;git@github.com:travisjeffery/vim-rails.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;https://github.com/tpope/vim-repeat.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;https://github.com/kien/ctrlp.vim.git&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Bundle</span> <span style="color:#0a3069">&#39;git@github.com:travisjeffery/vim-unimpaired.git&#39;</span>
 </span></span></code></pre></div><p><code>:g</code> is one of the most underrated features in Vim. You can learn more about it by running <code>:h :g</code>.</p>
 
 

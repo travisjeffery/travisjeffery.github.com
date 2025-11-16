@@ -9,24 +9,27 @@
     <link rel="alternate" type="application/rss+xml" title="Travis Jeffery's Blog Feed" href="https://travisjeffery.com/rss.xml">
     
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Xcode attaching to app running in simulator not working">
-    <meta property="og:description" content="If you&rsquo;re running your app in Xcode and the simulator, they may hang saying Attaching to your app name....
-To fix this and run your app in the simulator with the lldb debugger, go into your app&rsquo;s target, and explicitly set the deployment target to the version of the simulator to run. For me, right now, that&rsquo;s 7.0. If left blank, or with the placeholder, Xcode isn&rsquo;t smart enough to figure it out.">
-    <meta property="article:published_time" content="2013-10-03T00:00:00Z">
-    <meta property="article:modified_time" content="2013-10-03T00:00:00Z">
+    <meta property="og:title" content="25 years of Emacs">
+    <meta property="og:description" content="I began programming with Emacs but didn’t get it. I switched to Vim for a few years, liked its motions but hated its extensibility, and switched back to Emacs. That was 25 years ago.
+Emacs has never been the most popular text editor and never will be. Popularity requires accessibility, immediate appeal, and marketing. Emacs has none of these. You install it, open it up, and see what looks like a basic text editor with strange key bindings and hundreds of cryptic commands. Emacs takes 10 years to learn, and its learning curve is a spiral.">
+    <meta property="article:published_time" content="2025-11-16T12:50:05-05:00">
+    <meta property="article:modified_time" content="2025-11-16T12:50:05-05:00">
     
-    <meta property="og:url" content="http://localhost:1313/posts/2013-10-03-xcode-attaching-to-app-running-in-simulator-not-working/">
+    <meta property="og:url" content="http://localhost:1313/posts/2025-11-16-emacs/">
     <meta property="og:site_name" content="Travis Jeffery's Blog">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:site" content="@travisjeffery">
     
-    <meta name="twitter:text:title" content="Xcode attaching to app running in simulator not working">
+    <meta name="twitter:text:title" content="25 years of Emacs">
     
     <meta name="twitter:image" content="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39">
     <meta name="twitter:card" content="summary">
 
     <link href="/css/style.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/js/judy.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
     
     <script>
@@ -38,7 +41,7 @@ To fix this and run your app in the simulator with the lldb debugger, go into yo
       ga('create', 'UA-8462120-1', 'travisjeffery.com');
       ga('send', 'pageview');
     </script>
-    <title>Xcode attaching to app running in simulator not working</title>
+    <title>25 years of Emacs</title>
   </head>
   <body>
     <div class="container-fluid container">
@@ -70,13 +73,15 @@ To fix this and run your app in the simulator with the lldb debugger, go into yo
           
 <article class="col-xs-12 no-gutters">
   <header>
-    <h1 class="article-title"><a href="http://localhost:1313/posts/2013-10-03-xcode-attaching-to-app-running-in-simulator-not-working/">Xcode attaching to app running in simulator not working</a></h1>
+    <h1 class="article-title"><a href="http://localhost:1313/posts/2025-11-16-emacs/">25 years of Emacs</a></h1>
   </header>
 
-  <p>If you&rsquo;re running your app in Xcode and the simulator, they may hang saying <code>Attaching to your app name...</code>.</p>
-<p>To fix this and run your app in the simulator with the lldb debugger, go into your app&rsquo;s target, and explicitly set the deployment target to the version of the simulator to run. For me, right now, that&rsquo;s <code>7.0</code>. If left blank, or with the placeholder, Xcode isn&rsquo;t smart enough to figure it out.</p>
-<p><img src="images/xcode-attaching.png" alt="Settings to fix xcode attaching problem"></p>
-<p>Editing the scheme and setting the debugger to none works too, but then you don&rsquo;t have a debugger.</p>
+  <p>I began programming with Emacs but didn’t get it. I switched to Vim for a few years, liked its motions but hated its extensibility, and switched back to Emacs. That was 25 years ago.</p>
+<p>Emacs has never been the most popular text editor and never will be. Popularity requires accessibility, immediate appeal, and marketing. Emacs has none of these. You install it, open it up, and see what looks like a basic text editor with strange key bindings and hundreds of cryptic commands. Emacs takes 10 years to learn, and its learning curve is a spiral.</p>
+<p>The killer feature of Emacs is living in your editor. The Emacs community has made Emacs a great tool for most of the problems people use a computer to solve: text editor, shell/terminal emulator (eshell/vterm), file manager (dired), outline-based notes and organizer (org), email client (gnus), git client (magit), accounting (ledger), calculator (calc), IRC client (ERC), calendar, and so on. When working in and across any of these areas, you have the same key bindings, same kill ring, same text interface, with no task switching.</p>
+<p>Emacs is written in Lisp. You extend it in Lisp. Nearly everything you encounter in Emacs is a Lisp data structure you can inspect and change. Emacs buffers are sophisticated objects with rich metadata. They have modes, local variables, overlays for text properties&ndash;all programmable while Emacs runs. Programmers who care about their tools should try Emacs. You can make it do exactly what you need.</p>
+<p>Next year, Emacs turns 50. How many software projects can say that they’re used after 50 years? SABRE (airline reservation system), IRS Master Files, MOCAS (US Department of Defense contract management system), Voyager Flight Software, and Emacs. If you break SABRE, IRS Master Files, or MOCAS&ndash;you’ll go to jail. If you want to change Voyager&ndash;you’ll need to catch it in outer space.</p>
+<p>&ndash; Published from Emacs.</p>
 
 
 </article>
@@ -87,8 +92,8 @@ To fix this and run your app in the simulator with the lldb debugger, go into yo
   <p>
     <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button" data-via="travisjeffery" data-size="large">Tweet about this article</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
-    <span class="post-footer-item">Written Oct 3, 2013</span>
-    <span class="post-footer-item">Tags <a href="/tags/ios/">ios</a></span>
+    <span class="post-footer-item">Written Nov 16, 2025</span>
+    
     <span class="post-footer-item"><a href="/">Read more posts&#8230;</a></span>
   </p>
 </footer>
@@ -115,7 +120,7 @@ To fix this and run your app in the simulator with the lldb debugger, go into yo
   </div>
 
   <div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right">
-    <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam, ever.</p>
+    <p class="zero-margin"><strong>Delivered straight to your inbox.</strong> One email per post. No spam.</p>
 
     <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
       <div id="mc_embed_signup_scroll">

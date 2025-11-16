@@ -40,9 +40,7 @@ This function will go to the given repo in my dev directory, and if that repo is
     <link href="/css/style.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
-    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -84,22 +82,22 @@ This function will go to the given repo in my dev directory, and if that repo is
           
 <article class="col-xs-12 no-gutters">
   <header>
-    <h1 class="article-title">Writing your own Emacs interactive functions with completion</h1>
+    <h1 class="article-title"><a href="http://localhost:1313/posts/2015-09-11-emacs-completing-fns/">Writing your own Emacs interactive functions with completion</a></h1>
   </header>
 
   <p>Here&rsquo;s how to use <a href="http://emacswiki.org/emacs/InteractivelyDoThings">Ido</a> in Emacs to write your own interactive functions with completion. In this example, we&rsquo;ll make a function that completes directories but Ido provides functions for reading files, buffers, and more.</p>
 <p>This function will go to the given repo in my dev directory, and if that repo isn&rsquo;t cloned yet, will clone it from my GitHub first.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span>(<span style="color:#a6e22e">defun</span> tj-goto (<span style="color:#a6e22e">repo</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;Go to or clone the given dev `repo&#39;.&#34;</span>
-</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">interactive</span>
-</span></span><span style="display:flex;"><span>   (<span style="color:#a6e22e">list</span>
-</span></span><span style="display:flex;"><span>    (<span style="color:#a6e22e">ido-read-directory-name</span> <span style="color:#e6db74">&#34;Directory: &#34;</span> <span style="color:#e6db74">&#34;~/dev/&#34;</span>)))
-</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">let* </span>((<span style="color:#a6e22e">dev-dir</span> <span style="color:#e6db74">&#34;~/dev/&#34;</span>)
-</span></span><span style="display:flex;"><span>         (<span style="color:#a6e22e">repo-dir</span> repo))
-</span></span><span style="display:flex;"><span>    (<span style="color:#66d9ef">if </span>(<span style="color:#a6e22e">file-exists-p</span> repo-dir)
-</span></span><span style="display:flex;"><span>        (<span style="color:#a6e22e">projectile-find-file-in-directory</span> repo)
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">shell-command</span> (<span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;cd %s; git clone git@github.com:travisjeffery/%s.git&#34;</span> dev-dir repo))
-</span></span><span style="display:flex;"><span>      (<span style="color:#a6e22e">projectile-find-file-in-directory</span> repo))))
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-scheme" data-lang="scheme"><span style="display:flex;"><span><span style="color:#1f2328">(</span><span style="color:#6639ba">defun</span> <span style="color:#953800">tj-goto</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">repo</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0a3069">&#34;Go to or clone the given dev `repo&#39;.&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">(</span><span style="color:#6639ba">interactive</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#1f2328">(</span><span style="color:#6639ba">list</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#6639ba">ido-read-directory-name</span> <span style="color:#0a3069">&#34;Directory: &#34;</span> <span style="color:#0a3069">&#34;~/dev/&#34;</span><span style="color:#1f2328">)))</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">(</span><span style="color:#cf222e">let* </span><span style="color:#1f2328">((</span><span style="color:#6639ba">dev-dir</span> <span style="color:#0a3069">&#34;~/dev/&#34;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#1f2328">(</span><span style="color:#6639ba">repo-dir</span> <span style="color:#953800">repo</span><span style="color:#1f2328">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">(</span><span style="color:#cf222e">if </span><span style="color:#1f2328">(</span><span style="color:#6639ba">file-exists-p</span> <span style="color:#953800">repo-dir</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#1f2328">(</span><span style="color:#6639ba">projectile-find-file-in-directory</span> <span style="color:#953800">repo</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">(</span><span style="color:#6639ba">shell-command</span> <span style="color:#1f2328">(</span><span style="color:#6639ba">format</span> <span style="color:#0a3069">&#34;cd %s; git clone git@github.com:travisjeffery/%s.git&#34;</span> <span style="color:#953800">dev-dir</span> <span style="color:#953800">repo</span><span style="color:#1f2328">))</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">(</span><span style="color:#6639ba">projectile-find-file-in-directory</span> <span style="color:#953800">repo</span><span style="color:#1f2328">))))</span>
 </span></span></code></pre></div>
 
 </article>

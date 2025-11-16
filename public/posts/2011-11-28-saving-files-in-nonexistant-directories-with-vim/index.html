@@ -43,9 +43,7 @@ With this command, when you save a file in nonexistent directory, Vim will ask y
     <link href="/css/style.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
-    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -87,7 +85,7 @@ With this command, when you save a file in nonexistent directory, Vim will ask y
           
 <article class="col-xs-12 no-gutters">
   <header>
-    <h1 class="article-title">Saving files in nonexistent directories with Vim</h1>
+    <h1 class="article-title"><a href="http://localhost:1313/posts/2011-11-28-saving-files-in-nonexistant-directories-with-vim/">Saving files in nonexistent directories with Vim</a></h1>
   </header>
 
   <p>I often open a file in a directory that doesn&rsquo;t exist yet. However, Vim will not let you save a file
@@ -95,17 +93,17 @@ in a nonexistent directory.</p>
 <p>You can manually create the directory by running the following command:</p>
 <pre tabindex="0"><code>:!mkdir %:p:h
 </code></pre><p>You can automate creating the directory with the following autocommand:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">augroup</span> <span style="color:#a6e22e">vimrc</span>-<span style="color:#a6e22e">auto</span>-<span style="color:#a6e22e">mkdir</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">autocmd</span>!
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">autocmd</span> <span style="color:#a6e22e">BufWritePre</span> * <span style="color:#a6e22e">call</span> <span style="color:#a6e22e">s</span>:<span style="color:#a6e22e">auto_mkdir</span>(<span style="color:#a6e22e">expand</span>(<span style="color:#e6db74">&#39;&lt;afile&gt;:p:h&#39;</span>), <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">cmdbang</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">s</span>:<span style="color:#a6e22e">auto_mkdir</span>(<span style="color:#a6e22e">dir</span>, <span style="color:#a6e22e">force</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">isdirectory</span>(<span style="color:#a6e22e">a</span>:<span style="color:#a6e22e">dir</span>)
-</span></span><span style="display:flex;"><span>          \   &amp;&amp; (<span style="color:#a6e22e">a</span>:<span style="color:#a6e22e">force</span>
-</span></span><span style="display:flex;"><span>          \       || <span style="color:#a6e22e">input</span>(<span style="color:#e6db74">&#34;&#39;&#34;</span> . <span style="color:#a6e22e">a</span>:<span style="color:#a6e22e">dir</span> . <span style="color:#e6db74">&#34;&#39; does not exist. Create? [y/N]&#34;</span>) =~? <span style="color:#e6db74">&#39;^y\%[es]$&#39;</span>)
-</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">call</span> <span style="color:#a6e22e">mkdir</span>(<span style="color:#a6e22e">iconv</span>(<span style="color:#a6e22e">a</span>:<span style="color:#a6e22e">dir</span>, &amp;<span style="color:#a6e22e">encoding</span>, &amp;<span style="color:#a6e22e">termencoding</span>), <span style="color:#e6db74">&#39;p&#39;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">endif</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">endfunction</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">augroup</span> <span style="color:#a6e22e">END</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#1f2328">augroup</span> <span style="color:#1f2328">vimrc</span><span style="color:#1f2328">-</span><span style="color:#1f2328">auto</span><span style="color:#1f2328">-</span><span style="color:#1f2328">mkdir</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">autocmd</span><span style="color:#1f2328">!</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">autocmd</span> <span style="color:#1f2328">BufWritePre</span> * <span style="color:#1f2328">call</span> <span style="color:#1f2328">s</span>:<span style="color:#1f2328">auto_mkdir</span><span style="color:#1f2328">(</span><span style="color:#1f2328">expand</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;&lt;afile&gt;:p:h&#39;</span><span style="color:#1f2328">),</span> <span style="color:#1f2328">v</span>:<span style="color:#1f2328">cmdbang</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">function</span><span style="color:#1f2328">!</span> <span style="color:#1f2328">s</span>:<span style="color:#1f2328">auto_mkdir</span><span style="color:#1f2328">(</span><span style="color:#1f2328">dir</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">force</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> <span style="color:#1f2328">!</span><span style="color:#1f2328">isdirectory</span><span style="color:#1f2328">(</span><span style="color:#1f2328">a</span>:<span style="color:#1f2328">dir</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>          \   &amp;&amp; <span style="color:#1f2328">(</span><span style="color:#1f2328">a</span>:<span style="color:#1f2328">force</span>
+</span></span><span style="display:flex;"><span>          \       <span style="color:#1f2328">||</span> <span style="color:#1f2328">input</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;&#39;&#34;</span> . <span style="color:#1f2328">a</span>:<span style="color:#1f2328">dir</span> . <span style="color:#0a3069">&#34;&#39; does not exist. Create? [y/N]&#34;</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">=~</span>? <span style="color:#0a3069">&#39;^y\%[es]$&#39;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">call</span> <span style="color:#1f2328">mkdir</span><span style="color:#1f2328">(</span><span style="color:#1f2328">iconv</span><span style="color:#1f2328">(</span><span style="color:#1f2328">a</span>:<span style="color:#1f2328">dir</span><span style="color:#1f2328">,</span> &amp;<span style="color:#1f2328">encoding</span><span style="color:#1f2328">,</span> &amp;<span style="color:#1f2328">termencoding</span><span style="color:#1f2328">),</span> <span style="color:#0a3069">&#39;p&#39;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">endif</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">endfunction</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">augroup</span> <span style="color:#1f2328">END</span>
 </span></span></code></pre></div><p>With this command, when you save a file in nonexistent directory, Vim will ask you if you want the directory created and then create it.</p>
 
 

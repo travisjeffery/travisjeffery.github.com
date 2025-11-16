@@ -34,9 +34,7 @@ $ ec2-ssh i-6g5c7ed4
     <link href="/css/style.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
-    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -78,16 +76,16 @@ $ ec2-ssh i-6g5c7ed4
           
 <article class="col-xs-12 no-gutters">
   <header>
-    <h1 class="article-title">SSH into EC2 instance with instance ID</h1>
+    <h1 class="article-title"><a href="http://localhost:1313/posts/2015-11-30-ssh-into-ec2-instance-with-instance-id/">SSH into EC2 instance with instance ID</a></h1>
   </header>
 
   <p>Make sure you&rsquo;ve installed and configured the <a href="https://github.com/aws/aws-cli">aws-cli</a> and <a href="https://github.com/stedolan/jq">jq</a>.</p>
 <p>Drop this function into your .zshrc or .bashrc:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> ec2-ssh <span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>  ssh <span style="color:#66d9ef">$(</span>aws ec2 describe-instances --filter Name<span style="color:#f92672">=</span>instance-id,Values<span style="color:#f92672">=</span>$1 | jq <span style="color:#e6db74">&#39;.Reservations[0].Instances[0].PrivateIpAddress&#39;</span> | tr -d <span style="color:#e6db74">&#39;&#34;&#39;</span><span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#cf222e">function</span> ec2-ssh <span style="color:#0550ae">()</span> <span style="color:#0550ae">{</span>
+</span></span><span style="display:flex;"><span>  ssh <span style="color:#cf222e">$(</span>aws ec2 describe-instances --filter <span style="color:#953800">Name</span><span style="color:#0550ae">=</span>instance-id,Values<span style="color:#0550ae">=</span><span style="color:#953800">$1</span> <span style="color:#1f2328">|</span> jq <span style="color:#0a3069">&#39;.Reservations[0].Instances[0].PrivateIpAddress&#39;</span> <span style="color:#1f2328">|</span> tr -d <span style="color:#0a3069">&#39;&#34;&#39;</span><span style="color:#cf222e">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#0550ae">}</span>
 </span></span></code></pre></div><p>And now you can ssh into your EC2 instance:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ec2-ssh i-6g5c7ed4
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ ec2-ssh i-6g5c7ed4
 </span></span></code></pre></div>
 
 </article>

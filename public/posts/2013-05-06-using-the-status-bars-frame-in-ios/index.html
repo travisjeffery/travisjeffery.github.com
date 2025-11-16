@@ -28,9 +28,7 @@ The trick to the status bar&rsquo;s frame and height is to make sure you&rsquo;v
     <link href="/css/style.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Anonymous+Pro:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" type="text/css" media="screen">
-    <script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/judy.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
+    
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -72,13 +70,13 @@ The trick to the status bar&rsquo;s frame and height is to make sure you&rsquo;v
           
 <article class="col-xs-12 no-gutters">
   <header>
-    <h1 class="article-title">Getting the status bar&#39;s height in iOS</h1>
+    <h1 class="article-title"><a href="http://localhost:1313/posts/2013-05-06-using-the-status-bars-frame-in-ios/">Getting the status bar&#39;s height in iOS</a></h1>
   </header>
 
   <p>I had someone ask me for the best way to get the status bar&rsquo;s height. Their problem was they were using UIApplication-statusBarFrame.size.height which will usually be 20.0f when in portrait (<em><strong>but</strong></em> would be bigger if the user is on the phone, etc.) but when the phone was oriented in landscape the height was 480.0f.</p>
 <p>The trick to the status bar&rsquo;s frame and height is to make sure you&rsquo;ve converted it to the coordinate space of the view that you care about, this will probably be a UIViewController&rsquo;s view or subview.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-objc" data-lang="objc"><span style="display:flex;"><span>CGRect statusBarFrame <span style="color:#f92672">=</span> [yourView.window convertRect:UIApplication.sharedApplication.statusBarFrame toView:yourView];
-</span></span><span style="display:flex;"><span>CGFloat statusBarHeight <span style="color:#f92672">=</span> statusBarFrame.size.height;
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-objc" data-lang="objc"><span style="display:flex;"><span>CGRect statusBarFrame <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>yourView<span style="color:#1f2328">.</span>window <span style="color:#900;font-weight:bold">convertRect</span><span style="color:#1f2328">:</span>UIApplication<span style="color:#1f2328">.</span>sharedApplication<span style="color:#1f2328">.</span>statusBarFrame <span style="color:#900;font-weight:bold">toView</span><span style="color:#1f2328">:</span>yourView<span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span>CGFloat statusBarHeight <span style="color:#0550ae">=</span> statusBarFrame<span style="color:#1f2328">.</span>size<span style="color:#1f2328">.</span>height<span style="color:#1f2328">;</span>
 </span></span></code></pre></div><p>Now you&rsquo;ve got a height you&rsquo;d expect—usually 20.0f.</p>
 <p>I made a <a href="https://github.com/travisjeffery/StatusBarDemo">demo app</a> that may make this concrete for you. Build &amp; Run, switch your device&rsquo;s orientation and watch the output in the Debug Area.</p>
 
