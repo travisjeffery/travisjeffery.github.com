@@ -50,3 +50,4 @@ temp/
 # Large media (if you store originals elsewhere)
 # originals/
 # raw-footage/
+resources/_gen
