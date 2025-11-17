@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ruby on travis jeffery</title><link>https://travisjeffery.com/tags/ruby/</link><description>Recent content in Ruby on travis jeffery</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Wed, 28 Dec 2011 00:00:00 +0000</lastBuildDate><atom:link href="https://travisjeffery.com/tags/ruby/index.xml" rel="self" type="application/rss+xml"/><item><title>Expressive domain specific languages (DSL) in Ruby</title><link>https://travisjeffery.com/posts/2011-12-28-expressive-domain-specific-languages-dsl-in-ruby/</link><pubDate>Wed, 28 Dec 2011 00:00:00 +0000</pubDate><guid>https://travisjeffery.com/posts/2011-12-28-expressive-domain-specific-languages-dsl-in-ruby/</guid><description>&lt;p&gt;I&amp;rsquo;ve experimented with making DSLs in Ruby and here&amp;rsquo;s an example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"&gt;&lt;code class="language-ruby" data-lang="ruby"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#cf222e"&gt;class&lt;/span&gt; &lt;span style="color:#1f2328"&gt;User&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#cf222e"&gt;def&lt;/span&gt; &lt;span style="color:#6639ba"&gt;initialize&lt;/span&gt; &lt;span style="color:#0550ae"&gt;&amp;amp;&lt;/span&gt;block
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#cf222e"&gt;if&lt;/span&gt; block&lt;span style="color:#0550ae"&gt;.&lt;/span&gt;arity &lt;span style="color:#0550ae"&gt;==&lt;/span&gt; &lt;span style="color:#0550ae"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; block&lt;span style="color:#0550ae"&gt;[&lt;/span&gt;&lt;span style="color:#6639ba"&gt;self&lt;/span&gt;&lt;span style="color:#0550ae"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#cf222e"&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#6639ba"&gt;instance_eval&lt;/span&gt; &lt;span style="color:#0550ae"&gt;&amp;amp;&lt;/span&gt;block
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#cf222e"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#cf222e"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#cf222e"&gt;def&lt;/span&gt; &lt;span style="color:#6639ba"&gt;name&lt;/span&gt; new_name &lt;span style="color:#0550ae"&gt;=&lt;/span&gt; &lt;span style="color:#cf222e"&gt;nil&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#953800"&gt;@name&lt;/span&gt; &lt;span style="color:#0550ae"&gt;||=&lt;/span&gt; new_name
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#cf222e"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#cf222e"&gt;def&lt;/span&gt; &lt;span style="color:#6639ba"&gt;location&lt;/span&gt; new_location &lt;span style="color:#0550ae"&gt;=&lt;/span&gt; &lt;span style="color:#cf222e"&gt;nil&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#953800"&gt;@location&lt;/span&gt; &lt;span style="color:#0550ae"&gt;||=&lt;/span&gt; new_location
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#cf222e"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#cf222e"&gt;def&lt;/span&gt; &lt;span style="color:#6639ba"&gt;occupation&lt;/span&gt; new_occupation &lt;span style="color:#0550ae"&gt;=&lt;/span&gt; &lt;span style="color:#cf222e"&gt;nil&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#953800"&gt;@occupation&lt;/span&gt; &lt;span style="color:#0550ae"&gt;||=&lt;/span&gt; new_occupation
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#cf222e"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#cf222e"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#0550ae"&gt;---&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#0550ae"&gt;&amp;gt;&lt;/span&gt; u &lt;span style="color:#0550ae"&gt;=&lt;/span&gt; &lt;span style="color:#0550ae"&gt;User&lt;/span&gt;&lt;span style="color:#0550ae"&gt;.&lt;/span&gt;new &lt;span style="color:#cf222e"&gt;do&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#6639ba"&gt;name&lt;/span&gt; &lt;span style="color:#0a3069"&gt;&amp;#34;Travis Jeffery&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; location &lt;span style="color:#0a3069"&gt;&amp;#34;Toronto, Ontario&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; occupation &lt;span style="color:#0a3069"&gt;&amp;#34;Mathematician, Software Engineer&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#cf222e"&gt;end&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#0550ae"&gt;&amp;gt;&lt;/span&gt; u&lt;span style="color:#0550ae"&gt;.&lt;/span&gt;name
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#0550ae"&gt;=&amp;gt;&lt;/span&gt; &lt;span style="color:#0a3069"&gt;&amp;#34;Travis Jeffery&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#0550ae"&gt;&amp;gt;&lt;/span&gt; u&lt;span style="color:#0550ae"&gt;.&lt;/span&gt;location
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#0550ae"&gt;=&amp;gt;&lt;/span&gt; &lt;span style="color:#0a3069"&gt;&amp;#34;Toronto, Ontario&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#0550ae"&gt;&amp;gt;&lt;/span&gt; u&lt;span style="color:#0550ae"&gt;.&lt;/span&gt;occupation
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#0550ae"&gt;=&amp;gt;&lt;/span&gt; &lt;span style="color:#0a3069"&gt;&amp;#34;Mathematician, Software Engineer&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;By checking the arity of the block, we support this API too:&lt;/p&gt;</description></item></channel></rss>

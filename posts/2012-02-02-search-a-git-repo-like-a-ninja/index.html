@@ -1,0 +1,65 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=description content="Hacker, writer, good guy."><link rel=alternate type=application/rss+xml title="Travis Jeffery's Blog Feed" href=https://travisjeffery.com/rss.xml><meta property="og:type" content="article"><meta property="og:title" content="Search a git repo like a ninja"><meta property="og:description" content="$ git grep <regexp>
+
+Try it out on a project, then try the same search with ack and grep and you see
+that we have speed that&rsquo;s better than either grep or ack. But we can make some
+improvements:
+
+
+Allow extended regular expressions
+  $ git config --global grep.extendRegexp true
+
+git can also support full blown Perl regular expressions as well, by compiling
+git with libpcre. Easy for homebrew
+users:"><meta property="article:published_time" content="2012-02-02T00:00:00Z"><meta property="article:modified_time" content="2012-02-02T00:00:00Z"><meta property="og:url" content="https://travisjeffery.com/posts/2012-02-02-search-a-git-repo-like-a-ninja/"><meta property="og:site_name" content="Travis Jeffery's Blog"><meta property="og:locale" content="en_US"><meta name=twitter:site content="@travisjeffery"><meta name=twitter:text:title content="Search a git repo like a ninja"><meta name=twitter:image content="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39"><meta name=twitter:card content="summary"><link href=https://travisjeffery.com/css/style.min.5320ccbdfe5c8b65316b0017a872de5cb86715d4fe7fec778fefa42ea3262c3b.css rel=stylesheet><script src=https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js></script><script src=/js/judy.min.js type=text/javascript></script><script src=/js/main.js type=text/javascript></script><link href="https://fonts.googleapis.com/css?family=Fira+Code:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel=stylesheet><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css type=text/css media=screen><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-8462120-1","travisjeffery.com"),ga("send","pageview")</script><title>Search a git repo like a ninja</title></head><body><div class="container-fluid container"><div class=row><div class="col-xs-12 col-lg-8 col-lg-offset-2"><hgroup id=header class="col-xs-12 no-gutters clearfix"><img class="no-gutters col-xs-3 col-sm-1" src="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39?s=80"><h1 class="logo no-gutters col-xs-4 col-sm-6"><a href=/>travis jeffery</a></h1><div class="social no-gutters col-xs-6 col-sm-5 pull-right"><div class="no-gutters col-xs-12"><a href=/subscribe>Subscribe</a></div><div class="no-gutters col-xs-12"><a href=https://github.com/travisjeffery>GitHub</a></div><div class="no-gutters col-xs-12"><a href=https://twitter.com/travisjeffery>Twitter</a></div></div></hgroup><hr class="col-xs-12 no-gutters"><article class="col-xs-12 no-gutters"><header><h1 class=article-title><a href=https://travisjeffery.com/posts/2012-02-02-search-a-git-repo-like-a-ninja/>Search a git repo like a ninja</a></h1></header><pre><code>$ git grep &lt;regexp&gt;
+</code></pre><p>Try it out on a project, then try the same search with ack and grep and you see
+that we have speed that&rsquo;s better than either grep or ack. But we can make some
+improvements:</p><ul><li><p><strong>Allow extended regular expressions</strong></p><pre><code>  $ git config --global grep.extendRegexp true
+</code></pre><p>git can also support full blown Perl regular expressions as well, by compiling
+git with libpcre. Easy for <a href=https://github.com/mxcl/homebrew>homebrew</a>
+users:</p><pre><code>  $ brew install git --with-pcre
+</code></pre></li><li><p><strong>Always include line numbers</strong></p><pre><code>  $ git config --global grep.lineNumber true
+</code></pre></li><li><p><strong>Group output like ack!</strong></p><pre><code>  $ git config --global alias.g &quot;grep --break --heading --line-number&quot;
+</code></pre><p>As far as I know there is no non-trivial way to add default arguments/override
+git commands, plus g is nice and short.</p><p>Compare this output, without grouping:</p><img class=img-fluid alt="Without grouping" src=images/without-grouping.jpg><p>To this much more readable output, with grouping:</p><img class=img-fluid alt="With grouping" src=images/grouping.jpg><p>The speed of git grep, which is a product of it being implemented in
+C and only searching your project files, i.e. not files in .git, is
+alone compelling &mdash; but where git grep becomes unique and
+powerful is how it connects you with your repo&rsquo;s git database&mldr;</p></li></ul><h2 id=practical-examples>Practical examples</h2><p>Here&rsquo;s a list of commands made up of different arguments and concepts of git
+grep and git log that you will be able to reuse and learn from to
+reformulate later for your own use cases:</p><ul><li><p><strong>Search for our regexp in JavaScript files from another branch</strong></p><pre><code>  $ git grep -e &lt;regexp&gt; my_other_branch -- '*.js'
+</code></pre><p>The <code>--</code> signals the end of options and the rest of the paramaters are
+<pathspec>limiters.</p></li><li><p><strong>Search files registered in the index, rather than the working tree</strong></p><pre><code>  $ git grep --cached -e &lt;regexp&gt;
+</code></pre><p>Note that we&rsquo;re searching what&rsquo;s registered in the index rather than what&rsquo;s staged.</p></li><li><p><strong>Search for staged files containing a regexp that was either added or removed</strong></p><pre><code>  $ git diff-index --cached -G&lt;regexp&gt; HEAD | cut -f2
+</code></pre></li><li><p><strong>Search through previous revisions whose contents contain a given regexp</strong></p><pre><code>  $ git grep &lt;regexp&gt; $(git rev-list --all)
+</code></pre><p>I tried the above on one project large enough that git complained about the
+argument size, so if you run into this problem do something like this command:</p><pre><code>  $ git rev-list --all | (while read rev; do git grep -e &lt;regexp&gt; $rev; done)
+</code></pre></li><li><p><strong>Search for commits whose changes include your regexp</strong></p><pre><code>  $ git log -G &lt;regexp&gt;
+</code></pre></li><li><p><strong>Combine regexps and filter results via boolean logic</strong></p><pre><code>  $ git grep -e 'include' --or 'extend' --and \( -e 'Specification' -e 'Factory' \)
+</code></pre><p>With this command, we search for lines where we extend <em>or</em> include, either specifications <em>or</em> factories. For example, let&rsquo;s say we ran this command on this file:</p><pre><code>  module UserSpecification; end
+  module UserFactory; end
+  module Bad; end
+
+  class User
+      extend UserSpecification
+      include UserFactory
+      include Bad
+  end
+</code></pre><p>Then we&rsquo;d get these results:</p><img class=img-fluid alt="git grep example" src=images/combination.jpg></li><li><p><strong>Find files that contain some terms, not necessarily on the same line</strong></p><pre><code>  $ git grep -e &lt;regexp&gt; --and -e &lt;regexp&gt;
+</code></pre><p>&mldr;is not what you want, as it will search for lines that contain both those
+regular expressions. Instead, this is how we search for files with the matches occurring
+somewhere in the file:</p><pre><code>  $ git grep --all-matches -e &lt;regexp&gt; -e &lt;regexp&gt;
+</code></pre></li><li><p><strong>Find commits whose message mention login and were authored by Travis in the last month</strong></p><pre><code>  $ git log --grep=login --author=travis --since=1.month
+</code></pre></li></ul><h2 id=text-editor-integration>Text editor integration</h2><p>Inevitably we will want to be able to search and use these programs from within
+our text editors.</p><p>Vim users have it pretty good, with both <a href=https://github.com/mileszs/ack.vim>ack.vim</a> and Tim
+Pope&rsquo;s <a href=https://github.com/tpope/vim-fugitive>Fugitive</a> which includes <code>:Ggrep</code> to interface with
+git grep by being to search and have your results listed and linked in the quickfix window. By
+listing the results in the quickfix window, you have the usual quickfix navigation keybindings, if
+you&rsquo;re unfamiliar, see <code>:h quickfix</code></p><img class=img-fluid alt="Using :Ggrep in Vim" src=images/editor.jpg><p>If your project is not under git version control than you can use ack.vim in a
+similar manner:</p><pre><code>:Ack &lt;args&gt;
+</code></pre><p>Emacs user&rsquo;s have had <code>vc-git-grep</code> built in since v22.1 and it&rsquo;s very similar
+to <code>:Ggrep</code>. For acking, use <a href=http://www.emacswiki.org/emacs/FullAck>full-ack</a>.
+See <a href=http://www.gnu.org/software/emacs/manual/html_node/emacs/Compilation-Mode.html>the complation-mode help</a> page (or <code>C-h f compliation-mode</code>) for info on navigating in compilation-mode (the mode that both vc-git-grep and full-ack output into).</p><p>By now you are comfortable with git grep and git log and you can get more
+details on each of these commands by running <code>git help &lt;command></code>. And you have some useful tools in your repertoire &mdash; have fun!</p><h2 id=sources-and-further-reading>Sources and further reading</h2><ul><li><a href=https://git-scm.com/book/en/v2/Git-Tools-Searching>Git Tools - Search</a></li><li><a href=http://gitster.livejournal.com/27674.html>Junio C Hamano, current maintainer of git: Fun with &ldquo;git grep&rdquo;</a></li><li><a href=http://gitster.livejournal.com/30195.html>Junio C Hamano: Fun with &ldquo;git log &ndash;grep&rdquo;</a></li><li><a href=http://stackoverflow.com/questions/2928584/how-to-grep-in-the-git-history>How to grep in the git history?</a></li></ul></article><hr class="col-xs-12 no-gutters"><footer id=post-footer class="col-xs-12 no-gutters"><p><span class=post-footer-item>Share <a href=https://twitter.com/share class=twitter-share-button data-via=travisjeffery data-size=large>Tweet about this article</a>
+<script>!function(e,t,n){var s,o=e.getElementsByTagName(t)[0],i=/^http:/.test(e.location)?"http":"https";e.getElementById(n)||(s=e.createElement(t),s.id=n,s.src=i+"://platform.twitter.com/widgets.js",o.parentNode.insertBefore(s,o))}(document,"script","twitter-wjs")</script></span><span class=post-footer-item>Written Feb 2, 2012</span>
+<span class=post-footer-item>Tags <a href=/tags/git>git</a></span>
+<span class=post-footer-item><a href=/>Read more posts&#8230;</a></span></p></footer><hr class="col-xs-12 no-gutters"><footer class="footer col-xs-12 no-gutters left"><div class="col-xs-12 col-sm-4 pull-sm-left no-gutters"><a href=https://twitter.com/travisjeffery class=twitter-follow-button data-show-count=false data-size=large>Follow @travisjeffery</a>
+<script>!function(e,t,n){var s,o=e.getElementsByTagName(t)[0];e.getElementById(n)||(s=e.createElement(t),s.id=n,s.src="//platform.twitter.com/widgets.js",o.parentNode.insertBefore(s,o))}(document,"script","twitter-wjs")</script><div class="no-gutters col-xs-12"><a href=https://twitter.com/travisjeffery>Twitter</a></div><div class="no-gutters col-xs-12"><a href=https://github.com/travisjeffery>GitHub</a></div><div class="no-gutters col-xs-12"><a href=mailto:tj@travisjeffery.com>Email</a></div><div class="no-gutters col-xs-12"><a href=https://travisjeffery.com>Homepage</a></div></div><div class="subscribe col-xs-12 col-sm-8 no-gutters pull-sm-right"><p class=zero-margin><strong>Delivered straight to your inbox.</strong> One email per post. No spam.</p><form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method=post id=mc-embedded-subscribe-form name=mc-embedded-subscribe-form class="validate one-margin" target=_blank novalidate><div id=mc_embed_signup_scroll><div class=mc-field-group><input placeholder="Your email address" type=email name=EMAIL class="required email" id=mce-EMAIL></div><div id=mce-responses class=clear><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div style=position:absolute;left:-5e3px aria-hidden=true><input type=text name=b_1e3ff7d7791b26a8f60b9f16c_322d3e68e8 tabindex=-1></div><p class=clear><input type=submit value=Subscribe name=subscribe id=mc-embedded-subscribe class=button></p></div><p></form></div></footer></div></div></div></body></html>
