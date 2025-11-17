@@ -1,0 +1,13 @@
+{{- $pages := where .Site.RegularPages "Type" "posts" -}}
+{{- $pages = first 20 $pages -}}
+[
+{{ range $index, $page := $pages }}
+  {{- if $index }},{{ end }}
+  {
+    "title": {{ $page.Title | jsonify }},
+    "url": {{ $page.Permalink | jsonify }},
+    "date": {{ $page.Date.Format "2006-01-02" | jsonify }},
+    "summary": {{ $page.Summary | jsonify }}
+  }
+{{ end }}
+]

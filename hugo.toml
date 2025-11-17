@@ -1,8 +1,8 @@
 baseURL = 'https://travisjeffery.com/'
 languageCode = 'en-us'
-title = 'Travis Jeffery'
+title = 'travis jeffery'
 
-outputs = { home = ["HTML", "JSON"] }
+outputs = { home = ["HTML", "RSS", "JSON"] }
 
 [params]
   description = "Hacker, writer, good guy."

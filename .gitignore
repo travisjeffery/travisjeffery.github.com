@@ -1,1 +1,52 @@
-public
+# Build outputs
+_site/
+public/
+dist/
+out/
+.next/
+.cache/
+.parcel-cache/
+
+# Dependencies
+node_modules/
+vendor/
+bower_components/
+
+# Static site generators
+.hugo_build.lock
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Environment and config
+.env
+.env.local
+.env.*.local
+*.local.toml
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor directories
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Logs and databases
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Large media (if you store originals elsewhere)
+# originals/
+# raw-footage/

@@ -29,7 +29,8 @@
     <meta name="twitter:image" content="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39">
     <meta name="twitter:card" content="summary">
 
-    <link href="/css/style.css" rel="stylesheet"/>
+    {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
+    <link href="{{ $style.Permalink }}" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/js/judy.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/main.js" type="text/javascript" charset="utf-8"></script>
