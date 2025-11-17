@@ -1,0 +1,2 @@
+{{ $img := resources.Get (.Get "src") }}
+<img src="{{ $img.RelPermalink }}" alt="{{ .Get "alt" }}">

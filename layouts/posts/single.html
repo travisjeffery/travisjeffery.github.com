@@ -1,7 +1,11 @@
 {{ define "main" }}
 <article class="col-xs-12 no-gutters">
   <header>
+    {{ if .Params.externalURL }}
+    <h1 class="article-title"><a href="{{ .Params.externalURL }}" target="_blank" rel="noopener">{{ .Title }}</a></h1>
+    {{ else }}
     <h1 class="article-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+    {{ end }}
   </header>
 
   {{ .Content }}
@@ -15,7 +19,7 @@
     <span class="post-footer-item">Share <a href="https://twitter.com/share" class="twitter-share-button" data-via="travisjeffery" data-size="large">Tweet about this article</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></span>
     <span class="post-footer-item">Written {{ .Date.Format "Jan 2, 2006" }}</span>
-    {{ if .Params.tags }}<span class="post-footer-item">Tags {{ range $index, $tag := .Params.tags }}{{ if $index }}, {{ end }}<a href="/tags/{{ $tag | urlize }}/">{{ $tag }}</a>{{ end }}</span>{{ end }}
+    {{ if .Params.tags }}<span class="post-footer-item">Tags {{ range $index, $tag := .Params.tags }}{{ if $index }}, {{ end }}<a href="/#{{ $tag }}">{{ $tag }}</a>{{ end }}</span>{{ end }}
     <span class="post-footer-item"><a href="/">Read more posts&#8230;</a></span>
   </p>
 </footer>

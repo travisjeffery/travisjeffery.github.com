@@ -21,7 +21,11 @@
   {{ range (where .Site.RegularPages "Type" "posts").ByDate.Reverse }}
   <li>
     <span class="list-title col-xs-9"><strong>
-      <a href="{{ .Permalink }}">{{ .Title }}</a>
+      {{ if .Params.externalURL }}
+        <a href="{{ .Params.externalURL }}" target="_blank" rel="noopener">{{ .Title }}</a>
+      {{ else }}
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+      {{ end }}
     </strong></span>
     <span class="list-date col-xs-3 push-xs-left pull-xs-right">{{ .Date.Format "Jan 2, 2006" }}</span>
   </li>

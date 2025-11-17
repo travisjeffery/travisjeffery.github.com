@@ -1,0 +1,15 @@
+---
+title: Graphing Kafka offset lags with StatsD
+date: 2016-03-26T00:00:00Z
+draft: false
+tags: ["opensource"]
+---
+
+I wrote a [worker](https://github.com/travisjeffery/kafka-statsd) to track consumer offset lags with StatsD so that you
+can graph them in Grafana or something similar.
+
+<img class="img-fluid" src="images/graph.png" alt="Grafana example" />
+
+It's written in Golang and there's a Docker image too, so it's easy to deploy and use.
+
+[Check it out on GitHub.](https://github.com/travisjeffery/kafka-statsd)
