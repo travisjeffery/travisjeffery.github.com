@@ -107,7 +107,7 @@ reformulate later for your own use cases:
     regular expressions. Instead, this is how we search for files with the matches occurring
     somewhere in the file:
 
-        $ git grep --all-matches -e <regexp> -e <regexp>
+        $ git grep --all-match -e <regexp> -e <regexp>
 
 - **Find commits whose message mention login and were authored by Travis in the last month**
 
