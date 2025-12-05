@@ -1,6 +1,6 @@
 #+TITLE: Segment, 2014-2016
 #+DATE: 2020-11-02
-#+DRAFT: false
+#+DRAFT: true
 #+TAGS[]: segment startups
 #+CATEGORIES[]: tech
 
