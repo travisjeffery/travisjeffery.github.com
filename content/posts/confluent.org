@@ -1,0 +1,72 @@
+#+TITLE: Confluent, 2016-2021
+#+DATE: 2020-11-03
+#+DRAFT: true
+#+TAGS[]: confluent startups
+#+CATEGORIES[]: tech
+
+* Confluent
+
+I'd used Kafka.
+
+Had ran JVM software before with ELK.
+
+First time I'd used software that depended on ZooKeeper.
+
+I thought I could do better.
+
+After, building in consensus and discovery. I could make it more cloud-native.
+
+I wrote a project named Jocko.
+
+I wrote a blog post on it.
+
+That got attention.
+
+Jay Kreps dm'd me on Twitter. I spoke with Neha.
+
+I spoke with Rob, manager of the new team to build Confluent Cloud.
+
+He had me make a REST API. He said I'd be their first remote hire so the interviews would be tougher.
+
+I flew to PA to interview. I stayed in a hotel across their HQ. It was noisy and I didn't sleep well.
+
+I had 3 technical interviews. 1 interview with Neha. 1 interview with Jay. 1 interview with Cheryl the CFO.
+
+One interview was on a sliding window streaming aggregation.
+
+One was talking about a Kafka as a Service design I'd made.
+
+I forget exactly what the other interview was.
+
+Cheryl was a highlight that day, and my time at Confluent.
+
+Her openess with everything reminded me of the openess at Segment.
+
+Jay's interview was to convince me to join the company, the issue was I wanted to join. So it was awkward.
+
+Confluent gave me a job offer, but I had a 3 week trip to Japan planned, so I asked them if I should join now or wait until after. They had me join then. I flew to PA for a week to work. Flew home and then flew back to SF to connect to flight to Japan. Great trip, love Japan.
+
+My first project was adding the SASL SSL provider Kafka in Confluent Cloud uses to authenticate API keys.
+
+Then I went to Japan for a few weeks.
+
+I was in the depths of Kafka's security that doesn't change frequently and none of the Kafka Core team there had any good ideas.
+
+Most of the company wasn't interested in the cloud. They felt that they had a good thing going with the enterprise deployments.
+
+It wasn't until we got our 1st million dollar deal that things turned around. And then each month in our all hands the cloud's revenue growth outpaced enterprise.
+
+You had people who didn't want their own software. To them, writing software ends when they run `git push`.
+
+A lot of people came from LinkedIn and didn't have cloud experience, or experience using open-source software.
+
+When I got back from Japan it was intense period of getting Confluent Cloud ready. I set up Terraform to provision infrastructure, the VPC, and EKS cluster. Then I began writing HTTP/gRPC services: a scheduling/orchestration service to store metadata on cluster deployments and managing provisioning, a user service to authenticate and store user metadata, an operator, a sync service to sync changes from the control plane to the data plane.
+
+I liked the manager Rob. But he left around a year into Confluent. That was a huge stepback for me because I'd proven myself to Rob, building as much of Confluent Cloud as I had, leading the team. And then I had to begin again with a new manager.
+
+Politics of a big company.
+
+Confluent had a tool team who developed stuff for the enterprise deployments and managed the in-house Jenkins for CI.
+
+Jenkins would go down almost every day and was slow. So I set up SemaphoreCI. Didn't think much of it. Then I heard how they were complaining about how we weren't using their stuff, while not addressing the issues. Over time more and more stuff migrated to our set up. Today all of Confluent builds are running on SemaphoreCI.
+

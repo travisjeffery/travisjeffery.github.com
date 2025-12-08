@@ -1,6 +1,6 @@
 #+TITLE: Segment, 2014-2016
 #+DATE: 2020-11-02
-#+DRAFT: true
+#+DRAFT: false
 #+TAGS[]: segment startups
 #+CATEGORIES[]: tech
 
@@ -18,7 +18,10 @@ I talked with Segment. I flew out again to interview with them, and a couple oth
 
 I had 36 hours straight of travelling: Toronto to Vancouver to Sydney to Melbourne to Lord Somers Camp. It's wild to see the sun rise and set all in the same flight. I installed Civilization 5 for the flight to Sydney, I'd never played the series. I played Civilization for over 12 hours straight.
 
-The first few days in Australia, we attended Campjs, a 3-day tech retreat. The campsite's main area was reserved for hacking. Scheduled content took place in other rooms or outside. The final night was reserved for people to demonstrate what they built or learned at the event. I wish this setup were the standard for conferences. 
+The first few days in Australia, we attended Campjs, a 3-day tech retreat. The campsite's main area was reserved for hacking. Scheduled content took place in other rooms or outside. The final night was reserved for people to demonstrate what they built or learned at the event. I wish this setup were the standard for conferences.
+
+#+ATTR_HTML: :class m-t-1 img-fluid
+[[file:images/campjs.jpg]]
 
 After the retreat we flew to Sydney and drove a huge van to the Blue Mountains. Anthony, a native Aussie, drove the van. I think there were nine of us. We stayed at a house for a few days, went on a hike, and saw the Jenolan Caves. Then we drove back to Sydney, stopping at a zoo along the way, and stayed in a hotel in Coogee. One day we went to Bondi Beach for lunch at an upscale restaurant, a nearby table had a group of women who looked like the Real Housewives of Bondi. They thought we were a football team.
 
@@ -28,7 +31,11 @@ One day my bank called me asking what to do with the wire they just received for
 
 I lived in a building at Queen/Spadina in Toronto. It had a textile shop on the street, a gym on second floor, and a handful of apartments on the third and fourth floors. My neighbour and I walked in the building at the same time and headed upstairs together talking about what we were up to next week. I said I'm headed to SF tomorrow. He said me too. I said Oh really, my flight's at 8. Yours? He says I'm on the same flight. I said: Cool, we could share a ride to the airport. Where are you sitting? We checked our seats. We sat next to each other.
 
-Almost everyone was around the same age, with no kids. Although I lived in Toronto, I flew to SF almost every month. We'd play Diplomacy or Settlers of Catan after work. We hung out during the weekends---went for hikes, went to the park, went to concerts. We'd have impromptu nerf gun fights in the office. But most of all we got shit done. Segment was the most fun place I worked at and everyone who worked there during this time says the same thing. 
+Almost everyone was around the same age, with no kids. Although I lived in Toronto, I flew to SF almost every month. We'd play Diplomacy or Settlers of Catan after work. We hung out during the weekends---went for hikes, went to the park, went to concerts. We'd have impromptu nerf gun fights in the office. But most of all we got shit done. Segment was the most fun place I worked at and everyone who worked there during this time says the same thing.
+
+We threw two office parties when we raised our series A. The couth party for the investors. And the uncouth party for friends and family, the next night. The idea was not to fill up the couth party and get too rowdy. The problem is nobody wants to go to the couth party.
+
+[[file:images/photobooth.jpg]]
 
 Segment worked over email, using team mailing lists. We held daily standups by emailing team@segment.io your plan for the day. Everyone shared in the standup---CEO, sales, design, engineering. New customer sign ups triggered an email to the team and bizdev@segment.io. We sent emails to shipped@segment.io to notify everyone of done work, that could include a short demo. We had a weekly all-hands video meetup. And each team had their own weekly meetup. Financials were available for anyone to see in a Grafana dashboard: our ARR, runway, expenses. Everyone knew about new deals.
 
