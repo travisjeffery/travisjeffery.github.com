@@ -5,8 +5,7 @@ title = 'travis jeffery'
 outputs = { home = ["HTML", "RSS", "JSON"] }
 
 [permalinks]
-  [permalinks.page]
-    posts = "/:title/"
+posts = '/:title/'
 
 [params]
   description = "Hacker, writer, good guy."
