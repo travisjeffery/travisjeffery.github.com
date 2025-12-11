@@ -18,7 +18,7 @@
 <h3 class="section-header no-gutters col-xs-12" id="posts"><span style="background-color: pink">posts:</span></h3>
 
 <ul class="plain col-xs-12">
-  {{ range (where .Site.RegularPages "Type" "posts").ByDate.Reverse }}
+  {{ range (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
   <li>
     <span class="list-title col-xs-9"><strong>
       {{ if .Params.externalURL }}

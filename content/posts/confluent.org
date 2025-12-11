@@ -70,3 +70,4 @@ Confluent had a tool team who developed stuff for the enterprise deployments and
 
 Jenkins would go down almost every day and was slow. So I set up SemaphoreCI. Didn't think much of it. Then I heard how they were complaining about how we weren't using their stuff, while not addressing the issues. Over time more and more stuff migrated to our set up. Today all of Confluent builds are running on SemaphoreCI.
 
+A month away from deadline to ship Confluent Cloud and 2 out of 3 of my teammates go on leave. One took vacation another had an ill child I believe. So everything was on my shoulders.
