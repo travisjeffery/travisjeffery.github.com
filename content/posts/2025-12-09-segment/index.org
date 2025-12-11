@@ -1,6 +1,5 @@
 #+TITLE: Segment, 2014-2016
 #+DATE: 2025-12-09
-#+SLUG: segment
 #+DRAFT: false
 #+TAGS[]: segment startups
 #+CATEGORIES[]: tech
@@ -41,7 +40,7 @@ Almost everyone was around the same age, with no kids. Although I lived in Toron
 </video>
 #+end_export
 
-We threw two office parties when we raised our series A. The couth party for the investors. And the uncouth party for friends and family, the next night. The idea was not to fill up the couth party and get too rowdy. The problem is nobody wants to go to the couth party.
+We threw two office parties when we raised our series A. The couth party for the investors. And the uncouth party for friends and family, the next night. The idea was not to fill up the couth party and get too rowdy. The problem was nobody wanted to go to the couth party.
 
 [[file:images/uncouth.jpg]]
 
