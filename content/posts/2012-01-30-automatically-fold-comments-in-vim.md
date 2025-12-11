@@ -2,6 +2,8 @@
 title: "Hide comments with Vim folding"
 date: 2012-01-17T00:00:00Z
 tags: ["vim"]
+aliases:
+  - /b/2012/01/hide-comments-with-vim-folding/
 ---
 No matter how clean your code is, you need to document your code.
 

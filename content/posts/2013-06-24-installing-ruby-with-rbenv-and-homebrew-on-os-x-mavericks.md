@@ -2,6 +2,8 @@
 title: "Installing Ruby with rbenv and Homebrew on OS X Mavericks"
 date: 2013-06-24T00:00:00Z
 tags: ["mac"]
+aliases:
+  - /b/2013/06/installing-ruby-with-rbenv-and-homebrew-on-os-x-mavericks/
 ---
 It's a bit tricky to install Ruby on Mac OS X Maverick (10.9), but here's what worked for me.
 

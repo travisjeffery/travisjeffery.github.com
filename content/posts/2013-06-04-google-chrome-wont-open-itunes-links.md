@@ -2,6 +2,8 @@
 title: "When Google Chrome won't open iTunes links"
 date: 2013-06-04T00:00:00Z
 tags: ["googlechrome"]
+aliases:
+  - /b/2013/06/when-google-chrome-wont-open-itunes-links/
 ---
 Recently ran into this issue where Google Chrome wouldn't open iTunes links
 (e.g. links to WWDC videos, iOS apps, songs, etc.), a while

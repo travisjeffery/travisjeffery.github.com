@@ -2,6 +2,8 @@
 title: "Server-sent event event source API client in ObjC for iOS and Mac using NSURLSession"
 date: 2013-10-12T00:00:00Z
 tags: ["ios"]
+aliases:
+  - /b/2013/10/server-sent-event-event-source-api-client-in-objc-for-ios-and-mac-using-nsurlsession/
 ---
 [TRVSEventSource](https://github.com/travisjeffery/TRVSEventSource) provides an api for opening an http connection for receiving push notifications from a server in the form of [server-sent events](http://dev.w3.org/html5/eventsource/). Mozilla Developer Network has a [good page](https://developer.mozilla.org/en-US/docs/Server-sent_events/Using_server-sent_events) on server-sent events and event source usage too.
 

@@ -2,6 +2,8 @@
 title: "errors.js: client side errors object"
 date: 2012-03-30T00:00:00Z
 tags: [""]
+aliases:
+  - /b/2012/03/errors.js-client-side-errors-object/
 ---
 I like ActiveModel's Errors object. It simple, ubiquitous,
 consistent, and makes it easy to handle your models' errors, server-side. However, we're deep into the web developers' great migration to the client-side. And developers used to handle errors server-side that they now handle client-side.

@@ -2,6 +2,8 @@
 title: "Expressive domain specific languages (DSL) in Ruby"
 date: 2011-12-28T00:00:00Z
 tags: ["ruby"]
+aliases:
+  - /b/2011/12/expressive-domain-specific-languages-dsl-in-ruby/
 ---
 I've experimented with making DSLs in Ruby and here's an example:
 

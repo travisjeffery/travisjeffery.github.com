@@ -2,6 +2,8 @@
 title: "Search a git repo like a ninja"
 date: 2012-02-02T00:00:00Z
 tags: ["git"]
+aliases:
+  - /b/2012/02/search-a-git-repo-like-a-ninja/
 ---
     $ git grep <regexp>
 

@@ -2,6 +2,8 @@
 title: "Modern grep"
 date: 2012-02-09T00:00:00Z
 tags: ["tools"]
+aliases:
+  - /b/2012/02/modern-grep/
 ---
 Update: I updated the post for ripgrep.
 

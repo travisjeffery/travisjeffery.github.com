@@ -2,6 +2,8 @@
 title: "Making Custom Transitions Between UIViewControllers"
 date: 2012-10-22T00:00:00Z
 tags: ["ios"]
+aliases:
+  - /b/2012/10/making-custom-transitions-between-uiviewcontrollers/
 ---
 I released a project called
 [TRVSNavigationControllerTransition](https://github.com/travisjeffery/TRVSNavigationControllerTransition).

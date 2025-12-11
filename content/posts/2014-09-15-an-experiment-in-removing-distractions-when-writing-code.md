@@ -3,6 +3,8 @@ title: "An experiment in removing distractions when writing code"
 date: 2014-09-15T00:00:00Z
 draft: true
 tags: ["journal"]
+aliases:
+  - /b/2014/09/an-experiment-in-removing-distractions-when-writing-code/
 ---
 about a week ago, i turned off syntax highlighting in my editor, emacs.
 

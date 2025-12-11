@@ -2,6 +2,8 @@
 title: "Animated nyan cat in the terminal"
 date: 2015-06-25T00:00:00Z
 tags: [""]
+aliases:
+  - /b/2015/06/animated-nyan-cat-in-the-terminal/
 ---
 Fun little project I wrote in Go! [Code](https://github.com/travisjeffery/nyancat) on GitHub. Or run it yourself:
 

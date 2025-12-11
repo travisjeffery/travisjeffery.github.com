@@ -2,6 +2,8 @@
 title: "Text processing with NSLinguisticTagger: implementing Writer Pro's syntax control"
 date: 2013-12-25T00:00:00Z
 tags: ["ios"]
+aliases:
+  - /b/2013/12/text-processing-with-nslinguistictagger-implementing-writer-pros-syntax-control/
 ---
 Update: I wrote this code to show that iA was patenting a feature built into Apple's frameworks. Any
 iOS developer could build the same feature with ten lines of code. John Gruber [linked my

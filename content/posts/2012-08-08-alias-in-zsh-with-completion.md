@@ -2,6 +2,8 @@
 title: "Alias in ZSH with completion"
 date: 2012-08-08T00:00:00Z
 tags: ["zsh"]
+aliases:
+  - /b/2012/08/alias-in-zsh-with-completion/
 ---
 I use git in a terminal all day, every day. 3 characters adds up if you type them enough, `g i t`, so let's shorten what we have to type.
 

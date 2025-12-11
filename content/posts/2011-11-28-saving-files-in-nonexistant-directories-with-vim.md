@@ -2,6 +2,8 @@
 title: "Saving files in nonexistent directories with Vim"
 date: 2011-11-28T00:00:00Z
 tags: ["vim"]
+aliases:
+  - /b/2011/11/saving-files-in-nonexistent-directories-with-vim/
 ---
 I often open a file in a directory that doesn't exist yet. However, Vim will not let you save a file
 in a nonexistent directory.

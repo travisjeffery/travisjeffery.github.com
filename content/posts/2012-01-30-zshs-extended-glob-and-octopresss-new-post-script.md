@@ -2,6 +2,8 @@
 title: "ZSH's extended glob breaking commands"
 date: 2012-01-30T00:00:00Z
 tags: ["zsh"]
+aliases:
+  - /b/2012/01/zshs-extended-glob-breaking-commands/
 ---
 After running a command like `$ rake new_post["hello world"]`, you may have seen an error like the following:
 

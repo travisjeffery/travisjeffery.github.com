@@ -2,6 +2,8 @@
 title: "Keeping your git repo clean of .orig files!"
 date: 2011-12-03T00:00:00Z
 tags: ["git"]
+aliases:
+  - /b/2011/12/keeping-your-git-repo-clean-of-.orig-files/
 ---
 For teams building projects with Git, a good habit is to rebase and merge often so conflicts are
 less frequent and easier to resolve. Also, this helps keeps your branch graph simple. When

@@ -2,6 +2,8 @@
 title: "Adding a drop shadow to a table view"
 date: 2012-07-23T00:00:00Z
 tags: ["ios"]
+aliases:
+  - /b/2012/07/adding-a-drop-shadow-to-a-table-view/
 ---
 Recently I was implementing a view where the last
 cell of a table view needed a drop shadow.

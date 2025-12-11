@@ -2,6 +2,8 @@
 title: "How-to test starting Backbone's history"
 date: 2012-04-16T00:00:00Z
 tags: ["javascript"]
+aliases:
+  - /b/2012/04/how-to-test-starting-backbones-history/
 ---
 You can call `Backbone.history.start()` once. Multiple calls
 [causes](http://documentcloud.github.com/backbone/docs/backbone.html#section-127) Backbone to throw an Error saying: "Backbone.history has already been started".

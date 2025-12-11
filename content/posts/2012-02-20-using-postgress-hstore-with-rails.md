@@ -2,6 +2,8 @@
 title: "Using PostgreSQL's Hstore with Rails"
 date: 2012-02-20T00:00:00Z
 tags: ["postgres"]
+aliases:
+  - /b/2012/02/using-postgresqls-hstore-with-rails/
 ---
 ## Prelude
 

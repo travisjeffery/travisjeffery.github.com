@@ -1,6 +1,7 @@
 #+TITLE: Hello from Hugo
 #+DATE: 2025-11-17
 #+DRAFT: true
+#+aliases: /b/2025/11/hello-from-hugo/
 
 It's been a while since I've written a blog post. I've written a book, built Confluent Cloud, been building Oscilar's infrastructure, restoring heritage houses, raising kids. 
 

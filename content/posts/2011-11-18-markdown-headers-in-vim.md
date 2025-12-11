@@ -2,6 +2,8 @@
 title: "Markdown headers in Vim"
 date: 2011-11-18T00:00:00Z
 tags: ["vim"]
+aliases:
+  - /b/2011/11/markdown-headers-in-vim/
 ---
 With TextMate's Markdown bundle, you can mark headers by moving your cursor to the line
 after the intended header, typing `#` and pressing `<Tab>`. The Textmate bundle insert #'s until the

@@ -2,6 +2,8 @@
 title: "Library and Lambda function to show your Rdio heavy rotation on your website"
 date: 2015-10-24T00:00:00Z
 tags: [""]
+aliases:
+  - /b/2015/10/library-and-lambda-function-to-show-your-rdio-heavy-rotation-on-your-website/
 ---
 I thought it'd be cool to show what albums I'm listening to lately on my site, so I wrote a client lib and
 and Amazon Lambbda function to get the albums from your Rdio Heavy Rotation and put them on your site.

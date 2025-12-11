@@ -1,6 +1,8 @@
 ---
 title: "Re-architecting Segment's API"
 date: 2015-03-25T00:00:00Z
+aliases:
+  - /b/2015/03/re-architecting-segments-api/
 ---
 From a very high level POV, here's how Segment's API used to work and works now:
 

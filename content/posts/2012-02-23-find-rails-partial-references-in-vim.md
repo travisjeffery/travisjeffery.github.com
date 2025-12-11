@@ -2,6 +2,8 @@
 title: "Find Rails partial references in Vim"
 date: 2012-02-23T00:00:00Z
 tags: [""]
+aliases:
+  - /b/2012/02/find-rails-partial-references-in-vim/
 ---
 Before I change a Rails partial that's shared across the project, I check what effect my change will have by looking at where and how the partial's used. In Vim, I find the references to  partials with the following function:
 

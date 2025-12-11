@@ -2,6 +2,8 @@
 title: "iOS how-to: mask and shadow views"
 date: 2012-08-06T00:00:00Z
 tags: ["ios"]
+aliases:
+  - /b/2012/08/ios-how-to-mask-and-shadow-views/
 ---
 Two techniques that iOS developers use to make visually appealing app are masks and shadows; for
 example, masking an image to have round corners, or adding a drop shadow to an image to have

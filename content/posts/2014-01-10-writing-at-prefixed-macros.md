@@ -2,6 +2,8 @@
 title: "Writing @ prefixed macros"
 date: 2014-01-10T00:00:00Z
 tags: ["ios"]
+aliases:
+  - /b/2014/01/writing-@-prefixed-macros/
 ---
 While writing my own debugging lib, an idea I was toying with was having a debug macro look like one of the built-in @ compiler directives, e.g. @selector, @encode, etc.
 

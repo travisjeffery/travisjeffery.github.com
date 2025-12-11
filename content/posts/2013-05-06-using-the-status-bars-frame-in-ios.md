@@ -2,6 +2,8 @@
 title: "Getting the status bar's height in iOS"
 date: 2013-05-06T00:00:00Z
 tags: ["ios"]
+aliases:
+  - /b/2013/05/getting-the-status-bars-height-in-ios/
 ---
 I had someone ask me for the best way to get the status bar's height. Their problem was they were using UIApplication-statusBarFrame.size.height which will usually be 20.0f when in portrait (***but*** would be bigger if the user is on the phone, etc.) but when the phone was oriented in landscape the height was 480.0f.
 

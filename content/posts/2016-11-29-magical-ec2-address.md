@@ -2,6 +2,8 @@
 title: "EC2’S magical address to get instance metadata"
 date: 2016-11-29T00:00:00Z
 tags: ["ops"]
+aliases:
+  - /b/2016/11/ec2s-magical-address-to-get-instance-metadata/
 ---
 There’s a magical address in EC2 that you can query to get metadata on that instance (`http://169.254.169.254`). What’s especially awesome about it, is that you can use it inside Docker containers which makes it an easy
 way to find the host IP from inside the container without having to pass it in via an env var or equivalent.

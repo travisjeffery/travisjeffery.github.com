@@ -3,6 +3,8 @@ title: "On visibility with microservices and monoliths"
 date: 2015-10-08T00:00:00Z
 draft: true
 tags: ["engineering"]
+aliases:
+  - /b/2015/10/on-visibility-with-microservices-and-monoliths/
 ---
 <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">We replaced our monolith with micro services so that every outage could be more like a murder mystery.</p>&mdash; Honest Status Page (@honest_update) <a href="https://twitter.com/honest_update/status/651897353889259520">October 7, 2015</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>

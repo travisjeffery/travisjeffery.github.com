@@ -2,6 +2,8 @@
 title: "What is this? I don't even... bind this to your object in JavaScript!"
 date: 2012-03-29T00:00:00Z
 tags: ["javascript"]
+aliases:
+  - /b/2012/03/what-is-this-i-dont-even...-bind-this-to-your-object-in-javascript/
 ---
 In JavaScript, the `this` keyword refers to the object it belongs to, and the object depends on where you use it.
 

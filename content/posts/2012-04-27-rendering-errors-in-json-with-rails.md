@@ -2,6 +2,8 @@
 title: "Rendering errors with JSON and Rails"
 date: 2012-04-27T00:00:00Z
 tags: ["rails"]
+aliases:
+  - /b/2012/04/rendering-errors-with-json-and-rails/
 ---
 I've seen bad practices for handling errors with JSON and Rails:
 

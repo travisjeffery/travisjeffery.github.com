@@ -2,6 +2,8 @@
 title: "Mess up a rebase? Reflog your problems away"
 date: 2011-10-31T00:00:00Z
 tags: ["git"]
+aliases:
+  - /b/2011/10/mess-up-a-rebase-reflog-your-problems-away/
 ---
 I'm going to show you how to use the reflog to fix mistakes you've made with Git, where you seemingly can't recover the history.
 

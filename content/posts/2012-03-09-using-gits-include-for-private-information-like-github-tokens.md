@@ -2,6 +2,8 @@
 title: "Using git's include for private configuration information (like github tokens)"
 date: 2012-03-09T00:00:00Z
 tags: ["git"]
+aliases:
+  - /b/2012/03/using-gits-include-for-private-configuration-information-like-github-tokens/
 ---
 Git added a [feature](https://github.com/git/git/commit/9b25a0b52e09400719366f0a33d0d0da98bbf7b0)
 that enables you to split your Git config across multiple files.

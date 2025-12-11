@@ -2,6 +2,8 @@
 title: "Error responses on Node.js with Koa"
 date: 2015-10-21T00:00:00Z
 tags: ["javascript"]
+aliases:
+  - /b/2015/10/error-responses-on-node.js-with-koa/
 ---
 Koa is a web framework that's the next generation Express in that it's built by
 the same team, and aims to be smaller, more expressive, and more robust for

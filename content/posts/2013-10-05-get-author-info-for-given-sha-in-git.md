@@ -2,6 +2,8 @@
 title: "`git author sha`: get author info for a given sha in git"
 date: 2013-10-05T00:00:00Z
 tags: ["git"]
+aliases:
+  - /b/2013/10/git-author-sha-get-author-info-for-a-given-sha-in-git/
 ---
 When i'm hacking on open source libs i maintain, i often have to clean up the
 commits of people's prs. I wanna give attribution for good contributions and

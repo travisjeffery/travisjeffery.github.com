@@ -2,6 +2,8 @@
 title: "Outbound connections from Docker with VirtualBox not working?"
 date: 2015-11-17T00:00:00Z
 tags: ["ops"]
+aliases:
+  - /b/2015/11/outbound-connections-from-docker-with-virtualbox-not-working/
 ---
 Using Docker and VirtualBox and having trouble making outbound
 connections? You may have errors similar to:

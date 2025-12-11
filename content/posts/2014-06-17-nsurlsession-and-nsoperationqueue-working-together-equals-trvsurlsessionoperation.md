@@ -2,6 +2,8 @@
 title: "NSURLSession and NSOperationQueue working together = TRVSURLSessionOperation"
 date: 2014-06-17T00:00:00Z
 tags: [""]
+aliases:
+  - /b/2014/06/nsurlsession-and-nsoperationqueue-working-together-trvsurlsessionoperation/
 ---
 Been meaning on shipping this project for a while now.
 

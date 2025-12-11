@@ -2,6 +2,8 @@
 title: "SSH into EC2 instance with instance ID"
 date: 2015-11-30T00:00:00Z
 tags: ["ops"]
+aliases:
+  - /b/2015/11/ssh-into-ec2-instance-with-instance-id/
 ---
 Make sure you've installed and configured the [aws-cli](https://github.com/aws/aws-cli) and [jq](https://github.com/stedolan/jq).
 

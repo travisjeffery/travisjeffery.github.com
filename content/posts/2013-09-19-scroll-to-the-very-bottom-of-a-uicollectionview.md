@@ -2,6 +2,8 @@
 title: "Scroll to the bottom of a UICollectionView"
 date: 2013-09-19T00:00:00Z
 tags: ["ios"]
+aliases:
+  - /b/2013/09/scroll-to-the-bottom-of-a-uicollectionview/
 ---
 Here ya go.
 

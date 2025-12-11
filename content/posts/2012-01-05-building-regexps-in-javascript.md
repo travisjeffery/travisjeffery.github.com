@@ -2,6 +2,8 @@
 title: "Building regexps in JavaScript"
 date: 2012-01-05T00:00:00Z
 tags: ["javascript"]
+aliases:
+  - /b/2012/01/building-regexps-in-javascript/
 ---
 If you need to build a JavaScript RegExp from multiple strings or regexps, dynamically, here's how:
 

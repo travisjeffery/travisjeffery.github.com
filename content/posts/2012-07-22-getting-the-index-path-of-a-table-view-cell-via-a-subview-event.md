@@ -2,6 +2,8 @@
 title: "Getting the index path of a table view cell via a subview event"
 date: 2012-07-22T00:00:00Z
 tags: ["ios"]
+aliases:
+  - /b/2012/07/getting-the-index-path-of-a-table-view-cell-via-a-subview-event/
 ---
 You've subclassed UITableViewCell and you've added a UIButton as a subview. Whenever you touch that
 button, you want to act on the data of your UITableView. To act on the data, you need to know the

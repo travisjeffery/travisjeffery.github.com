@@ -2,6 +2,8 @@
 title: "URL linking in a non-editable NSTextView"
 date: 2013-11-09T00:00:00Z
 tags: ["mac"]
+aliases:
+  - /b/2013/11/url-linking-in-a-non-editable-nstextview/
 ---
 You’re likely here because you thought you could just do this:
 

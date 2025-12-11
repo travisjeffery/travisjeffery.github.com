@@ -2,6 +2,8 @@
 title: "Quick staging and other file operations in git"
 date: 2012-11-01T00:00:00Z
 tags: ["git"]
+aliases:
+  - /b/2012/11/quick-staging-and-other-file-operations-in-git/
 ---
 Having a modular and well-organized code is clearly great from an architectural
 standpoint, but it can make the actual filesystem layout and hierarchy of your

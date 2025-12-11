@@ -2,6 +2,8 @@
 title: "M-x occur for Vim"
 date: 2011-10-31T00:00:00Z
 tags: ["vim"]
+aliases:
+  - /b/2011/10/m-x-occur-for-vim/
 ---
 Emacs has a feature named "occur" that lists the lines in the current buffer that match a given regexp. I've created the equivalent feature in Vim:
 

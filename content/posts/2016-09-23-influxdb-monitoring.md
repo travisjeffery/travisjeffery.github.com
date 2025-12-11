@@ -3,4 +3,6 @@ title: "Monitoring with InfluxData's TICK stack"
 date: 2016-09-23T00:00:00Z
 tags: ["ops"]
 externalURL: "https://medium.com/the-hoard/monitoring-with-influxdatas-tick-stack-cafe82a07efc#.xndz40del"
+aliases:
+  - /b/2016/09/monitoring-with-influxdatas-tick-stack/
 ---

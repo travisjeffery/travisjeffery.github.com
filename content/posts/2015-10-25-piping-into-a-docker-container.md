@@ -2,6 +2,8 @@
 title: "Piping into a Docker container"
 date: 2015-09-25T00:00:00Z
 tags: ["ops"]
+aliases:
+  - /b/2015/09/piping-into-a-docker-container/
 ---
 Here's how you can write docker images that you can pipe into:
 

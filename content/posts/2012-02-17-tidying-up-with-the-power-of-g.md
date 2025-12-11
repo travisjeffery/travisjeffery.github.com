@@ -2,6 +2,8 @@
 title: "Vim and the power of :g"
 date: 2012-02-17T00:00:00Z
 tags: ["vim"]
+aliases:
+  - /b/2012/02/vim-and-the-power-of-g/
 ---
 Vim's `:g` takes two inputs: a pattern and an operation, and it runs that operation on each line
 that matches the pattern in the current file. `:g` is a tool whose usage isn't imposed on you, nor

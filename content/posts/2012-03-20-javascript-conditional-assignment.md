@@ -2,6 +2,8 @@
 title: "JavaScript conditional assignment"
 date: 2012-03-20T00:00:00Z
 tags: ["javascript"]
+aliases:
+  - /b/2012/03/javascript-conditional-assignment/
 ---
 Ruby has a conditional assignment operator: `||=`.
 JavaScript doesn't have such an operator. Common use cases for conditional assignment that JavaScript developers use are lazily defining a namespace and defaulting function arguments.

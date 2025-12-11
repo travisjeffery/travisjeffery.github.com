@@ -2,6 +2,8 @@
 title: "Generate Rails migrations that automagically add your change"
 date: 2012-03-16T00:00:00Z
 tags: ["rails"]
+aliases:
+  - /b/2012/03/generate-rails-migrations-that-automagically-add-your-change/
 ---
 Rails' generators can pump out code and save you from tedious work.
 

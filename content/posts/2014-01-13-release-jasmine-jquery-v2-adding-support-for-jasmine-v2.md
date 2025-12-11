@@ -2,6 +2,8 @@
 title: "Jasmine-jQuery v2 adding support for Jasmine v2"
 date: 2014-01-13T00:00:00Z
 tags: [""]
+aliases:
+  - /b/2014/01/jasmine-jquery-v2-adding-support-for-jasmine-v2/
 ---
 I released Jasmine-jQuery v2.0.0 which adds support for Jasmine v2.0.0.
 
