@@ -18,11 +18,16 @@ I had 36 hours straight of travelling: Toronto to Vancouver to Sydney to Melbour
 
 The first few days in Australia, we attended Campjs, a 3-day tech retreat. The campsite's main area was reserved for hacking. Scheduled content took place in other rooms or outside. The final night was reserved for people to demonstrate what they built or learned at the event. I wish this setup were the standard for conferences.
 
-[[file:images/campjs.jpg]]
 
 After the retreat we flew to Sydney and drove a huge van to the Blue Mountains. Anthony, a native Aussie, drove the van. I think there were nine of us. We stayed at a house for a few days, went on a hike, and saw the Jenolan Caves. Then we drove back to Sydney, stopping at a zoo along the way, and stayed in a hotel in Coogee. One day we went to Bondi Beach for lunch at an upscale restaurant, a nearby table had a group of women who looked like the Real Housewives of Bondi. They thought we were a football team.
 
+[[file:images/campjs.jpg]]
+
 [[file:images/aus.JPG]]
+
+[[file:images/group-aus.jpeg]]
+
+[[file:images/sydney.jpeg]]
 
 Another fun trip was to NYC for Brooklyn Beta. The venue was the Duggal Greenhouse in the Brooklyn Navy Yard. At night we went out for karaoke and bar hopping. One night Anthony went too hard on the dance floor, did the worm, and split his chin open. He and Ian went to the hospital to get stitched up. The next day we drove to the airport together to head home. They went to the east side of the terminal and I went to the west side of the terminal but we met in the middle because our gates were on opposite sides.
 
@@ -34,25 +39,25 @@ I lived in a building at Queen/Spadina in Toronto. It had a textile shop on the 
 
 Almost everyone was around the same age, with no kids. Although I lived in Toronto, I flew to SF almost every month. We'd play Diplomacy or Settlers of Catan after work. We hung out during the weekends---went for hikes, went to the park, went to concerts. We'd have impromptu nerf gun fights in the office. But most of all we got shit done. Segment was the most fun place I worked at and everyone who worked there during this time says the same thing.
 
-#+begin_export html
-<video controls class="m-t-1">
-<source src="images/show.mov" type="video/mp4" />
-</video>
-#+end_export
-
 We threw two office parties when we raised our series A. The couth party for the investors. And the uncouth party for friends and family, the next night. The idea was not to fill up the couth party and get too rowdy. The problem was nobody wanted to go to the couth party.
 
 [[file:images/uncouth.jpg]]
 
-Segment worked over email, using team mailing lists. We held daily standups by emailing team@segment.io your plan for the day. Everyone shared in the standup---CEO, sales, design, engineering. New customer sign ups triggered an email to the team and bizdev@segment.io. We sent emails to shipped@segment.io to notify everyone of done work, that could include a short demo. We had a weekly all-hands video meetup. And each team had their own weekly meetup. Financials were available for anyone to see in a Grafana dashboard: our ARR, runway, expenses. Everyone knew about new deals.
-
-TJ Holowaychuk shipped a lot every day. Quality work that was modular, packaged as a library, and then built on into an API or CLI. He wrote documentation. He was open to questions and talking things over. This was at the height of his celebrity but he was a hard working, no ego kinda guy. I was always impressed by him, one of the best coworkers I've had. Ian was another. Creative, always tinkering and making interesting projects. He had the idea for Segment's pivot. If there were squabbles he'd get everyone to take a breath and move forward. He was usually driving anything fun. These two made Segment what it was.
-
 #+begin_export html
-<video controls class="m-t-1">
+<video controls class="img-fluid m-t-1">
 <source src="images/karaoke.mov" type="video/mp4" />
 </video>
 #+end_export
+
+#+begin_export html
+<video class="img-fluid m-t-1" controls>
+  <source src="images/show.mov" type="video/mp4">
+</video>
+#+end_export
+
+Segment worked over email, using team mailing lists. We held daily standups by emailing team@segment.io your plan for the day. Everyone shared in the standup---CEO, sales, design, engineering. New customer sign ups triggered an email to the team and bizdev@segment.io. We sent emails to shipped@segment.io to notify everyone of done work, that could include a short demo. We had a weekly all-hands video meetup. And each team had their own weekly meetup. Financials were available for anyone to see in a Grafana dashboard: our ARR, runway, expenses. Everyone knew about new deals.
+
+TJ Holowaychuk shipped a lot every day. Quality work that was modular, packaged as a library, and then built on into an API or CLI. He wrote documentation. He was open to questions and talking things over. This was at the height of his celebrity but he was a hard working, no ego kinda guy. I was always impressed by him, one of the best coworkers I've had. Ian was another. Creative, always tinkering and making interesting projects. He had the idea for Segment's pivot. If there were squabbles he'd get everyone to take a breath and move forward. He was usually driving anything fun. These two made Segment what it was.
 
 The shift from 30 to 100 people at Segment was sharp. I learned later that a VP smacked an underling in the face during a meeting around this time. The VP wasn't disciplined from what I understand and the other guy left the company. Ian left. TJ left. They were burnt out and have semi-retired. The work style had changed with more synchronous communication, Slack instead of email. We stopped hiring from open-source and started hiring people chasing hot startups with big series A rounds. We hired one of the worst teammates I've worked with. The hacker tribe phase of Segment was over. I lasted a couple of months before I was out.
 
