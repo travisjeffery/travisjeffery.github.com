@@ -4,9 +4,6 @@ title = 'travis jeffery'
 
 outputs = { home = ["HTML", "RSS", "JSON"] }
 
-[permalinks]
-  posts = "/:title/"
-
 [params]
   description = "Hacker, writer, good guy."
   author = "Travis Jeffery"
