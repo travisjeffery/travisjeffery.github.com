@@ -7,8 +7,6 @@ outputs = { home = ["HTML", "RSS", "JSON"] }
 [permalinks]
   [permalinks.page]
     posts = "/:title/"
-  [permalinks.section]
-    posts = "/"
 
 [params]
   description = "Hacker, writer, good guy."
