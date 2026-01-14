@@ -1,6 +1,6 @@
 #+TITLE: I built our JIT system in a day with Claude
 #+DATE: 2026-01-14
-#+DRAFT: false
+#+DRAFT: true
 #+TAGS[]: ai
 #+CATEGORIES[]: tech
 
@@ -14,8 +14,8 @@ It's a Slack app backed by a small service called admitter. People request acces
 /access <group> <duration> <reason>
 ```
 
-We have three permission sets: Viewer, Developer, Administrator. Developer access auto-approves. Administrator requires someone to approve it in Slack. Once approved, the service adds you to the right Google Group, which syncs to AWS Identity Center within a minute. You get access for the time you asked for, up to a configured max.
+We have three permission sets: Viewer, Developer, Administrator. Developer access auto-approves. Administrator requires someone to approve it in Slack. Once approved, the service adds you to the right Google Group, which syncs to AWS Identity Center within a minute. You get access for the time you asked for, up to a configured max. The admitter service persists the access requests, approvals, and revocations to an audit log.
 
-That's it. A day of work. No operating costs. Saving $60K+ a year.
+That's it. A day of work. Negligible compute costs and maitenance. Saving $60K+ a year.
 
 A lot of B2B software exists in this category - not complex enough to justify the price, but annoying enough that nobody wanted to build it. The build-vs-buy math used to favor buying. It doesn't anymore.
