@@ -10,9 +10,10 @@ I looked at two third-party services. Both charged $1000 per seat. We have 60 pe
 
 It's a Slack app backed by a small service called admitter. People request access with a slash command:
 
-```
+
+#+begin_src
 /access <group> <duration> <reason>
-```
+#+end_src
 
 We have three permission sets: Viewer, Developer, Administrator. Developer access auto-approves. Administrator requires someone to approve it in Slack. Once approved, the service adds you to the right Google Group, which syncs to AWS Identity Center within a minute. You get access for the time you asked for, up to a configured max. The admitter service persists the access requests, approvals, and revocations to an audit log.
 
