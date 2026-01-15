@@ -1,0 +1,27 @@
+#+TITLE: I built our JIT system in a day with Claude
+#+DATE: 2026-01-14
+#+DRAFT: false
+#+TAGS[]: ai
+#+CATEGORIES[]: tech
+
+I wanted to improve security at Oscilar by adding just-in-time permissions. The idea: everyone gets read-only access by default. When you need to do something, you request elevated access for a limited time.
+
+I looked at two third-party services. Both charged $1000 per seat. We have 60 people. That's $60K a year. We'll probably double that by next year. For software we'd host ourselves. Software that stores almost nothing, uses almost no compute, and does almost no work - it authorizes a few requests per person per day. So I built our own with Claude. It took a day.
+
+At Segment, when I was single and childless, I would've built this in 2-3 late nights. At Confluent, we probably would've just spent the money. Now that I'm married with two kids, I don't have late nights to spare but AI helps make up the difference.
+
+[[file:images/screenshot.png]]
+
+It's a Slack app backed by a small service called admitter. People request access with a slash command:
+
+
+#+begin_src
+/access <group> <duration> <reason>
+#+end_src
+
+
+We have three permission sets: Viewer, Developer, Administrator. Developer access auto-approves. Administrator requires someone to approve it in Slack. Once approved, the service adds you to the right Google Group, which syncs to AWS Identity Centre within a minute. You get access for the time you asked for, up to a configured max. The service persists all requests, approvals, and revocations to an audit log, and supports manual revocations if needed. If Slack goes down, we have an admin CLI, or we can simply modify the Google Group membership directly.
+
+That's it. A day of work. Negligible compute costs and maintenance. Saving $60K+ a year.
+
+A lot of B2B software exists in this category - not complex enough to justify the price, but annoying enough that nobody wanted to build it. The build-vs-buy math used to favour buying. It doesn't anymore.
