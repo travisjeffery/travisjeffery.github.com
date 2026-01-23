@@ -1,27 +1,71 @@
-#+TITLE: I built our JIT system in a day with Claude
+#+TITLE: I built our JIT access system in a day
 #+DATE: 2026-01-14
 #+DRAFT: false
 #+TAGS[]: ai
 #+CATEGORIES[]: tech
 
-I wanted to improve security at Oscilar by adding just-in-time permissions. The idea: everyone gets read-only access by default. When you need to do something, you request elevated access for a limited time.
+We wanted just-in-time permissions at Oscilar.
 
-I looked at two third-party services. Both charged $1000 per seat. We have 60 people. That's $60K a year. We'll probably double that by next year. For software we'd host ourselves. Software that stores almost nothing, uses almost no compute, and does almost no work - it authorizes a few requests per person per day. So I built our own with Claude. It took a day.
+The rules are simple: everyone gets read-only by default. If you need to change something, you ask for higher access for a short time. When the time is up, the access ends.
 
-At Segment, when I was single and childless, I would've built this in 2-3 late nights. At Confluent, we probably would've just spent the money. Now that I'm married with two kids, I don't have late nights to spare but AI helps make up the difference.
+I looked at two vendors. Both were about $1000 per seat per year. We have 60 people. That’s $60K a year. If we double headcount, it becomes $120K.
+
+For what we needed, that felt wrong. This kind of tool should do three things: take a request, add a user to a group, and remove them later. It should log what happened. It should not be a big system.
+
+So I built it with Claude. It took a day of focused work.
+
+At Segment, when I was single and childless, I would’ve done it in a few late nights. At Confluent, we might’ve paid. Now I’m married with two kids. I don’t have those nights. AI doesn’t give me more time, but it makes the time I have go further.
 
 [[file:images/screenshot.png]]
 
-It's a Slack app backed by a small service called admitter. People request access with a slash command:
+** The system
 
+It’s a Slack app backed by a small service called admitter.
+
+People request access like this:
 
 #+begin_src
 /access <group> <duration> <reason>
 #+end_src
 
+We have three permission sets:
 
-We have three permission sets: Viewer, Developer, Administrator. Developer access auto-approves. Administrator requires someone to approve it in Slack. Once approved, the service adds you to the right Google Group, which syncs to AWS Identity Centre within a minute. You get access for the time you asked for, up to a configured max. The service persists all requests, approvals, and revocations to an audit log, and supports manual revocations if needed. If Slack goes down, we have an admin CLI, or we can simply modify the Google Group membership directly.
+- Viewer (default)
+- Developer (auto-approves)
+- Administrator (requires approval in Slack)
 
-That's it. A day of work. Negligible compute costs and maintenance. Saving $60K+ a year.
+When a request is approved, admitter adds you to the right Google Group. That group syncs to AWS Identity Center in about a minute. When the timer ends, admitter removes you.
 
-A lot of B2B software exists in this category - not complex enough to justify the price, but annoying enough that nobody wanted to build it. The build-vs-buy math used to favour buying. It doesn't anymore.
+Admitter logs every request, approval, and revocation. It also supports manual revocation.
+
+If Slack is down, we can still operate:
+
+- there is an admin CLI
+- worst case, we edit the Google Group directly
+
+The full path:
+
+#+begin_src
+Slack (/access) -> admitter -> Google Group -> AWS Identity Center -> AWS roles
+                 \-> audit log
+#+end_src
+
+That’s the whole thing. One day of work. Low compute. Low upkeep. It saves about $60K a year today.
+
+** The sharp edges
+
+- Revocation is not always instant. Removing someone from a group stops new access quickly, but it does not necessarily kill an active session. In practice, access ends after propagation delay plus the session lifetime. On AWS and EKS, the shortest practical session durations are typically 15 minutes, so that becomes the lower bound. If you care about this, you have to set those limits explicitly and test them.
+
+- Auto-approval only works if the role is genuinely low risk. Developer is safe only if it cannot touch prod, read sensitive data, or mint credentials. If it can, it needs the same controls as admin.
+
+- Slack is only the front end. The real identity is your SSO or Google Workspace user. The service must map Slack users to that identity and refuse requests it cannot map.
+
+- Small code can still be powerful. This service can grant access into AWS. It needs the usual hardening: verify Slack signatures, use least-privilege credentials, rate-limit abuse, alert on odd use, and log everything.
+
+** Why build beat buy here
+
+There is a lot of B2B software in the “annoying but not hard” band. For years, buying won because building cost too much time. I wouldn’t trust AI to replace judgment or experience. I could have built this without Claude and kept it secure—it just would have taken long enough that it wouldn’t have made the cut.
+
+This only worked because the pieces were already familiar. I knew to use Google Groups as the control point, rely on SSO sync into AWS Identity Center, and put Slack in front as the request and approval surface. Claude helped wire it together quickly, but the architecture was already clear.
+
+AI cut the time. It didn’t remove thinking. It acted as a multiplier—and that was enough to change the math.
