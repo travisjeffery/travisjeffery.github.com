@@ -1,7 +1,7 @@
 #+TITLE: I built our JIT access system in a day
 #+DATE: 2026-01-23
 #+DRAFT: false
-#+TAGS[]: ai
+#+TAGS[]: oscilar startups
 #+CATEGORIES[]: tech
 
 We wanted just-in-time permissions at Oscilar.
