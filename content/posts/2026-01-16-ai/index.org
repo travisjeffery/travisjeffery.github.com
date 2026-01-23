@@ -1,5 +1,5 @@
 #+TITLE: I built our JIT access system in a day
-#+DATE: 2026-01-14
+#+DATE: 2026-01-23
 #+DRAFT: false
 #+TAGS[]: ai
 #+CATEGORIES[]: tech
