@@ -64,7 +64,9 @@ That’s the whole thing. One day of work. Low compute. Low upkeep. It saves abo
 
 ** Why build beat buy here
 
-There is a lot of B2B software in the “annoying but not hard” band. For years, buying won because building cost too much time. I wouldn’t trust AI to replace judgment or experience. I could have built this without Claude and kept it secure—it just would have taken long enough that it wouldn’t have made the cut.
+There is a lot of B2B software in the “annoying but not hard” band. For years, buying won because building cost too much time.
+
+I wouldn’t trust AI to replace judgment or experience. I could have built this without Claude and kept it secure—it just would have taken long enough that it wouldn’t have made the cut.
 
 This only worked because the pieces were already familiar. I knew to use Google Groups as the control point, rely on SSO sync into AWS Identity Center, and put Slack in front as the request and approval surface. Claude helped wire it together quickly, but the architecture was already clear.
 
