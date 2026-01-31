@@ -4,8 +4,12 @@
 #+TAGS[]: startups
 #+CATEGORIES[]: tech
 
-You can't hire with certainty. Things move too fast to be absolutely sure of everyone. And if you're certain of everyone it's because you're looking at the same signals you know. You're not allowing for adding something new, something different.
+You can't hire with certainty.
 
-You can fire with certainty. After people have been in your company for a month or two, you have a pretty good idea what they're about.
+Things move too fast to be absolutely sure of everyone. And if you're certain of everyone it's because you're looking at the same signals you know. You're not allowing for adding something new, something different.
+
+You can fire with certainty.
+
+After people have been in your company for a month or two, you have a pretty good idea what they're about.
 
 Derek Sivers' rule applies here: If it's not a Hell Yeah, it's a No. By three months, if you aren't feeling a Hell Yeah about them, make the call—stay or go.
