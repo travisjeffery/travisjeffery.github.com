@@ -6121,7 +6121,10 @@ a.bg-danger:focus, a.bg-danger:hover {
 }
 
 h1 {
-  font-size: 2rem;
+    font-size: 2rem;
+    line-height: 1.4; /* Give it a bit more room to accommodate the lower underline */
+    text-underline-offset: 0.15em; /* Pushes the line down away from the letters */
+    text-decoration-thickness: 2px; /* Optional: makes the line feel more deliberate */
 }
 
 h2 {
