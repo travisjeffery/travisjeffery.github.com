@@ -1,5 +1,5 @@
-#+TITLE: Hiring is a Guess. Firing is a Choice.
-#+DATE: 2026-01-30
+#+TITLE: Hiring is a guess. Firing is a choice.
+#+date: 2026-01-30
 #+DRAFT: false
 #+TAGS[]: startups
 #+CATEGORIES[]: tech
