@@ -6141,7 +6141,7 @@ blockquote {
 
 body {
   font-family: "Libre Caslon Text", serif !important;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 pre, code {
@@ -6155,17 +6155,6 @@ pre {
   white-space: pre-wrap;
   margin-top: 1rem;
 }
-
-a {
-  color: blue;
-  text-decoration: none !important;
-  border-bottom: 1px solid blue;
-}
-
-a.js-judy {
-  font-weight: bold;
-}
-
 p {
   margin-top: 1rem;
   margin-bottom: 0;
@@ -6242,7 +6231,6 @@ article {
 }
 
 article p {
-    text-align: justify;
     hyphens: auto;
 }
 
@@ -6387,4 +6375,104 @@ article footer {
 
 .post-footer-item:last-child {
   flex-basis: 6rem;
+}
+
+:root{
+  --content: 68ch;
+}
+
+main, .content, article {
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: 0 1.1rem;
+}
+
+body{
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: auto;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  text-wrap: balance;
+  /* margin: 2.2rem 0 0.8rem; */
+}
+
+h1 { font-size: clamp(1.9rem, 2.6vw, 2.6rem); }
+h2 { font-size: clamp(1.35rem, 1.7vw, 1.75rem); }
+h3 { font-size: 1.15rem; }
+
+p, ul, ol {
+  margin: 0.95rem 0;
+}
+
+a{
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+a:hover{
+  text-decoration-thickness: 0.12em;
+}
+
+pre, code{
+  font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92em;
+}
+
+pre{
+  padding: 1rem;
+  overflow: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,.08);
+}
+
+code{
+  padding: 0.12em 0.35em;
+  border-radius: 6px;
+  background: rgba(0,0,0,.05);
+}
+pre code{
+  padding: 0;
+  background: none;
+}
+
+article{
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+
+article img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.6rem auto;
+  border-radius: 12px;
+}
+
+figure { margin: 1.6rem 0; }
+figcaption{
+  font-size: 0.92em;
+  opacity: 0.75;
+  text-align: center;
+  margin-top: 0.6rem;
+}
+
+body{ background: var(--bg); color: var(--fg); }
+
+small, .muted{ color: var(--muted); }
+
+a{
+    color: blue;
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.18em;
+}
+
+a:hover{
+  text-decoration-thickness: 0.1em;
 }
