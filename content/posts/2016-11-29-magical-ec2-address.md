@@ -25,7 +25,7 @@ and have your alerts include the host’s IP so you know exactly where to go to 
 
 Aside from the hostname and local IP address, there’s plenty of other metadata:
 
-```
+``` sh
 travis@ip-10–0–8–119:~$ curl http://169.254.169.254/latest/meta-data/
 ami-id
 ami-launch-index
