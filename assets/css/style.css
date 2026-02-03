@@ -6469,10 +6469,10 @@ a{
     color: blue;
   text-decoration-line: underline;
   text-decoration-color: currentColor;
-  text-decoration-thickness: 0.05em;
+  text-decoration-thickness: 0.03em;
   text-underline-offset: 0.18em;
 }
 
 a:hover{
-  text-decoration-thickness: 0.1em;
+  text-decoration-thickness: 0.06em;
 }
