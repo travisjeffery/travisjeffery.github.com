@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="{{ .Site.Params.description }}">
+    <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Summary }}{{ end }}">
+    <link rel="canonical" href="{{ .Permalink }}">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="alternate" hreflang="en-us" href="{{ .Permalink }}">
 
     <link rel="alternate" type="application/rss+xml" title="Travis Jeffery's Blog Feed" href="https://travisjeffery.com/rss.xml">
     {{ if .IsHome }}
@@ -29,18 +31,44 @@
     <meta name="twitter:image" content="https://s.gravatar.com/avatar/3ee6c3893e75232ed43ed4e8e9a7cf39">
     <meta name="twitter:card" content="summary">
 
-    {{ $style := resources.Get "css/style.css" | minify | fingerprint }}
-    <link href="{{ $style.Permalink }}" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Fira+Code:400,700|Libre+Caslon+Text:400,400i,700&display=swap" rel="stylesheet">
+    {{ $style := resources.Get "css/style.css" | minify }}
+    <style>{{ $style.Content | safeCSS }}</style>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NJMB3TZ8ZN"></script>
+    <script>
+      (function () {
+        var fontHref = 'https://fonts.googleapis.com/css?family=Fira+Code:400,700|Libre+Caslon+Text:400,400i,700&display=swap';
+        function loadGoogleFonts() {
+          if (document.getElementById('google-fonts-css')) {
+            return;
+          }
+          var link = document.createElement('link');
+          link.id = 'google-fonts-css';
+          link.rel = 'stylesheet';
+          link.href = fontHref;
+          document.head.appendChild(link);
+        }
+
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadGoogleFonts, { timeout: 2000 });
+        } else {
+          window.addEventListener('load', loadGoogleFonts, { once: true });
+        }
+      })();
+    </script>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Code:400,700|Libre+Caslon+Text:400,400i,700&display=swap"></noscript>
+
+    <!-- Google tag (gtag.js), deferred until window load to avoid impacting initial render -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      gtag('config', 'G-NJMB3TZ8ZN');
+      window.addEventListener('load', function () {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-NJMB3TZ8ZN';
+        document.head.appendChild(script);
+        gtag('config', 'G-NJMB3TZ8ZN');
+      });
     </script>
     <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}</title>
   </head>

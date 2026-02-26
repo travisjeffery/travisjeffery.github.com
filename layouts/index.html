@@ -1,5 +1,5 @@
 {{ define "main" }}
-<h3 class="section-header no-gutters col-xs-12"><span class="who">who:</span></h3>
+<h2 class="section-header no-gutters col-xs-12"><span class="who">who:</span></h2>
 
 <p class="col-xs-12 no-gutters">I'm an infrastructure engineer. I've been a founding engineer at Segment, Confluent, now Oscilar. Early in my career, I worked at 37signals.</p>
 
@@ -15,7 +15,7 @@
 
 <hr>
 
-<h3 class="section-header no-gutters col-xs-12" id="posts"><span style="background-color: pink">posts:</span></h3>
+<h2 class="section-header no-gutters col-xs-12" id="posts"><span style="background-color: pink">posts:</span></h2>
 
 <ul class="plain col-xs-12">
   {{ range (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}

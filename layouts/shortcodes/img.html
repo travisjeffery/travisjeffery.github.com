@@ -1,2 +1,3 @@
 {{ $img := resources.Get (.Get "src") }}
-<img src="{{ $img.RelPermalink }}" alt="{{ .Get "alt" }}">
+{{ $alt := .Get "alt" | default "" }}
+<img src="{{ $img.RelPermalink }}" alt="{{ $alt }}" width="{{ $img.Width }}" height="{{ $img.Height }}" loading="lazy" decoding="async">

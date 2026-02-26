@@ -6145,10 +6145,11 @@ body {
 }
 
 pre, code {
-  font-family: "Fira Code", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   background: none;
   color: #373a3c;
   font-size: 1rem;
+  font-weight: 400;
 }
 
 pre {
@@ -6321,6 +6322,71 @@ input.email {
   padding-left: .5rem;
 }
 
+#mc-embedded-subscribe-form {
+  margin-top: 0.75rem;
+}
+
+#mc_embed_signup_scroll {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+#mc-embedded-subscribe-form .mc-field-group {
+  flex: 1 1 16rem;
+  min-width: 0;
+  padding: 0;
+}
+
+#mc-embedded-subscribe-form input.email {
+  width: 100%;
+  border: 1px solid blue;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 1.2;
+  padding: 0.28rem 0.65rem;
+}
+
+#mc-embedded-subscribe-form input.email:focus-visible {
+  outline: 2px dotted blue;
+  outline-offset: 2px;
+}
+
+#mc-embedded-subscribe-form .clear {
+  margin: 0;
+}
+
+#mc-embedded-subscribe {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  color: blue;
+  font: inherit;
+  line-height: 1.2;
+  padding: 0.28rem 0.65rem;
+  text-decoration: none;
+}
+
+#mc-embedded-subscribe:hover {
+  color: blue;
+  background: rgba(0, 0, 255, 0.06);
+  text-decoration: none;
+}
+
+#mc-embedded-subscribe:active {
+  transform: translateY(1px);
+}
+
+#mc-embedded-subscribe:focus-visible {
+  outline: 2px dotted currentColor;
+  outline-offset: 2px;
+}
+
 .center {
   text-align: center;
 }
@@ -6418,8 +6484,9 @@ a:hover{
 }
 
 pre, code{
-  font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 0.92em;
+  font-weight: 400;
 }
 
 pre{

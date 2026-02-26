@@ -2,13 +2,31 @@
 
 <footer class="footer col-xs-12 no-gutters left">
   <div class="col-xs-12 col-sm-4 pull-sm-left no-gutters">
-    <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
     <div class="no-gutters col-xs-12">
-      <a href="https://twitter.com/travisjeffery">Twitter</a>
+      <a href="https://twitter.com/travisjeffery" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @travisjeffery</a>
     </div>
+    <script>
+      (function () {
+        var loaded = false;
+        function loadTwitterWidgets() {
+          if (loaded || !document.querySelector('.twitter-follow-button, .twitter-share-button')) {
+            return;
+          }
+          loaded = true;
+          var script = document.createElement('script');
+          script.id = 'twitter-wjs';
+          script.async = true;
+          script.src = 'https://platform.twitter.com/widgets.js';
+          document.head.appendChild(script);
+        }
+
+        ['pointerdown', 'touchstart', 'keydown', 'scroll'].forEach(function (eventName) {
+          window.addEventListener(eventName, loadTwitterWidgets, { once: true, passive: eventName !== 'keydown' });
+        });
+      })();
+    </script>
     <div class="no-gutters col-xs-12">
-      <a href="https://github.com/travisjeffery">GitHub</a>
+      <a href="https://github.com/travisjeffery" rel="noopener noreferrer">GitHub</a>
     </div>
     <div class="no-gutters col-xs-12">
       <a href="mailto:tj@travisjeffery.com">Email</a>
@@ -24,6 +42,7 @@
     <form action="https://travisjeffery.us4.list-manage.com/subscribe/post?u=1e3ff7d7791b26a8f60b9f16c&amp;id=322d3e68e8" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate one-margin" target="_blank" novalidate>
       <div id="mc_embed_signup_scroll">
         <div class="mc-field-group">
+          <label class="sr-only" for="mce-EMAIL">Email address</label>
 	  <input placeholder="Your email address" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
         </div>
 	<div id="mce-responses" class="clear">

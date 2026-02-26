@@ -1,0 +1,351 @@
+#+TITLE: Writing Distributed Services With Go
+#+DATE: 2026-11-03
+#+DRAFT: true
+#+TAGS[]: book
+#+CATEGORIES[]: writing
+
+** Publisher and Plan
+
+** Tough Beginning
+
+** Turning Point
+
+** Flow state
+
+** Reviews
+
+** Release
+
+** Is it worth it?
+
+#+begin_src
+2018-07-26      $0.01
+2020-03-25      $0.01
+2020-06-01      $8,447.40
+2020-09-01      $2,292.93
+2020-12-01      $4,518.47
+2021-03-01      $1,496.97
+2021-06-01      $5,347.34
+2021-09-02      $4,811.91
+2021-12-01      $8,916.64
+2022-03-01      $7,097.02
+2022-06-01      $10,674.20
+2022-09-01      $3,380.94
+2022-12-01      $3,346.62
+2023-03-01      $2,867.50
+2023-06-05      $2,554.00
+2023-09-01      $2,709.80
+2023-12-01      $1,936.30
+2024-03-01      $2,018.42
+2024-06-11      $1,616.68
+2024-09-13      $1,593.58
+2024-12-13      $945.19
+2025-03-14      $1,757.15
+2025-06-13      $902.18
+2025-09-15      $674.92
+2025-12-11      $815.27
+Total $80,721.44
+#+end_src
+
+Here's what I've made. Writing a book is probably the least efficient way to make money. Most of the timeline is before AI took off and from what I understand AI's crashed technical book sales. So you're setting yourself up for failure if you write a book for the money.
+
+I wrote the book because I wanted to write the book and before that I'd wanted to read this book. So this seemed like as a good a way as any to accomplish my life long goal of writing a book. So for my own self-fulfillment and from all the messages I've received from people thankign me for writing the book---by that criteria writing a book was worth it.
+
+**
+
+---
+
+* Book
+  
+I began writing this book on xxx.
+
+The book was pretty slow going for the first six months.
+
+I really picked up the pace after that and each year gradually improved my pace up
+until the end of the year.
+
+A big first for me aside from working on a book was working with a publisher and
+professional editors. PragProg is one of the publishers whose books I like most,
+their style being relaxed and practical. I liked the structure they provided for
+structuring the book. They have an author guide that's like a style guide. My
+editors were helpful for editing of course. But probably the biggest help was in
+providing motivation. When I mentioned earlier that I didn't get much done the first
+six months, the change occurred after my editor sent me email that was essentially
+asking "are you going to get it going or what?"
+
+Writing a book is tough. Really, really tough. I was already working at Confluent
+full-time bring Confluent Cloud 0-to-1 and it was only about 1.5 years old so adding
+another whole job of writing a book was a bit insane. I think I went into it from
+the point-of-view, which I think came from 37signals, which is that writing a book
+is like writing 10-15 blog posts (or however many chapters in your book). And for
+37signals, that's somewhat true because their books generally consist of chapters
+that are 1-3 pages long that don't build on each other. But for most books, and
+definitely my book, where my book has the reader begin with nothing and build a
+distributed service from scratch, each chapter directly leads to the next. So if I
+made a change to chapter 10, I had to back port that change to the related content
+in chapters 1-9. Also each chapter is generally 10-15 pages long and I never write a
+blog post that long. Writing a book to me is more like running 10-15 consecutive
+marathons after each other. You go through the grueling process of writing a
+chapter, send it off to your editor, take a brief moment to celebrate finishing
+another chapter, just to realize you have many more chapters to go and you'd better
+begin on the next. During all this time you really have only yourself, with some
+help for your editor, to provide the motivation and discipline to keep going.
+
+In a year or so I'll do a retrospective on sales and the financials. If you were
+just in it for the money you'd never finish though. At PragProg, they begin a book's
+beta at the 3/4 writing mark and the book begins selling on their website, when you
+begin making money.
+
+I wrote the book to create something I thought was missing in the world: a practical
+book on distributed systems that people could read and build a distributed service.
+
+I wanted to fill the gap I saw in software engineering literature: a practical book
+on distributed systems that people could read and build a distributed service.
+
+
+** Why write this book
+
+I program because I'm drawn to it and feel I have to.
+
+My other motivation was just to test myself and see if I could do it. Write a book.
+
+I've been a bookworm as long as I can remember. I love books. In my personal library, I have over 1200 books.
+
+I was trying to write a book that hadn't been written before, with content that didn't exist yet, and a really great book at that. A lot of technical books today are basically gloried man pages.
+
+There are pretty much no places that I compromised. I could tinker on minor things forever and argue with myself on the upsides and downsides of each possible change. But I after 2 years if I wasn't happy with a book I change it until I was happy or throw it in the trash.
+
+** New experiences and learnings
+
+I hadn't worked with a professional editor or publisher before. I was pleasantly
+surprised by the experience. My publisher (Pragmatic Bookshelf) has an internal wiki
+full of useful info and helpful author guide that's 250 pages long. Half the book is
+on how to structure and prepare to write your book. The other half is on writing the
+syntax to format your book. You can write in either
+
+
+*** How to write
+
+Emacs
+Markdown
+Wrote my own "pragmatic-mode" to help editing.
+
+*** Publisher
+
+*** Editor
+
+One question might be why even use a publisher at all and publish it myself instead
+on leanpub or something. Partially was that's just how it naturally began and the
+momentum kept it going. 
+
+But i feel like if you don't care about the money then you
+should use a publisher. They're going to help market the book and have an existing
+audience. I have a decent following so I think my number of sales would have been
+similar if I had self-published. But I think my book is better having worked with a
+publisher and editors. There's a good chance I would've never finished the book at all.
+
+Why publish your book with a publisher? Self-publishing is a viable option today, so
+why publish with a publisher? a) Structure and resources: editors, author guides,
+conventions. b) Marketing and customerbase. c) Conveince: you can do all the work
+yourself: go hire an editor, hire a graphics artist for your covers, or make your
+own, then go get your book published to paper (if you want), and then go get your
+book in all the stores. For myself, I wrote this book as a side-gig to my current
+job which was a bit crazy. And by the end of just writing my book I'd had enough, if
+I had to do all that other stuff it would have sucked.
+
+The relationship with publishers can be frustrating because you will be putting
+everything into your book and when they let you down on something small, like
+updating a marketing page or something, it can be quite frustrating.
+
+Would I or will I write another book? I'd write another edition of this book when it
+made sense, like when the Go team pushes generics. I won't write a whole new book
+for a while, at least 3 years. I think I will write another book again though,
+eventually. I think I'll write a fiction book some day as well.
+
+
+The grind. Writing a book isn't like running a marathon. Writing a book is running
+one marathon after another, one for each chapter in your book. Plus another marathon for all the other stuff.
+
+
+---
+
+In this post i'll share what it was like writing my book, distributed services with
+go. a practical book on building distributed systems. 
+
+
+The book walks the reader through building a distributed event-stream service from
+scratch through deployment---along the way---it explains the concepts underlying
+distributed system you may use, work on, or plan to build.
+
+I spent 2.5 years writing the book. Pragmatic Bookshelf has saught out authors to
+write a Go book and eventually we got in touch. I told Pragmatic I didn't want to
+write a book on Go, there's already a lot of books on Go out there and The Go
+Programming Language will always be the standard. But I was interested in writing a book 
+
+
+** Inbox
+
+Here is the extracted timeline and details from your emails, formatted for your essay.
+2018: The Origin & The Pivot
+
+    April 25, 2018
+
+        Event: Tyler Treat introduces you to Brian MacDonald (Pragmatic Bookshelf Editor).
+
+        Subject: Re: Brian <==> Travis
+
+        Brian MacDonald Quote: "I'm specifically looking for 'Here's how to [do X | solve problem X] with Go,' because I think all the 'learning Go' books we need have been written."
+
+        Your Reply: "We see eye to eye on the saturation of learning Go books and the lack of real-world problem solving writing I love reading and writing most."
+
+    June 26, 2018
+
+        Event: Proposal accepted.
+
+        Subject: Re: Brian <==> Travis
+
+        Brian MacDonald: "I sincerely apologize for the delay. Your proposal has been accepted -- congratulations!"
+
+    July 3, 2018
+
+        Event: You sign the contract.
+
+        Subject: Re: Brian <==> Travis
+
+        Detail: The working title in the emails and contract discussions is "Real-World Go".
+
+    September 24, 2018
+
+        Event: Susan Conant (Managing Editor) assigns Dawn Schanafelt as your Development Editor.
+
+        Subject: Connection for new editor: Travis Jeffrey meet Dawn Schanafelt
+
+        Susan Conant: "I'd like you to meet Travis Jeffery, who is writing a book for us on Distributed Services with GO... The tentative full draft complete (FDC) date on this book is currently early 2019."
+
+    December 1, 2018
+
+        Event: Dawn pushes for a "reader-centric" approach, using Programming Elm as a model.
+
+        Subject: Re: One more thing
+
+        Dawn Schanafelt: "I pinged Brian, and he mentioned that he sent you 'Programming Elm' as an example of a book that does a good job of being reader centric... The author of that book does a great job of introducing every bit of code he includes by using phrases such as 'like so' and 'add this code'."
+
+    December 7, 2018
+
+        Event: Dawn gives tough feedback on Chapter 4.
+
+        Subject: Re: Chapter 4 feedback
+
+        Dawn Schanafelt: "It reads more like a lecture than a conversation... Make the easy stuff (like being clear about why you're showing them code) easy."
+
+2019: The Grind & The Transition
+
+    January 22, 2019
+
+        Event: The "3-Chapter Check" feedback from Susan Conant is critical.
+
+        Subject: Re: 3-chapter feedback
+
+        Susan Conant (via Dawn): "The author’s writing style feels 'forced,' with bare-minimum topic coverage, and little sense of his voice... As a reader, it’s more like a handout from a Go conference tutorial."
+
+        Dawn Schanafelt: "I know this is your first book, so I'm sure you were a little nervous starting out... I want you to start focusing more on making the reader the star of the book and taking them on a hero's journey."
+
+    February 21, 2019
+
+        Event: You rewrite Chapter 1, and the tone changes completely.
+
+        Subject: Re: Feedback on Chapter 1 (http.md)
+
+        Susan Conant (via Dawn): "This feels like Travis. I have a sense of him now and readers will too."
+
+    October 14, 2019
+
+        Event: Dawn announces her departure for maternity leave.
+
+        Subject: Re: First half of Travis's Go book for tech review
+
+        Dawn Schanafelt: "FYI, alas, I'm not going to be able to edit the remainder of this book with Travis because I'm due to have a baby (my second) in January, and I know I won't be able to edit well when I'm completely distracted and sleep deprived."
+
+    December 2, 2019
+
+        Event: Brian Ketelsen apologizes for missing a review deadline.
+
+        Subject: Re: Reviewing Distributed Services With Go
+
+        Brian Ketelsen: "Travis, I really let you down on this and I apologize... I did read the first several chapters and didn’t have any criticism at all of the style, scope and direction."
+
+    December 23, 2019
+
+        Event: Katie Dvorak (your new editor) checks in on the Consensus chapter.
+
+        Source: Trello Notification
+
+        Katie Dvorak: "Fantastic! I'll holler if I have any additional questions or suggestions. Happy holidays!"
+
+2020: Beta & Polish
+
+    March 25, 2020
+
+        Event: The book goes into Beta.
+
+        Subject: [Pragmatic Bookstore] Your eBook 'Distributed Services with Go' is ready for download
+
+        Pragmatic Bookstore: "The gerbils at the Pragmatic Bookstore have just finished hand-crafting your eBook of 'Distributed Services with Go'..."
+
+    November 2, 2020
+
+        Event: Reviewer Clinton Begin gives feedback on your preface.
+
+        Subject: Review feedback from Clinton Begin
+
+        Clinton Begin: "In doing so, he edges on potentially insulting the authors of many open source frameworks and tools, and at one point refers to their code as spaghetti code... I think he can probably make the same point by just saying that the codebases are very large and not focused on learning."
+
+    November 18, 2020
+
+        Event: Ben Johnson (author of BoltDB) provides a blurb.
+
+        Subject: Re: Review second half of Distributed Services With Go
+
+        Ben Johnson: "Travis Jeffrey distills the traditionally academic topic of distributed systems down to a series of practical steps to get you up and running."
+
+    December 1, 2020
+
+        Event: Armon Dadgar (HashiCorp Co-Founder) provides a blurb.
+
+        Subject: Re: Quote for my book on building distributed systems with Go
+
+        Armon Dadgar: "I’ve attached the signed form. You can just use 'HashiCorp Co-Founder' as the attribution."
+
+2021: Publication
+
+    January 29, 2021
+
+        Event: Final production stages.
+
+        Subject: Re: Production update
+
+        Katie Dvorak: "Janet told me she expects the indexer to get it back later today..."
+
+    March 10, 2021
+
+        Event: Final layout review.
+
+        Subject: Re: tjgo layout review
+
+        Katie Dvorak: "With the layout complete, the book will be heading to the printer tomorrow and we can expect it to be officially published by the end of March."
+
+    July 7, 2021
+
+        Event: Physical copies arrive (after a shipping delay).
+
+        Subject: Re: Copies of Distributed Services with Go
+
+        Pat (Support): "I double-checked the tracking info and it shows that your books were delivered on Monday."
+
+2025: Legacy
+
+    September 2025
+
+        Event: Discussions about a second edition.
+
+        Context: Dave Thomas and the Pragmatic team discussing potential updates in an email thread.
