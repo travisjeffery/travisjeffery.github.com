@@ -26,16 +26,16 @@ Shepherd is a Herdr plugin. It does four things.
 
 *Beads is the only state.* Shepherd keeps no task list of its own. Statuses, notes, questions and lessons live in beads. That's what makes running many agents at once work: they all read and write the same record. It's also why nothing is lost when an agent or the whole terminal restarts. The next session picks up exactly where things are.
 
-The sidebar puts the coordinator on top with a summary of what's waiting, then every thread sorted so what needs me comes first:
+The sidebar puts the coordinator on top with a summary of what's waiting, then every thread sorted so what needs me comes first. Each worker is named after its bead, so every row says which task it is and where it stands:
 
 #+begin_example
-coordinator · 2 need you · 1 review · 3 working · 2 inbox
-needs you · run command
-checks failing · PR #405 (integration-tests)
-review · PR #411 approved · ENG-1024
-rolling out · PR #398 · deploy running
-working
-idle
+shepherd    coordinator · 2 need you · 1 review · 3 working · 2 inbox
+app-7qd     needs you · run command
+app-k2m     checks failing · PR #405 (integration-tests)
+app-9xr-2   review · PR #411 approved · ENG-1024
+app-3fw     rolling out · PR #398 · deploy running
+app-p1c     working
+app-c8n-1   idle
 #+end_example
 
 The pieces never talk to each other directly. A worker says everything through its bead: notes, a PR link, a question, a command it needs me to run. The ticker reads beads, Herdr and GitHub, and writes what changed to an inbox, which is just a folder of files. The coordinator reads the inbox when it's nudged, or when I ask. The state lives in beads and those files. A prompt only says "go look", so if one gets missed, nothing is lost.
