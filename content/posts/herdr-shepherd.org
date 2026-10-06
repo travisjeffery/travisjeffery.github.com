@@ -93,7 +93,7 @@ AI didn't make managing agents unnecessary. It made the agents good enough that 
 Quartermaster is on GitHub at [[https://github.com/travisjeffery/herdr-quartermaster][travisjeffery/herdr-quartermaster]]. Installing takes two commands, with nothing to build:
 
 #+begin_src sh
-herdr plugin install travisjeffery/herdr-quartermaster --ref v0.5.0
+herdr plugin install travisjeffery/herdr-quartermaster --ref v0.5.1
 herdr plugin action invoke configure --plugin quartermaster   # from a workspace in your repo
 #+end_src
 
