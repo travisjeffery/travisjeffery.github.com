@@ -1,9 +1,9 @@
-#+TITLE: Flatcircle: one conversation, many agents
+#+TITLE: Quartermaster: one conversation, many agents
 #+DATE: 2026-09-25
 #+DRAFT: false
 #+TAGS[]: ai tools
 #+CATEGORIES[]: tech
-#+ALIASES[]: /shepherd-one-conversation-many-agents/
+#+ALIASES[]: /flatcircle-one-conversation-many-agents/ /shepherd-one-conversation-many-agents/
 
 Running one agent is easy. You talk to it, it does the work, you review it.
 
@@ -13,30 +13,30 @@ I was the scheduler, the pager, and the memory for all of them. That's the part 
 
 I run my agents in [[https://herdr.dev][Herdr]], a terminal that knows which panes are agents and what each one is doing, and track work in [[https://github.com/steveyegge/beads][beads]], an issue tracker that many agents can update at once. On top of those I tried the obvious options. Minding sessions by hand stopped scaling around a dozen. A dashboard showed me the state of every agent, but seeing isn't coordinating. A full orchestrator was a whole world to buy into. The closest was [[https://github.com/eliasstravik/herdr-projects][herdr-projects]]: one coordinator, a worker per task, a sidebar of what needs you. But it kept its own state in Markdown files, and for state that many agents read and write at once, beads is the better tool. A few other rough edges and I knew I'd only be happy with a setup I wrote myself.
 
-So I wrote flatcircle. It keeps herdr-projects' shape, puts all the state in beads, and runs as much in parallel as I'll let it.
+So I wrote quartermaster. It keeps herdr-projects' shape, puts all the state in beads, and runs as much in parallel as I'll let it.
 
-** What flatcircle is
+** What quartermaster is
 
-Flatcircle is a Herdr plugin. It does four things.
+Quartermaster is a Herdr plugin with a CLI, ~quartermaster~, or ~qm~ for short. It does four things.
 
 *One place to coordinate from.* I talk to one agent, the coordinator. I tell it what I want. It turns that into beads, proposes how to split the work, and waits for me to say go. It never does the work itself, so it's always free to answer me.
 
-*One bead, one branch, one worktree, one agent.* When I say go, flatcircle claims the bead, creates a worktree on its own branch, starts Claude or Codex in it named after the bead, and sends it a short brief. Starting a thread is one key. Cleaning up after a merge is one command.
+*One bead, one branch, one worktree, one agent.* When I say go, quartermaster claims the bead, creates a worktree on its own branch, starts Claude or Codex in it named after the bead, and sends it a short brief. Starting a thread is one key. Cleaning up after a merge is one command.
 
 *Workers get checked on automatically.* A background ticker follows every thread. When a PR's checks fail, it tells the worker. When review comments land, it tells the worker. When a PR is ready to merge, it tells both of us. When it merges, it tells the worker to verify and close the bead. Every hour it also rechecks beads nobody has touched in a few days, in case their work is already done. It follows deploy workflows linked in the bead too. It only types into an agent that's been idle for a minute, so it never lands in the middle of something I'm typing.
 
-*Beads is the only state.* Flatcircle keeps no task list of its own. Statuses, notes, questions and lessons live in beads. That's what makes running many agents at once work: they all read and write the same record. It's also why nothing is lost when an agent or the whole terminal restarts. The next session picks up exactly where things are.
+*Beads is the only state.* Quartermaster keeps no task list of its own. Statuses, notes, questions and lessons live in beads. That's what makes running many agents at once work: they all read and write the same record. It's also why nothing is lost when an agent or the whole terminal restarts. The next session picks up exactly where things are.
 
 The sidebar puts the coordinator on top with a summary of what's waiting, then every thread sorted so what needs me comes first. Each worker is named after its bead, so every row says which task it is and where it stands:
 
 #+begin_example
-flatcircle  coordinator · 2 need you · 1 review · 3 working · 2 inbox
-app-7qd     needs you · run command
-app-k2m     checks failing · PR #405 (integration-tests)
-app-9xr-2   review · PR #411 approved · ENG-1024
-app-3fw     rolling out · PR #398 · deploy running
-app-p1c     working
-app-c8n-1   idle
+quartermaster  coordinator · 2 need you · 1 review · 3 working · 2 inbox
+app-7qd        needs you · run command
+app-k2m        checks failing · PR #405 (integration-tests)
+app-9xr-2      review · PR #411 approved · ENG-1024
+app-3fw        rolling out · PR #398 · deploy running
+app-p1c        working
+app-c8n-1      idle
 #+end_example
 
 The pieces never talk to each other directly. A worker says everything through its bead: notes, a PR link, a question, a command it needs me to run. The ticker reads beads, Herdr and GitHub, and writes what changed to an inbox, which is just a folder of files. The coordinator reads the inbox when it's nudged, or when I ask. The state lives in beads and those files. A prompt only says "go look", so if one gets missed, nothing is lost.
@@ -59,19 +59,19 @@ The coordinator makes three beads, notices the write-up should cite the alert's 
 
 *Afternoon.* The alert merges. The worker checks that the rule actually loaded, then closes its bead. That unblocks the write-up, which the coordinator mentions in its next status.
 
-*A restart.* Herdr restarts, and it doesn't relaunch agents. The coordinator lists two threads as resumable. ~flatcircle resume~ starts each worker again in its worktree, continuing its last conversation.
+*A restart.* Herdr restarts, and it doesn't relaunch agents. The coordinator lists two threads as resumable. ~qm resume~ starts each worker again in its worktree, continuing its last conversation.
 
-*End of day.* ~flatcircle report~ writes my daily update: what shipped and how it was verified, what's in flight, what needs me. I ask the coordinator what's left, and I mark two beads for tomorrow. One lesson from the day goes into beads' memory, so every agent that starts tomorrow sees it.
+*End of day.* ~qm report~ writes my daily update: what shipped and how it was verified, what's in flight, what needs me. I ask the coordinator what's left, and I mark two beads for tomorrow. One lesson from the day goes into beads' memory, so every agent that starts tomorrow sees it.
 
 Nothing about the day lived in my head. Tomorrow starts the same way: open the coordinator, ask where things stand.
 
 ** How I built it
 
-I built the first version in a day with Claude. It's a single Go binary. Herdr has a CLI and a socket API for panes, agents, worktrees and sidebar metadata, so flatcircle is mostly glue between Herdr, beads and ~gh~.
+I built the first version in a day with Claude. It's a single Go binary. Herdr has a CLI and a socket API for panes, agents, worktrees and sidebar metadata, so quartermaster is mostly glue between Herdr, beads and ~gh~.
 
-The second round was more interesting. I asked Claude how flatcircle could fit the way I actually work. It looked at my beads, my running agents and what had come up that day, and came back with a list: resume agents after a restart, surface commands that only I can run, keep following work after merge, support several repos, keep Linear in step, write my daily report, clean up old worktrees.
+The second round was more interesting. I asked Claude how quartermaster could fit the way I actually work. It looked at my beads, my running agents and what had come up that day, and came back with a list: resume agents after a restart, surface commands that only I can run, keep following work after merge, support several repos, keep Linear in step, write my daily report, clean up old worktrees.
 
-Then it built all seven at once. Seven agents, each on its own branch in its own worktree, which is exactly what flatcircle is for. It merged them one at a time and ran the tests after each. Then an independent reviewer went over the combined change, and it caught two real bugs: cleanup could have deleted the worktree of a rollout that was still in progress, and an old command could have been offered to me to run again. Fixed and shipped.
+Then it built all seven at once. Seven agents, each on its own branch in its own worktree, which is exactly what quartermaster is for. It merged them one at a time and ran the tests after each. Then an independent reviewer went over the combined change, and it caught two real bugs: cleanup could have deleted the worktree of a rollout that was still in progress, and an old command could have been offered to me to run again. Fixed and shipped.
 
 That's the workflow in miniature. The agents did the work in parallel. The review caught what parallel work misses. I made the calls.
 
@@ -79,20 +79,22 @@ That's the workflow in miniature. The agents did the work in parallel. The revie
 
 - *The coordinator proposes; it doesn't decide.* It waits for me before starting threads. Agents are good at doing work and worse at knowing which work matters.
 - *Automated prompts need manners.* The ticker only types into an agent that has sat idle for a minute. On the Herdr version I run, a prompt merges into whatever you've half-typed, and nothing annoys you faster than an agent that interrupts you.
-- *Cleanup is where you lose work.* Removing a worktree is irreversible. Flatcircle keeps anything dirty, anything with unpushed commits, anything with an agent in it, and anything whose bead is still active. The dry run is the default.
-- *Names are the contract.* Flatcircle ties a worker to its bead by its name. It names each worker itself when it starts it, and if a name drifts, the ticker finds the one agent in that bead's worktree and renames it back.
-- *Folder trust is per path.* Claude asks whether to trust every new folder. Worktrees of a repo you've already trusted seem to be fine. For anything else, flatcircle holds the brief until you answer.
+- *Cleanup is where you lose work.* Removing a worktree is irreversible. Quartermaster keeps anything dirty, anything with unpushed commits, anything with an agent in it, and anything whose bead is still active. The dry run is the default.
+- *Names are the contract.* Quartermaster ties a worker to its bead by its name. It names each worker itself when it starts it, and if a name drifts, the ticker finds the one agent in that bead's worktree and renames it back.
+- *Folder trust is per path.* Claude asks whether to trust every new folder. Worktrees of a repo you've already trusted seem to be fine. For anything else, quartermaster holds the brief until you answer.
 - *It's built for how I work.* One tracker, one terminal, Claude and Codex, GitHub. If your setup is different, the ideas probably carry over better than the code.
 
 ** Why build it
 
 What I needed was small. Start an agent in the right place. Check on it. Tell me when it needs me. Clean up after it. Keep the state where it already lives.
 
-AI didn't make managing agents unnecessary. It made the agents good enough that managing them became the bottleneck. Flatcircle moves that job off me and onto a loop that doesn't forget, so the time I have goes to the decisions.
+AI didn't make managing agents unnecessary. It made the agents good enough that managing them became the bottleneck. Quartermaster moves that job off me and onto a loop that doesn't forget, so the time I have goes to the decisions.
 
-Flatcircle is on GitHub at [[https://github.com/travisjeffery/herdr-flatcircle][travisjeffery/herdr-flatcircle]]. Installing takes two commands, with nothing to build:
+Quartermaster is on GitHub at [[https://github.com/travisjeffery/herdr-quartermaster][travisjeffery/herdr-quartermaster]]. Installing takes two commands, with nothing to build:
 
 #+begin_src sh
-herdr plugin install travisjeffery/herdr-flatcircle --ref v0.4.0
-herdr plugin action invoke configure --plugin flatcircle   # from a workspace in your repo
+herdr plugin install travisjeffery/herdr-quartermaster --ref v0.5.0
+herdr plugin action invoke configure --plugin quartermaster   # from a workspace in your repo
 #+end_src
+
+It used to be called flatcircle, and ~flatcircle~ still works as a deprecated alias.
