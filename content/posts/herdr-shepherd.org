@@ -83,15 +83,15 @@ me ─ talk ─▶ coordinator ─ qm dispatch ─▶ worker
 
 Usually there's nothing for me to do. When a PR merges, the ticker tells the worker to verify and close its bead with what shipped and how it was verified. A ~rolling-out~ bead finishes its rollout first. Then ~qm resolve~ removes the worktree and the workspace, closing the worker's pane, and deletes the local branch if the PR merged. It refuses while the bead is still open or its agent is working, and it only ever removes that bead's own worktree, never the main checkout.
 
-The rest is by hand:
+Other cases:
 
-| Situation                                        | Do this                                                                              |
-|--------------------------------------------------+--------------------------------------------------------------------------------------|
-| Done without a PR, like an investigation          | ~bd close <id> --reason "…"~, then ~qm resolve <id>~                                 |
-| Dropping the work                                | Close the bead or defer it, then ~qm resolve <id> --force~ if nothing is worth keeping |
-| Done, but I want the worktree a while longer     | Close the bead and resolve it later                                                  |
-| Finished worktrees have piled up                 | ~qm sweep~, then ~qm sweep --yes~ to remove the safe ones                            |
-| Claims nobody is going to finish                 | ~qm stale~, then ~qm stale --release~ to reopen them                                 |
+| Situation                                    | What happens                                                                                                                                            |
+|----------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Done without a PR, like an investigation     | The worker closes its bead with a reason when it finishes; the coordinator runs ~qm resolve <id>~, since auto-resolve only covers merged PRs            |
+| Dropping or parking the work                 | I tell the coordinator; it closes the bead (~dropped: …~) or defers it and resolves it, with ~--force~ only if nothing in the worktree is worth keeping |
+| Done, but I want the worktree a while longer | I ask the coordinator to hold off on ~qm resolve~                                                                                                       |
+| Finished worktrees have piled up             | ~qm sweep~, then ~qm sweep --yes~ to remove the safe ones                                                                                               |
+| Claims nobody is going to finish             | ~qm stale~, then ~qm stale --release~ to reopen them                                                                                                    |
 
 *** Messages
 
