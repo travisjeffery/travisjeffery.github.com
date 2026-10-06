@@ -39,7 +39,72 @@ app-p1c        working
 app-c8n-1      idle
 #+end_example
 
+** How it works
+
+*** The pieces
+
+| Piece       | What it is                                         | What it owns                                                                          |
+|-------------+----------------------------------------------------+---------------------------------------------------------------------------------------|
+| Beads       | The issue tracker in the repo                      | All task state: status, notes, questions, lessons. The only record.                   |
+| Herdr       | The terminal the agents run in                     | Panes, agent names and states, worktrees, the sidebar, notifications                  |
+| Coordinator | One agent named ~quartermaster~, in its own folder | Talking to me, planning, creating beads, dispatching. Never does the work.            |
+| Workers     | One agent per bead, named after it, in its worktree | Doing the work and keeping their bead current                                        |
+| Ticker      | A background loop, started with the plugin         | Watching threads, following PRs and runs, prompting workers, the inbox, the sidebar   |
+
 The pieces never talk to each other directly. A worker says everything through its bead: notes, a PR link, a question, a command it needs me to run. The ticker reads beads, Herdr and GitHub, and writes what changed to an inbox, which is just a folder of files. The coordinator reads the inbox when it's nudged, or when I ask. The state lives in beads and those files. A prompt only says "go look", so if one gets missed, nothing is lost.
+
+*** The loop
+
+#+begin_example
+me ─ talk ─▶ coordinator ─ qm dispatch ─▶ worker
+ ▲            ▲    │                       │  ▲
+ │            │    └─ qm context ◀┐        │  │ prompts
+ │ notifies   │ nudge             │ inbox  │  │
+ │ + sidebar  │                   │        ▼  │
+ └─────────── ticker ─────────────┴───────────┘
+             reads bd, herdr, gh every 15s,
+             GitHub PRs and runs every 60s
+#+end_example
+
+1. *I ask the coordinator for something.* It runs ~qm context~, creates beads for the work, with parents and dependencies, and proposes threads. Then it waits for my go-ahead.
+2. *The coordinator dispatches.* ~qm dispatch <bead>~ claims the bead, creates a worktree on its own branch, starts Claude or Codex named after the bead, and sends the brief: the bead and its title, the worktree and branch, the issue key if there is one, how to report, and my own standing instructions. If the agent opens on a startup prompt, like folder trust, the brief waits in an outbox and I'm notified. The ticker delivers it once the agent is ready.
+3. *The worker works and writes to its bead.* Findings and decisions go in ~bd note~. It notes ~PR: <url>~ when it opens a PR, and any Actions run it's waiting on. It turns on auto-merge for each PR once it isn't a draft, so an approved PR with passing checks merges without anyone clicking merge. Who has to approve is still up to the repo's own rules. When it needs a decision, it writes the question and sets the bead to ~needs_me~. When it needs me to run a command, it writes ~RUN: <command>~ and does the same. If steps are left after a merge, like a deploy, it adds the ~rolling-out~ label.
+4. *The ticker watches.* Every 15 seconds it reads the active beads (in progress, needs me, blocked) and Herdr's agents, and joins them by name. Every 60 seconds it also asks GitHub about each bead's PR, found by branch or by a PR link in the notes, and any Actions runs linked in the notes. It compares each thread with what it saw last time.
+5. *The ticker acts on what changed.*
+   - *The sidebar:* each worker's row gets its state line, like ~review · PR #411 approved · ENG-1024~, and what needs me sorts to the top.
+   - *The worker:* failing checks, new review feedback, a PR ready to merge, auto-merge turned off, a merge or a finished run each become a prompt to that worker. GitHub turns auto-merge off when the base branch changes or someone without write access pushes, so while the PR is open, the worker is asked to turn it back on. Prompts wait until the worker has been idle for a minute, so they never land in the middle of something, and several are sent together.
+   - *The inbox:* each change is also an event file for the coordinator.
+   - *Me:* a thread needing me, a PR ready to merge, a merge, a failed run or a human review sends me a notification. Bot reviews go to the worker without bothering me.
+   - *The coordinator:* when there are new events and it's been idle for a minute, the ticker nudges it to run ~qm context~.
+6. *The coordinator catches up.* It reads the inbox and threads, relays questions and ~RUN:~ commands to me, passes my answers to the worker, and marks the items handled.
+7. *The thread finishes.* After the merge the worker verifies its work and closes its bead with a reason. The ticker sees the bead leave the active set and writes a ~closed~ event, and the coordinator runs ~qm resolve~ to remove the worktree.
+
+*** Finishing a thread
+
+Usually there's nothing for me to do. When a PR merges, the ticker tells the worker to verify and close its bead with what shipped and how it was verified. A ~rolling-out~ bead finishes its rollout first. Then ~qm resolve~ removes the worktree and the workspace, closing the worker's pane, and deletes the local branch if the PR merged. It refuses while the bead is still open or its agent is working, and it only ever removes that bead's own worktree, never the main checkout.
+
+The rest is by hand:
+
+| Situation                                        | Do this                                                                              |
+|--------------------------------------------------+--------------------------------------------------------------------------------------|
+| Done without a PR, like an investigation          | ~bd close <id> --reason "…"~, then ~qm resolve <id>~                                 |
+| Dropping the work                                | Close the bead or defer it, then ~qm resolve <id> --force~ if nothing is worth keeping |
+| Done, but I want the worktree a while longer     | Close the bead and resolve it later                                                  |
+| Finished worktrees have piled up                 | ~qm sweep~, then ~qm sweep --yes~ to remove the safe ones                            |
+| Claims nobody is going to finish                 | ~qm stale~, then ~qm stale --release~ to reopen them                                 |
+
+*** Messages
+
+Every automated message says it isn't from me, and none of them approves anything.
+
+| From → to            | When                                                   | Starts with                                                               |
+|----------------------+--------------------------------------------------------+---------------------------------------------------------------------------|
+| dispatch → worker    | Once, at start                                         | ~You are the quartermaster worker for bead …~                             |
+| ticker → worker      | Checks fail, review, ready to merge, merge, run done   | ~[quartermaster: automated, not the user] PR #N …~                        |
+| resume → worker      | After ~qm resume~                                      | ~[quartermaster] You were resumed after your agent exited.~               |
+| ticker → coordinator | New inbox items and the coordinator is idle            | ~[quartermaster ticker: automated, not the user, approves nothing] …~     |
+| worker → everyone    | Any time                                               | A note on its bead, or a status change                                    |
+| coordinator → worker | Relaying my answer                                     | Whatever it writes                                                        |
 
 ** A day with it
 
