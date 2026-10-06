@@ -62,7 +62,7 @@ me ─ talk ─▶ coordinator ─ qm dispatch ─▶ worker
  │ notifies   │ nudge             │ inbox  │  │
  │ + sidebar  │                   │        ▼  │
  └─────────── ticker ─────────────┴───────────┘
-             reads bd, herdr, gh every 15s,
+             reads bd and herdr every 15s,
              GitHub PRs and runs every 60s
 #+end_example
 
@@ -97,14 +97,14 @@ Other cases:
 
 Every automated message says it isn't from me, and none of them approves anything.
 
-| From → to            | When                                                   | Starts with                                                               |
-|----------------------+--------------------------------------------------------+---------------------------------------------------------------------------|
-| dispatch → worker    | Once, at start                                         | ~You are the quartermaster worker for bead …~                             |
-| ticker → worker      | Checks fail, review, ready to merge, merge, run done   | ~[quartermaster: automated, not the user] PR #N …~                        |
-| resume → worker      | After ~qm resume~                                      | ~[quartermaster] You were resumed after your agent exited.~               |
-| ticker → coordinator | New inbox items and the coordinator is idle            | ~[quartermaster ticker: automated, not the user, approves nothing] …~     |
-| worker → everyone    | Any time                                               | A note on its bead, or a status change                                    |
-| coordinator → worker | Relaying my answer                                     | Whatever it writes                                                        |
+| From → to            | When                                                                 | Starts with                                                                       |
+|----------------------+----------------------------------------------------------------------+-----------------------------------------------------------------------------------|
+| dispatch → worker    | Once, at start                                                       | ~You are the quartermaster worker for bead …~                                     |
+| ticker → worker      | Checks fail, review, ready to merge, auto-merge off, merge, run done | ~[quartermaster: automated, not the user] PR #N …~, or ~… <workflow> run <url> …~ |
+| resume → worker      | After ~qm resume~                                                    | ~[quartermaster] You were resumed after your agent exited.~                       |
+| ticker → coordinator | New inbox items and the coordinator is idle                          | ~[quartermaster ticker: automated, not the user, approves nothing] …~             |
+| worker → everyone    | Any time                                                             | A note on its bead, or a status change                                            |
+| coordinator → worker | Relaying my answer                                                   | Whatever it writes                                                                |
 
 ** A day with it
 
@@ -120,7 +120,7 @@ The coordinator makes three beads, notices the write-up should cite the alert's 
 
 *Midday.* The alert PR fails lint. I don't touch it. The ticker sees the failure, waits for the worker to go idle, and sends it the failing check. It fixes it and pushes. On the other PR, a teammate asks for the timeout to be configurable. The ticker hands the review to that worker, which makes the change and replies. I can see and follow all of this looking at the sidebar.
 
-*A command only I can run.* One worker needs a production change its permissions won't allow. It writes the exact command on the bead and marks it as needing me. The sidebar goes red: /needs you · run command/. I copy the command from the board, run it, and the worker sees what happened and continues.
+*A command only I can run.* One worker needs a production change its permissions won't allow. It writes the exact command on the bead and marks it as needing me. The sidebar goes red: /needs you · run command/. I copy the command from the board, run it, and tell the coordinator how it went. The coordinator passes the result to the worker, which notes it on the bead and continues.
 
 *Afternoon.* The alert merges. The worker checks that the rule actually loaded, then closes its bead. That unblocks the write-up, which the coordinator mentions in its next status.
 
@@ -162,4 +162,6 @@ herdr plugin install travisjeffery/herdr-quartermaster --ref v0.5.1
 herdr plugin action invoke configure --plugin quartermaster   # from a workspace in your repo
 #+end_src
 
-It used to be called flatcircle, and ~flatcircle~ still works as a deprecated alias.
+Beads needs the ~needs_me~ status (~bd config set status.custom needs_me~), and the ~prefix+j~ and ~prefix+shift+j~ keys and the sidebar row go in ~~/.config/herdr/config.toml~. The [[https://github.com/travisjeffery/herdr-quartermaster#keys-and-sidebar][README]] has the snippet.
+
+It used to be called flatcircle, and before that kelpie and shepherd. ~flatcircle~, ~kelpie~ and ~shepherd~ all still work as deprecated aliases.
