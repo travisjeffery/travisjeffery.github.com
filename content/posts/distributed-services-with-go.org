@@ -1,0 +1,136 @@
+#+TITLE: Writing Distributed Services With Go
+#+DATE: 2026-11-03
+#+DRAFT: true
+#+TAGS[]: book
+#+CATEGORIES[]: writing
+
+I wrote a book, [[https://pragprog.com/titles/tjgo/distributed-services-with-go/][Distributed Services with Go]], published by the Pragmatic Bookshelf. It's a practical book on distributed systems. It walks you through building a distributed event-stream service from scratch through deployment, and along the way it explains the concepts underlying the distributed systems you use, work on, or plan to build. The code is at [[https://github.com/travisjeffery/proglog][travisjeffery/proglog]].
+
+I spent about two and a half years writing it. In this post I'll share what that was like, and whether it was worth it.
+
+I've been a bookworm as long as I can remember. I have over 1,200 books in my personal library. Writing one was a lifelong goal, and I wanted to test myself and see if I could do it.
+
+I also wanted to write the book I'd wanted to read: a practical book on distributed systems that you could read and come out the other side having built a distributed service. A lot of technical books today are basically glorified man pages. I wanted to write one with content that didn't exist yet, and a really good one at that.
+
+** Publisher and Plan
+
+In April 2018, Tyler Treat introduced me to Brian MacDonald, an editor at the Pragmatic Bookshelf. Pragmatic was looking for authors to write a Go book. I told them I didn't want to write a book on learning Go. There are already a lot of those, and The Go Programming Language will always be the standard. Brian agreed. He thought all the learning Go books we need had been written, and he was looking for books on how to solve real problems with Go. That's the kind of writing I love reading and writing most.
+
+Pragmatic accepted my proposal in June 2018, and I signed the contract in July. The working title was /Real-World Go/. By September it was /Distributed Services with Go/, Dawn Schanafelt was my development editor, and the plan had the full draft done in early 2019.
+
+[TJ: How did /Real-World Go/ become /Distributed Services with Go/? Anything about the proposal itself worth sharing?]
+
+PragProg is one of the publishers whose books I like most. Their style is relaxed and practical. I hadn't worked with a publisher or professional editors before, and I was pleasantly surprised. They have an internal wiki full of useful info and an author guide that's 250 pages long, like a style guide. Half of it is on how to structure and prepare to write your book. The other half is on the syntax to format it. I liked the structure it gave me.
+
+I wrote in Markdown, in Emacs, and wrote my own =pragmatic-mode= to help with editing.
+
+[TJ: Your notes say "You can write in either" and stop. Either Markdown or what? Is pragmatic-mode public, and is there anything more to say about it?]
+
+** Tough Beginning
+
+The book was slow going for the first six months.
+
+I was already working full-time at Confluent, building Confluent Cloud from zero to one, and it was only about a year and a half old. Adding another whole job of writing a book was a bit insane.
+
+I went into it with the idea, which I think came from 37signals, that writing a book is like writing 10-15 blog posts, one for each chapter. That's somewhat true for 37signals because their chapters are generally 1-3 pages long and don't build on each other. It isn't true for most books, and definitely not mine. My book has the reader begin with nothing and build a distributed service from scratch, so each chapter leads directly to the next. If I made a change to chapter 10, I had to back port it to the related content in chapters 1-9. And each chapter is 10-15 pages long. I never write a blog post that long.
+
+The early feedback was tough too. My editor said chapter 4 read more like a lecture than a conversation. Pragmatic sent me /Programming Elm/ as an example of a reader-centric book, one where the author introduces every bit of code with phrases like "add this code."
+
+In January 2019 I got Pragmatic's three-chapter feedback. My writing felt forced, the topics had bare-minimum coverage, and there was little sense of my voice. It read more like a handout from a Go conference tutorial. Dawn told me to make the reader the star of the book and take them on a hero's journey.
+
+[TJ: How did that feedback land at the time, and what did you change?]
+
+** Turning Point
+
+My editors were helpful with editing, of course. But probably their biggest help was motivation. The change after those slow first six months came after my editor sent me an email that was essentially asking, "are you going to get it going or what?"
+
+I rewrote chapter 1, and the tone changed completely. The feedback in February 2019 was: "This feels like Travis. I have a sense of him now and readers will too."
+
+[TJ: Were the "get it going" email and the chapter 1 rewrite the same moment, or two separate turning points?]
+
+** Flow state
+
+I really picked up the pace after that, and my pace kept improving each year until the end.
+
+Writing a book is tough. Really, really tough. People say writing a book is like running a marathon. It isn't. It's running one marathon after another, one for each chapter in your book, plus another marathon for all the other stuff. You go through the grueling process of writing a chapter, send it off to your editor, take a brief moment to celebrate finishing another chapter, and then realize you have many more to go and you'd better begin on the next. The whole time, you have only yourself, with some help from your editor, to provide the motivation and discipline to keep going.
+
+In October 2019, Dawn left for maternity leave, and Katie Dvorak became my editor for the rest of the book.
+
+There are pretty much no places I compromised. I could tinker on minor things forever, arguing with myself over the upsides and downsides of each possible change. But after two years, if I wasn't happy with something in the book, I changed it until I was happy or threw it in the trash.
+
+[TJ: What did a writing day look like? When did you write, for how long, and did anything help you keep the pace? How was the change of editors mid-book?]
+
+** Reviews
+
+The book went out for technical review in two halves.
+
+Brian Ketelsen read the first several chapters and didn't have any criticism of the style, scope, or direction.
+
+Clinton Begin reviewed the preface. He caught that I edged on insulting the authors of many open source frameworks and tools, and at one point referred to their code as spaghetti code. He suggested I make the same point by saying their codebases are very large and not focused on learning.
+
+[TJ: Did you take Clinton's change? Any other reviewer feedback that changed the book?]
+
+Ben Johnson, the author of BoltDB, gave the book a blurb: "Travis Jeffery distills the traditionally academic topic of distributed systems down to a series of practical steps to get you up and running." Armon Dadgar, co-founder of HashiCorp, gave one too.
+
+[TJ: Add Armon's blurb text? Your inbox has Ben's quote spelled "Jeffrey"; I used "Jeffery", check against the book. Any reader reviews you want to mention?]
+
+** Release
+
+At Pragmatic, a book goes into beta at about the three-quarters mark and begins selling on their website. That's when you begin making money. My book went into beta on March 25, 2020.
+
+The final production work ran into 2021: indexing in January, then layout review in March. The book went to the printer in March 2021 and was published at the end of the month. My own physical copies arrived in July, after a shipping delay.
+
+The relationship with a publisher can be frustrating. You put everything into your book, so when they let you down on something small, like updating a marketing page, it's quite frustrating.
+
+[TJ: What was release day like? Anything you did to launch or market it?]
+
+** Is it worth it?
+
+Here's what I've made:
+
+#+begin_src
+2018-07-26      $0.01
+2020-03-25      $0.01
+2020-06-01      $8,447.40
+2020-09-01      $2,292.93
+2020-12-01      $4,518.47
+2021-03-01      $1,496.97
+2021-06-01      $5,347.34
+2021-09-02      $4,811.91
+2021-12-01      $8,916.64
+2022-03-01      $7,097.02
+2022-06-01      $10,674.20
+2022-09-01      $3,380.94
+2022-12-01      $3,346.62
+2023-03-01      $2,867.50
+2023-06-05      $2,554.00
+2023-09-01      $2,709.80
+2023-12-01      $1,936.30
+2024-03-01      $2,018.42
+2024-06-11      $1,616.68
+2024-09-13      $1,593.58
+2024-12-13      $945.19
+2025-03-14      $1,757.15
+2025-06-13      $902.18
+2025-09-15      $674.92
+2025-12-11      $815.27
+Total $80,721.44
+#+end_src
+
+[TJ: Are these royalty payments, and do they include an advance? What are the two $0.01 entries (bank account verification?). The rows add up to $80,721.45, a cent more than the total.]
+
+Writing a book is probably the least efficient way to make money. Most of this timeline is from before AI took off, and from what I understand AI has crashed technical book sales. If you were just in it for the money, you'd never finish, so you're setting yourself up for failure if you write a book for the money.
+
+I wrote the book because I wanted to write it, and before that I'd wanted to read it. It was as good a way as any to accomplish my lifelong goal of writing a book. By the criteria of my own fulfillment, and all the messages I've received from people thanking me for writing it, writing the book was worth it.
+
+Was the publisher worth it? Self-publishing is a viable option today. You could put your book on Leanpub, hire your own editor, hire an artist for the cover or make your own, get it printed, and get it into stores. Partly I went with a publisher because that's how it naturally began and the momentum kept it going. But I think if you don't care about the money, you should use a publisher:
+
+- Structure and resources: editors, author guides, conventions.
+- Marketing and an existing audience.
+- Convenience. I wrote this book as a side gig to a full-time job, and by the end of just writing it I'd had enough. If I'd had to do all that other stuff too, it would have sucked.
+
+I have a decent following, so I think my sales would have been similar if I'd self-published. But my book is better for having worked with a publisher and editors. There's a good chance I would've never finished it at all.
+
+Would I write another book? I'd write another edition of this one when it made sense. I won't write a whole new book for a while, but I think I will eventually. I think I'll write a fiction book some day as well.
+
+[TJ: Your notes said you'd do a second edition "when the Go team pushes generics", which happened in 2022, and Pragmatic discussed a second edition in September 2025. Where does that stand? Your notes also said "at least 3 years" before a new book; is that still how you'd put it?]
