@@ -6,7 +6,7 @@
 
 Every install trusts strangers. A lockfile pins what you asked for, but not whether the thing you asked for is safe. When a maintainer's account is phished and a bad version is published, or a typosquat sits one keystroke from a real package, or an install script runs on a laptop with cloud credentials, the first line of defense is whatever stands between the package manager and the registry. For most teams that's nothing.
 
-Commercial products fill that gap, and they're good. We wanted their fundamentals in our own infrastructure, and AI made building them a project of weeks instead of quarters. So we built [[https://github.com/travisjeffery/package-firewall][Package Firewall]]. This post covers why, what it does, and how it works.
+Commercial products fill that gap, and they're good. At [[https://oscilar.com][Oscilar]] we wanted their fundamentals in our own infrastructure, and AI made building them a project of weeks instead of quarters. So we built [[https://github.com/travisjeffery/package-firewall][Package Firewall]]. This post covers why, what it does, and how it works.
 
 ** The risk
 
@@ -91,7 +91,7 @@ Anything not decided by policy is looked up in [[https://osv.dev][OSV]], which a
 
 OSV is the weakest of the four fundamentals compared with the products. It knows about published advisories and reported malware; it doesn't analyze package contents. That limit is stated in the README, and it's the trade we made: the data is open, and the firewall is the part we needed to own.
 
-There are two gaps I found while writing this. OSV's =MAL-= records carry no CVSS score, so today a known-malicious package is only blocked if the default vulnerability action is =block=; with the default of =warn= it's served with a warning. And the policy engine has a release cooldown (hold any version published in the last day), but no adapter supplies publish times yet, so it never fires. Both are being fixed. [EDIT: update once the fixes land.]
+There are two gaps I found while writing this. OSV's =MAL-= records carry no CVSS score, so today a known-malicious package is only blocked if the default vulnerability action is =block=; with the default of =warn= it's served with a warning. And the policy engine has a release cooldown (hold any version published in the last day), but no adapter supplies publish times yet, so it never fires. Both are being fixed. [HOLD: don't publish this paragraph as is; rewrite it to describe the fix once it lands in this repo.]
 
 *** 4. Explain the decision
 
@@ -140,7 +140,7 @@ For Gradle there's =pfw prewarm=, which reads the committed lockfiles and verifi
 
 Package Firewall doesn't analyze package code; it acts on OSV and your policy. It doesn't intercept TLS, so it only sees what's configured to use it. It isn't a repository manager: no hosting your own packages, no Artifactory or Nexus discovery. And it covers four ecosystems, not dozens.
 
-Within those limits it gives us the fundamentals: one door, a decision before download, a verified cache, and an explanation when it says no. At work, [NUMBER: which installs go through it, e.g. CI jobs and developer machines] install through it, and it serves [NUMBER: cache hit rate] of artifacts from cache. [EDIT: keep, replace or cut once numbers are approved.]
+Within those limits it gives us the fundamentals: one door, a decision before download, a verified cache, and an explanation when it says no. At Oscilar it sits in front of CI in about twenty repositories. In the 30 days to November 3 it answered about 119 million requests and blocked 1,162 downloads of 27 distinct package versions. Of the 35 million artifact downloads eligible for the cache, 89.6% were served from it: 99.5% or better for npm, PyPI and Go, and 84.5% for Maven Central.
 
 Package Firewall is on GitHub at [[https://github.com/travisjeffery/package-firewall][travisjeffery/package-firewall]] under the Apache 2.0 license. The README has a quick start that runs it locally against the public registries.
 
