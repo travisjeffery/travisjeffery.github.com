@@ -1,16 +1,20 @@
 #+TITLE: Radar: we automated PR review because AI made us write more code
 #+DATE: 2026-11-03
 #+DRAFT: true
-#+TAGS[]: ai tools
+#+TAGS[]: ai tools oscilar
 #+CATEGORIES[]: tech
 
 AI didn't make code review unnecessary. It made code review the bottleneck.
 
-Once everyone on the team had agents writing code, the number of pull requests went up and their size went up with it. [NUMBER: PRs a week, or lines per PR, before and after agents] The number of people who can review them didn't change. Reviews got slower, then shallower. A reviewer with ten open PRs skims.
+At Oscilar, people merged 471 pull requests in October 2025. In October 2026 they merged 3,448, about 7x. (Those are GitHub's counts of merged PRs across the org, with bots like Dependabot left out.) The team grew too, from 39 people opening PRs to 77. People roughly doubled; PRs went up 7x.
+
+The growth isn't spread evenly across people. I'm the extreme case: in the first half of October, I merged 486 of the org's 1,910 PRs, about a quarter. Leave me out and everyone else still went from about 12 PRs a month to about 36.
+
+That's what broke review. One engineer with agents can open more PRs in a day than a reviewer can read carefully. Reviews got slower, then shallower. A reviewer with ten open PRs skims.
 
 We're not unusual. In May, Meta published [[https://arxiv.org/abs/2605.30208][a paper on RADAR]], the system they built to auto-review low-risk changes. Their numbers: lines of code per human-landed diff up 106% year over year, diffs per developer up 51%, and agentic AI behind over 80% of that growth. Same problem, at a much bigger scale.
 
-So I built Radar. It started as a Go implementation of that paper. It's grown into the AI reviewer on every pull request at work, and it's on GitHub at [[https://github.com/travisjeffery/radar][travisjeffery/radar]].
+So I built Radar. It started as a Go implementation of that paper. It's grown into the AI reviewer on every pull request at Oscilar, and it's on GitHub at [[https://github.com/travisjeffery/radar][travisjeffery/radar]].
 
 This is the first post in a series. This one covers why, how it works, and what it does. The next one covers how we cut what it costs to run.
 
@@ -46,7 +50,7 @@ Radar runs in GitHub Actions as two stages on each pull request head.
 
 *Verdict.* Once checks finish, Radar decides. It reuses the findings stage's reviews when the request is byte-identical, so the comment people read and the decision rest on the same reviews, and the verdict normally needs no new model call.
 
-Each review goes to more than one model. At work that's Claude on Bedrock and Codex, run concurrently from the same snapshot. Both can read the repository, not just the patch: Codex runs read-only over a checkout of the head, and Claude gets read-only tools (~read_file~, ~grep~, ~list_dir~, ~git_log~) confined to the checkout. Their findings are merged. Two findings in the same file, within three lines, citing the same rule are one issue, and the comment shows who agreed.
+Each review goes to more than one model. At Oscilar that's Claude on Bedrock and Codex, run concurrently from the same snapshot. Both can read the repository, not just the patch: Codex runs read-only over a checkout of the head, and Claude gets read-only tools (~read_file~, ~grep~, ~list_dir~, ~git_log~) confined to the checkout. Their findings are merged. Two findings in the same file, within three lines, citing the same rule are one issue, and the comment shows who agreed.
 
 The part I'd keep if I threw everything else away: *the model is never asked to approve.* Every reviewer gets the same prompt and returns a structured review: a summary, findings with severity, file, lines, impact and a fix, questions, assumptions, suggested tests, and what it covered. Radar computes the verdict from those fields. P0s and P1s block. So do defect signals, a structural change, a reviewer that didn't cover every file, and paths or phrases the policy denies. The comment is rendered from the same data, so the verdict can't disagree with what the review says.
 
