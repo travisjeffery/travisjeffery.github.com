@@ -1,0 +1,147 @@
+#+TITLE: Package Firewall: a registry proxy that checks packages before you install them
+#+DATE: 2026-11-03
+#+DRAFT: true
+#+TAGS[]: ai security tools
+#+CATEGORIES[]: tech
+
+Every install trusts strangers. A lockfile pins what you asked for, but not whether the thing you asked for is safe. When a maintainer's account is phished and a bad version is published, or a typosquat sits one keystroke from a real package, or an install script runs on a laptop with cloud credentials, the first line of defense is whatever stands between the package manager and the registry. For most teams that's nothing.
+
+Commercial products fill that gap, and they're good. We wanted their fundamentals in our own infrastructure, and AI made building them a project of weeks instead of quarters. So we built [[https://github.com/travisjeffery/package-firewall][Package Firewall]]. This post covers why, what it does, and how it works.
+
+** The risk
+
+The attacks are boring and they work:
+
+- *Compromised maintainers.* An attacker gets publish access and ships a malicious patch release. Everyone with a caret range pulls it on their next install. In September 2025, phished maintainer credentials put malicious versions of =chalk=, =debug= and more than a dozen other packages on npm, with over two billion weekly downloads between them, and the Shai-Hulud worm spread itself through stolen npm tokens the same month.
+- *Typosquats.* =lodahs= instead of =lodash=. One typo, and the package runs.
+- *Install scripts.* npm lifecycle scripts, Python build backends and Gradle plugins all run code at install or build time, before any test or review sees it.
+- *Known vulnerabilities.* Less dramatic and far more common. A critical CVE in a transitive dependency ships because nobody looked.
+
+All four share a property: the damage happens at download time, on developer machines and CI runners. Finding the problem in a scan afterwards is too late for the machine that already ran it.
+
+** What the products give you
+
+Two products shaped how I thought about this.
+
+[[https://socket.dev][Socket]] analyzes packages for malware and risky behavior, not just CVEs. Its [[https://docs.socket.dev/docs/socket-firewall-overview][Socket Firewall]] is "an HTTP/HTTPS proxy server that sits between package managers and package registries" and checks each request against Socket's data before it reaches the registry. The free version wraps a command (=sfw npm install=), blocks confirmed malware and warns on AI-detected threats, for npm, Yarn, pnpm, pip, uv and cargo. The enterprise version adds a registry mode that package managers point at directly, more ecosystems including Go and Maven, private registries, and policies for CVEs and unscanned packages.
+
+[[https://jfrog.com][JFrog]] comes at it from the repository manager. Artifactory remote repositories proxy and cache public registries. [[https://docs.jfrog.com/security/docs/curation-intro][JFrog Curation]] enforces security and license policies "before they're even used", at the point a package enters a remote repository, with conditions for malicious packages, critical CVEs, licenses and package maturity. Xray handles gating for what's already in local repositories.
+
+Strip away the specifics and both deliver the same fundamentals:
+
+1. *One door.* Package managers fetch from a proxy you control, not from public registries.
+2. *A decision before download.* Each package version is checked against threat data and your policy before bytes reach a machine.
+3. *A cache.* Approved artifacts are served from your own storage: faster, and resilient to the registry being slow or down.
+4. *An explanation.* A developer whose install fails can find out why, and what to do next.
+
+If you need deep malware analysis, license policy across dozens of ecosystems, or a full repository manager, buy one of these. We needed the four fundamentals for four ecosystems, and we wanted them inside infrastructure we already run.
+
+** Building it with AI
+
+A registry proxy used to be a project nobody had time for. Each ecosystem has its own URL layout, metadata format and client quirks, and a cache in front of untrusted bytes has to be careful in ways that take a long time to get right.
+
+What changed is that agents now write most of the code. I describe the behavior and the constraints, review the diffs, and spend my time on the decisions. The [[https://github.com/travisjeffery/package-firewall/commits/main][history]] runs from the first commit in late June to the explain-blocks release in November, almost all of it through pull requests, with unit tests on the decision and cache paths and [[https://github.com/travisjeffery/package-firewall/blob/main/scripts/live-smoke.sh][live smoke tests]] against the real registries.
+
+AI didn't make it correct on the first try. Some of the bugs it shipped and then fixed are in the code comments, and they're the instructive part:
+
+- OSV reports severity as a CVSS vector string, not a number. The first parser read a number off the end of the vector, every severity came out as zero, and the block threshold never fired. The [[https://github.com/travisjeffery/package-firewall/blob/main/internal/intel/severity_test.go][regression test]] now feeds it real vectors.
+- pip and uv ask for gzip. A compressed metadata response can't be rewritten byte for byte, so every wheel was downloaded straight from =files.pythonhosted.org=, around the firewall. Metadata is now always fetched uncompressed.
+- npm packuments can pass 28 MB. A 20 MiB read cap cut them off mid-string and served the stub as a complete response. The rewrite now streams.
+
+Each one was the kind of thing that passes unit tests with tidy fixtures and fails against real traffic. The fix for building with agents isn't to trust them less. It's to make real traffic part of the tests.
+
+** How it works
+
+Package Firewall is a Go service. Package managers point at it as their registry:
+
+#+begin_src bash
+npm config set registry http://localhost:8080/npm/
+pip config set global.index-url http://localhost:8080/pypi/simple
+export GOPROXY=http://localhost:8080/go
+#+end_src
+
+and Maven or Gradle use it as a mirror. It's a registry proxy, not a TLS-intercepting one: nothing sees traffic it wasn't explicitly pointed at, and no machine needs a custom CA.
+
+It supports npm-compatible registries (so npm, pnpm and Yarn), PyPI's Simple API (pip and uv), the Maven repository layout (Maven and Gradle), and the Go module proxy protocol. A =static= ecosystem covers fixed build assets, like Gradle distributions, that have no package coordinate and are pinned by checksum instead.
+
+Every request goes through the same steps.
+
+*** 1. Identify the package
+
+Each route has an ecosystem adapter that turns a URL into a package and version, written as a [[https://github.com/package-url/purl-spec][purl]]: =/npm/shell-quote/-/shell-quote-1.9.0.tgz= becomes =pkg:npm/shell-quote@1.9.0=. Metadata requests (the npm packument, the PyPI index page) don't name a version and pass through to the next step without a vulnerability check. A request for an artifact the adapter can't identify is unknown, and the config decides whether unknown means warn or block.
+
+*** 2. Apply local policy
+
+Policy files are purl globs:
+
+#+begin_src yaml
+deny:
+  - "pkg:npm/lodahs@*"
+warn:
+  - "pkg:pypi/django@5.*"
+allow:
+  - "pkg:golang/golang.org/x/mod@v0.30.0"
+#+end_src
+
+Deny always wins, so a broad allow can't mask an explicit deny. An explicit allow skips the vulnerability check, which is how you take an exception for a package you've reviewed.
+
+*** 3. Check threat data
+
+Anything not decided by policy is looked up in [[https://osv.dev][OSV]], which aggregates the GitHub advisory database, the ecosystems' own advisories, and the OpenSSF malicious-packages feed (published under =MAL-= IDs). Findings at or above a CVSS threshold block; findings below it get the default action, warn in the example config. Results are cached for a few hours, and if OSV is unreachable you choose whether to fail open or closed.
+
+OSV is the weakest of the four fundamentals compared with the products. It knows about published advisories and reported malware; it doesn't analyze package contents. That limit is stated in the README, and it's the trade we made: the data is open, and the firewall is the part we needed to own.
+
+There are two gaps I found while writing this. OSV's =MAL-= records carry no CVSS score, so today a known-malicious package is only blocked if the default vulnerability action is =block=; with the default of =warn= it's served with a warning. And the policy engine has a release cooldown (hold any version published in the last day), but no adapter supplies publish times yet, so it never fires. Both are being fixed. [EDIT: update once the fixes land.]
+
+*** 4. Explain the decision
+
+A block is a =403= with the reason, and the reason is written for the person whose install just failed:
+
+#+begin_src text
+Blocked by Package Firewall: shell-quote@1.9.0 has GHSA-pqg4-j6r4-53mv (CVE-2026-102422),
+severity 9.2 >= threshold 9.0: shell-quote: `quote()` command injection ... Affected: >=1.8.4,
+<1.11.0. Fixed in 1.11.0; upgrade to a fixed version (update the lockfile, or override the
+transitive dependency). Details: https://osv.dev/vulnerability/GHSA-pqg4-j6r4-53mv.
+Request ID: 1234567890123456789. Exceptions: <decision.exceptions_url>
+#+end_src
+
+Each kind of block has its own next step. A vulnerability says which version fixes it. Malware says to remove it and treat the machine as compromised. A deny rule says to pick something else or ask for an exception, and every message links to wherever your team takes exceptions.
+
+The catch is that only npm prints a =403= body. pnpm, Yarn, pip, uv, Maven and Gradle print the status and the URL and nothing else. So the explanation is also in =X-Package-Firewall-*= headers, and there's an =/explain= endpoint that takes the URL from the error, or a purl, and re-runs the same decision without downloading anything:
+
+#+begin_src bash
+curl -fsS --netrc -G https://packages.example.com/explain \
+  --data-urlencode "url=https://packages.example.com/npm/shell-quote/-/shell-quote-1.9.0.tgz" \
+  --data-urlencode format=text
+#+end_src
+
+A CI job can call it for every failed URL in its log. A firewall that blocks without saying why gets routed around; one that names the advisory and the fixed version gets the lockfile updated.
+
+*** 5. Rewrite metadata so nothing goes around it
+
+A proxy only protects you if every download goes through it. Registry metadata names where to download from: an npm packument lists tarball URLs on =registry.npmjs.org=, and a PyPI index page links wheels on =files.pythonhosted.org=. A client that follows those links fetches the artifact directly, skipping the firewall without anyone noticing.
+
+So metadata responses are rewritten to point back at the firewall, as a stream, so a 28 MB packument is never held in memory.
+
+*** 6. Serve from the cache
+
+Approved artifacts are cached on the local filesystem or in S3. The cache is deliberately much narrower than a general HTTP cache:
+
+- The decision runs before every cache lookup, so a package blocked today can't be served from yesterday's cache entry.
+- Only exact artifacts with a concrete name and version are cached, and only clean responses: a =200=, no ranges, no conditional requests, no cookies, nothing marked =private= or =no-store=.
+- A hit is staged to local disk and checked against its recorded length and SHA-256 before a byte goes to the client. A missing, truncated or corrupt entry is just a miss.
+- Public npm artifacts respect the registry's freshness headers, and an expired entry means a new fetch, never a stale fallback.
+
+With several replicas, a DynamoDB lease makes sure a cold artifact is fetched from upstream once, not once per pod, and an upstream that answers =429= cools down every replica at once. That matters the first time a few hundred CI jobs hit an empty cache together. The [[https://github.com/travisjeffery/package-firewall/tree/main/deploy/opentofu/modules][OpenTofu modules]] create the S3 bucket and DynamoDB table with least-privilege IAM policies.
+
+For Gradle there's =pfw prewarm=, which reads the committed lockfiles and verification metadata, downloads every artifact through the firewall checking each SHA-256, then does it again and fails unless every artifact is a cache hit the second time. It's meant to run as one controlled job before a wave of CI traffic: a miss on the second pass means the cache isn't working.
+
+** What it isn't
+
+Package Firewall doesn't analyze package code; it acts on OSV and your policy. It doesn't intercept TLS, so it only sees what's configured to use it. It isn't a repository manager: no hosting your own packages, no Artifactory or Nexus discovery. And it covers four ecosystems, not dozens.
+
+Within those limits it gives us the fundamentals: one door, a decision before download, a verified cache, and an explanation when it says no. At work, [NUMBER: which installs go through it, e.g. CI jobs and developer machines] install through it, and it serves [NUMBER: cache hit rate] of artifacts from cache. [EDIT: keep, replace or cut once numbers are approved.]
+
+Package Firewall is on GitHub at [[https://github.com/travisjeffery/package-firewall][travisjeffery/package-firewall]] under the Apache 2.0 license. The README has a quick start that runs it locally against the public registries.
+
+Next: what running it taught us about caching, from CDN cookies to cold-cache stampedes.
