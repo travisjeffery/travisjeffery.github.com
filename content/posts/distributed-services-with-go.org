@@ -16,15 +16,13 @@ I also wanted to write the book I'd wanted to read: a practical book on distribu
 
 In April 2018, Tyler Treat introduced me to Brian MacDonald, an editor at the Pragmatic Bookshelf. Pragmatic was looking for authors to write a Go book. I told them I didn't want to write a book on learning Go. There are already a lot of those, and The Go Programming Language will always be the standard. Brian agreed. He thought all the learning Go books we need had been written, and he was looking for books on how to solve real problems with Go. That's the kind of writing I love reading and writing most.
 
-Pragmatic accepted my proposal in June 2018, and I signed the contract in July. The working title was /Real-World Go/. By September it was /Distributed Services with Go/, Dawn Schanafelt was my development editor, and the plan had the full draft done in early 2019.
+Pragmatic accepted my proposal in June 2018, and I signed the contract in July. The working title was /Real-World Go/. In August my introduction still had a heading that read "Why Real-World Go? (TK: title TBD)". By late September Pragmatic was calling it /Distributed Services with Go/, and in October I put that title in the book's info file. I don't remember what drove the change. The book's own build files said /Real-World Go/ until the first beta in March 2020, which also added the subtitle, /Your Guide to Reliable, Scalable, and Maintainable Systems/.
 
-[TJ: How did /Real-World Go/ become /Distributed Services with Go/? Anything about the proposal itself worth sharing?]
+By September 2018, Dawn Schanafelt was my development editor, and the plan had the full draft done in early 2019.
 
 PragProg is one of the publishers whose books I like most. Their style is relaxed and practical. I hadn't worked with a publisher or professional editors before, and I was pleasantly surprised. They have an internal wiki full of useful info and an author guide that's 250 pages long, like a style guide. Half of it is on how to structure and prepare to write your book. The other half is on the syntax to format it. I liked the structure it gave me.
 
-I wrote in Markdown, in Emacs, and wrote my own =pragmatic-mode= to help with editing.
-
-[TJ: Your notes say "You can write in either" and stop. Either Markdown or what? Is pragmatic-mode public, and is there anything more to say about it?]
+You can write in either Markdown or Pragmatic's own HTML-like markup, PML. I wrote in Markdown, in Emacs, with =pragmatic-mode=, a mode I wrote for myself to help with editing.
 
 ** Tough Beginning
 
@@ -36,17 +34,15 @@ I went into it with the idea, which I think came from 37signals, that writing a 
 
 The early feedback was tough too. My editor said chapter 4 read more like a lecture than a conversation. Pragmatic sent me /Programming Elm/ as an example of a reader-centric book, one where the author introduces every bit of code with phrases like "add this code."
 
-In January 2019 I got Pragmatic's three-chapter feedback. My writing felt forced, the topics had bare-minimum coverage, and there was little sense of my voice. It read more like a handout from a Go conference tutorial. Dawn told me to make the reader the star of the book and take them on a hero's journey.
+Pragmatic does a three-chapter check early on, where the managing editor reads your first chapters. Mine started on January 16, 2019, and the feedback came back a week later. Susan Conant, the managing editor, said my writing felt forced, the topics had bare-minimum coverage, and there was little sense of my voice. It read more like a handout from a Go conference tutorial. Dawn told me to make the reader the star of the book and take them on a hero's journey. The fix meant turning one chapter into an appendix and writing a new chapter to replace it.
 
 You can see it in the word count. I had about 19,500 words at the end of 2018 and about 19,700 two months later.
 
-[TJ: How did that feedback land at the time, and what did you change?]
-
 ** Turning Point
 
-I rewrote chapter 1, and the tone changed completely. The feedback in February 2019 was: "This feels like Travis. I have a sense of him now and readers will too."
+I had the new chapter 1 written by February 13, and the tone changed completely. The feedback on it was: "This feels like Travis. I have a sense of him now and readers will too." By February 27, Susan and Brian agreed it was much improved, and I started writing new chapters in that more conversational style. My first chapters needed the same overhaul. On May 1, Dawn reset the count of edited chapters from 6 of 13 back to 2.
 
-But the big turning point was about motivation. My editors were helpful with editing, of course, but probably their biggest help was motivation. After those slow first six months, my editor sent me an email that was essentially asking, "are you going to get it going or what?" That email was the turning point.
+But the big turning point was about motivation. My editors were helpful with editing, of course, but probably their biggest help was motivation. My editor sent me an email that was essentially asking, "are you going to get it going or what?" That email was the turning point. Her weekly status notes show she nudged me on May 29, 2019, and again on July 24.
 
 ** Flow state
 
@@ -84,13 +80,36 @@ The book went out for technical review in two halves.
 
 Brian Ketelsen read the first several chapters and didn't have any criticism of the style, scope, or direction.
 
-Clinton Begin reviewed the preface. He caught that I edged on insulting the authors of many open source frameworks and tools, and at one point referred to their code as spaghetti code. He suggested I make the same point by saying their codebases are very large and not focused on learning.
+Clinton Begin reviewed the preface. He caught that I edged on insulting the authors of many open source frameworks and tools, and at one point referred to their code as spaghetti code. He suggested I make the same point by saying their codebases are very large and not focused on learning. I didn't take that one. "Spaghetti code" is in the printed book.
 
-[TJ: Did you take Clinton's change? Any other reviewer feedback that changed the book?]
+A few people gave the book blurbs:
 
-Ben Johnson, the author of BoltDB, gave the book a blurb: "Travis Jeffery distills the traditionally academic topic of distributed systems down to a series of practical steps to get you up and running." Armon Dadgar, co-founder of HashiCorp, gave one too.
+#+begin_quote
+For any aspiring Gopher, Travis provides a gentle introduction to complex topics in distributed systems and provides a hands-on approach to applying the concepts.
+--- Armon Dadgar, HashiCorp Co-Founder
+#+end_quote
 
-[TJ: Add Armon's blurb text? Your inbox has Ben's quote spelled "Jeffrey"; I used "Jeffery", check against the book. Any reader reviews you want to mention?]
+#+begin_quote
+Having built most of the technologies in this book without the benefit of this book, I can wholeheartedly recommend Distributed Services with Go. Travis delivers years of practical experience distilled into a clear and concise guide that takes the reader step by step from foundational knowledge to production deployment. This book earns my most hearty endorsement.
+--- Brian Ketelsen, Principal Developer Advocate, Microsoft and Organizer, GopherCon
+#+end_quote
+
+#+begin_quote
+In this practical, engaging book, Travis Jeffery shines a light on the path to building distributed systems. Read it, learn from it, and get coding!
+--- Jay Kreps, CEO, Confluent, Inc. and Co-Creator of Apache Kafka
+#+end_quote
+
+Ben Johnson, the author of BoltDB, wrote: "Travis Jeffery distills the traditionally academic topic of distributed systems down to a series of practical steps to get you up and running."
+
+Reader reviews are a mix. As I write this, the book has about 4.4 out of 5 from 121 ratings on Amazon and 3.71 from 86 ratings on Goodreads. Some of what people have written:
+
+- "This is an excellent starter book for aspiring distributed systems programmers." (Vinay, Goodreads)
+- "I would definitely recommend this book." (Dalibor Mesarić, [[https://developerschallenges.com/2023/10/02/book-review-%E2%80%94-distributed-services-with-go-by-travis-jeffery/][Developer's Challenges]], 4/5)
+- "The book filled all requirements that I was looking for." ([[https://otavio.dev/2025/06/24/distributed-services-with-go-book-review/][otavio.dev]])
+- "This book took me many reads to fully get best value out of it." (Omar ElKhatib, Goodreads)
+- "It's a decent book but it's a bit poorly organized and contains too many code examples." (Denis, Goodreads)
+- "The chapter on Raft is pretty disappointing." (Dang-Khoa Le Tan, Goodreads)
+- "Not even a single diagram." (Javier, Goodreads)
 
 ** Release
 
