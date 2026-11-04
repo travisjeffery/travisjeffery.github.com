@@ -60,19 +60,17 @@ Feb 2021    54,800
 
 The flat spot in early 2019 is the three-chapter check. The dip in fall 2019 is cuts, while the first half was in technical review.
 
-I wrote mostly at night. About two-thirds of my commits were between 10pm and 6am, and my busiest hour was 5am.
-
 I also wrote about twice what was printed. Across all my edits I added roughly 106,000 words and deleted roughly 57,000, for a book of about 55,000 words.
 
 Writing a book is tough. Really, really tough. People say writing a book is like running a marathon. It isn't. It's running one marathon after another, one for each chapter in your book, plus another marathon for all the other stuff. You go through the grueling process of writing a chapter, send it off to your editor, take a brief moment to celebrate finishing another chapter, and then realize you have many more to go and you'd better begin on the next. The whole time, you have only yourself, with some help from your editor, to provide the motivation and discipline to keep going.
-
-In October 2019, Dawn left for maternity leave, and Katie Dvorak became my editor for the rest of the book.
 
 There are pretty much no places I compromised. I could tinker on minor things forever, arguing with myself over the upsides and downsides of each possible change. But after two years, if I wasn't happy with something in the book, I changed it until I was happy or threw it in the trash.
 
 A lot went in the trash. I cut a whole chapter on writing a protobuf plugin. The testing chapters became testing sections in the other chapters. Chapters on Kubernetes operators, performance, and the CLI never got past an outline. The plan went from 8 chapters, up to 15, and down to the 11 the book shipped with.
 
-[TJ: What did a writing day look like, and did anything help you keep the pace? How was the change of editors mid-book?]
+My writing days were mostly writing nights. I had a full-time job, so the book got the hours around it. About two-thirds of my commits were between 10pm and 6am, and my busiest hour was 5am. Monday was my busiest day and Saturday my quietest. About a fifth of my commits landed on weekends.
+
+Halfway through, I changed editors. In October 2019 Dawn told me she was going on maternity leave, and in November Katie Dvorak took over for the rest of the book. Dawn got me through the rewrite and the first half. Katie got me through the second half, the betas, and production.
 
 ** Reviews
 
@@ -123,11 +121,11 @@ Beta 4   September 23, 2020   224 pages
 Print    March 2021           245 pages
 #+end_src
 
-The final production work ran into 2021: indexing in January, then layout review in March. The book went to the printer in March 2021 and was published at the end of the month. My own physical copies arrived in July, after a shipping delay.
+The final production work ran into 2021: indexing in January, then layout review in March. The book went to the printer in March 2021 and was published at the end of the month.
 
 The relationship with a publisher can be frustrating. You put everything into your book, so when they let you down on something small, like updating a marketing page, it's quite frustrating.
 
-[TJ: What was release day like? Anything you did to launch or market it?]
+Release day wasn't the big day for me. The big day was when I held a copy in my hands. My copies showed up in July 2021, months after the book came out, because of a shipping delay. After all that writing, it was finally a real book.
 
 ** Is it worth it?
 
