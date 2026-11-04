@@ -5,11 +5,9 @@
 #+CATEGORIES[]: tech
 #+ALIASES[]: /posts/tidewaiter/
 
-I built [[https://github.com/travisjeffery/tidewaiter][Tidewaiter]], a package firewall. Package managers point at it instead of the public registry. It checks each package version against local policy and OSV before download, caches approved artifacts, and says why when it blocks one. At [[https://oscilar.com][Oscilar]] it was called Package Firewall; a tidewaiter was the customs officer who inspected cargo before it landed.
+I built [[https://github.com/travisjeffery/tidewaiter][Tidewaiter]], a package firewall. Package managers point at it instead of the public registry. It checks each package version against local policy and OSV before download, caches approved artifacts, and says why when it blocks one.
 
 A lockfile pins a version. It does not say if that version is safe. A phished maintainer can publish a bad version, a typosquat sits one keystroke from a real package, and an install script runs on a laptop with cloud credentials. Most teams have nothing between the package manager and the registry.
-
-Commercial products do this well. Oscilar wanted the same basic checks in its own infrastructure. AI let me build them in weeks instead of quarters.
 
 ** The risk
 
@@ -22,7 +20,7 @@ The attacks are boring and they work:
 
 All four hit at download time, on developer machines and CI runners. A later scan is too late for a machine that already ran the code.
 
-** What the products give you
+** Commercial options
 
 [[https://socket.dev][Socket]] analyzes packages for malware and risky behavior as well as CVEs. Its [[https://docs.socket.dev/docs/socket-firewall-overview][Socket Firewall]] is "an HTTP/HTTPS proxy server that sits between package managers and package registries" and checks each request against Socket's data before it reaches the registry. It blocks confirmed malware, and the enterprise version adds a registry mode that package managers point at directly.
 
@@ -34,8 +32,6 @@ Both do four things:
 2. *A decision before download.* The proxy checks each package version against threat data and your policy before bytes reach a machine.
 3. *A cache.* The proxy serves approved artifacts from your own storage: faster, and still up when the registry is slow or down.
 4. *An explanation.* A developer whose install fails can find out why, and what to do next.
-
-If you need deep malware analysis, license policy across dozens of ecosystems, or a full repository manager, buy one of these. Oscilar needed those four things for four ecosystems, inside infrastructure it already runs.
 
 ** Building it with AI
 
@@ -90,9 +86,7 @@ Deny always wins, so a broad allow can't mask an explicit deny. An allow rule na
 
 Tidewaiter looks up anything policy didn't decide in [[https://osv.dev][OSV]], which aggregates the GitHub advisory database, the ecosystems' own advisories, and the OpenSSF malicious-packages feed (published under =MAL-= IDs). Findings at or above a CVSS threshold block; findings below it get the default action, warn in the example config. Tidewaiter caches results for a few hours, and if OSV is unreachable you choose whether to fail open or closed.
 
-OSV is weaker than the products' data. It knows published advisories and reported malware. It does not look inside packages. I took that limit because the data is open, and Oscilar needed to own the firewall.
-
-Writing this post turned up two more gaps. OSV's =MAL-= records, and GitHub advisories tagged CWE-506 (embedded malicious code), usually carry no CVSS score. A known-malicious package scored zero and fell through to the default action, so with =warn= Tidewaiter served it with a warning. And the optional release cooldown, which holds any version published less than =min_age= ago, never fired, because nothing looked up when a version was published. I fixed both. Malware now always blocks, whatever the threshold, the default action or a matching =warn= rule says, and a malicious result outlives the OSV cache so an OSV outage can't serve a package already seen to be malicious. In production, =flatmap-stream@0.1.1= (the payload behind the 2018 =event-stream= compromise) and =coa@2.0.3= (hijacked in 2021) now get a =403=. The cooldown looks up publish times from each registry: the npm packument, PyPI's upload time for the requested file, the Go proxy's =.info=, and Maven's =Last-Modified=.
+OSV's =MAL-= records, and GitHub advisories tagged CWE-506 (embedded malicious code), usually carry no CVSS score. Malware always blocks, whatever the threshold, the default action or a matching =warn= rule says, and a malicious result outlives the OSV cache so an OSV outage can't serve a package already seen to be malicious. In production, =flatmap-stream@0.1.1= (the payload behind the 2018 =event-stream= compromise) and =coa@2.0.3= (hijacked in 2021) get a =403=. The cooldown looks up publish times from each registry: the npm packument, PyPI's upload time for the requested file, the Go proxy's =.info=, and Maven's =Last-Modified=.
 
 *** 4. Explain the decision
 
