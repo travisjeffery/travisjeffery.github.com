@@ -123,6 +123,6 @@ Tidewaiter acts on OSV and your policy. It does not look at package code or inte
 
 At Oscilar it sits in front of CI in about twenty repositories. In the 30 days to November 3 it answered about 119 million requests and blocked 1,162 downloads of 27 distinct package versions. Of the 35 million artifact downloads eligible for the cache, 89.6% were served from it: 99.5% or better for npm, PyPI and Go, and 84.5% for Maven Central.
 
-Tidewaiter is on GitHub at [[https://github.com/travisjeffery/tidewaiter][travisjeffery/tidewaiter]] under the Apache 2.0 license. The README has a quick start that runs it locally against the public registries.
+Tidewaiter is on GitHub at [[https://github.com/travisjeffery/tidewaiter][travisjeffery/tidewaiter]] under the MIT license. The README has a quick start that runs it locally against the public registries.
 
 Next: what running it taught me about caching, from CDN cookies to cold-cache stampedes.
