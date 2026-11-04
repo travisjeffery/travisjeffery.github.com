@@ -1,4 +1,4 @@
-#+TITLE: Package Firewall: a registry proxy that checks packages before you install them
+#+TITLE: Tidewaiter: a registry proxy that checks packages before you install them
 #+DATE: 2026-11-03
 #+DRAFT: true
 #+TAGS[]: ai security tools
@@ -6,7 +6,7 @@
 
 Every install trusts strangers. A lockfile pins what you asked for, but not whether the thing you asked for is safe. When a maintainer's account is phished and a bad version is published, or a typosquat sits one keystroke from a real package, or an install script runs on a laptop with cloud credentials, the first line of defense is whatever stands between the package manager and the registry. For most teams that's nothing.
 
-Commercial products fill that gap, and they're good. At [[https://oscilar.com][Oscilar]] we wanted their fundamentals in our own infrastructure, and AI made building them a project of weeks instead of quarters. So we built [[https://github.com/travisjeffery/package-firewall][Package Firewall]]. This post covers why, what it does, and how it works.
+Commercial products fill that gap, and they're good. At [[https://oscilar.com][Oscilar]] we wanted their fundamentals in our own infrastructure, and AI made building them a project of weeks instead of quarters. So we built [[https://github.com/travisjeffery/tidewaiter][Tidewaiter]], a package firewall. Internally it was called Package Firewall; a tidewaiter was the customs officer who boarded ships to inspect cargo before it landed. This post covers why, what it does, and how it works.
 
 ** The risk
 
@@ -40,11 +40,11 @@ If you need deep malware analysis, license policy across dozens of ecosystems, o
 
 A registry proxy used to be a project nobody had time for. Each ecosystem has its own URL layout, metadata format and client quirks, and a cache in front of untrusted bytes has to be careful in ways that take a long time to get right.
 
-What changed is that agents now write most of the code. I describe the behavior and the constraints, review the diffs, and spend my time on the decisions. The [[https://github.com/travisjeffery/package-firewall/commits/main][history]] runs from the first commit in late June to the explain-blocks release in November, almost all of it through pull requests, with unit tests on the decision and cache paths and [[https://github.com/travisjeffery/package-firewall/blob/main/scripts/live-smoke.sh][live smoke tests]] against the real registries.
+What changed is that agents now write most of the code. I describe the behavior and the constraints, review the diffs, and spend my time on the decisions. The [[https://github.com/travisjeffery/tidewaiter/commits/main][history]] runs from the first commit in late June to the explain-blocks release in November, almost all of it through pull requests, with unit tests on the decision and cache paths and [[https://github.com/travisjeffery/tidewaiter/blob/main/scripts/live-smoke.sh][live smoke tests]] against the real registries.
 
 AI didn't make it correct on the first try. Some of the bugs it shipped and then fixed are in the code comments, and they're the instructive part:
 
-- OSV reports severity as a CVSS vector string, not a number. The first parser read a number off the end of the vector, every severity came out as zero, and the block threshold never fired. The [[https://github.com/travisjeffery/package-firewall/blob/main/internal/intel/severity_test.go][regression test]] now feeds it real vectors.
+- OSV reports severity as a CVSS vector string, not a number. The first parser read a number off the end of the vector, every severity came out as zero, and the block threshold never fired. The [[https://github.com/travisjeffery/tidewaiter/blob/main/internal/intel/severity_test.go][regression test]] now feeds it real vectors.
 - pip and uv ask for gzip. A compressed metadata response can't be rewritten byte for byte, so every wheel was downloaded straight from =files.pythonhosted.org=, around the firewall. Metadata is now always fetched uncompressed.
 - npm packuments can pass 28 MB. A 20 MiB read cap cut them off mid-string and served the stub as a complete response. The rewrite now streams.
 
@@ -52,7 +52,7 @@ Each one was the kind of thing that passes unit tests with tidy fixtures and fai
 
 ** How it works
 
-Package Firewall is a Go service. Package managers point at it as their registry:
+Tidewaiter is a Go service. Package managers point at it as their registry:
 
 #+begin_src bash
 npm config set registry http://localhost:8080/npm/
@@ -83,7 +83,7 @@ allow:
   - "pkg:golang/golang.org/x/mod@v0.30.0"
 #+end_src
 
-Deny always wins, so a broad allow can't mask an explicit deny. An explicit allow skips the vulnerability check, which is how you take an exception for a package you've reviewed.
+Deny always wins, so a broad allow can't mask an explicit deny. An allow rule naming an exact version skips the threat check, which is how you take an exception for a package you've reviewed. Warn rules and wildcard allows still block malware, since a wildcard would also exempt the next, possibly compromised, release.
 
 *** 3. Check threat data
 
@@ -91,14 +91,14 @@ Anything not decided by policy is looked up in [[https://osv.dev][OSV]], which a
 
 OSV is the weakest of the four fundamentals compared with the products. It knows about published advisories and reported malware; it doesn't analyze package contents. That limit is stated in the README, and it's the trade we made: the data is open, and the firewall is the part we needed to own.
 
-There are two gaps I found while writing this. OSV's =MAL-= records carry no CVSS score, so today a known-malicious package is only blocked if the default vulnerability action is =block=; with the default of =warn= it's served with a warning. And the policy engine has a release cooldown (hold any version published in the last day), but no adapter supplies publish times yet, so it never fires. Both are being fixed. [HOLD: don't publish this paragraph as is; rewrite it to describe the fix once it lands in this repo.]
+Writing this post turned up two more gaps. OSV's =MAL-= records, and GitHub advisories tagged CWE-506 (embedded malicious code), usually carry no CVSS score. A known-malicious package scored zero and fell through to the default action, so with =warn= it was served with a warning. And the optional release cooldown, which holds any version published less than =min_age= ago, never fired, because nothing looked up when a version was published. Both are fixed. Malware now always blocks, whatever the threshold, the default action or a matching =warn= rule says, and a malicious result outlives the OSV cache so an OSV outage can't serve a package already seen to be malicious. In production, =flatmap-stream@0.1.1= (the payload behind the 2018 =event-stream= compromise) and =coa@2.0.3= (hijacked in 2021) now get a =403=. The cooldown looks up publish times from each registry: the npm packument, PyPI's upload time for the requested file, the Go proxy's =.info=, and Maven's =Last-Modified=.
 
 *** 4. Explain the decision
 
 A block is a =403= with the reason, and the reason is written for the person whose install just failed:
 
 #+begin_src text
-Blocked by Package Firewall: shell-quote@1.9.0 has GHSA-pqg4-j6r4-53mv (CVE-2026-102422),
+Blocked by Tidewaiter: shell-quote@1.9.0 has GHSA-pqg4-j6r4-53mv (CVE-2026-102422),
 severity 9.2 >= threshold 9.0: shell-quote: `quote()` command injection ... Affected: >=1.8.4,
 <1.11.0. Fixed in 1.11.0; upgrade to a fixed version (update the lockfile, or override the
 transitive dependency). Details: https://osv.dev/vulnerability/GHSA-pqg4-j6r4-53mv.
@@ -132,16 +132,16 @@ Approved artifacts are cached on the local filesystem or in S3. The cache is del
 - A hit is staged to local disk and checked against its recorded length and SHA-256 before a byte goes to the client. A missing, truncated or corrupt entry is just a miss.
 - Public npm artifacts respect the registry's freshness headers, and an expired entry means a new fetch, never a stale fallback.
 
-With several replicas, a DynamoDB lease makes sure a cold artifact is fetched from upstream once, not once per pod, and an upstream that answers =429= cools down every replica at once. That matters the first time a few hundred CI jobs hit an empty cache together. The [[https://github.com/travisjeffery/package-firewall/tree/main/deploy/opentofu/modules][OpenTofu modules]] create the S3 bucket and DynamoDB table with least-privilege IAM policies.
+With several replicas, a DynamoDB lease makes sure a cold artifact is fetched from upstream once, not once per pod, and an upstream that answers =429= cools down every replica at once. That matters the first time a few hundred CI jobs hit an empty cache together. The [[https://github.com/travisjeffery/tidewaiter/tree/main/deploy/opentofu/modules][OpenTofu modules]] create the S3 bucket and DynamoDB table with least-privilege IAM policies.
 
-For Gradle there's =pfw prewarm=, which reads the committed lockfiles and verification metadata, downloads every artifact through the firewall checking each SHA-256, then does it again and fails unless every artifact is a cache hit the second time. It's meant to run as one controlled job before a wave of CI traffic: a miss on the second pass means the cache isn't working.
+For Gradle there's =tidewaiter prewarm=, which reads the committed lockfiles and verification metadata, downloads every artifact through the firewall checking each SHA-256, then does it again and fails unless every artifact is a cache hit the second time. It's meant to run as one controlled job before a wave of CI traffic: a miss on the second pass means the cache isn't working.
 
 ** What it isn't
 
-Package Firewall doesn't analyze package code; it acts on OSV and your policy. It doesn't intercept TLS, so it only sees what's configured to use it. It isn't a repository manager: no hosting your own packages, no Artifactory or Nexus discovery. And it covers four ecosystems, not dozens.
+Tidewaiter doesn't analyze package code; it acts on OSV and your policy. It doesn't intercept TLS, so it only sees what's configured to use it. It isn't a repository manager: no hosting your own packages, no Artifactory or Nexus discovery. And it covers four ecosystems, not dozens.
 
 Within those limits it gives us the fundamentals: one door, a decision before download, a verified cache, and an explanation when it says no. At Oscilar it sits in front of CI in about twenty repositories. In the 30 days to November 3 it answered about 119 million requests and blocked 1,162 downloads of 27 distinct package versions. Of the 35 million artifact downloads eligible for the cache, 89.6% were served from it: 99.5% or better for npm, PyPI and Go, and 84.5% for Maven Central.
 
-Package Firewall is on GitHub at [[https://github.com/travisjeffery/package-firewall][travisjeffery/package-firewall]] under the Apache 2.0 license. The README has a quick start that runs it locally against the public registries.
+Tidewaiter is on GitHub at [[https://github.com/travisjeffery/tidewaiter][travisjeffery/tidewaiter]] under the Apache 2.0 license. The README has a quick start that runs it locally against the public registries.
 
 Next: what running it taught us about caching, from CDN cookies to cold-cache stampedes.
