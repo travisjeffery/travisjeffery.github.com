@@ -33,20 +33,6 @@ Both do four things:
 3. *A cache.* The proxy serves approved artifacts from your own storage: faster, and still up when the registry is slow or down.
 4. *An explanation.* A developer whose install fails can find out why, and what to do next.
 
-** Building it with AI
-
-Each ecosystem has its own URL layout, metadata format and client quirks. A cache for untrusted bytes takes care to get right.
-
-Agents now write most of the code. I set the behavior and constraints, review the diffs, and make the decisions. The [[https://github.com/travisjeffery/tidewaiter/commits/main][history]] runs from the first commit in late June to the explain-blocks release in November, almost all of it through pull requests, with unit tests on the decision and cache paths and [[https://github.com/travisjeffery/tidewaiter/blob/main/scripts/live-smoke.sh][live smoke tests]] against the real registries.
-
-AI got it wrong at first. Some bugs it shipped and then fixed:
-
-- OSV reports severity as a CVSS vector string, not a number. The first parser read a number off the end of the vector, every severity came out as zero, and the block threshold never fired. The [[https://github.com/travisjeffery/tidewaiter/blob/main/internal/intel/severity_test.go][regression test]] now feeds it real vectors.
-- pip and uv ask for gzip. A compressed metadata response can't be rewritten byte for byte, so pip and uv downloaded every wheel straight from =files.pythonhosted.org=, around the firewall. I changed it to always fetch metadata uncompressed.
-- npm packuments can pass 28 MB. A 20 MiB read cap cut them off mid-string and served the stub as a complete response. I made the rewrite stream.
-
-Each bug passed unit tests with tidy fixtures and failed on real traffic. So I made real traffic part of the tests.
-
 ** How it works
 
 Tidewaiter is a Go service. Package managers point at it as their registry:
