@@ -1,4 +1,4 @@
-#+TITLE: Radar: we automated PR review because AI made us write more code
+#+TITLE: Radar: I automated PR review because AI made Oscilar write more code
 #+DATE: 2026-11-03
 #+DRAFT: true
 #+TAGS[]: ai tools oscilar
@@ -12,11 +12,11 @@ The growth isn't spread evenly across people. I'm the extreme case: in the first
 
 That's what broke review. One engineer with agents can open more PRs in a day than a reviewer can read carefully. Reviews got slower, then shallower. A reviewer with ten open PRs skims.
 
-We're not unusual. In May, Meta published [[https://arxiv.org/abs/2605.30208][a paper on RADAR]], the system they built to auto-review low-risk changes. Their numbers: lines of code per human-landed diff up 106% year over year, diffs per developer up 51%, and agentic AI behind over 80% of that growth. Same problem, at a much bigger scale.
+Oscilar isn't unusual. In May, Meta published [[https://arxiv.org/abs/2605.30208][a paper on RADAR]], the system they built to auto-review low-risk changes. Their numbers: lines of code per human-landed diff up 106% year over year, diffs per developer up 51%, and agentic AI behind over 80% of that growth. Same problem, at a much bigger scale.
 
 So I built Radar. It started as a Go implementation of that paper. It's grown into the AI reviewer on every pull request at Oscilar, and it's on GitHub at [[https://github.com/travisjeffery/radar][travisjeffery/radar]].
 
-This is the first post in a series. This one covers why, how it works, and what it does. The next one covers how we cut what it costs to run.
+This is the first post in a series. This one covers why, how it works, and what it does. The next one covers how I cut what it costs to run.
 
 ** What the paper does
 
@@ -34,7 +34,7 @@ My first version was that funnel: the gates, the decisions and the metrics, with
 
 ** What changed when it met real PRs
 
-Pointed at our pull requests, a few things became clear.
+Pointed at Oscilar's pull requests, a few things became clear.
 
 The risk score didn't hold up. Without Meta's model, my stand-in score is mostly size, and gating on size just means big changes always go to a person, whatever they contain. Now approval rests on what the reviewers find, not on how big the change is.
 
@@ -79,10 +79,10 @@ Most of these exist because something went wrong without them.
 
 ** Why build it
 
-What I needed was a reviewer that keeps up with how fast we write code now, that people actually read, and that never approves something because a model said "looks good."
+What I needed was a reviewer that keeps up with how fast the team writes code now, that people actually read, and that never approves something because a model said "looks good."
 
-AI made each of us faster at writing code. Reviewing it has to get faster too, or the speed just piles up in the review queue. Radar takes the first pass on every change so people spend their review time where it matters.
+AI made each engineer at Oscilar faster at writing code. Reviewing it has to get faster too, or the speed just piles up in the review queue. Radar takes the first pass on every change so people spend their review time where it matters.
 
 Radar is on GitHub at [[https://github.com/travisjeffery/radar][travisjeffery/radar]]. [[https://github.com/travisjeffery/radar/blob/main/examples/github-actions/radar-review.yml][The example workflow]] and [[https://github.com/travisjeffery/radar/blob/main/examples/github-policy.json][policy]] start you in shadow mode.
 
-Next: how we optimised what it costs.
+Next: how I optimised what it costs.
