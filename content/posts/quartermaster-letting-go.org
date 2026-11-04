@@ -96,14 +96,6 @@ I don't route autonomous work to Muse to avoid Claude Code's classifier. That wo
 
 Different models are also good at checking each other. Every PR a worker opens at Oscilar goes through [[https://github.com/travisjeffery/radar][Radar]], the reviewer I built, which sends each review to both Claude and Codex and shows where they agreed.
 
-** More machines, almost
-
-A dozen workers on one desktop is a lot of builds. I designed worker hosts: other machines each running a headless Herdr in a container, with the desktop keeping the coordinator, the ticker and the one bead database. Remote workers reach the database through an SSH key that can only run a short list of ~bd~ subcommands, so there's never a second copy to keep in sync.
-
-I shipped some of that: the host registry, dispatching to a host, and the database proxy. Then I changed my mind about the machines. A box under my desk is one more thing to maintain, and the agent vendors now run sessions in their own clouds. My current design, still open, swaps the LAN hosts for cloud workers. The desktop keeps the control plane and anything that needs my credentials, a VPN or a browser. The workers go wherever's cheapest to run them.
-
-Designing it, I found that remote agents differ most in how far they can be supervised. Some cloud agents give you no status and no transcript. Some can only produce a diff, so the desktop has to push it and open the PR. The one that exposes its state, its transcript and its approvals over a protocol is the one quartermaster can actually manage.
-
 ** What parallel work breaks
 
 - *Shared resources don't know about your threads.* Two workers each dispatched a production deploy for their own change. The deploy workflow shares one concurrency group and keeps only one pending job, so the dispatches cancelled each other. I added a rule: one worker dispatches, the others wait. That lesson lives in beads' memory now, so every agent that starts sees it.
