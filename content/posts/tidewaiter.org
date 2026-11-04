@@ -1,8 +1,9 @@
 #+TITLE: Tidewaiter: a registry proxy that checks packages before you install them
 #+DATE: 2026-11-03
-#+DRAFT: true
+#+DRAFT: false
 #+TAGS[]: ai security tools
 #+CATEGORIES[]: tech
+#+ALIASES[]: /posts/tidewaiter/
 
 I built [[https://github.com/travisjeffery/tidewaiter][Tidewaiter]], a package firewall. Package managers point at it instead of the public registry. It checks each package version against local policy and OSV before download, caches approved artifacts, and says why when it blocks one. At [[https://oscilar.com][Oscilar]] it was called Package Firewall; a tidewaiter was the customs officer who inspected cargo before it landed.
 
