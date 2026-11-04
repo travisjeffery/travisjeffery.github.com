@@ -86,11 +86,9 @@ The relationship with a publisher can be frustrating. You put everything into yo
 
 ** Is it worth it?
 
-Here's what I've made:
+Here's what I've made in royalties. As far as I recall, I didn't get an advance.
 
 #+begin_src
-2018-07-26      $0.01
-2020-03-25      $0.01
 2020-06-01      $8,447.40
 2020-09-01      $2,292.93
 2020-12-01      $4,518.47
@@ -114,10 +112,8 @@ Here's what I've made:
 2025-06-13      $902.18
 2025-09-15      $674.92
 2025-12-11      $815.27
-Total $80,721.44
+Total $80,721.43
 #+end_src
-
-[TJ: Are these royalty payments, and do they include an advance? What are the two $0.01 entries (bank account verification?). The rows add up to $80,721.45, a cent more than the total.]
 
 Writing a book is probably the least efficient way to make money. Most of this timeline is from before AI took off, and from what I understand AI has crashed technical book sales. If you were just in it for the money, you'd never finish, so you're setting yourself up for failure if you write a book for the money.
 
@@ -131,6 +127,4 @@ Was the publisher worth it? Self-publishing is a viable option today. You could 
 
 I have a decent following, so I think my sales would have been similar if I'd self-published. But my book is better for having worked with a publisher and editors. There's a good chance I would've never finished it at all.
 
-Would I write another book? I'd write another edition of this one when it made sense. I won't write a whole new book for a while, but I think I will eventually. I think I'll write a fiction book some day as well.
-
-[TJ: Your notes said you'd do a second edition "when the Go team pushes generics", which happened in 2022, and Pragmatic discussed a second edition in September 2025. Where does that stand? Your notes also said "at least 3 years" before a new book; is that still how you'd put it?]
+Would I write another book? I'd write another edition of this one when it made sense. I haven't started one. I won't write a whole new book for a while, but I think I will eventually. I think I'll write a fiction book some day as well.
