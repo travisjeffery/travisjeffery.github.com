@@ -35,7 +35,7 @@ Both do four things:
 
 ** How it works
 
-Tidewaiter is a Go service. Package managers point at it as their registry:
+Package managers point to Tidewaiter, a Go HTTP service, as their registry:
 
 #+begin_src bash
 npm config set registry http://localhost:8080/npm/
