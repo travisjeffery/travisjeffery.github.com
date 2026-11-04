@@ -16,7 +16,7 @@ I also wanted to write the book I'd wanted to read: a practical book on distribu
 
 In April 2018, Tyler Treat introduced me to Brian MacDonald, an editor at the Pragmatic Bookshelf. Pragmatic was looking for authors to write a Go book. I told them I didn't want to write a book on learning Go. There are already a lot of those, and The Go Programming Language will always be the standard. Brian agreed. He thought all the learning Go books we need had been written, and he was looking for books on how to solve real problems with Go. That's the kind of writing I love reading and writing most.
 
-Pragmatic accepted my proposal in June 2018, and I signed the contract in July. The working title was /Real-World Go/. In August my introduction still had a heading that read "Why Real-World Go? (TK: title TBD)". By late September Pragmatic was calling it /Distributed Services with Go/, and in October I put that title in the book's info file, though the managing editor's review in January 2019 still called it /Real-World Go/. That month I told my editor I thought /Distributed Services with Go/ made more sense. Part of our trouble was mixed expectations: people expected a book about Go the language, and I'd planned with Brian to write a book about building something with Go. The book's own build files said /Real-World Go/ until the first beta in March 2020, which also added the subtitle, /Your Guide to Reliable, Scalable, and Maintainable Systems/.
+Pragmatic accepted my proposal in June 2018, and I signed the contract in July. The working title was /Real-World Go/. In August my introduction still had a heading that read "Why Real-World Go? (TK: title TBD)". By late September Pragmatic was calling it /Distributed Services with Go/, and in October I put that title in the book's info file, though the managing editor's review in January 2019 still called it /Real-World Go/. That month I told my editor I thought /Distributed Services with Go/ made more sense. Part of our trouble was mixed expectations: people expected a book about Go the language, and I'd planned with Brian to write a book about building something with Go. In October 2019 we went over titles again. For a while it was going to be /Building Distributed Services with Go/, but I dropped "Building" because it was extraneous and didn't fit Pragmatic's title style. The book's own build files said /Real-World Go/ until the first beta in March 2020, which also added the subtitle, /Your Guide to Reliable, Scalable, and Maintainable Systems/.
 
 My first development editor was Jackie Carter. In September 2018, Susan Conant, the managing editor, moved me to Dawn Schanafelt, and the plan had the full draft done in early 2019.
 
@@ -36,15 +36,21 @@ I went into it with the idea, which I think came from 37signals, that writing a 
 
 The big turning point was about motivation. My editors were helpful with editing, of course, but probably their biggest help was motivation. In October 2018, my editor sent me an email that was essentially asking, "are you going to get it going or what?" That email was the turning point. Two weeks later I had a call with Susan, and I committed to sending Dawn a chapter a week. I had about 5,300 words in August 2018 and about 19,500 by the end of the year.
 
-Getting going didn't mean the writing was good yet. In November 2018, Dawn said the book read more like a lecture than a conversation, and that I should make the reader the star of the book and take them on a hero's journey. Brian had sent me /Programming Elm/ as an example of a reader-centric book, one where the author introduces every bit of code with phrases like "add this code."
+Getting going didn't mean the writing was good yet. That took a second turn, a few months later.
 
-Pragmatic does a three-chapter check early on, where the managing editor reads your first chapters. Mine started on January 16, 2019, and the feedback came back on January 21. Susan said my writing felt forced, the topics had bare-minimum coverage, and there was little sense of my voice. It read more like a handout from a Go conference tutorial. The fix meant turning one chapter into an appendix and writing a new chapter to replace it. You can see it in the word count: about 19,500 words at the end of 2018 and about 19,700 two months later.
+In November 2018, Dawn said the book read more like a lecture than a conversation, and that I should make the reader the star of the book and take them on a hero's journey. Brian had sent me /Programming Elm/ as an example of a reader-centric book, one where the author introduces every bit of code with phrases like "add this code."
+
+Pragmatic does a three-chapter check early on, where the managing editor reads your first chapters. Mine started on January 16, 2019, and the feedback came back on January 21. Susan said my writing felt forced, the topics had bare-minimum coverage, and there was little sense of my voice. It read more like a handout from a Go conference tutorial. You can see it in the word count: about 19,500 words at the end of 2018 and about 19,700 two months later.
+
+The biggest problem was my first chapter. It explained how to lay out a Go project, and the reader didn't write any code. I moved the layout chapter to the back of the book as an appendix, and it later fell out of the book entirely. In its place I wrote a new first chapter where you build a working HTTP service for the log from the first pages. Instead of getting ready to build something, the reader was building it.
 
 I sent Dawn the new chapter 1 on February 7, and the tone changed completely. On February 21, Susan and Brian agreed it was much improved. Susan's note on it was: "This feels like Travis. I have a sense of him now and readers will too." I started writing new chapters in that more conversational style. My first chapters needed the same overhaul. On May 1, Dawn reset the count of edited chapters from 6 of 13 back to 2.
 
+The payoff came in October 2019, when Susan did the publication review of the first half. The same editor who'd had serious concerns in January now called it a solid book, with good, conversational teaching, ready to be announced and go to beta. Her one concern was whether I could write the rest faster. I'd been expecting another tough review.
+
 ** Flow state
 
-I really picked up the pace after that, and my pace kept improving each year until the end. Here's the book's approximate word count over time, from the repository's history:
+I picked up the pace after that, but it wasn't steady. In spring 2020, right after the first beta, I stalled again: readers sent in a wave of errata that I spent weeks fixing, and the Kubernetes chapter got so big I split it in two. Here's the book's approximate word count over time, from the repository's history:
 
 #+begin_src
 Aug 2018     5,300
@@ -56,29 +62,31 @@ Feb 2020    43,700
 Feb 2021    54,800
 #+end_src
 
-The flat spot in early 2019 is the three-chapter check. The dip in fall 2019 is cuts, while the first half was in technical review.
+The flat spot in early 2019 is the three-chapter check. The dip in fall 2019 is cuts, plus moving code out of the text into separate source files, while the first half was in technical review.
 
-I also wrote about twice what was printed. Across all my edits I added roughly 106,000 words and deleted roughly 57,000, for a book of about 55,000 words.
+I also wrote about twice as much as ended up in the book, counting everything I added and deleted along the way.
 
 Writing a book is tough. Really, really tough. People say writing a book is like running a marathon. It isn't. It's running one marathon after another, one for each chapter in your book, plus another marathon for all the other stuff. You go through the grueling process of writing a chapter, send it off to your editor, take a brief moment to celebrate finishing another chapter, and then realize you have many more to go and you'd better begin on the next. The whole time, you have only yourself, with some help from your editor, to provide the motivation and discipline to keep going.
 
 There are pretty much no places I compromised. I could tinker on minor things forever, arguing with myself over the upsides and downsides of each possible change. But after two years, if I wasn't happy with something in the book, I changed it until I was happy or threw it in the trash.
 
-A lot went in the trash. I cut a whole chapter on writing a protobuf plugin. The testing chapters became testing sections in the other chapters. Chapters on Kubernetes operators, performance, and the CLI never got past an outline. The plan went from 8 chapters, up to 15, and down to the 11 the book shipped with.
+A lot went in the trash, mostly on purpose. I cut the chapter on Kubernetes operators because the operator frameworks were a mess and I couldn't say what the best way to build one was. I dropped the testing chapters because I'd written tests throughout the book, so they would have mostly repeated earlier material. I dropped a performance chapter because it was generic Go, and that's covered well elsewhere. The protobuf plugin chapter became an appendix, and then I cut it: my reviewers had never needed to write a plugin, and Go's new protobuf library was about to make it look dated. A CLI chapter never got past an outline. Instead I added a chapter on observability (metrics, logs, and traces) because it matters for people building services and hadn't been covered much. It was the last chapter I wrote, though it's chapter 6 in the book. The plan went from 8 chapters, up to 15, and down to the 11 the book shipped with. You begin with nothing and end by deploying the finished service to the internet, and that's the whole story.
 
 My writing days were mostly writing nights. I had a full-time job, so the book got the hours around it. About two-thirds of my commits were between 10pm and 6am, and my busiest hour was 5am. Monday was my busiest day and Saturday my quietest. About a fifth of my commits landed on weekends. When I went quiet, Dawn checked in, like on May 29 and July 24, 2019.
 
-Halfway through, I changed editors. In July 2019 Dawn told me she was pregnant, and in September she said she'd hand the book to another editor once we hit the halfway mark. In November 2019, Katie Dvorak took over for the rest of the book. Dawn got me through the rewrite and the first half. Katie got me through the second half, the betas, and production.
+Halfway through, I changed editors. In September 2019, Dawn planned to hand the book to another editor once we hit the halfway mark, and in November Katie Dvorak took over for the rest of the book. Dawn got me through the rewrite and the first half. Katie got me through the second half, the betas, and production.
 
 ** Reviews
 
 The book went out for technical review in two halves.
 
+Tyler Treat and Ben Johnson reviewed the first half in October 2019, and they changed the book. Tyler caught small things, like snippets where my =mkdir= commands had turned into =make=, and he asked big questions I'd been weighing myself: whether to keep record batching, which I took out, and whether the protobuf plugin belonged in the book. Ben sent a document full of specific fixes. I took pretty much every change they suggested.
+
 Brian Ketelsen read the first several chapters and didn't have any criticism of the style, scope, or direction.
 
-Clinton Begin reviewed the preface. He caught that I edged on insulting the authors of many open source frameworks and tools, and at one point referred to their code as spaghetti code. He suggested I make the same point by saying their codebases are very large and not focused on learning. I didn't take that one. "Spaghetti code" is in the printed book.
+Clinton Begin reviewed the finished book in fall 2020. He caught that I edged on insulting the authors of many open source frameworks and tools in the preface, and at one point referred to their code as spaghetti code. He suggested I make the same point by saying their codebases are very large and not focused on learning. I didn't take that one. "Spaghetti code" is in the printed book. His bigger point was about focus. Halfway through, he hadn't learned much about distributed services: the part of the book called Distribute starts on page 113 of 223, and only about three chapters are really about distribution. He was right, and it's the same thing some readers say about the book.
 
-A few people gave the book blurbs:
+A few people gave the book blurbs, including these two:
 
 #+begin_quote
 For any aspiring Gopher, Travis provides a gentle introduction to complex topics in distributed systems and provides a hands-on approach to applying the concepts.
@@ -86,16 +94,11 @@ For any aspiring Gopher, Travis provides a gentle introduction to complex topics
 #+end_quote
 
 #+begin_quote
-Having built most of the technologies in this book without the benefit of this book, I can wholeheartedly recommend Distributed Services with Go. Travis delivers years of practical experience distilled into a clear and concise guide that takes the reader step by step from foundational knowledge to production deployment. This book earns my most hearty endorsement.
---- Brian Ketelsen, Principal Developer Advocate, Microsoft and Organizer, GopherCon
-#+end_quote
-
-#+begin_quote
 In this practical, engaging book, Travis Jeffery shines a light on the path to building distributed systems. Read it, learn from it, and get coding!
 --- Jay Kreps, CEO, Confluent, Inc. and Co-Creator of Apache Kafka
 #+end_quote
 
-Ben Johnson, the author of BoltDB, wrote: "Travis Jeffery distills the traditionally academic topic of distributed systems down to a series of practical steps to get you up and running."
+Brian Ketelsen and Ben Johnson, the author of BoltDB, gave blurbs too. Ben wrote: "Travis Jeffery distills the traditionally academic topic of distributed systems down to a series of practical steps to get you up and running."
 
 Reader reviews are a mix. As I write this, the book has about 4.4 out of 5 from 121 ratings on Amazon and 3.71 from 86 ratings on Goodreads. Some of what people have written:
 
@@ -106,6 +109,8 @@ Reader reviews are a mix. As I write this, the book has about 4.4 out of 5 from 
 - "It's a decent book but it's a bit poorly organized and contains too many code examples." (Denis, Goodreads)
 - "The chapter on Raft is pretty disappointing." (Dang-Khoa Le Tan, Goodreads)
 - "Not even a single diagram." (Javier, Goodreads)
+
+Javier's right. I meant to add diagrams, and they never made it into the book.
 
 ** Release
 
@@ -119,7 +124,9 @@ Beta 4   September 23, 2020   224 pages
 Print    March 2021           245 pages
 #+end_src
 
-The final production work ran into 2021: indexing in January, then layout review in March. The book went to the printer in March 2021 and was published at the end of the month.
+The final production work ran into 2021: indexing in January, then layout review in March. The book went to the printer in March 2021 and was published on March 17.
+
+My own marketing was mostly tweets and telling coworkers.
 
 The relationship with a publisher can be frustrating. You put everything into your book, so when they let you down on something small, like updating a marketing page, it's quite frustrating.
 
@@ -127,7 +134,7 @@ Release day wasn't the big day for me. The big day was when I held a copy in my 
 
 ** Is it worth it?
 
-Here's what I've made in royalties. As far as I recall, I didn't get an advance.
+Here's what I've made in royalties. Pragmatic paid me 50% of net, and I didn't get an advance.
 
 #+begin_src
 2020-06-01      $8,447.40
@@ -156,7 +163,7 @@ Here's what I've made in royalties. As far as I recall, I didn't get an advance.
 Total $80,721.43
 #+end_src
 
-Writing a book is probably the least efficient way to make money. Most of this timeline is from before AI took off, and from what I understand AI has crashed technical book sales. If you were just in it for the money, you'd never finish, so you're setting yourself up for failure if you write a book for the money.
+Writing a book is probably the least efficient way to make money. Most of this timeline is from before AI took off, and I suspect AI has hurt technical book sales since. If you were just in it for the money, you'd never finish, so you're setting yourself up for failure if you write a book for the money.
 
 I wrote the book because I wanted to write it, and before that I'd wanted to read it. It was as good a way as any to accomplish my lifelong goal of writing a book. By the criteria of my own fulfillment, and all the messages I've received from people thanking me for writing it, writing the book was worth it.
 
