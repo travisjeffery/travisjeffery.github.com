@@ -38,19 +38,35 @@ The early feedback was tough too. My editor said chapter 4 read more like a lect
 
 In January 2019 I got Pragmatic's three-chapter feedback. My writing felt forced, the topics had bare-minimum coverage, and there was little sense of my voice. It read more like a handout from a Go conference tutorial. Dawn told me to make the reader the star of the book and take them on a hero's journey.
 
+You can see it in the word count. I had about 19,500 words at the end of 2018 and about 19,700 two months later.
+
 [TJ: How did that feedback land at the time, and what did you change?]
 
 ** Turning Point
 
-My editors were helpful with editing, of course. But probably their biggest help was motivation. The change after those slow first six months came after my editor sent me an email that was essentially asking, "are you going to get it going or what?"
-
 I rewrote chapter 1, and the tone changed completely. The feedback in February 2019 was: "This feels like Travis. I have a sense of him now and readers will too."
 
-[TJ: Were the "get it going" email and the chapter 1 rewrite the same moment, or two separate turning points?]
+But the big turning point was about motivation. My editors were helpful with editing, of course, but probably their biggest help was motivation. After those slow first six months, my editor sent me an email that was essentially asking, "are you going to get it going or what?" That email was the turning point.
 
 ** Flow state
 
-I really picked up the pace after that, and my pace kept improving each year until the end.
+I really picked up the pace after that, and my pace kept improving each year until the end. Here's the book's approximate word count over time, from the repository's history:
+
+#+begin_src
+Aug 2018     5,300
+Dec 2018    19,500
+Feb 2019    19,700
+Aug 2019    33,700
+Oct 2019    32,100
+Feb 2020    43,700
+Feb 2021    54,800
+#+end_src
+
+The flat spot in early 2019 is the three-chapter check. The dip in fall 2019 is cuts, while the first half was in technical review.
+
+I wrote mostly at night. About two-thirds of my commits were between 10pm and 6am, and my busiest hour was 5am.
+
+I also wrote about twice what was printed. Across all my edits I added roughly 106,000 words and deleted roughly 57,000, for a book of about 55,000 words.
 
 Writing a book is tough. Really, really tough. People say writing a book is like running a marathon. It isn't. It's running one marathon after another, one for each chapter in your book, plus another marathon for all the other stuff. You go through the grueling process of writing a chapter, send it off to your editor, take a brief moment to celebrate finishing another chapter, and then realize you have many more to go and you'd better begin on the next. The whole time, you have only yourself, with some help from your editor, to provide the motivation and discipline to keep going.
 
@@ -58,7 +74,9 @@ In October 2019, Dawn left for maternity leave, and Katie Dvorak became my edito
 
 There are pretty much no places I compromised. I could tinker on minor things forever, arguing with myself over the upsides and downsides of each possible change. But after two years, if I wasn't happy with something in the book, I changed it until I was happy or threw it in the trash.
 
-[TJ: What did a writing day look like? When did you write, for how long, and did anything help you keep the pace? How was the change of editors mid-book?]
+A lot went in the trash. I cut a whole chapter on writing a protobuf plugin. The testing chapters became testing sections in the other chapters. Chapters on Kubernetes operators, performance, and the CLI never got past an outline. The plan went from 8 chapters, up to 15, and down to the 11 the book shipped with.
+
+[TJ: What did a writing day look like, and did anything help you keep the pace? How was the change of editors mid-book?]
 
 ** Reviews
 
@@ -76,7 +94,15 @@ Ben Johnson, the author of BoltDB, gave the book a blurb: "Travis Jeffery distil
 
 ** Release
 
-At Pragmatic, a book goes into beta at about the three-quarters mark and begins selling on their website. That's when you begin making money. My book went into beta on March 25, 2020.
+At Pragmatic, a book goes into beta at about the three-quarters mark and begins selling on their website. That's when you begin making money. My book went into beta on March 25, 2020. Each beta added chapters:
+
+#+begin_src
+Beta 1   March 25, 2020       178 pages
+Beta 2   June 16, 2020        207 pages
+Beta 3   August 12, 2020      213 pages
+Beta 4   September 23, 2020   224 pages
+Print    March 2021           245 pages
+#+end_src
 
 The final production work ran into 2021: indexing in January, then layout review in March. The book went to the printer in March 2021 and was published at the end of the month. My own physical copies arrived in July, after a shipping delay.
 
