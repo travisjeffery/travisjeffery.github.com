@@ -68,7 +68,7 @@ The book went out for technical review in two halves.
 
 Tyler Treat and Ben Johnson reviewed the first half in October 2019, and they changed the book. Tyler caught small things, like snippets where my =mkdir= commands had turned into =make=, and he asked big questions I'd been weighing myself: whether to keep record batching, which I took out, and whether the protobuf plugin belonged in the book. Ben sent a document full of specific fixes. I took pretty much every change they suggested. Brian Ketelsen read the first several chapters and didn't have any criticism of the style, scope, or direction.
 
-A few people gave the book blurbs, including these two:
+A few people gave the book blurbs, including these:
 
 #+begin_quote
 For any aspiring Gopher, Travis provides a gentle introduction to complex topics in distributed systems and provides a hands-on approach to applying the concepts.
@@ -78,6 +78,11 @@ For any aspiring Gopher, Travis provides a gentle introduction to complex topics
 #+begin_quote
 In this practical, engaging book, Travis Jeffery shines a light on the path to building distributed systems. Read it, learn from it, and get coding!
 --- Jay Kreps, CEO, Confluent, Inc. and Co-Creator of Apache Kafka
+#+end_quote
+
+#+begin_quote
+Travis Jeffery distills the traditionally academic topic of distributed systems down to a series of practical steps to get you up and running.
+--- Ben Johnson, author of BoltDB
 #+end_quote
 
 As I write this, the book has about 4.4 out of 5 from 121 ratings on Amazon. Some of what people have written:
