@@ -112,6 +112,22 @@ The relationship with a publisher can be frustrating. You put everything into yo
 
 Release day wasn't the big day for me. The big day was when I held a copy in my hands. My copies showed up on July 5, 2021, months after the book came out, because of a mix-up with my shipping address. After all that writing, it was finally a real book.
 
+** Readers
+
+While the book was in beta, I answered a question on r/golang about why Go suits distributed services and plugged the book. My favorite part of [[https://www.reddit.com/r/golang/comments/j97ct8/comment/g8iuyn6/?context=3][the thread]] was this:
+
+#+begin_quote
+dobegor: Are you the same person who wrote Kafka in Go, aka Jocko? \\
+travisjeffery: Yes. \\
+[deleted]: Damn dude save some for the rest of us
+#+end_quote
+
+Readers have written to me since. John Carnell, the author of /Spring Microservices in Action/, bought a hard copy and wrote: "I know how much time and effort it takes to write a book so I just wanted to let you know how much I have enjoyed reading it." I told him writing that book was the toughest thing I'd done.
+
+Wes Anderson read it after Kleppmann's book and found it "very useful in my development and ability to bridge the gap between writing smaller programs and modules and building something intended to serve as a platform or infrastructure-related tool for other engineers." He'd since built Chimera, an open source tool for canary deployments on AWS.
+
+Amir Alaeifar, who was 23, wrote: "I've read this book three times in a row now and each time, it's filling the gap between everything." He'd also seen people on Reddit telling me how I should have written the book. I told him: "Those people on Reddit didn't affect me at all... I know there isn't another book out there like mine and it achieves what I wanted."
+
 ** Is it worth it?
 
 Here's what I've made in royalties. Pragmatic paid me 50% of net, and I didn't get an advance.
