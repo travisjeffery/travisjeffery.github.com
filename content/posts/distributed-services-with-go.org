@@ -1,0 +1,157 @@
+#+TITLE: Writing Distributed Services With Go
+#+DATE: 2026-11-05
+#+DRAFT: false
+#+TAGS[]: book
+#+CATEGORIES[]: writing
+
+I wrote a book, [[https://pragprog.com/titles/tjgo/distributed-services-with-go/][Distributed Services with Go]], published by the Pragmatic Bookshelf. It's a practical book on distributed systems. It walks you through building a distributed event-stream service from scratch through deployment, and along the way it explains the concepts underlying the distributed systems you use, work on, or plan to build. The code is at [[https://github.com/travisjeffery/proglog][travisjeffery/proglog]].
+
+I spent about two and a half years writing it. Writing one was a lifelong goal, and I wanted to test myself and see if I could do it. In this post I'll share what that was like, and whether it was worth it.
+
+I intended to write the book I'd wanted to read: a practical book on distributed systems that you could read and come out the other side having built a distributed service. A lot of technical books today are basically glorified man pages. I wanted to write a great one that didn't exist yet.
+
+** Publisher and Plan
+
+In April 2018, Tyler Treat introduced me to Brian MacDonald, an editor at the Pragmatic Bookshelf. Pragmatic was looking for authors to write a Go book. I told them I didn't want to write a book on learning Go. There are already a lot of those, and The Go Programming Language will always be the standard. Brian agreed. He thought all the learning Go books we need had been written, and he was looking for books on how to build and solve real problems. That's the kind of writing I love reading and writing most. Pragmatic accepted my proposal in June 2018, and I signed the contract in July.
+
+** Tough Beginning
+
+The book was slow going for the first six months.
+
+I was working full-time at Confluent, about a year and a half into building Confluent Cloud from zero to one. Adding another whole job of writing a book was a bit insane. I'd also gone from Brian MacDonald to Jackie Carter to Dawn Schanafelt in my first three months, and each of them gave me different advice.
+
+I went into it with the idea, which I think came from 37signals, that writing a book is like writing 10-15 blog posts, one for each chapter. That's somewhat true for 37signals because their chapters are generally 1-3 pages long and don't build on each other. It isn't true for most books, and definitely not mine. My book has the reader begin with nothing and build a distributed service from scratch, so each chapter leads directly to the next. If I made a change to chapter 10, I had to back port it to the related content in chapters 1-9. And each chapter is 10-15 pages long. I never write a blog post that long.
+
+** Turning Point
+
+The big turning point was about motivation. My editors were helpful with editing, of course, but probably their biggest help was motivation. In October 2018, my editor sent me an email that was essentially asking, "are you going to get it going or what?" That email was the turning point. Two weeks later I had a call with Susan Conant, the managing editor at Pragmatic, and I committed to sending Dawn a chapter a week. I had about 5,300 words in August 2018 and about 19,500 by the end of the year.
+
+Getting going didn't mean the writing was good yet. That took a second turn, a few months later.
+
+In November 2018, Dawn said the book read more like a lecture than a conversation, and that I should make the reader the star of the book and take them on a hero's journey. Brian had sent me /Programming Elm/ as an example of a reader-centric book, one where the author introduces every bit of code with phrases like "add this code."
+
+Pragmatic does a three-chapter check early on, where the managing editor reads your first chapters. Mine started on January 16, 2019, and the feedback came back on January 21. Susan said my writing felt forced, the topics had bare-minimum coverage, and there was little sense of my voice. It read more like a handout from a Go conference tutorial. You can see it in the word count: about 19,500 words at the end of 2018 and about 19,700 two months later.
+
+The biggest problem was my first chapter. It explained how to lay out a Go project, and the reader didn't write any code. I moved the layout chapter to the back of the book as an appendix, and it later fell out of the book entirely. In its place I wrote a new first chapter where you build a working HTTP service for the log from the first pages. Instead of getting ready to build something, the reader was building it.
+
+I sent Dawn the new chapter 1 on February 7, and the tone changed completely. On February 21, Susan and Brian agreed it was much improved. Susan's note on it was: "This feels like Travis. I have a sense of him now and readers will too." I started writing new chapters in that more conversational style. My first chapters needed the same overhaul. On May 1, Dawn reset the count of edited chapters from 6 of 13 back to 2.
+
+The payoff came in October 2019, when Susan did the publication review of the first half. The same editor who'd had serious concerns in January now called it a solid book, with good, conversational teaching, ready to be announced and go to beta. Her one concern was whether I could write the rest faster.
+
+** Flow state
+
+My writing days were mostly writing nights. I had a full-time job, so the book got the hours around it. About two-thirds of my commits were between 10pm and 6am, and my busiest hour was 5am. Non-existent sleep schedule. Monday was my busiest day and Saturday my quietest. About a fifth of my commits landed on weekends. When I went quiet, Dawn checked in, like on May 29 and July 24, 2019.
+
+In spring 2020, right after the first beta, readers sent in a wave of errata that I spent weeks fixing, and the Kubernetes chapter got so big I split it in two. Here's the book's approximate word count over time, from the repository's history:
+
+#+begin_src
+Aug 2018     5,300
+Dec 2018    19,500
+Feb 2019    19,700
+Aug 2019    33,700
+Oct 2019    32,100
+Feb 2020    43,700
+Feb 2021    54,800
+#+end_src
+
+The flat spot in early 2019 is the three-chapter check. The dip in fall 2019 is cuts, plus moving code out of the text into separate source files, while the first half was in technical review.
+
+I also wrote about twice as much as ended up in the book, counting everything I added and deleted along the way.
+
+A lot went in the trash, mostly on purpose. I cut the chapter on Kubernetes operators because the operator frameworks were a mess and I couldn't say what the best way to build one was. I dropped the testing chapters because I'd written tests throughout the book, so they would have mostly repeated earlier material. I dropped a performance chapter because it was too generic and covered well elsewhere. The protobuf plugin chapter became an appendix, and then I cut it: my reviewers had never needed to write a plugin, and Go's new protobuf library was about to make it look dated. A CLI chapter never got past an outline. Instead I added a chapter on observability (metrics, logs, and traces) because it matters for people building services and hadn't been covered much. It was the last chapter I wrote, though it's chapter 6 in the book. The plan went from 8 chapters, up to 15, and down to the 11 the book shipped with. You begin with nothing and end by deploying the finished service to the internet, and that's the whole story.
+
+Halfway through, I changed editors. In September 2019, Dawn planned, for personal reasons, to hand the book to another editor once we hit the halfway mark, and in November Katie Dvorak took over for the rest of the book. Dawn got me through the rewrite and the first half. Katie got me through the second half, the betas, and production.
+
+** Reviews
+
+The book went out for technical review in two halves.
+
+Tyler Treat and Ben Johnson reviewed the first half in October 2019, and they changed the book. Tyler caught small things, like snippets where my =mkdir= commands had turned into =make=, and he asked big questions I'd been weighing myself: whether to keep record batching, which I took out, and whether the protobuf plugin belonged in the book. Ben sent a document full of specific fixes. I took pretty much every change they suggested. Brian Ketelsen read the first several chapters and didn't have any criticism of the style, scope, or direction.
+
+As I write this, the book has about 4.4 out of 5 from 121 ratings on Amazon. Some of what people have written:
+
+- "This is an excellent starter book for aspiring distributed systems programmers." (Vinay, Goodreads)
+- "I would definitely recommend this book." (Dalibor Mesarić, [[https://developerschallenges.com/2023/10/02/book-review-%E2%80%94-distributed-services-with-go-by-travis-jeffery/][Developer's Challenges]], 4/5)
+- "The book filled all requirements that I was looking for." ([[https://otavio.dev/2025/06/24/distributed-services-with-go-book-review/][otavio.dev]])
+- "This book took me many reads to fully get best value out of it." (Omar ElKhatib, Goodreads)
+
+** Release
+
+At Pragmatic, a book goes into beta at about the three-quarters mark and begins selling on their website. That's when you begin making money. My book went into beta on March 25, 2020. Each beta added chapters:
+
+#+begin_src
+Beta 1   March 25, 2020       178 pages
+Beta 2   June 16, 2020        207 pages
+Beta 3   August 12, 2020      213 pages
+Beta 4   September 23, 2020   224 pages
+Print    March 2021           245 pages
+#+end_src
+
+The final production work ran into 2021: indexing in January, then layout review in March. The book went to the printer in March 2021 and was published on March 17.
+
+My own marketing was mostly tweets and telling coworkers.
+
+The relationship with a publisher can be frustrating. You put everything into your book, so when they let you down on something small, like updating a marketing page, it's quite frustrating.
+
+Release day wasn't the big day for me. The big day was when I held a copy in my hands. My copies showed up on July 5, 2021. After all that writing, it was finally a real book.
+
+** Readers
+
+While the book was in beta, I answered a question on r/golang about why Go suits distributed services and plugged the book. My favorite part of [[https://www.reddit.com/r/golang/comments/j97ct8/comment/g8iuyn6/?context=3][the thread]] was this:
+
+#+begin_quote
+dobegor: Are you the same person who wrote Kafka in Go, aka Jocko? \\
+travisjeffery: Yes. \\
+[deleted]: Damn dude save some for the rest of us
+#+end_quote
+
+Readers have written to me since. John Carnell, the author of /Spring Microservices in Action/, bought a hard copy and wrote: "I know how much time and effort it takes to write a book so I just wanted to let you know how much I have enjoyed reading it." I told him writing that book was the toughest thing I'd done.
+
+Wes Anderson read it after Kleppmann's book and found it "very useful in my development and ability to bridge the gap between writing smaller programs and modules and building something intended to serve as a platform or infrastructure-related tool for other engineers." He'd since built Chimera, an open source tool for canary deployments on AWS.
+
+Amir Alaeifar, who was 23, wrote: "I've read this book three times in a row now and each time, it's filling the gap between everything." He'd also seen people on Reddit telling me how I should have written the book. I told him: "Those people on Reddit didn't affect me at all... I know there isn't another book out there like mine and it achieves what I wanted."
+
+** Is it worth it?
+
+Here's what I've made in royalties. Pragmatic paid me 50% of net, and I didn't get an advance.
+
+#+begin_src
+2020-06-01      $8,447.40
+2020-09-01      $2,292.93
+2020-12-01      $4,518.47
+2021-03-01      $1,496.97
+2021-06-01      $5,347.34
+2021-09-02      $4,811.91
+2021-12-01      $8,916.64
+2022-03-01      $7,097.02
+2022-06-01      $10,674.20
+2022-09-01      $3,380.94
+2022-12-01      $3,346.62
+2023-03-01      $2,867.50
+2023-06-05      $2,554.00
+2023-09-01      $2,709.80
+2023-12-01      $1,936.30
+2024-03-01      $2,018.42
+2024-06-11      $1,616.68
+2024-09-13      $1,593.58
+2024-12-13      $945.19
+2025-03-14      $1,757.15
+2025-06-13      $902.18
+2025-09-15      $674.92
+2025-12-11      $815.27
+Total $80,721.43
+#+end_src
+
+Writing a book is probably the least efficient way to make money. Most of this timeline is from before AI took off, and I suspect AI has hurt technical book sales since. If you were just in it for the money, you'd never finish, so you're setting yourself up for failure if you write a book for the money.
+
+I wrote the book because I wanted to write it, and before that I'd wanted to read it. It was as good a way as any to accomplish my lifelong goal of writing a book. By the criteria of my own fulfillment, and all the messages I've received from people thanking me for writing it, writing the book was worth it.
+
+Was the publisher worth it? Self-publishing is a viable option today. You could put your book on Leanpub, hire your own editor, hire an artist for the cover or make your own, get it printed, and get it into stores. Partly I went with a publisher because that's how it naturally began and the momentum kept it going. But I think if you don't care about the money, you should use a publisher:
+
+- Structure and resources: editors, author guides, conventions.
+- Marketing and an existing audience.
+- Convenience. I wrote this book as a side gig to a full-time job, and by the end of just writing it I'd had enough. If I'd had to do all that other stuff too, it would have sucked.
+
+I have a decent following, so I think my sales would have been similar if I'd self-published. But my book is better for having worked with a publisher and editors. There's a good chance I would've never finished it at all.
+
+Would I write another book? I'd write another edition of this one when it made sense. I haven't started one. I won't write a whole new book for a while, but I think I will eventually. I'd like to write a non-technical book some day.
