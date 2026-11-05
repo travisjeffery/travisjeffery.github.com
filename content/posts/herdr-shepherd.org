@@ -1,9 +1,9 @@
-#+TITLE: Quartermaster: one conversation, many agents
+#+TITLE: Coordinating many agents with Quartermaster
 #+DATE: 2026-09-25
 #+DRAFT: false
 #+TAGS[]: ai tools
 #+CATEGORIES[]: tech
-#+ALIASES[]: /flatcircle-one-conversation-many-agents/ /shepherd-one-conversation-many-agents/
+#+ALIASES[]: /flatcircle-one-conversation-many-agents/ /shepherd-one-conversation-many-agents/ /quartermaster-one-conversation-many-agents/
 
 Running one agent is easy. You talk to it, it does the work, you review it.
 
