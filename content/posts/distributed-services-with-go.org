@@ -16,13 +16,11 @@ I also wanted to write the book I'd wanted to read: a practical book on distribu
 
 In April 2018, Tyler Treat introduced me to Brian MacDonald, an editor at the Pragmatic Bookshelf. Pragmatic was looking for authors to write a Go book. I told them I didn't want to write a book on learning Go. There are already a lot of those, and The Go Programming Language will always be the standard. Brian agreed. He thought all the learning Go books we need had been written, and he was looking for books on how to build and solve real problems. That's the kind of writing I love reading and writing most.
 
-Pragmatic accepted my proposal in June 2018, and I signed the contract in July. The working title was /Real-World Go/. In August my introduction still had a heading that read "Why Real-World Go? (TK: title TBD)". By late September Pragmatic was calling it /Distributed Services with Go/, and in October I put that title in the book's info file, though the managing editor's review in January 2019 still called it /Real-World Go/. That month I told my editor I thought /Distributed Services with Go/ made more sense. Part of our trouble was mixed expectations: people expected a book about Go the language, and I'd planned with Brian to write a book about building something with Go. In October 2019 we went over titles again. For a while it was going to be /Building Distributed Services with Go/, but I dropped "Building" because it was extraneous and didn't fit Pragmatic's title style. The book's own build files said /Real-World Go/ until the first beta in March 2020, which also added the subtitle, /Your Guide to Reliable, Scalable, and Maintainable Systems/.
+Pragmatic accepted my proposal in June 2018, and I signed the contract in July. The working title was /Real-World Go/, but people expected a book about Go the language, and I'd planned with Brian to write a book about building something with Go. In January 2019 I told my editor I thought /Distributed Services with Go/ made more sense. For a while it was going to be /Building Distributed Services with Go/, but I dropped "Building" because it was extraneous and didn't fit Pragmatic's title style.
 
 My first development editor was Jackie Carter. In September 2018, Susan Conant, the managing editor, moved me to Dawn Schanafelt, and the plan had the full draft done in early 2019.
 
-PragProg is one of the publishers whose books I like most. Their style is relaxed and practical. I hadn't worked with a publisher or professional editors before, and I was pleasantly surprised. They have an internal wiki full of useful info and an author guide that's 250 pages long, like a style guide. Half of it is on how to structure and prepare to write your book. The other half is on the syntax to format it. I liked the structure it gave me.
-
-You can write in either Markdown or Pragmatic's own HTML-like markup, PML. I wrote in Markdown, in Emacs, with =pragmatic-mode=, a mode I wrote for myself to help with editing.
+Pragmatic lets you write in either Markdown or its own HTML-like markup, PML. I wrote in Markdown, in Emacs, with =pragmatic-mode=, a mode I wrote for myself to help with editing.
 
 ** Tough Beginning
 
@@ -66,8 +64,6 @@ The flat spot in early 2019 is the three-chapter check. The dip in fall 2019 is 
 
 I also wrote about twice as much as ended up in the book, counting everything I added and deleted along the way.
 
-Writing a book is tough. Really, really tough. People say writing a book is like running a marathon. It isn't. It's running one marathon after another, one for each chapter in your book, plus another marathon for all the other stuff. You go through the grueling process of writing a chapter, send it off to your editor, take a brief moment to celebrate finishing another chapter, and then realize you have many more to go and you'd better begin on the next. The whole time, you have only yourself, with some help from your editor, to provide the motivation and discipline to keep going.
-
 A lot went in the trash, mostly on purpose. I cut the chapter on Kubernetes operators because the operator frameworks were a mess and I couldn't say what the best way to build one was. I dropped the testing chapters because I'd written tests throughout the book, so they would have mostly repeated earlier material. I dropped a performance chapter because it was generic Go, and that's covered well elsewhere. The protobuf plugin chapter became an appendix, and then I cut it: my reviewers had never needed to write a plugin, and Go's new protobuf library was about to make it look dated. A CLI chapter never got past an outline. Instead I added a chapter on observability (metrics, logs, and traces) because it matters for people building services and hadn't been covered much. It was the last chapter I wrote, though it's chapter 6 in the book. The plan went from 8 chapters, up to 15, and down to the 11 the book shipped with. You begin with nothing and end by deploying the finished service to the internet, and that's the whole story.
 
 My writing days were mostly writing nights. I had a full-time job, so the book got the hours around it. About two-thirds of my commits were between 10pm and 6am, and my busiest hour was 5am. Monday was my busiest day and Saturday my quietest. About a fifth of my commits landed on weekends. When I went quiet, Dawn checked in, like on May 29 and July 24, 2019.
@@ -83,20 +79,6 @@ Tyler Treat and Ben Johnson reviewed the first half in October 2019, and they ch
 Brian Ketelsen read the first several chapters and didn't have any criticism of the style, scope, or direction.
 
 Clinton Begin reviewed the finished book in fall 2020. He caught that I edged on insulting the authors of many open source frameworks and tools in the preface, and at one point referred to their code as spaghetti code. He suggested I make the same point by saying their codebases are very large and not focused on learning. I didn't take that one. "Spaghetti code" is in the printed book. His bigger point was about focus. Halfway through, he hadn't learned much about distributed services: the part of the book called Distribute starts on page 113 of 223, and only about three chapters are really about distribution. He was right, and it's the same thing some readers say about the book.
-
-A few people gave the book blurbs, including these two:
-
-#+begin_quote
-For any aspiring Gopher, Travis provides a gentle introduction to complex topics in distributed systems and provides a hands-on approach to applying the concepts.
---- Armon Dadgar, HashiCorp Co-Founder
-#+end_quote
-
-#+begin_quote
-In this practical, engaging book, Travis Jeffery shines a light on the path to building distributed systems. Read it, learn from it, and get coding!
---- Jay Kreps, CEO, Confluent, Inc. and Co-Creator of Apache Kafka
-#+end_quote
-
-Brian Ketelsen and Ben Johnson, the author of BoltDB, gave blurbs too. Ben wrote: "Travis Jeffery distills the traditionally academic topic of distributed systems down to a series of practical steps to get you up and running."
 
 Reader reviews are a mix. As I write this, the book has about 4.4 out of 5 from 121 ratings on Amazon and 3.71 from 86 ratings on Goodreads. Some of what people have written:
 
