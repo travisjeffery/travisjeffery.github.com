@@ -1,6 +1,6 @@
 #+TITLE: Writing Distributed Services With Go
-#+DATE: 2026-11-03
-#+DRAFT: true
+#+DATE: 2026-11-05
+#+DRAFT: false
 #+TAGS[]: book
 #+CATEGORIES[]: writing
 
@@ -18,13 +18,13 @@ In April 2018, Tyler Treat introduced me to Brian MacDonald, an editor at the Pr
 
 The book was slow going for the first six months.
 
-I working full-time at Confluent, about a year and a half into building Confluent Cloud from zero to one. Adding another whole job of writing a book was a bit insane. I'd also gone from Brian MacDonald to Jackie Carter to Dawn Schanafelt in my first three months, and each of them gave me different advice.
+I was working full-time at Confluent, about a year and a half into building Confluent Cloud from zero to one. Adding another whole job of writing a book was a bit insane. I'd also gone from Brian MacDonald to Jackie Carter to Dawn Schanafelt in my first three months, and each of them gave me different advice.
 
 I went into it with the idea, which I think came from 37signals, that writing a book is like writing 10-15 blog posts, one for each chapter. That's somewhat true for 37signals because their chapters are generally 1-3 pages long and don't build on each other. It isn't true for most books, and definitely not mine. My book has the reader begin with nothing and build a distributed service from scratch, so each chapter leads directly to the next. If I made a change to chapter 10, I had to back port it to the related content in chapters 1-9. And each chapter is 10-15 pages long. I never write a blog post that long.
 
 ** Turning Point
 
-The big turning point was about motivation. My editors were helpful with editing, of course, but probably their biggest help was motivation. In October 2018, my editor sent me an email that was essentially asking, "are you going to get it going or what?" That email was the turning point. Two weeks later I had a call with Susan Conant, Managing Editor at Pragmatic, and I committed to sending Dawn a chapter a week. I had about 5,300 words in August 2018 and about 19,500 by the end of the year.
+The big turning point was about motivation. My editors were helpful with editing, of course, but probably their biggest help was motivation. In October 2018, my editor sent me an email that was essentially asking, "are you going to get it going or what?" That email was the turning point. Two weeks later I had a call with Susan Conant, the managing editor at Pragmatic, and I committed to sending Dawn a chapter a week. I had about 5,300 words in August 2018 and about 19,500 by the end of the year.
 
 Getting going didn't mean the writing was good yet. That took a second turn, a few months later.
 
@@ -60,7 +60,7 @@ I also wrote about twice as much as ended up in the book, counting everything I 
 
 A lot went in the trash, mostly on purpose. I cut the chapter on Kubernetes operators because the operator frameworks were a mess and I couldn't say what the best way to build one was. I dropped the testing chapters because I'd written tests throughout the book, so they would have mostly repeated earlier material. I dropped a performance chapter because it was too generic and covered well elsewhere. The protobuf plugin chapter became an appendix, and then I cut it: my reviewers had never needed to write a plugin, and Go's new protobuf library was about to make it look dated. A CLI chapter never got past an outline. Instead I added a chapter on observability (metrics, logs, and traces) because it matters for people building services and hadn't been covered much. It was the last chapter I wrote, though it's chapter 6 in the book. The plan went from 8 chapters, up to 15, and down to the 11 the book shipped with. You begin with nothing and end by deploying the finished service to the internet, and that's the whole story.
 
-Halfway through, I changed editors. In September 2019, Dawn planned to hand the book to another editor once we hit the halfway mark for personal reasons, and in November Katie Dvorak took over for the rest of the book. Dawn got me through the rewrite and the first half. Katie got me through the second half, the betas, and production.
+Halfway through, I changed editors. In September 2019, Dawn planned, for personal reasons, to hand the book to another editor once we hit the halfway mark, and in November Katie Dvorak took over for the rest of the book. Dawn got me through the rewrite and the first half. Katie got me through the second half, the betas, and production.
 
 ** Reviews
 
