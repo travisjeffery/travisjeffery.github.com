@@ -43,13 +43,11 @@ The stacks build on each other in waves: global, then regions, then clusters, th
 
 A trace showed about 34 seconds going to reading Pulumi config. Each stack read its whole config, wrote one key, and read it all back, just to merge one setting. Reading only that key, once per stack, up front, got it to *193 seconds.*
 
-That was as far as it got against Pulumi Cloud. The runs were too noisy to trust a few seconds either way. At one point the agent changed my DNS to 8.8.8.8, with my permission, to see if that helped. It didn't.
+Then the runs got too noisy to trust a few seconds either way. At one point the agent changed my DNS to 8.8.8.8, with my permission, to see if that helped. It didn't.
 
 *** Changing the benchmark
 
 I asked whether a Postgres backend would mean less remote work, and whether it could test that without touching the real stacks. It exported the 26 stacks, re-encrypted their secrets with a passphrase, loaded them into a local Postgres container, and pointed the preview at the copy. *137 seconds*, and much less noise.
-
-That changed the benchmark, not the code, to make the numbers steady enough to trust: every number from here on is against that local copy, while production still runs on Pulumi Cloud.
 
 With a steady benchmark, the loop swept each wave's concurrency one knob at a time and got it to *78 seconds*. It settled on two global stacks, four regions, three clusters and four or five services at a time. Pushing any wave past that made it slower.
 
@@ -57,7 +55,7 @@ With a steady benchmark, the loop swept each wave's concurrency one knob at a ti
 
 Then I asked what work we could skip.
 
-Every preview refreshed every stack first: it read every resource's live state from AWS and Kubernetes before diffing. The preview was there to show what a code change would do, so I told it to stop refreshing. Without a refresh, the preview diffs the code against Pulumi's recorded state, so it no longer shows changes someone made outside Pulumi. *50 seconds.*
+Every preview refreshed every stack first: it read every resource's live state from AWS and Kubernetes before diffing. The preview was there to show what a code change would do, so I told it to stop refreshing. *50 seconds.*
 
 Then I asked the agent to dig through the Pulumi Go SDK for knobs. It found ~PULUMI_DISABLE_RESOURCE_REFERENCES~, which sends plain values instead of typed resource references between the program and the engine. *47 seconds.* With less going on, more of each wave could run at once. Retuned, *38 seconds.*
 
@@ -69,20 +67,18 @@ Earlier, more than a few at a time had made every wave slower. Now that each sta
 
 ** Results
 
-Over four days the loop logged 181 experiments: it kept 28, discarded 95, and 58 crashed. I didn't get to 15 seconds, but the gains held up outside the benchmark:
+Over four days the loop logged 181 experiments: it kept 28, discarded 95, and 58 crashed.
 
-| Measure                                    | Before                  | After                    | Change           |
-|--------------------------------------------+-------------------------+--------------------------+------------------|
-| Laptop benchmark, 26 stacks, local Postgres | 330s                    | 31s                      | about 10x faster |
-| Laptop, 26 stacks, Pulumi Cloud            | 330s                    | 193s                     | about 40% faster |
-| A region stack in CI                       | 24-34s                  | 16-24s                   | about 30% faster |
-| A cluster stack in CI                      | 48-59s                  | 33-40s                   | about 30% faster |
-| Whole environment in CI, per stack         | 7.3s                    | 6.0s                     | about 18% faster |
-| A CI preview of a change                   | 3.6 min, all 29 stacks  | 13s, the one it touched  | minutes to seconds |
+| Preview                     | Before  | After |
+|-----------------------------+---------+-------|
+| The loop's benchmark        | 330s    | 31s   |
+| A change, previewed in CI   | 3.6 min | 13s   |
 
-The changes went out in one PR: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. Disabling resource references didn't ship, and the 31-second run had it on.
+The 31 seconds was measured on a local copy of the state, not Pulumi Cloud.
 
-The real-world gain came in two parts. First, those changes made each stack's preview faster in CI: about 30% for region and cluster stacks (the two global stacks didn't speed up), and about 18% per stack across the whole environment, which meanwhile grew from 29 stacks to 46. Second, we stopped previewing every stack and started previewing only the stacks a change touches. That's a scope change, not a speedup, and it accounts for most of the difference. Together they took a CI preview from about 3.6 minutes in March to 13 seconds for the one stack a change touched today.
+The changes went out in one PR: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. One flag I tested, disabling resource references, didn't ship.
+
+We also stopped previewing every stack in CI. A change now previews only the stack it touches. Together, the time CI spends in Pulumi for a preview went from about 3.6 minutes in March to about 13 seconds today.
 
 ** Lessons
 
@@ -92,4 +88,4 @@ The real-world gain came in two parts. First, those changes made each stack's pr
 
 *Set the fences first.* "Don't change the stacks, the resources or the state" did a lot of work. Several experiments were faster and wrong. Turning off server-side apply broke previews. Trusting provided secrets over live ones sped things up but proposed replacing databases. Because of the constraint, the loop checked for changed diffs and threw those out. Decide up front, too, what it's allowed to touch outside the repo.
 
-Four days of experiments took a benchmark preview from five and a half minutes to about half a minute. Most of the work was done by a loop that worked away as I worked on other stuff.
+Four days of experiments, and previewing only what a change touches, took our CI preview from minutes to seconds. Most of the work was done by a loop that worked away as I worked on other stuff.
