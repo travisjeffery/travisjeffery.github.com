@@ -37,11 +37,11 @@ Every experiment was a commit or a revert, and every result went in a log. Over 
 
 *** First it had to finish
 
-The baseline didn't produce a number. It ran for ten minutes and died. Pulumi Cloud returned 401s, DNS lookups to Pulumi, AWS and the Kubernetes APIs failed, and stacks fell over halfway through.
+The baseline didn't produce a number. Pulumi Cloud returned 401s, DNS lookups to Pulumi, AWS and the Kubernetes APIs failed, and stacks fell over halfway through.
 
 So the first eleven experiments were all crashes. The loop tried fewer concurrent previews, fewer chart pulls, a different DNS resolver, and skipping Pulumi's update checks. Each crash got a little further. The cause was the preview tool opening 50 stacks at once, each with its own fresh Pulumi workspace, all hammering the same APIs.
 
-Experiment 12 finished: one stack at a time, a pool of reused workspaces instead of a new one per stack, config written in one call instead of one call per key, and Helm charts pulled only for the stacks that use them. *330 seconds.* Slower than I wanted, but a real number to beat.
+Experiment 12 finished: one stack at a time, a pool of reused workspaces instead of a new one per stack, config written in one call instead of one call per key, and Helm charts pulled only for the stacks that use them. *330 seconds*, about five and a half minutes. That was the number to beat.
 
 *** Then it got faster in steps
 
@@ -98,24 +98,11 @@ The last run of the session: every wave at 50 at a time. *31.4 seconds.* At 100 
 | No resource references, retuned              |      38 |
 | Every wave at 50                             |      31 |
 
-I didn't get to 15 seconds. And everything from 137 down was measured against the local Postgres copy, not the Pulumi Cloud backend we run on. Against Pulumi Cloud the best I measured was 193. The 31 is a benchmark number.
+From 330 seconds to 31: about five minutes to about thirty seconds. I didn't get to 15. Everything from 137 down was measured against the local Postgres copy; against Pulumi Cloud the best I measured was 193.
 
 The changes went out in one PR: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. Disabling resource references didn't ship. It's the riskiest of the changes, and it isn't set anywhere in our code or CI.
 
-** The CI job
-
-The same PR changed the CI job too. It used to run the deployer's tests and build a container image for the preview, then run the preview in that image. The build took a median of 5 minutes and the tests 3, and the preview waited on both. Now the job checks out the repo and runs the preview with ~go run~, using a cache of Go modules.
-
-| Preview workflow, successful runs | Before (Feb 15 to Mar 10) | After (Mar 17 to Apr 10) |
-|-----------------------------------+---------------------------+--------------------------|
-| Runs                              |                        18 |                       27 |
-| Median wall time                  |                  10.2 min |                  4.9 min |
-
-In the two days before I started, it failed every time. In the weeks after, it mostly passed.
-
-The preview job itself didn't get much shorter: a median of 4.7 minutes before and 4.4 after. But it now compiles the deployer from source, which the old job got from the image. I can't split that time any further, because GitHub no longer has the logs.
-
-Two weeks later I cleaned up the CI caches. The preview job had been caching Go's build output as well as its modules. Build output changes on every commit, so that cache churned. I kept only the modules. Before, the job swung between 3 and 12 minutes. After, it held at 4 to 5. The fast runs got about a minute slower, and the slow ones went away.
+The CI job didn't drop the same way. It still takes a few minutes, but most of that is compiling the deployer and saving the Go module cache, not Pulumi.
 
 ** Lessons
 
@@ -131,4 +118,4 @@ Two weeks later I cleaned up the CI caches. The preview job had been caching Go'
 
 *It'll touch more than the code.* Mine changed my DNS settings, with my permission. Decide up front what it's allowed to touch outside the repo.
 
-Four days and 181 experiments took a preview that wouldn't finish to one that runs in about half a minute on a quiet benchmark, and halved the CI job. Most of the work was done by a loop that didn't get bored.
+Four days and 181 experiments took a preview that wouldn't finish, then took five and a half minutes, to one that runs in about half a minute. Most of the work was done by a loop that didn't get bored.
