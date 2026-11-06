@@ -1,12 +1,12 @@
-#+TITLE: Autoresearch took our Pulumi preview from 330 seconds to 31
+#+TITLE: Autoresearch took our Pulumi preview from 300 seconds to 30
 #+DATE: 2026-11-06
 #+DRAFT: true
 #+TAGS[]: ai pulumi
 #+CATEGORIES[]: tech
 
-At Oscilar, infrastructure changes go through a deployer we wrote on top of Pulumi. Before a change ships, we preview it: Pulumi works out what would change in every stack and shows the diff. One environment is 26 stacks. The CI job that previews a change took about ten minutes when it worked, and that week it mostly didn't. Locally, a preview of all 26 stacks didn't finish at all.
+At Oscilar, infrastructure changes go through a deployment service I wrote on top of Pulumi. Before a change ships, we preview it: Pulumi works out what would change in every stack and shows the diff. One environment is 26 stacks. The CI job that previews a change took about 5 minutes.
 
-Ten minutes is long enough to switch to something else and forget to come back. It's long enough that people skip the preview. A preview nobody runs catches nothing.
+5 minutes is long enough to switch to something else and forget to come back. It's long enough that people skip the preview. A preview nobody runs catches nothing.
 
 ** The announcement
 
