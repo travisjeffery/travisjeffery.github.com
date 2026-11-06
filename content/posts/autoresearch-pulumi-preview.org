@@ -1,6 +1,5 @@
 #+TITLE: pi-autoresearch took our Pulumi preview from minutes to seconds
 #+DATE: 2026-03-20
-#+DRAFT: true
 #+TAGS[]: ai pulumi
 #+CATEGORIES[]: tech
 
