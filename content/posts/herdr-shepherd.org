@@ -56,11 +56,11 @@ The pieces never talk to each other directly. A worker says everything through i
 *** The loop
 
 #+begin_example
-me ─ talk ─▶ coordinator ─ qm dispatch ─▶ worker
- ▲            ▲    │                       │  ▲
- │            │    └─ qm context ◀┐        │  │ prompts
+me ─ talk ─> coordinator ─ qm dispatch ─> worker
+ ^            ^    │                       │  ^
+ │            │    └─ qm context <┐        │  │ prompts
  │ notifies   │ nudge             │ inbox  │  │
- │ + sidebar  │                   │        ▼  │
+ │ + sidebar  │                   │        v  │
  └─────────── ticker ─────────────┴───────────┘
              reads bd and herdr every 15s,
              GitHub PRs and runs every 60s
