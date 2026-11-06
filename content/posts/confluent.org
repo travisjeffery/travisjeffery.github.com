@@ -1,76 +1,121 @@
-#+TITLE: Confluent, 2016-2021
+#+TITLE: Confluent, 2017-2021
 #+DATE: 2020-11-03
 #+DRAFT: true
 #+TAGS[]: confluent startups
 #+CATEGORIES[]: tech
 
-* Confluent
+Confluent IPO'd on June 24, 2021. I built more of Confluent Cloud than anyone.
 
-I'd used Kafka.
+I joined to build it from nothing. That is what happened. The rest of this is what it was like.
 
-Had ran JVM software before with ELK.
+* Jocko
 
-First time I'd used software that depended on ZooKeeper.
+I'd used Kafka at Segment. I'd run JVM software before, with ELK. Kafka was the first time I'd used software that depended on ZooKeeper.
 
-I thought I could do better.
+I thought I could do better. Build in consensus and discovery. Make it more cloud-native. So I wrote a project named Jocko: Kafka in Go, with Serf for discovery and Raft for consensus, and no ZooKeeper to run. I started it in October 2016 and wrote most of it that fall.
 
-After, building in consensus and discovery. I could make it more cloud-native.
+In January 2017 I wrote a post about it, "Building a Kafka that doesn't depend on ZooKeeper." On January 21, Jocko was on the front page of Hacker News --- 108 points, 49 comments. antirez commented that needing no ZooKeeper was a "tremendous operational simplification." In the thread I quoted Feynman: "What I cannot build, I do not understand." I wanted to understand Kafka by building it.
 
-I wrote a project named Jocko.
+That same day, Jay Kreps followed me on Twitter and, eight minutes later, DM'd me:
 
-I wrote a blog post on it.
+#+begin_quote
+Hey I saw Jocko. Very cool! We've had similar plans for internalizing some of the metadata and coordination to get rid of zk.
+#+end_quote
 
-That got attention.
+Confluent was already planning to remove ZooKeeper. It would take them until 2020 to say so in public, with KIP-500 and a post called "Apache Kafka Needs No Keeper." Jocko had the same idea three years earlier. I did not know that yet. I just knew the creator of Kafka had read my post the day it hit Hacker News.
 
-Jay Kreps dm'd me on Twitter. I spoke with Neha.
+After the DM, I had a call with Jay in early February. On February 8 he introduced me to Neha by email: Travis "just builds his own Kafka in his spare time because he finds Zookeeper irritating... so our kind of guy."
 
-I spoke with Rob, manager of the new team to build Confluent Cloud.
+* Getting hired
 
-He had me make a REST API. He said I'd be their first remote hire so the interviews would be tougher.
+I spoke with Neha Narkhede on February 24. That day she introduced me to Sabrina Kinder, the recruiter, and Rob Benson, the manager of the new team building Confluent Cloud. Rob followed me on Twitter the same day.
 
-I flew to PA to interview. I stayed in a hotel across their HQ. It was noisy and I didn't sleep well.
+The team was called CaaS --- Confluent as a Service. Rob had me do two take-homes. One was a design doc, five pages at most, for a multi-tenant Kafka as a Service on AWS. The prompt, more or less, was the job itself:
 
-I had 3 technical interviews. 1 interview with Neha. 1 interview with Jay. 1 interview with Cheryl the CFO.
+#+begin_quote
+As an application developer, I want Confluent to provide me with a fully managed Kafka environment... and forget about the complexities of operating a complex stateful system.
+#+end_quote
 
-One interview was on a sliding window streaming aggregation.
+The other take-home was to build a REST API. Dan Norwood reviewed it. Rob told me I'd be their first remote hire, so the interviews would be tougher.
 
-One was talking about a Kafka as a Service design I'd made.
+I submitted the design doc on March 2. On March 3 I flew to Palo Alto to interview at 101 University Ave, directly across the street from the Caltrain station. I stayed in a hotel across from their HQ. It was noisy and I didn't sleep well.
 
-I forget exactly what the other interview was.
+I had five interviews that day: four technical --- Roger Hoover, Xavier Léauté, Ewen Cheslack-Postava, and Rob --- and one hour with Jay and Neha together. I also met Cheryl Dalrymple, the CFO, that day. She is not on the itinerary. I met her anyway.
 
-Cheryl was a highlight that day, and my time at Confluent.
+One interview was on a sliding-window streaming aggregation. One was talking through the Kafka as a Service design I'd made --- the take-home. I forget exactly what the others were.
 
-Her openess with everything reminded me of the openess at Segment.
+Jay's interview was to convince me to join the company. The issue was I wanted to join. So it was awkward.
 
-Jay's interview was to convince me to join the company, the issue was I wanted to join. So it was awkward.
+Cheryl was a highlight that day, and of my time at Confluent. Her openness with everything reminded me of the openness at Segment, where our financials sat on a Grafana dashboard anyone could see. A few weeks after I started, Cheryl emailed the whole company our hiring numbers: we'd started the year with 87 people and were at 112 by the end of March, me among the new engineering hires. That is how small Confluent was when I joined.
 
-Confluent gave me a job offer, but I had a 3 week trip to Japan planned, so I asked them if I should join now or wait until after. They had me join then. I flew to PA for a week to work. Flew home and then flew back to SF to connect to flight to Japan. Great trip, love Japan.
+On March 8, Rob emailed that my references were being checked and that "CaaS is the top product priority for the company in 2017, so you will be setup for impact from day one." He also told me Confluent had no published technical ladder, so every engineer had the same title: Software Engineer. Remember that. It matters later.
 
-My first project was adding the SASL SSL provider Kafka in Confluent Cloud uses to authenticate API keys.
+On March 9, Rob wrote: "Congrats and welcome to the team!" Roger Hoover wrote too. The whole CaaS team, he said, was excited. I hadn't met Jon and Sumit yet.
 
-Then I went to Japan for a few weeks.
+* First weeks
 
-I was in the depths of Kafka's security that doesn't change frequently and none of the Kafka Core team there had any good ideas.
+Before I started, I asked Rob for something I'd never asked a manager: a list of seven to ten habits I could apply each day to contribute as much as I could. He delivered it on my first day and said it "was a very interesting thought experiment that I had not done before." We were supposed to come back in 30 days and talk about whether the priorities were right. I built that working relationship on purpose, from day one. That is part of why losing Rob later cost me so much.
 
-Most of the company wasn't interested in the cloud. They felt that they had a good thing going with the enterprise deployments.
+I flew Toronto to SFO on March 22 and started March 23 in Palo Alto. People Ops put me in Hotel Keen. I worked a week and left after work on March 29. For the welcome email I described myself as the guy who "made Basecamp's mobile apps not suck" and wrote "Jocko, his implementation of Kafka." That is still a fair summary.
 
-It wasn't until we got our 1st million dollar deal that things turned around. And then each month in our all hands the cloud's revenue growth outpaced enterprise.
+Back home, my first project was the SASL provider Confluent Cloud uses to authenticate API keys --- in Jira, CAAS-297, "Implement a backing store for tenant SASL credentials and hook it up." I was in the depths of Kafka's security, code that doesn't change frequently, and none of the Kafka core team there had any good ideas. So my first job at the Kafka company was figuring out a corner of Kafka that the Kafka people didn't want to touch. That set the pattern.
 
-You had people who didn't want their own software. To them, writing software ends when they run `git push`.
+* Building Confluent Cloud
 
-A lot of people came from LinkedIn and didn't have cloud experience, or experience using open-source software.
+It was an intense period of getting Confluent Cloud ready. Confluent announced it in early access at Kafka Summit in New York on May 8, 2017, about six weeks after I started. We had announced a thing we were still building. It is still a deadline with your name on it.
 
-When I got back from Japan it was intense period of getting Confluent Cloud ready. I set up Terraform to provision infrastructure, the VPC, and EKS cluster. Then I began writing HTTP/gRPC services: a scheduling/orchestration service to store metadata on cluster deployments and managing provisioning, a user service to authenticate and store user metadata, an operator, a sync service to sync changes from the control plane to the data plane.
+I set up Terraform to provision the infrastructure, the VPC, and the Kubernetes cluster, which we ran on AWS with kops. EKS came later. Then I began writing the HTTP and gRPC services: a scheduler to store metadata on cluster deployments and manage provisioning, a user service to authenticate users and store their metadata, an operator, and a sync service to sync changes from the control plane to the data plane.
 
-I liked the manager Rob. But he left around a year into Confluent. That was a huge stepback for me because I'd proven myself to Rob, building as much of Confluent Cloud as I had, leading the team. And then I had to begin again with a new manager.
+A month away from the May announcement deadline, two out of three of my teammates went on leave. One took vacation. Another had an ill child, I believe. So everything was on my shoulders.
 
-Politics of a big company.
+On June 13, Rob emailed the company: Confluent Cloud's first customer was onboard. The goal was five customers by the end of June. He thanked eight of us by name.
 
-Confluent had a tool team who developed stuff for the enterprise deployments and managed the in-house Jenkins for CI.
+Confluent Cloud went GA on AWS on November 28, 2017, at re:Invent, as Confluent Cloud Enterprise with a 99.95% SLA. Rob's paternity leave started that same day. I don't remember a celebration. I remember shipping.
 
-Jenkins would go down almost every day and was slow. So I set up SemaphoreCI. Didn't think much of it. Then I heard how they were complaining about how we weren't using their stuff, while not addressing the issues. Over time more and more stuff migrated to our set up. Today all of Confluent builds are running on SemaphoreCI.
+Shipping also meant operating it. In February 2018 I was on a customer support ticket. I first thought their API key hadn't been copied to their new brokers. It turned out we had filtered their security group too aggressively for the new brokers. My first project, in production, on a customer. That is owning your software.
 
-A month away from deadline to ship Confluent Cloud and 2 out of 3 of my teammates go on leave. One took vacation another had an ill child I believe. So everything was on my shoulders.
+There was a second launch my notes don't mention and the mail does. On April 20, 2018, we soft-launched the self-serve product, Confluent Cloud Professional. Jay's all-hands email that day said: "You can create a Kafka cluster with the click of a button and get billed for your usage on your credit card" --- and that the team had ported the product to Google Cloud at the same time, with almost everyone working overtime. Enterprise GA made us a product. Self-serve made us a cloud company. Those are different things, and the second one is the one that mattered.
 
-A lot of strange hiring and promoting happened at Confluent.
+* Cloud vs. enterprise
+
+Rob had told me CaaS was the company's top product priority. Leadership meant it. Most of the company didn't act like it.
+
+Most of the company wasn't interested in the cloud. They felt they had a good thing going with the enterprise deployments. You had people who didn't want to own their software. To them, writing software ended when they ran ~git push~. A lot of people came from LinkedIn and didn't have cloud experience, or experience using open-source software. Running Kafka for other people, on AWS, with an SLA, was a different job from shipping Kafka to other people. We were the team doing the different job, and for a while we were easy to ignore.
+
+It wasn't until we got our first million-dollar deal --- with a healthcare company in the Midwest, probably in late 2017 --- that things turned around. And then each month in our all-hands the cloud's revenue growth outpaced enterprise. In July 2018, Neha made the theme for the second half "Cloud First": onboard all of Confluent Platform onto Confluent Cloud. By December 2019, monthly cloud revenue passed $2M for the first time. Money settled the argument that "top priority" hadn't.
+
+The Jenkins story is the same argument in miniature. Confluent had a tools team who built for the enterprise deployments and managed the in-house Jenkins for CI. Jenkins would go down almost every day and was slow. A few months after I started, the company told us it had also been exploited through a security vulnerability. Someone unknown had run unauthorized programs on it. So in October 2017, I set up SemaphoreCI. I emailed Semaphore from my personal address. I'd used it before and was a big fan. Then I put them in touch with IT for a security review. I didn't think much of it. Then I heard how they were complaining about how we weren't using their stuff, while not addressing the issues. Over time more and more stuff migrated to our setup. By the time I left, all of Confluent's builds were running on SemaphoreCI. Nobody announced that the cloud team's tools had won. The builds just moved.
+
+* Losing Rob
+
+I liked my manager Rob. But he left early in 2018, about a year into my time at Confluent.
+
+Roger Hoover stepped in temporarily. Then, as I remember it, Ram Subramanian managed the team. After that the teams split, and I had a new manager every year. Every good manager left after about a year.
+
+Losing Rob was a huge setback for me. I'd proven myself to Rob, building as much of Confluent Cloud as I had and leading the team. We'd had the habits list, the 30-day check-in, a shared idea of what my job was. And then I had to begin again with a new manager. And again the next year. Each time, prove the same things to someone who hadn't seen the work.
+
+Politics of a big company. Except Confluent wasn't big yet when I joined --- 112 people. It got big while I was there, and I felt the change first as losing the one person who had seen the work from the start.
+
+Remember: no published technical ladder, one title for every engineer. Rob had pitched that as meritocracy. In practice, a lot of strange hiring and promoting happened at Confluent, and with no ladder there was nothing to point at and argue with. Your standing lived in your manager's head. When they left, it left with them.
+
+The company said it valued getting shit done. But it hired and promoted people who did nothing but talk. It promoted "collaboration" --- people meeting up to talk for no reason --- over independence and efficiency. Promotions always went to people who worked locally in the office, regardless of what they'd shipped. I was remote, in Toronto.
+
+From April 2018 I was also writing a book, /Distributed Services with Go/, on top of bringing Confluent Cloud from zero to one. The book has the reader build a distributed service from scratch --- consensus, discovery, the stuff Jocko was about --- and it was published in March 2021. Jay agreed to blurb it. I drafted the quote. He replied: "Works for me." I don't recommend writing a book while building a cloud. I did it anyway. "What I cannot build, I do not understand" cuts both ways.
+
+* The end
+
+In May 2020, Confluent published "Apache Kafka Needs No Keeper," announcing the work to remove ZooKeeper from Kafka. An internal newsletter that month put it under the heading "Goodbye Zookeeper---in progress." Jay had told me in a Twitter DM in January 2017 that they had "similar plans." Jocko was a side project by a guy in Toronto who thought he could do better. He couldn't, not at Kafka's scale. But he was right about the ZooKeeper part, and being right about that is what got me the job.
+
+Confluent priced its IPO on June 23, 2021 at $36 a share, above the range, and started trading on Nasdaq the next day as CFLT. It closed the first day at $45.02. Jay's email the night before said: "It's our great shared honor for all of us to be part of the team that helped create a public company."
+
+On November 1, I resigned in two sentences. "Please accept this letter as formal notification that I am resigning from my position with Confluent. My last day will be November 22."
+
+Cheryl retired that fall. Her last day was November 5. On November 17, the company announced that Ram, Gwen Shapira, and Dan Norwood were leaving in December to found their own company. Dan was the guy who had reviewed my REST API take-home. Everyone was leaving that month.
+
+I left Confluent on November 22, 2021, five months after the IPO. A bunch of people at the company came to a Zoom call to send me off. By mid-December I was at Oscilar.
+
+The bureaucracy was frustrating. The company valued the wrong things while saying the other. I was ready to do another startup and just build.
+
+I picked Confluent to build Confluent Cloud from nothing. I wanted to build it all, and I built more of it than anyone. The company that wasn't interested in the cloud became a cloud company while I was there. I watched that happen from Toronto, mostly alone with the work, which is how I like it and also the problem with it. Both of those are true. Kafka got rid of ZooKeeper in the end, the way Jay had said they planned to. I had wanted to build the cloud from nothing. I did that. Then I left.
+
 
