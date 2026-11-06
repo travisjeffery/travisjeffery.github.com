@@ -76,7 +76,7 @@ Over four days the loop logged 181 experiments: it kept 28, discarded 95, and 58
 
 The 31 seconds was measured on a local copy of the state, not Pulumi Cloud.
 
-The changes went out: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. One flag I tested, disabling resource references, saved about three seconds. Too risky for three seconds, so it didn't ship.
+The changes went out: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. One flag I tested, disabling resource references, saved about three seconds. It hands resources between components as bare IDs instead of real resources, so a preview could stop matching what an apply does. Too risky for three seconds, so it didn't ship.
 
 We also stopped previewing every stack in CI. A change now previews only the stack it touches. Together, the time CI spends in Pulumi for a preview went from about 3.6 minutes in March to about 13 seconds today.
 
