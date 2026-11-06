@@ -1,0 +1,74 @@
+#+TITLE: Radar: I automated PR review because AI made Oscilar write more code
+#+DATE: 2026-11-03
+#+DRAFT: true
+#+TAGS[]: ai tools oscilar
+#+CATEGORIES[]: tech
+
+AI made code review the bottleneck at Oscilar. People merged 471 pull requests in October 2025. In October 2026 they merged 3,448, about 7x. (Those are GitHub's counts of merged PRs across the org, with bots like Dependabot left out.) The number of people opening PRs went from 39 to 77.
+
+I'm the extreme case. In the first half of October I merged 486 of the org's 1,910 PRs, about a quarter. Without me, everyone else still went from about 12 PRs a month to about 36.
+
+One engineer with agents can open more PRs in a day than a reviewer can read carefully, and a reviewer with ten open PRs skims. So I built Radar. I wrote the first version in Go from Meta's RADAR paper. It now reviews every pull request at Oscilar, and it's on GitHub at [[https://github.com/travisjeffery/radar][travisjeffery/radar]].
+
+** What the paper does
+
+In May, Meta published [[https://arxiv.org/abs/2605.30208][a paper on RADAR]], the system they built to auto-review low-risk changes. Their numbers: lines of code per human-landed diff up 106% year over year, diffs per developer up 51%, and agentic AI behind over 80% of that growth.
+
+RADAR stands for Risk Aware Diff Auto Review. A change must pass every gate to skip human review. If it fails a gate, it goes to a person.
+
+The gates, roughly:
+
+- *Static checks.* Is the change in scope? Do CI and its state pass? Does it touch a blocklisted path or contain blocklisted content?
+- *A risk score.* Meta has a model that scores each diff's risk, the Diff Risk Score. Scores are calibrated to percentiles, so a threshold like P20 means "only the safest 20% qualify."
+- *An AI reviewer.* An LLM reviews the change and must be confident with zero risk signals.
+
+Meta reports that RADAR reviewed over 535,000 diffs and landed over 331,000. People reverted those diffs a third as often as others, and they caused a fiftieth as many production incidents. Those numbers come from Meta's scale and risk model. I can't reproduce them and don't claim to.
+
+My first version was those gates, the decisions and the metrics, with the two proprietary pieces (the risk model and the AI reviewer) as interfaces. That's still in the repo as ~radar classify~ and ~radar replay~.
+
+** What changed when it met real PRs
+
+I changed it after running it on Oscilar's pull requests.
+
+The risk score didn't hold up. Without Meta's model, my stand-in score is mostly size, and gating on size just means big changes always go to a person, whatever they contain. So I made approval rest on what the reviewers find.
+
+People read the review. On every PR, a yes or no was not enough. So I made Radar a reviewer first and an approver second.
+
+I ran Radar in comment-only mode for about a week, with its approvals in shadow, before anyone considered letting it approve. Shadow is still the default. Radar never merges a pull request and never requests changes.
+
+** How it works
+
+Radar runs in GitHub Actions as two stages on each pull request head.
+
+*Findings.* As soon as a PR opens or changes, Radar reviews it, without waiting for checks. It posts one comment with the findings grouped by severity, and the P0s and P1s inline.
+
+*Verdict.* Once checks finish, Radar decides. It reuses the findings stage's reviews when the request is byte-identical, so the comment people read and the decision rest on the same reviews, and the verdict normally needs no new model call.
+
+I send each review to more than one model. At Oscilar, Claude on Bedrock and Codex run at the same time from the same snapshot. Both read the repository as well as the patch: Codex runs read-only over a checkout of the head, and Claude gets read-only tools (~read_file~, ~grep~, ~list_dir~, ~git_log~) confined to the checkout. Radar merges their findings. Two findings in the same file, within three lines, citing the same rule are one issue, and the comment shows who agreed.
+
+*I never ask the model to approve.* Every reviewer gets the same prompt and returns a structured review: a summary, findings with severity, file, lines, impact and a fix, questions, assumptions, suggested tests, and what it covered. Radar computes the verdict from those fields. P0s and P1s block. So do defect signals, a structural change, a reviewer that didn't cover every file, and paths or phrases the policy denies. Radar renders the comment from the same data, so the verdict can't disagree with what the review says.
+
+Radar fails closed: a provider error, a timeout, a cut-off response, checks that change between two reads, or a policy that doesn't load all route to a person.
+
+** The features
+
+- *Severity measures what the change does.* Early on, the findings people thumbs-downed were all P0s and P1s, and few were plain false positives. Most of those findings were valid but too severe. Now a P0 or P1 needs a line this PR changes to create or newly expose the risk. A gap the change only passes near is pre-existing: a P2 and a question for the author.
+- *Review rounds converge.* Every push gets a full review, and at first any new P1 blocked. PRs never finished: each round found something new, usually on lines the author hadn't touched. From round two, a P1 blocks only if it's on or near lines changed since the last review. Radar collapses anything raised late on unchanged lines into a separate list that doesn't block.
+- *You can answer it.* Reply to a finding with ~/radar~ and what it missed. Radar re-checks just that finding. It withdraws or downgrades it only if the re-check cites lines that exist at the head. If the only evidence is your word, the finding stops blocking but the PR goes to a person. Authors can't talk Radar into approving their own change.
+- *PR text is untrusted data.* The title, description, commits, linked issue, open threads and check states all go to the reviewers, inside one delimited, length-capped block. The prompt says it's untrusted, and to report anything that tries to steer the review. The verdict never reads it, so injected text can't approve anything.
+- *Per-area criteria.* A rules file maps paths to review packs (rules with IDs the findings cite) and to policy, like "IAM changes always need a person." Area policy can only tighten. Radar reads the rules, packs and guidance from the default branch, never the PR, so a change can't rewrite what it's reviewed against.
+- *Generated files and lockfiles.* Radar withholds generated files from the reviewers, but only ones that already existed at a generated path, so naming a new file like generated code doesn't hide it. It summarizes lockfiles per package, and supply-chain signals (a new source, a downgrade, a hash-only change, a lockfile change with no manifest change) are P1s or go straight to a person.
+- *A person can always insist.* The ~radar:human-review~ label routes a PR to a person. Only people with write or triage access can set labels, so unlike text in the description, it's trusted.
+- *Approval stays current.* In approve mode, a Radar approval must not carry over to code pushed after it. Dismissing approvals on push would dismiss human approvals too, so Radar keeps a commit status current on each head, and the branch rules require it.
+- *Review before the PR.* ~radar-gh review-commit~ reviews a pushed commit exactly as CI would review a PR from it. A hosted MCP server runs the same review from Claude Code or claude.ai, so you can ask for Radar's review before you open the PR.
+
+** The sharp edges
+
+- *AI review isn't human review.* Radar finds a lot. It doesn't know why the change exists or whether it's the right change. A person still has to judge that. The review shows them where to look.
+- *Models disagree with themselves.* The same PR reviewed twice can get different findings. Merging several reviewers and computing the verdict from structured fields makes that tolerable.
+- *Calibration is ongoing.* Most of the rules above came from reading findings people disagreed with. Severity and convergence fixes have fixtures from real, anonymised rounds so they don't regress.
+- *Approval is a separate decision.* Comment-only is useful on its own and low-risk to turn on. Letting a bot approve needs branch rules you trust, a shadow period, and someone who owns the outcome.
+
+Radar is on GitHub at [[https://github.com/travisjeffery/radar][travisjeffery/radar]]. [[https://github.com/travisjeffery/radar/blob/main/examples/github-actions/radar-review.yml][The example workflow]] and [[https://github.com/travisjeffery/radar/blob/main/examples/github-policy.json][policy]] start you in shadow mode.
+
+Next: how I optimised what it costs.
