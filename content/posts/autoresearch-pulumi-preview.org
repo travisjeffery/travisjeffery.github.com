@@ -90,4 +90,4 @@ Tobi posted on Thursday evening, March 12, and I installed it that night. The lo
 
 *Set the fences first.* "Don't change the stacks, the resources or the state" did a lot of work. Several experiments were faster and wrong. Turning off server-side apply broke previews. Trusting provided secrets over live ones sped things up but proposed replacing databases. Because of the constraint, the loop checked for changed diffs and threw those out. Decide up front, too, what it's allowed to touch outside the repo.
 
-Four days of experiments, and previewing only what a change touches, took our CI preview from minutes to seconds. Most of the work was done by a loop that worked away during the weekend while I played with my kids.
+Four days of experiments, and previewing only what a change touches, took our CI preview from minutes to seconds. A loop did most of the work over the weekend while I played with my kids.
