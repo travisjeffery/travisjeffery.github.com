@@ -4,9 +4,7 @@
 #+TAGS[]: confluent startups
 #+CATEGORIES[]: tech
 
-Confluent IPO'd on June 24, 2021. I built more of Confluent Cloud than anyone.
-
-I joined to build it from nothing.
+I started at Confluent on March 23, 2017. My job was to build Confluent Cloud from nothing.
 
 * Jocko
 
