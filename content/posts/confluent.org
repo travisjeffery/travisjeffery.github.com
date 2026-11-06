@@ -48,7 +48,7 @@ On March 8 Rob said my references were being checked and that "CaaS is the top p
 
 Before I started, I asked Rob for a list of seven to ten habits to apply each day. He sent it on my first day. It "was a very interesting thought experiment that I had not done before." We would revisit the priorities in 30 days.
 
-I flew from Toronto to SFO on March 22 and started in Palo Alto on March 23. I worked a week and left after work on March 29. My first project was the SASL provider Confluent Cloud uses to authenticate API keys: CAAS-297, "Implement a backing store for tenant SASL credentials and hook it up." I was deep in Kafka security. That code rarely changes. Nobody on the Kafka core team had good ideas. My first job at the Kafka company was a corner of Kafka they did not want to touch.
+I flew from Toronto to SFO on March 22 and started in Palo Alto on March 23. I worked a week and left after work on March 29. My first project was the SASL provider Confluent Cloud uses to authenticate API keys: CAAS-297, "Implement a backing store for tenant SASL credentials and hook it up." I was deep in Kafka security. That code rarely changes. Nobody on the Kafka core team had good ideas. My first job at the Kafka company was a corner of Kafka they did not want to touch. It also meant writing Java. I had not written Java since one course at university, almost ten years earlier.
 
 * Building Confluent Cloud
 
