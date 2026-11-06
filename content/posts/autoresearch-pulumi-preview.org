@@ -1,12 +1,12 @@
-#+TITLE: Autoresearch took our Pulumi preview from 300 seconds to 30
+#+TITLE: Autoresearch took our Pulumi preview from 330 seconds to 30
 #+DATE: 2026-11-06
 #+DRAFT: true
 #+TAGS[]: ai pulumi
 #+CATEGORIES[]: tech
 
-At Oscilar, infrastructure changes go through a deployment service I wrote on top of Pulumi. Before a change ships, we preview it: Pulumi works out what would change in every stack and shows the diff. One environment is 26 stacks. The CI job that previews a change took about 5 minutes.
+At Oscilar, infrastructure changes go through a deployment service I wrote on top of Pulumi. Before a change ships, we preview it: Pulumi works out what would change in every stack and shows the diff. One environment is 26 stacks. The CI job that previews a change took about 5 1/2 minutes.
 
-5 minutes is long enough to switch to something else and forget to come back. It's long enough that people skip the preview. A preview nobody runs catches nothing.
+5 1/2 minutes is long enough to switch to something else and forget to come back. It's long enough that people skip the preview. A preview nobody runs catches nothing.
 
 ** The announcement
 
@@ -49,13 +49,13 @@ The stacks build on each other in waves: global, then regions, then clusters, th
 
 A trace showed about 34 seconds going to reading Pulumi config. Each stack read its whole config, wrote one key, and read it all back, just to merge one setting. Reading only that key, once per stack, up front, got it to *193 seconds.*
 
-That was as far as it got against Pulumi Cloud. The runs were too noisy to trust a few seconds either way. Some runs died before starting because my laptop couldn't reach the cluster that holds the Pulumi credentials. At one point the agent changed my DNS to 8.8.8.8 to see if that helped. It didn't.
+That was as far as it got against Pulumi Cloud. The runs were too noisy to trust a few seconds either way. At one point the agent changed my DNS to 8.8.8.8 to see if that helped. It didn't.
 
 *** Changing the benchmark
 
 I asked whether a Postgres backend would mean less remote work, and whether it could test that without touching the real stacks. It exported the 26 stacks, re-encrypted their secrets with a passphrase, loaded them into a local Postgres container, and pointed the preview at the copy. *137 seconds*, and much less noise.
 
-To be clear about this one: that was a change to the benchmark, not to the code. Production still uses Pulumi Cloud. But a quiet benchmark is what made the next round of experiments possible, because a two-second win no longer disappeared in the noise.
+That was a change to the benchmark, not to the code --- to make the benchmarks and numbers more consistent and reliable. Production still uses Pulumi Cloud. But a quiet benchmark is what made the next round of experiments possible, because a two-second win no longer disappeared in the noise.
 
 *** Wave tuning
 
@@ -88,7 +88,6 @@ The last run of the session: every wave at 50 at a time. *31.4 seconds.* At 100 
 
 | Stage                                        | Seconds |
 |----------------------------------------------+---------|
-| Baseline                                     | crashed |
 | First run to finish                          |     330 |
 | Wave-aware scheduling                        |     223 |
 | Targeted config reads (best on Pulumi Cloud) |     193 |
@@ -101,8 +100,6 @@ The last run of the session: every wave at 50 at a time. *31.4 seconds.* At 100 
 From 330 seconds to 31: about five minutes to about thirty seconds. I didn't get to 15. Everything from 137 down was measured against the local Postgres copy; against Pulumi Cloud the best I measured was 193.
 
 The changes went out in one PR: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. Disabling resource references didn't ship. It's the riskiest of the changes, and it isn't set anywhere in our code or CI.
-
-The CI job didn't drop the same way. It still takes a few minutes, but most of that is compiling the deployer and saving the Go module cache, not Pulumi.
 
 ** Lessons
 
@@ -118,4 +115,4 @@ The CI job didn't drop the same way. It still takes a few minutes, but most of t
 
 *It'll touch more than the code.* Mine changed my DNS settings, with my permission. Decide up front what it's allowed to touch outside the repo.
 
-Four days and 181 experiments took a preview that wouldn't finish, then took five and a half minutes, to one that runs in about half a minute. Most of the work was done by a loop that didn't get bored.
+Four days and 181 experiments took a preview that took five and a half minutes, to one that runs in about half a minute. Most of the work was done by a loop that worked away as I worked on other stuff.
