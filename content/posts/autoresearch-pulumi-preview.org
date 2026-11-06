@@ -1,10 +1,10 @@
-#+TITLE: Autoresearch made our Pulumi previews ten times faster
+#+TITLE: Autoresearch took our Pulumi preview from 330 seconds to 31
 #+DATE: 2026-11-06
 #+DRAFT: true
 #+TAGS[]: ai pulumi
 #+CATEGORIES[]: tech
 
-At Oscilar, infrastructure changes go through a deployer we wrote on top of Pulumi. Before a change ships, we preview it: Pulumi works out what would change in every stack and shows the diff. One environment is 26 stacks. A preview of all of them took ten minutes in CI when it worked, and that week it mostly didn't.
+At Oscilar, infrastructure changes go through a deployer we wrote on top of Pulumi. Before a change ships, we preview it: Pulumi works out what would change in every stack and shows the diff. One environment is 26 stacks. The CI job that previews a change took about ten minutes when it worked, and that week it mostly didn't. Locally, a preview of all 26 stacks didn't finish at all.
 
 Ten minutes is long enough to switch to something else and forget to come back. It's long enough that people skip the preview. A preview nobody runs catches nothing.
 
@@ -98,11 +98,24 @@ The last run of the session: every wave at 50 at a time. *31.4 seconds.* At 100 
 | No resource references, retuned              |      38 |
 | Every wave at 50                             |      31 |
 
-I didn't get to 15 seconds.
+I didn't get to 15 seconds. And everything from 137 down was measured against the local Postgres copy, not the Pulumi Cloud backend we run on. Against Pulumi Cloud the best I measured was 193. The 31 is a benchmark number.
 
-The changes went out in one PR: the workspace pool, the batched config, the wave concurrency, no refresh by default, and the trimmed secret and stack reference reads. Resource references stay on by default. Disabling them is the riskiest of the changes, so it's opt-in.
+The changes went out in one PR: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. Disabling resource references didn't ship. It's the riskiest of the changes, and it isn't set anywhere in our code or CI.
 
-In CI, the preview job's median went from about 10 minutes to about 5, counting checkout, build and setup. In the two days before I started, it failed every time. Since, it mostly passes.
+** The CI job
+
+The same PR changed the CI job too. It used to run the deployer's tests and build a container image for the preview, then run the preview in that image. The build took a median of 5 minutes and the tests 3, and the preview waited on both. Now the job checks out the repo and runs the preview with ~go run~, using a cache of Go modules.
+
+| Preview workflow, successful runs | Before (Feb 15 to Mar 10) | After (Mar 17 to Apr 10) |
+|-----------------------------------+---------------------------+--------------------------|
+| Runs                              |                        18 |                       27 |
+| Median wall time                  |                  10.2 min |                  4.9 min |
+
+In the two days before I started, it failed every time. In the weeks after, it mostly passed.
+
+The preview job itself didn't get much shorter: a median of 4.7 minutes before and 4.4 after. But it now compiles the deployer from source, which the old job got from the image. I can't split that time any further, because GitHub no longer has the logs.
+
+Two weeks later I cleaned up the CI caches. The preview job had been caching Go's build output as well as its modules. Build output changes on every commit, so that cache churned. I kept only the modules. Before, the job swung between 3 and 12 minutes. After, it held at 4 to 5. The fast runs got about a minute slower, and the slow ones went away.
 
 ** Lessons
 
@@ -118,4 +131,4 @@ In CI, the preview job's median went from about 10 minutes to about 5, counting 
 
 *It'll touch more than the code.* Mine changed my DNS settings, with my permission. Decide up front what it's allowed to touch outside the repo.
 
-Four days, 181 experiments, and a preview that used to be skipped is now one people run. Most of the work was done by a loop that didn't get bored.
+Four days and 181 experiments took a preview that wouldn't finish to one that runs in about half a minute on a quiet benchmark, and halved the CI job. Most of the work was done by a loop that didn't get bored.
