@@ -90,9 +90,9 @@ From April 2018 I also wrote /Distributed Services with Go/ while taking Conflue
 
 For the company kickoff in January 2020, Confluent booked a whole cruise ship, Royal Caribbean's Mariner of the Seas. About 2,000 people, all Confluent. I flew from Toronto to Orlando on Sunday, January 26. We spent a night in Orlando, then sailed the Caribbean for four days.
 
-On the way home, we heard the Costa Smeralda was being held in Italy over a suspected coronavirus case. I flew back to Toronto on Friday night, January 31. I landed at 11:35 p.m. At Pearson, nothing had changed.
+On the way home, we heard the Costa Smeralda was being held in Italy over a suspected coronavirus case. I landed in Toronto late Friday night. Nothing at Pearson had changed.
 
-I was home for a few hours. At 9:30 the next morning, I flew to Cancun for a week in Tulum. We watched the Super Bowl there on February 2. That week, the Diamond Princess was quarantined in Japan. On February 8, I flew home. I landed in Toronto at about 1:15 in the morning. Pearson was in full hazmat mode.
+I was home for a few hours, then flew to Cancún the next morning for a week in Tulum. We watched the Super Bowl there on February 2. That week, the Diamond Princess was quarantined in Japan. I landed back in Toronto after midnight. Pearson was in full hazmat mode.
 
 In May 2020 Confluent published "Apache Kafka Needs No Keeper," and announced the work to remove ZooKeeper. An internal newsletter ran it as "Goodbye Zookeeper---in progress." In January 2017 Jay had DM'd me they had "similar plans." Jocko was a side project by a man in Toronto who thought he could do better. At Kafka's scale, he could not. On ZooKeeper, he was right. That got me the job.
 
