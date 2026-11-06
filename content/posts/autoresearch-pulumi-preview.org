@@ -1,5 +1,5 @@
 #+TITLE: pi-autoresearch took our Pulumi preview from minutes to seconds
-#+DATE: 2026-11-06
+#+DATE: 2026-03-20
 #+DRAFT: true
 #+TAGS[]: ai pulumi
 #+CATEGORIES[]: tech
@@ -78,7 +78,9 @@ The 31 seconds was measured on a local copy of the state, not Pulumi Cloud.
 
 The changes went out: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. One flag I tested, disabling resource references, saved about three seconds. It hands resources between components as bare IDs instead of real resources, so a preview could stop matching what an apply does. Too risky for three seconds, so it didn't ship.
 
-We also stopped previewing every stack in CI. A change now previews only the stack it touches. Together, the time CI spends in Pulumi for a preview went from about 3.6 minutes in March to about 13 seconds today.
+We also stopped previewing every stack in CI. A change now previews only the stack it touches. Together, the time CI spends in Pulumi for a preview went from about 3.6 minutes before to about 13 seconds after.
+
+Tobi posted on the evening of March 12, and I installed it that night. The loop ran from March 13 to 16, the changes merged on the 16th, and CI started previewing just the stack a change touches on the 20th: about a week from announcement to shipped.
 
 ** Lessons
 
