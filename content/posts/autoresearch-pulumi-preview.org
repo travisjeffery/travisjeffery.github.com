@@ -1,4 +1,4 @@
-#+TITLE: Autoresearch took our Pulumi preview from minutes to seconds
+#+TITLE: pi-autoresearch took our Pulumi preview from minutes to seconds
 #+DATE: 2026-11-06
 #+DRAFT: true
 #+TAGS[]: ai pulumi
@@ -31,7 +31,7 @@ From that it wrote an ~autoresearch.md~ with the goal, the files in scope and wh
 
 *** First it had to finish
 
-Run on my laptop against all 26 stacks, the preview didn't produce a number at all. Pulumi Cloud returned 401s, DNS lookups to Pulumi, AWS and the Kubernetes APIs failed, and stacks fell over halfway through.
+Ran on my dev machine against all 26 stacks, the preview didn't produce a number at all. Pulumi Cloud returned 401s, DNS lookups to Pulumi, AWS and the Kubernetes APIs failed, and stacks fell over halfway through.
 
 So the first eleven experiments were all crashes. The preview started every stack in a wave at once, each with its own fresh Pulumi workspace. The loop tried fewer at a time, fewer chart pulls, a different DNS resolver, and skipping Pulumi's update checks. The fewer stacks it ran at once, the further it got.
 
@@ -76,7 +76,7 @@ Over four days the loop logged 181 experiments: it kept 28, discarded 95, and 58
 
 The 31 seconds was measured on a local copy of the state, not Pulumi Cloud.
 
-The changes went out in one PR: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. One flag I tested, disabling resource references, didn't ship.
+The changes went out: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. One flag I tested, disabling resource references, saved about three seconds. Too risky for three seconds, so it didn't ship.
 
 We also stopped previewing every stack in CI. A change now previews only the stack it touches. Together, the time CI spends in Pulumi for a preview went from about 3.6 minutes in March to about 13 seconds today.
 
