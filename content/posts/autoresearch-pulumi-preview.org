@@ -1,0 +1,92 @@
+#+TITLE: pi-autoresearch took our Pulumi preview from minutes to seconds
+#+DATE: 2026-03-20
+#+TAGS[]: ai pulumi
+#+CATEGORIES[]: tech
+
+At Oscilar, infrastructure changes go through a deployment service I wrote on top of Pulumi. Before a change ships, we preview it: Pulumi works out what would change in every stack and shows the diff. One environment is 26 stacks. The CI job that previews a change took about four minutes.
+
+Four minutes is long enough to switch to something else and forget to come back. It's long enough that people skip the preview. A preview nobody runs catches nothing.
+
+** The announcement
+
+On March 12, Tobi Lütke [[https://x.com/tobi/status/2032212536716578932][posted]] that Shopify had open-sourced an autoresearch plugin for [[https://pi.dev][pi]], the coding agent: [[https://github.com/davebcn87/pi-autoresearch][pi-autoresearch]], written by David Cortés and inspired by Karpathy's autoresearch. "Just tell it what you want, it will do the rest."
+
+The idea is simple. You give the agent a command and a number. It changes the code, runs the command, and reads the number. If the number got better, it commits. If not, it reverts. Then it tries something else, and it doesn't stop.
+
+I had a slow command and a number. I installed it that night and put it to work.
+
+** Setting it up
+
+The plugin's setup skill asks four questions. My answers:
+
+1. *Goal:* get the preview as close to 15 seconds as possible.
+2. *Command:* ~go run ./cmd/preview~, which previews every stack.
+3. *Metric:* wall time in seconds, lower is better.
+4. *Constraints:* don't change the stacks, the resources, or the state. Keep the preview's output the same.
+
+From that it wrote an ~autoresearch.md~ with the goal, the files in scope and what was off limits, and an ~autoresearch.sh~ that ran the preview and printed its wall time. Every experiment was a commit or a revert, and every result went in a log.
+
+** What the loop found
+
+*** First it had to finish
+
+Ran on my dev machine against all 26 stacks, the preview didn't produce a number at all. Pulumi Cloud returned 401s, DNS lookups to Pulumi, AWS and the Kubernetes APIs failed, and stacks fell over halfway through.
+
+So the first eleven experiments were all crashes. The preview started every stack in a wave at once, each with its own fresh Pulumi workspace. The loop tried fewer at a time, fewer chart pulls, a different DNS resolver, and skipping Pulumi's update checks. The fewer stacks it ran at once, the further it got.
+
+Experiment 12 finished in *330 seconds*. It ran one stack at a time. It reused a pool of workspaces instead of making one per stack. It wrote each stack's config in one call instead of one call per key. It pulled Helm charts only for the stacks that use them. That was the number to beat.
+
+*** Then it got faster in steps
+
+The stacks build on each other in waves: global, then regions, then clusters, then the services on each cluster. Earlier waves were flaky under load, and later waves weren't. So the loop ran the early waves one at a time and the service waves three at a time. *223 seconds.*
+
+A trace showed about 34 seconds going to reading Pulumi config. Each stack read its whole config, wrote one key, and read it all back, just to merge one setting. Reading only that key, once per stack, up front, got it to *193 seconds.*
+
+Then the runs got too noisy to trust a few seconds either way. At one point the agent changed my DNS to 8.8.8.8, with my permission, to see if that helped. It didn't.
+
+*** Changing the benchmark
+
+I asked whether a Postgres backend would mean less remote work, and whether it could test that without touching the real stacks. It exported the 26 stacks, re-encrypted their secrets with a passphrase, loaded them into a local Postgres container, and pointed the preview at the copy. *137 seconds*, and much less noise.
+
+With a steady benchmark, the loop swept each wave's concurrency one knob at a time and got it to *78 seconds*. It settled on two global stacks, four regions, three clusters and four or five services at a time. Pushing any wave past that made it slower.
+
+*** Turning off work nobody asked for
+
+Then I asked what work we could skip.
+
+Every preview refreshed every stack first: it read every resource's live state from AWS and Kubernetes before diffing. The preview was there to show what a code change would do, so I told it to stop refreshing. *50 seconds.*
+
+Then I asked the agent to dig through the Pulumi Go SDK for knobs. It found ~PULUMI_DISABLE_RESOURCE_REFERENCES~, which sends plain values instead of typed resource references between the program and the engine. *47 seconds.* With less going on, more of each wave could run at once. Retuned, *38 seconds.*
+
+*** What a trace said was left
+
+I ran Pulumi's [[https://www.pulumi.com/docs/support/debugging/performance-tracing/][performance tracing]] across a full run. The time wasn't in diffing, which was under half a second in the traced stack. It was in reads: services rereading Kubernetes secrets they already had the values for, and stack references fetched again and again. The loop removed the safe rereads and resolved stack references once. That stayed around *38 seconds*, but with less load on the clusters.
+
+Earlier, more than a few at a time had made every wave slower. Now that each stack did less, the clusters could take the load, so the last run of the session set every wave to 50, which runs every stack in a wave at once. *31.4 seconds.*
+
+** Results
+
+Over four days the loop logged 181 experiments: it kept 28, discarded 95, and 58 crashed.
+
+| Preview                     | Before  | After |
+|-----------------------------+---------+-------|
+| The loop's benchmark        | 330s    | 31s   |
+| A change, previewed in CI   | 3.6 min | 13s   |
+
+The 31 seconds was measured on a local copy of the state, not Pulumi Cloud.
+
+The changes went out: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. One flag I tested, disabling resource references, saved about three seconds. It passes plain IDs instead of real resources between the program and the engine, so a preview could stop matching what an apply does. Too risky for three seconds, so it didn't ship.
+
+We also stopped previewing every stack in CI. A change now previews only the stack it touches. Together, the time CI spends in Pulumi for a preview went from about 3.6 minutes before to about 13 seconds after.
+
+Tobi posted on Thursday evening, March 12. The loop ran from Friday to Monday, and the changes merged Monday evening: a few days, over a weekend. Previewing just the stack a change touches followed that Friday.
+
+** Lessons
+
+*The loop is only as good as the number.* For the first day the number was mostly noise: DNS failures, expired tokens, a VPN that dropped. The loop discarded good ideas because a run landed on a bad minute. The targeted config read was tried and thrown out twice before it was kept on the third try. It also profiled by trial and error until I asked whether it had read the profiles. When it did, they said nearly all the time was waiting on Pulumi. Next time I'd make the benchmark steady, and read the profile, before starting the loop.
+
+*The big wins came from questions, not from the loop.* The loop is great at sweeping knobs: try 3, try 4, keep 3, try the next wave, dozens of runs I'd never have had the patience for. But stop refreshing, test against a copy, and raise every wave to 50 each came from me asking "why are we doing this at all?" or "what if?" The loop is good at climbing a hill. It doesn't ask whether it's on the right one.
+
+*Set the fences first.* "Don't change the stacks, the resources or the state" did a lot of work. Several experiments were faster and wrong. Turning off server-side apply broke previews. Trusting provided secrets over live ones sped things up but proposed replacing databases. Because of the constraint, the loop checked for changed diffs and threw those out. Decide up front, too, what it's allowed to touch outside the repo.
+
+A few days of experiments, and previewing only what a change touches, took our CI preview from minutes to seconds. A loop did most of the work over the weekend while I played with my kids.
