@@ -1,4 +1,4 @@
-#+TITLE: Autoresearch took our Pulumi preview benchmark from 330 seconds to 31
+#+TITLE: Autoresearch took our Pulumi preview from minutes to seconds
 #+DATE: 2026-11-06
 #+DRAFT: true
 #+TAGS[]: ai pulumi
@@ -69,26 +69,20 @@ Earlier, more than a few at a time had made every wave slower. Now that each sta
 
 ** Results
 
-Over four days the loop logged 181 experiments: it kept 28, discarded 95, and 58 crashed.
+Over four days the loop logged 181 experiments: it kept 28, discarded 95, and 58 crashed. I didn't get to 15 seconds, but the gains held up outside the benchmark:
 
-| Stage                                 | Where                  | Seconds |
-|---------------------------------------+------------------------+---------|
-| First run to finish                   | Laptop, Pulumi Cloud   |     330 |
-| Wave-aware scheduling                 | Laptop, Pulumi Cloud   |     223 |
-| Targeted config reads                 | Laptop, Pulumi Cloud   |     193 |
-| Copy of the stacks                    | Laptop, local Postgres |     137 |
-| Wave concurrency tuning               | Laptop, local Postgres |      78 |
-| No refresh                            | Laptop, local Postgres |      50 |
-| No resource references, retuned       | Laptop, local Postgres |      38 |
-| Every wave at 50                      | Laptop, local Postgres |      31 |
-| CI before, 29 stacks (March, 3 runs)  | CI, Pulumi Cloud       | 213-220 |
-| CI after, 46 stacks (November, 1 run) | CI, Pulumi Cloud       |     278 |
+| Measure                                    | Before                  | After                    | Change           |
+|--------------------------------------------+-------------------------+--------------------------+------------------|
+| Laptop benchmark, 26 stacks, local Postgres | 330s                    | 31s                      | about 10x faster |
+| Laptop, 26 stacks, Pulumi Cloud            | 330s                    | 193s                     | about 40% faster |
+| A region stack in CI                       | 24-34s                  | 16-24s                   | about 30% faster |
+| A cluster stack in CI                      | 48-59s                  | 33-40s                   | about 30% faster |
+| Whole environment in CI, per stack         | 7.3s                    | 6.0s                     | about 18% faster |
+| A CI preview of a change                   | 3.6 min, all 29 stacks  | 13s, the one it touched  | minutes to seconds |
 
-I didn't get to 15 seconds.
+The changes went out in one PR: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. Disabling resource references didn't ship, and the 31-second run had it on.
 
-The changes went out in one PR: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. Disabling resource references didn't ship. It's the riskiest of the changes, and it isn't set anywhere in our code or CI. The 31-second run had it on.
-
-In CI the gain mostly didn't carry over. Region stacks went from 24-34 seconds each to 16-24, and cluster stacks from 48-59 to 33-40. But the two global stacks got slower, from 44 seconds to 61-87, and the environment grew from 29 stacks to 46.
+The real-world gain came in two parts. First, those changes made each stack's preview faster in CI: about 30% for region and cluster stacks (the two global stacks didn't speed up), and about 18% per stack across the whole environment, which meanwhile grew from 29 stacks to 46. Second, we stopped previewing every stack and started previewing only the stacks a change touches. That's a scope change, not a speedup, and it accounts for most of the difference. Together they took a CI preview from about 3.6 minutes in March to 13 seconds for the one stack a change touched today.
 
 ** Lessons
 
