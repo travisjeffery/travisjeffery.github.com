@@ -76,21 +76,15 @@ Jenkins tells the same story in small. A tools team ran the in-house Jenkins. It
 
 * Losing Rob
 
-I liked Rob. He left early in 2018, about a year in.
+I liked Rob. He left early in 2018, about a year in. Roger Hoover stepped in temporarily. Then Ram Subramanian managed the team. After that the teams split, and I had a new manager every year. Every good manager left after about a year.
 
-Roger Hoover stepped in temporarily. Then, as I remember it, Ram Subramanian managed the team. After that the teams split, and I had a new manager every year. Every good manager left after about a year.
+Losing Rob hurt. I had proved myself to him. I had built much of Confluent Cloud and led the team. We had the habits list, the 30-day check-in, a shared view of my job. Then I started over with a new manager. Then again the next year. Each time, I proved the same things to someone who had not seen the work. Your standing lived in your manager's head. When they left, it left with them.
 
-Losing Rob hurt. I had proved myself to him. I had built much of Confluent Cloud and led the team. We had the habits list, the 30-day check-in, a shared view of my job. Then I started over with a new manager. Then again the next year. Each time, I proved the same things to someone who had not seen the work.
+Your manager is your company. Jay said all the right things. But culture can stop one level down. At Confluent much of it did. There were bad people under Jay. What he said in all-hands did not get through to them.
 
-Big-company politics. Confluent had 112 people when I joined. It grew while I was there. I felt the growth first as losing the man who had seen the work from the start.
+The company said it valued getting shit done. It hired and promoted people who only talked. It pushed "collaboration" --- meetings to talk for no reason --- over independence and efficiency. Promotions always went to people in the office, regardless of what they had shipped.
 
-Remember: there was no technical ladder. Every engineer had one title. Rob called that meritocracy. In practice, strange hiring and promoting went on, with no ladder to point to. Your standing lived in your manager's head. When they left, it left with them.
-
-Your manager is your company. Jay said all the right things. I believed him. But they reach you only through the people between him and you. Culture can stop one level down. At Confluent much of it did. There were bad people under Jay. What he said in all-hands did not get past them.
-
-The company said it valued getting shit done. It hired and promoted people who only talked. It pushed "collaboration" --- meetings to talk for no reason --- over independence and efficiency. Promotions always went to people in the office, regardless of what they had shipped. I was remote, in Toronto.
-
-From April 2018 I also wrote /Distributed Services with Go/ while taking Confluent Cloud from zero to one. The reader builds a distributed service from scratch: consensus, discovery, the Jocko problems. It came out in March 2021. Jay agreed to blurb it. I drafted his quote. He replied: "Works for me." Do not write a book while building a cloud. I did it anyway. "What I cannot build, I do not understand" cuts both ways.
+From April 2018 I also wrote /Distributed Services with Go/ while taking Confluent Cloud from zero to one. The reader builds a distributed service from scratch: consensus, discovery, the Jocko problems. It came out in March 2021. Jay gave me a quote to promote the book.
 
 * The end
 
