@@ -80,7 +80,7 @@ The changes went out: the workspace pool, the batched config, every wave at 50 b
 
 We also stopped previewing every stack in CI. A change now previews only the stack it touches. Together, the time CI spends in Pulumi for a preview went from about 3.6 minutes before to about 13 seconds after.
 
-Tobi posted on the evening of March 12, and I installed it that night. The loop ran from March 13 to 16, the changes merged on the 16th, and CI started previewing just the stack a change touches on the 20th: about a week from announcement to shipped.
+Tobi posted on Thursday evening, March 12, and I installed it that night. The loop ran from Friday to Monday, and the changes merged Monday evening: a few days, over a weekend. Previewing just the stack a change touches followed that Friday.
 
 ** Lessons
 
@@ -90,4 +90,4 @@ Tobi posted on the evening of March 12, and I installed it that night. The loop 
 
 *Set the fences first.* "Don't change the stacks, the resources or the state" did a lot of work. Several experiments were faster and wrong. Turning off server-side apply broke previews. Trusting provided secrets over live ones sped things up but proposed replacing databases. Because of the constraint, the loop checked for changed diffs and threw those out. Decide up front, too, what it's allowed to touch outside the repo.
 
-Four days of experiments, and previewing only what a change touches, took our CI preview from minutes to seconds. Most of the work was done by a loop that worked away as I worked on other stuff.
+Four days of experiments, and previewing only what a change touches, took our CI preview from minutes to seconds. Most of the work was done by a loop that worked away during the weekend while I played with my kids.
