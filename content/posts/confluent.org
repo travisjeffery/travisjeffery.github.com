@@ -106,7 +106,7 @@ From April 2018 I also wrote /Distributed Services with Go/ while taking Conflue
 
 * The end
 
-In May 2020 Confluent published "Apache Kafka Needs No Keeper" and announced the work to remove ZooKeeper. An internal newsletter ran it as "Goodbye Zookeeper---in progress." In January 2017 Jay had DM'd me they had "similar plans." Jocko was a side project by a man in Toronto who thought he could do better. At Kafka's scale, he could not. On ZooKeeper, he was right. That got me the job.
+In May 2020 Confluent published "Apache Kafka Needs No Keeper," and announced the work to remove ZooKeeper. An internal newsletter ran it as "Goodbye Zookeeper---in progress." In January 2017 Jay had DM'd me they had "similar plans." Jocko was a side project by a man in Toronto who thought he could do better. At Kafka's scale, he could not. On ZooKeeper, he was right. That got me the job.
 
 Confluent priced the IPO at $36 on June 23, 2021, above the range. CFLT traded on Nasdaq the next day and closed at $45.02. Jay's email the night before said: "It's our great shared honor for all of us to be part of the team that helped create a public company."
 
