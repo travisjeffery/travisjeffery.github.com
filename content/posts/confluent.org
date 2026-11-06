@@ -98,7 +98,7 @@ Politics of a big company. Except Confluent wasn't big yet when I joined --- 112
 
 Remember: no published technical ladder, one title for every engineer. Rob had pitched that as meritocracy. In practice, a lot of strange hiring and promoting happened at Confluent, and with no ladder there was nothing to point at and argue with. Your standing lived in your manager's head. When they left, it left with them.
 
-Your manager is your company. Jay said all the right things at the top. I believed him. But none of it reaches you except through the people between him and you. Culture can stop one level down. At Confluent, a lot of it did. There were bad people under Jay, and whatever he said in an all-hands did not make it past them. That is not a shot at Rob, Roger, or Ram. It is the layer of the company above and around them.
+Your manager is your company. Jay said all the right things at the top. I believed him. But none of it reaches you except through the people between him and you. Culture can stop one level down. At Confluent, a lot of it did. There were bad people under Jay, and whatever he said in an all-hands did not make it past them.
 
 The company said it valued getting shit done. But it hired and promoted people who did nothing but talk. It promoted "collaboration" --- people meeting up to talk for no reason --- over independence and efficiency. Promotions always went to people who worked locally in the office, regardless of what they'd shipped. I was remote, in Toronto.
 
