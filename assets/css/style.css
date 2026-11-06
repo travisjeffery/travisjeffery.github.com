@@ -6156,6 +6156,13 @@ pre {
   white-space: pre-wrap;
   margin-top: 1rem;
 }
+
+/* Diagrams and sample output keep their columns; scroll instead of wrapping on narrow screens. */
+pre.example {
+  white-space: pre;
+  overflow-x: auto;
+  line-height: 1.2;
+}
 p {
   margin-top: 1rem;
   margin-bottom: 0;
