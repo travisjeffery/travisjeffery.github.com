@@ -4,9 +4,9 @@
 #+TAGS[]: ai pulumi
 #+CATEGORIES[]: tech
 
-At Oscilar, infrastructure changes go through a deployment service I wrote on top of Pulumi. Before a change ships, we preview it: Pulumi works out what would change in every stack and shows the diff. One environment is 26 stacks. The CI job that previews a change took about 5 1/2 minutes.
+At Oscilar, infrastructure changes go through a deployment service I wrote on top of Pulumi. Before a change ships, we preview it: Pulumi works out what would change in every stack and shows the diff. One environment is 26 stacks. The CI job that previews a change took about 4 minutes.
 
-5 1/2 minutes is long enough to switch to something else and forget to come back. It's long enough that people skip the preview. A preview nobody runs catches nothing.
+4 minutes is long enough to switch to something else and forget to come back. It's long enough that people skip the preview. A preview nobody runs catches nothing.
 
 ** The announcement
 
@@ -14,7 +14,7 @@ On March 12, Tobi Lütke [[https://x.com/tobi/status/2032212536716578932][posted
 
 The idea is simple. You give the agent a command and a number. It changes the code, runs the command, and reads the number. If the number got better, it commits. If not, it reverts. Then it tries something else, and it doesn't stop.
 
-I had a slow command and a number. I installed it that night.
+I had a slow command and a number. I installed it that night and put it to work.
 
 ** Setting it up
 
@@ -90,4 +90,4 @@ Tobi posted on Thursday evening, March 12, and I installed it that night. The lo
 
 *Set the fences first.* "Don't change the stacks, the resources or the state" did a lot of work. Several experiments were faster and wrong. Turning off server-side apply broke previews. Trusting provided secrets over live ones sped things up but proposed replacing databases. Because of the constraint, the loop checked for changed diffs and threw those out. Decide up front, too, what it's allowed to touch outside the repo.
 
-Four days of experiments, and previewing only what a change touches, took our CI preview from minutes to seconds. A loop did most of the work over the weekend while I played with my kids.
+A few days of experiments, and previewing only what a change touches, took our CI preview from minutes to seconds. A loop did most of the work over the weekend while I played with my kids.
