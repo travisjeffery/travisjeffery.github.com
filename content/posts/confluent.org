@@ -26,7 +26,7 @@ We had a call in early February. On February 8 Jay introduced me to Neha by emai
 
 * Getting hired
 
-I spoke with Neha Narkhede on February 24. She introduced me to Sabrina Kinder, the recruiter, and Rob Benson, manager of the new Confluent Cloud team. Rob followed me on Twitter that day.
+I spoke with Neha Narkhede on February 24. She introduced me to Sabrina Kinder, the recruiter, and Rob Benson, manager of the new Confluent Cloud team.
 
 The team was CaaS, Confluent as a Service. Rob gave me two take-homes. One was a design doc, five pages at most, for multi-tenant Kafka as a Service on AWS. The prompt was the job:
 
@@ -38,25 +38,17 @@ The other take-home was to build a REST API. Dan Norwood reviewed it. Rob told m
 
 I sent the design doc on March 2. On March 3 I flew to Palo Alto. Their office was at 101 University Ave, across from the Caltrain station. My hotel was across from HQ. It was noisy. I slept badly.
 
-I had five interviews: four technical --- Roger Hoover, Xavier Léauté, Ewen Cheslack-Postava, and Rob --- and an hour with Jay and Neha together. I also met Cheryl Dalrymple, the CFO. She was not on the itinerary. I met her anyway.
+I had five interviews: four technical --- Roger Hoover, Xavier Léauté, Ewen Cheslack-Postava, and Rob --- and an hour with Jay and Neha together. I also met Cheryl Dalrymple, the CFO.
 
-One interview covered a sliding-window streaming aggregation. One walked through my Kafka as a Service design, the take-home. I forget the others.
+One interview covered a sliding-window streaming aggregation. One walked through my Kafka as a Service design, the take-home. Another was implementing a hashmap. Jay spent his interview trying to convince me to join but I already wanted to join. Cheryl was a highlight that day, and of my time at Confluent. Her openness reminded me of Segment, where the financials sat on a Grafana dashboard anyone could see.
 
-Jay spent his interview trying to convince me to join. I already wanted to join. It was awkward.
-
-Cheryl was a highlight that day, and of my time at Confluent. Her openness reminded me of Segment, where the financials sat on a Grafana dashboard anyone could see. Weeks after I started, she emailed the company the hiring numbers: 87 people at the start of the year, 112 by the end of March. I was one of the new engineers. That was the size of Confluent when I joined.
-
-On March 8 Rob said my references were being checked and that "CaaS is the top product priority for the company in 2017, so you will be setup for impact from day one." He also said Confluent had no published technical ladder. Every engineer was a Software Engineer. Remember that. It matters later.
-
-On March 9, Rob wrote: "Congrats and welcome to the team!" Roger Hoover wrote too: the whole CaaS team was excited. I hadn't met Jon and Sumit yet.
+On March 8 Rob said my references were being checked and that "CaaS is the top product priority for the company in 2017, so you will be setup for impact from day one." He also said Confluent had no published technical ladder. Every engineer was a Software Engineer. On March 9, Rob wrote: "Congrats and welcome to the team!" Roger Hoover wrote too: the whole CaaS team was excited.
 
 * First weeks
 
-Before I started, I asked Rob for a list of seven to ten habits to apply each day. I had never asked a manager for that. He sent it on my first day. It "was a very interesting thought experiment that I had not done before." We would revisit the priorities in 30 days. I built that relationship on purpose. That is part of why losing Rob cost me so much.
+Before I started, I asked Rob for a list of seven to ten habits to apply each day. He sent it on my first day. It "was a very interesting thought experiment that I had not done before." We would revisit the priorities in 30 days.
 
-I flew from Toronto to SFO on March 22 and started in Palo Alto on March 23. People Ops booked Hotel Keen. I worked a week and left after work on March 29. In my welcome bio I said I "made Basecamp's mobile apps not suck" and wrote "Jocko, his implementation of Kafka." Still fair.
-
-Back home, my first project was the SASL provider Confluent Cloud uses to authenticate API keys: CAAS-297, "Implement a backing store for tenant SASL credentials and hook it up." I was deep in Kafka security. That code rarely changes. Nobody on the Kafka core team had good ideas. My first job at the Kafka company was a corner of Kafka they did not want to touch. That set the pattern.
+I flew from Toronto to SFO on March 22 and started in Palo Alto on March 23. I worked a week and left after work on March 29. My first project was the SASL provider Confluent Cloud uses to authenticate API keys: CAAS-297, "Implement a backing store for tenant SASL credentials and hook it up." I was deep in Kafka security. That code rarely changes. Nobody on the Kafka core team had good ideas. My first job at the Kafka company was a corner of Kafka they did not want to touch.
 
 * Building Confluent Cloud
 
