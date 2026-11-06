@@ -118,6 +118,8 @@ I left Confluent on November 22, 2021, five months after the IPO. A bunch of peo
 
 The bureaucracy was frustrating. The company valued the wrong things while saying the other. I was ready to do another startup and just build.
 
-I picked Confluent to build Confluent Cloud from nothing. I wanted to build it all, and I built more of it than anyone. The company that wasn't interested in the cloud became a cloud company while I was there. I watched that happen from Toronto, mostly alone with the work, which is how I like it and also the problem with it. Both of those are true. Kafka got rid of ZooKeeper in the end, the way Jay had said they planned to. I had wanted to build the cloud from nothing. I did that. Then I left.
+I picked Confluent to build Confluent Cloud from nothing. I wanted to build it all, and I built more of it than anyone. The company that wasn't interested in the cloud became a cloud company while I was there. I watched that happen from Toronto, mostly alone with the work, which is how I like it and also the problem with it. Both of those are true.
+
+I came to Confluent to build Confluent Cloud. I did that. I drove Confluent from startup to IPO.
 
 
