@@ -62,7 +62,7 @@ On June 13, Rob emailed the company: Confluent Cloud's first customer was onboar
 
 Confluent Cloud went GA on AWS on November 28, 2017, at re:Invent, as Confluent Cloud Enterprise with a 99.95% SLA. Rob's paternity leave started that same day.
 
-On April 20, 2018, we soft-launched Confluent Cloud Professional, the self-serve product. Jay's all-hands email said: "You can create a Kafka cluster with the click of a button and get billed for your usage on your credit card" --- and the team had also ported it to Google Cloud, with almost everyone on overtime. GA made us a product. Self-serve made us a cloud company.
+On April 20, 2018, we soft-launched Confluent Cloud Professional, the self-serve product. Jay's all-hands email said: "You can create a Kafka cluster with the click of a button and get billed for your usage on your credit card" --- and the team had also ported it to Google Cloud, with almost everyone on overtime. I also named the plans, Professional and Enterprise. The product lead was out and nobody stepped up. GA made us a product. Self-serve made us a cloud company.
 
 * Cloud vs. enterprise
 
