@@ -1,4 +1,4 @@
-#+TITLE: Autoresearch took our Pulumi preview from 330 seconds to 30
+#+TITLE: Autoresearch took our Pulumi preview benchmark from 330 seconds to 31
 #+DATE: 2026-11-06
 #+DRAFT: true
 #+TAGS[]: ai pulumi
@@ -25,23 +25,17 @@ The plugin's setup skill asks four questions. My answers:
 3. *Metric:* wall time in seconds, lower is better.
 4. *Constraints:* don't change the stacks, the resources, or the state. Keep the preview's output the same.
 
-From that it wrote an ~autoresearch.md~ with the objective, the files in scope and what was off limits, and an ~autoresearch.sh~ that ran the preview and printed one line:
-
-#+begin_example
-METRIC preview_run_seconds=330.439741
-#+end_example
-
-Every experiment was a commit or a revert, and every result went in a log. Over four days it logged 181 experiments: it kept 28, discarded 95, and 58 crashed.
+From that it wrote an ~autoresearch.md~ with the goal, the files in scope and what was off limits, and an ~autoresearch.sh~ that ran the preview and printed its wall time. Every experiment was a commit or a revert, and every result went in a log.
 
 ** What the loop found
 
 *** First it had to finish
 
-The baseline didn't produce a number. Pulumi Cloud returned 401s, DNS lookups to Pulumi, AWS and the Kubernetes APIs failed, and stacks fell over halfway through.
+Run on my laptop against all 26 stacks, the preview didn't produce a number at all. Pulumi Cloud returned 401s, DNS lookups to Pulumi, AWS and the Kubernetes APIs failed, and stacks fell over halfway through.
 
-So the first eleven experiments were all crashes. The loop tried fewer concurrent previews, fewer chart pulls, a different DNS resolver, and skipping Pulumi's update checks. Each crash got a little further. The cause was the preview tool opening 50 stacks at once, each with its own fresh Pulumi workspace, all hammering the same APIs.
+So the first eleven experiments were all crashes. The preview started every stack in a wave at once, each with its own fresh Pulumi workspace. The loop tried fewer at a time, fewer chart pulls, a different DNS resolver, and skipping Pulumi's update checks. The fewer stacks it ran at once, the further it got.
 
-Experiment 12 finished: one stack at a time, a pool of reused workspaces instead of a new one per stack, config written in one call instead of one call per key, and Helm charts pulled only for the stacks that use them. *330 seconds*, about five and a half minutes. That was the number to beat.
+Experiment 12 finished in *330 seconds*. It ran one stack at a time. It reused a pool of workspaces instead of making one per stack. It wrote each stack's config in one call instead of one call per key. It pulled Helm charts only for the stacks that use them. That was the number to beat.
 
 *** Then it got faster in steps
 
@@ -49,70 +43,59 @@ The stacks build on each other in waves: global, then regions, then clusters, th
 
 A trace showed about 34 seconds going to reading Pulumi config. Each stack read its whole config, wrote one key, and read it all back, just to merge one setting. Reading only that key, once per stack, up front, got it to *193 seconds.*
 
-That was as far as it got against Pulumi Cloud. The runs were too noisy to trust a few seconds either way. At one point the agent changed my DNS to 8.8.8.8 to see if that helped. It didn't.
+That was as far as it got against Pulumi Cloud. The runs were too noisy to trust a few seconds either way. At one point the agent changed my DNS to 8.8.8.8, with my permission, to see if that helped. It didn't.
 
 *** Changing the benchmark
 
 I asked whether a Postgres backend would mean less remote work, and whether it could test that without touching the real stacks. It exported the 26 stacks, re-encrypted their secrets with a passphrase, loaded them into a local Postgres container, and pointed the preview at the copy. *137 seconds*, and much less noise.
 
-That was a change to the benchmark, not to the code --- to make the benchmarks and numbers more consistent and reliable. Production still uses Pulumi Cloud. But a quiet benchmark is what made the next round of experiments possible, because a two-second win no longer disappeared in the noise.
+That changed the benchmark, not the code, to make the numbers steady enough to trust: every number from here on is against that local copy, while production still runs on Pulumi Cloud.
 
-*** Wave tuning
-
-With a steady benchmark, the loop swept each wave's concurrency, one knob at a time, keeping what helped:
-
-| Change                              | Seconds |
-|-------------------------------------+---------|
-| Clusters 2 at a time                |     126 |
-| Clusters 3 at a time                |      98 |
-| Regions 4 and global 2 at a time    |      83 |
-| Service waves 4 to 5 at a time      |      78 |
-
-Going higher on any one of them made it slower. Clusters at 4 lost. Services at 6 lost.
+With a steady benchmark, the loop swept each wave's concurrency one knob at a time and got it to *78 seconds*. It settled on two global stacks, four regions, three clusters and four or five services at a time. Pushing any wave past that made it slower.
 
 *** Turning off work nobody asked for
 
-The two biggest single wins came from asking what work we could skip.
+Then I asked what work we could skip.
 
-Every preview refreshed every stack first: it read every resource's live state from AWS and Kubernetes before diffing. The preview was there to show what a code change would do, so I told it to stop refreshing. *50 seconds.*
+Every preview refreshed every stack first: it read every resource's live state from AWS and Kubernetes before diffing. The preview was there to show what a code change would do, so I told it to stop refreshing. Without a refresh, the preview diffs the code against Pulumi's recorded state, so it no longer shows changes someone made outside Pulumi. *50 seconds.*
 
-Then I asked the agent to dig through the Pulumi Go SDK for knobs. It found ~PULUMI_DISABLE_RESOURCE_REFERENCES~, which sends plain values instead of typed resource references between the program and the engine. *47 seconds*, and with less going on, more of each wave could run at once. Retuned, *38 seconds.*
+Then I asked the agent to dig through the Pulumi Go SDK for knobs. It found ~PULUMI_DISABLE_RESOURCE_REFERENCES~, which sends plain values instead of typed resource references between the program and the engine. *47 seconds.* With less going on, more of each wave could run at once. Retuned, *38 seconds.*
 
 *** What a trace said was left
 
 I ran Pulumi's [[https://www.pulumi.com/docs/support/debugging/performance-tracing/][performance tracing]] across a full run. The time wasn't in diffing, which was under half a second in the traced stack. It was in reads: services rereading Kubernetes secrets they already had the values for, and stack references fetched again and again. The loop removed the safe rereads and resolved stack references once. That stayed around *38 seconds*, but with less load on the clusters.
 
-The last run of the session: every wave at 50 at a time. *31.4 seconds.* At 100 it got slower again, 52.
+Earlier, more than a few at a time had made every wave slower. Now that each stack did less, the clusters could take the load, so the last run of the session set every wave to 50, which runs every stack in a wave at once. *31.4 seconds.*
 
 ** Results
 
-| Stage                                        | Seconds |
-|----------------------------------------------+---------|
-| First run to finish                          |     330 |
-| Wave-aware scheduling                        |     223 |
-| Targeted config reads (best on Pulumi Cloud) |     193 |
-| Local Postgres copy of the stacks            |     137 |
-| Wave concurrency tuning                      |      78 |
-| No refresh                                   |      50 |
-| No resource references, retuned              |      38 |
-| Every wave at 50                             |      31 |
+Over four days the loop logged 181 experiments: it kept 28, discarded 95, and 58 crashed.
 
-From 330 seconds to 31: about five minutes to about thirty seconds. I didn't get to 15. Everything from 137 down was measured against the local Postgres copy; against Pulumi Cloud the best I measured was 193.
+| Stage                                 | Where                  | Seconds |
+|---------------------------------------+------------------------+---------|
+| First run to finish                   | Laptop, Pulumi Cloud   |     330 |
+| Wave-aware scheduling                 | Laptop, Pulumi Cloud   |     223 |
+| Targeted config reads                 | Laptop, Pulumi Cloud   |     193 |
+| Copy of the stacks                    | Laptop, local Postgres |     137 |
+| Wave concurrency tuning               | Laptop, local Postgres |      78 |
+| No refresh                            | Laptop, local Postgres |      50 |
+| No resource references, retuned       | Laptop, local Postgres |      38 |
+| Every wave at 50                      | Laptop, local Postgres |      31 |
+| CI before, 29 stacks (March, 3 runs)  | CI, Pulumi Cloud       | 213-220 |
+| CI after, 46 stacks (November, 1 run) | CI, Pulumi Cloud       |     278 |
 
-The changes went out in one PR: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. Disabling resource references didn't ship. It's the riskiest of the changes, and it isn't set anywhere in our code or CI.
+I didn't get to 15 seconds.
+
+The changes went out in one PR: the workspace pool, the batched config, every wave at 50 by default, no refresh by default, and the trimmed secret and stack reference reads. Disabling resource references didn't ship. It's the riskiest of the changes, and it isn't set anywhere in our code or CI. The 31-second run had it on.
+
+In CI the gain mostly didn't carry over. Region stacks went from 24-34 seconds each to 16-24, and cluster stacks from 48-59 to 33-40. But the two global stacks got slower, from 44 seconds to 61-87, and the environment grew from 29 stacks to 46.
 
 ** Lessons
 
-*The loop is only as good as the number.* For the first day the number was mostly noise: DNS failures, expired tokens, a VPN that dropped. The loop discarded good ideas because a run landed on a bad minute. The targeted config read was tried and thrown out twice before it was kept on the third try. The local Postgres copy did more for the search than any single idea did. Next time I'd make the benchmark steady before starting the loop.
+*The loop is only as good as the number.* For the first day the number was mostly noise: DNS failures, expired tokens, a VPN that dropped. The loop discarded good ideas because a run landed on a bad minute. The targeted config read was tried and thrown out twice before it was kept on the third try. It also profiled by trial and error until I asked whether it had read the profiles. When it did, they said nearly all the time was waiting on Pulumi. Next time I'd make the benchmark steady, and read the profile, before starting the loop.
 
-*Sweeping knobs is what it does best.* The wave concurrency sweep was dozens of runs I'd never have had the patience for. Try 3, try 4, keep 3, try the next wave. It's dull, it's easy to measure, and that's exactly what the loop wants.
+*The big wins came from questions, not from the loop.* The loop is great at sweeping knobs: try 3, try 4, keep 3, try the next wave, dozens of runs I'd never have had the patience for. But stop refreshing, test against a copy, and raise every wave to 50 each came from me asking "why are we doing this at all?" or "what if?" The loop is good at climbing a hill. It doesn't ask whether it's on the right one.
 
-*The big wins came from questions, not from the loop.* Stop refreshing. Test against a copy. Raise every wave to 50. Each came from me asking "why are we doing this at all?" or "what if?" The loop is good at climbing a hill. It doesn't ask whether it's on the right one.
+*Set the fences first.* "Don't change the stacks, the resources or the state" did a lot of work. Several experiments were faster and wrong. Turning off server-side apply broke previews. Trusting provided secrets over live ones sped things up but proposed replacing databases. Because of the constraint, the loop checked for changed diffs and threw those out. Decide up front, too, what it's allowed to touch outside the repo.
 
-*Read the profile early.* For the first day the agent was profiling by trial and error. When I asked if it had read the profiles, it said not really. When it did, they said the Go program was barely using the CPU. Nearly all the time was waiting on Pulumi, which ruled out a whole class of experiments.
-
-*Keep the constraint in the prompt.* "Don't change the stacks, the resources or the state" did a lot of work. Several experiments were faster and wrong. Turning off server-side apply broke previews. Trusting provided secrets over live ones sped things up but proposed replacing databases. Because of the constraint, the loop checked for changed diffs and threw those out.
-
-*It'll touch more than the code.* Mine changed my DNS settings, with my permission. Decide up front what it's allowed to touch outside the repo.
-
-Four days and 181 experiments took a preview that took five and a half minutes, to one that runs in about half a minute. Most of the work was done by a loop that worked away as I worked on other stuff.
+Four days of experiments took a benchmark preview from five and a half minutes to about half a minute. Most of the work was done by a loop that worked away as I worked on other stuff.
