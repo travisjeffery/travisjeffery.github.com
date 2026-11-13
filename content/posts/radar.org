@@ -1,0 +1,81 @@
+#+TITLE: Radar: I automated PR review because AI made Oscilar write more code
+#+DATE: 2026-11-03
+#+DRAFT: true
+#+TAGS[]: ai tools oscilar
+#+CATEGORIES[]: tech
+
+AI has made code review the bottleneck. At Oscilar, people merged 467 pull requests in October 2025. In October 2026 they merged 3,443, about 7x, while the number of people opening PRs only doubled. I wrote 688 of October's, a fifth. Without me, everyone else still went from about 12 PRs a month each to about 36.
+
+One engineer with agents can open more PRs in a day than a reviewer can read carefully, and a reviewer with ten open PRs skims. So I built Radar. I wrote the first version in Go from Meta's RADAR paper. It now reviews every pull request at Oscilar, and approves the ones that pass. It's on GitHub at [[https://github.com/travisjeffery/radar][travisjeffery/radar]].
+
+** What the paper does
+
+In May, Meta published [[https://arxiv.org/abs/2605.30208][a paper on RADAR]], the system they built to auto-review low-risk changes. Their numbers: lines of code per human-landed diff up 106% year over year, diffs per developer up 51%, and agentic AI behind over 80% of that growth.
+
+RADAR stands for Risk Aware Diff Auto Review. A change must pass every gate to skip human review. If it fails a gate, it goes to a person.
+
+The gates, roughly:
+
+- *Static checks.* Is the change in scope? Do CI and its state pass? Does it touch a blocklisted path or contain blocklisted content?
+- *A risk score.* Meta has a model that scores each diff's risk, the Diff Risk Score. Scores are calibrated to percentiles. Diffs from Meta's AI bots qualify up to P20, the safest 20%. Diffs from people default to P5.
+- *An AI reviewer.* An LLM reviews the change and must be confident with zero risk signals. It also leaves comments on the diff.
+
+Meta reports that RADAR reviewed over 535,000 diffs and landed over 331,000. People reverted those diffs a third as often as others, and they caused a fiftieth as many production incidents. Those numbers come from Meta's scale and risk model. I can't reproduce them and don't claim to.
+
+My first version was those gates, the decisions and the metrics, with the two proprietary pieces (the risk model and the AI reviewer) as interfaces. That's still in the repo as ~radar classify~ and ~radar replay~.
+
+** What changed when it met real PRs
+
+The risk score was useless. Without Meta's model, my stand-in score was mostly size, and gating on size just meant big changes always went to a person, whatever they contained. I removed it quickly and made approval rest on what the reviewers find.
+
+People read the review. On every PR, a yes or no was not enough. So I made Radar a reviewer first and an approver second.
+
+I ran Radar in comment-only mode first, with its approvals in shadow, and turned approval on once the reviews had earned it. Radar now approves pull requests across Oscilar. It never merges one and never requests changes.
+
+** How it works
+
+Radar runs in GitHub Actions, in two stages on each pull request head. As soon as a PR opens or changes, the *findings* stage reviews it, without waiting for checks, and posts one comment with the findings grouped by severity, the P0s and P1s inline. Once checks finish, the *verdict* stage decides. It reuses the findings stage's reviews, so the comment people read and the decision rest on the same reviews.
+
+Each review goes to more than one model. At Oscilar, Claude and Codex review the same snapshot at the same time. Both read the repository as well as the patch, with read-only access to a checkout of the head. Radar merges their findings, and the comment shows when they agreed.
+
+*I never ask the model to approve.* Every reviewer returns a structured review: findings with a severity, file, lines, impact and a fix, plus questions, assumptions and what it covered. Radar computes the verdict from those fields. P0s and P1s block. So do defect signals, low confidence, a reviewer saying a person must look, a structural change, a reviewer that didn't cover every file, and paths or phrases the policy denies. Radar fails closed: a provider error, a timeout, a cut-off response or a policy that doesn't load all route to a person.
+
+Most of what makes it usable came from reading findings people disagreed with:
+
+- *Severity measures what the change does.* A P0 or P1 needs a line this PR changes to create or newly expose the risk. A gap the change only passes near is a P2 and a question for the author.
+- *Review rounds converge.* At first each push found something new, usually on lines the author hadn't touched, and PRs never finished. From the second round, a P1 blocks only on or near lines changed since the last review.
+- *You can answer it.* Reply to a finding with ~/radar~ and what it missed. Radar re-checks just that finding and withdraws it only if it can cite the code. Your word alone stops the block but sends the PR to a person.
+- *It's hard to steer.* PR text goes to the reviewers as untrusted data, and the verdict never reads it. The rules, review criteria and policy come from the default branch, never from the PR. Generated files are withheld from the reviewers and lockfiles are summarised, with supply-chain signals flagged.
+- *A person can always insist.* The ~radar:human-review~ label sends a PR to a person, and a Radar approval never carries over to code pushed after it.
+- *Review before the PR.* ~radar-gh review-commit~ reviews any pushed commit the way CI would, and ~radar-mcp~ serves the same review to Claude Code.
+
+** A real review
+
+Here's a finding from one of my pull requests. The change added a setting that names a reference deployment, so new deployments copy its image tag, with a default. The docs said to set it empty to turn the default off. (I've shortened the names.)
+
+#+begin_quote
+*P1: Preserve an explicitly empty reference setting* (Radar, found by Codex)
+
+*Impact:* Setting ~REFERENCE_DEPLOYMENT=""~ does not disable defaulting: ~getEnvOrDefault~ treats an empty value as unset and restores the default. New deployments therefore continue inheriting its image tag after the documented disable action.
+
+*Recommendation:* Use ~os.LookupEnv~ so only an absent variable receives the default, while an explicitly empty value remains empty. Add configuration tests for absent, empty and custom values.
+#+end_quote
+
+It was right, and I'd missed it. I replied on the thread:
+
+#+begin_quote
+Valid, fixed in 1dfaf4a. ~REFERENCE_DEPLOYMENT~ is now read with a new ~lookupEnvOrDefault~ helper built on ~os.LookupEnv~: only an absent variable gets the default, and an explicitly empty one stays empty and turns the default off. ~TestLoad~ now covers absent, empty and custom values; the empty case fails with the old ~getEnvOrDefault~.
+#+end_quote
+
+The next push got a fresh review, and the finding didn't come back. Not every finding goes that way. Later in the same PR Radar raised a P1 I disagreed with, and I replied with the reason instead of a fix.
+
+** The sharp edges
+
+- *AI review isn't human review.* Radar finds a lot. It doesn't know why the change exists or whether it's the right change. A person still has to judge that. The review shows them where to look.
+- *Models disagree with themselves.* The same PR reviewed twice can get different findings. Merging several reviewers and computing the verdict from structured fields makes that tolerable.
+- *Calibration is ongoing.* Severity and convergence fixes have fixtures from real, anonymised rounds so they don't regress.
+- *Approval is a separate decision.* Comment-only is useful on its own and low-risk to turn on. Letting a bot approve needs branch rules you trust, a shadow period, and someone who owns the outcome.
+
+Radar is MIT-licensed and on GitHub at [[https://github.com/travisjeffery/radar][travisjeffery/radar]]. [[https://github.com/travisjeffery/radar/blob/main/examples/github-actions/radar-review.yml][The example workflow]] and [[https://github.com/travisjeffery/radar/blob/main/examples/github-policy.json][policy]] start you in shadow mode.
+
+Next: how I optimised what it costs.
