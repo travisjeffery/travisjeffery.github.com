@@ -4,9 +4,7 @@
 #+TAGS[]: ai tools oscilar
 #+CATEGORIES[]: tech
 
-AI made code review the bottleneck at Oscilar. People merged 471 pull requests in October 2025. In October 2026 they merged 3,448, about 7x. (Those are GitHub's counts of merged PRs across the org, with bots like Dependabot left out.) The number of people opening PRs went from 39 to 77.
-
-I'm the extreme case. In the first half of October I merged 486 of the org's 1,910 PRs, about a quarter. Without me, everyone else still went from about 12 PRs a month to about 36.
+AI has made code review the bottleneck. At Oscilar, people merged 467 pull requests in October 2025. In October 2026 they merged 3,443, about 7x. While the number of people opening PRs was 2x. I wrote 688 of October's, a fifth. Without me, everyone else still went from about 12 PRs a month each to about 36.
 
 One engineer with agents can open more PRs in a day than a reviewer can read carefully, and a reviewer with ten open PRs skims. So I built Radar. I wrote the first version in Go from Meta's RADAR paper. It now reviews every pull request at Oscilar, and it's on GitHub at [[https://github.com/travisjeffery/radar][travisjeffery/radar]].
 
