@@ -4,11 +4,11 @@
 #+TAGS[]: ai security
 #+CATEGORIES[]: tech
 
-Pointing an LLM at a repository and asking it for security bugs is easy. Getting output an engineering team will trust is harder, and running an agentic scanner safely in CI is harder still.
+Over the past few months at work, we tested Cisco's Antares, Z.ai's GLM-5.3 over Fireworks, Claude Code with Cloudflare's security-audit skill, and OpenAI's Codex Security. We now run scans with Vercel Labs' Deepsec.
 
-Over the past few months at work, our team iterated through five AI security setups: Cisco's Antares, Z.ai's GLM-5.3, Claude Code with Cloudflare's security-audit skill, OpenAI's Codex Security, and now Vercel Labs' Deepsec. Each step exposed a real gap in the one before it.
+Any scanner that gets a shell runs in a locked-down microVM, with API keys, egress logging, and spend caps enforced outside the guest.
 
-Two design rules came out of that work. First, any scanner that gets a shell belongs in a locked-down microVM, with API keys, egress logging, and spend caps enforced outside the guest. Second, a scanner finding is only a claim. Turning claims into bugs worth fixing takes a separate verification pipeline.
+We treat every scanner finding as an unverified claim. Turning claims into bugs worth fixing takes a separate verification pipeline that clusters findings, checks the code, and reproduces them before an engineer sees a ticket.
 
 ** How we got here
 
@@ -16,7 +16,7 @@ Two design rules came out of that work. First, any scanner that gets a shell bel
 
 We started with Cisco's specialized vulnerability-localization models ([[https://huggingface.co/fdtn-ai/antares-1b][Antares-1B]] and the 350M control) on private endpoints over AWS PrivateLink.
 
-Published benchmark numbers tell you very little about how a model behaves on your own code, so we built a three-layer evaluation harness first:
+Before trusting published benchmark numbers, we built a three-layer evaluation harness:
 
 1. *Public calibration:* tasks from Cisco's [[https://arxiv.org/abs/2608.02407][VLoc]] benchmark across five ecosystems (Go, Maven, npm, pip, and Rust), both vulnerable and patched snapshots, repeated three times.
 2. *Internal history:* curated historical security fixes from our own services, again vulnerable and patched.
@@ -24,11 +24,11 @@ Published benchmark numbers tell you very little about how a model behaves on yo
 
 Antares ran in a capability-dropped container on an internal Docker network whose only peer was a fixed-target inference proxy holding the endpoint token. VLoc commands ran in a separate ~network=none~ sandbox with tight CPU, memory, and time limits.
 
-Antares is built for targeted localization when you hand it a CWE up front. On our own historical fixes it struggled to tell patched snapshots apart from vulnerable ones, and we wanted broader blind discovery across whole repositories rather than CWE-by-CWE lookups.
+Antares locates vulnerabilities when you give it a CWE up front. On our past security fixes it struggled to tell patched code from vulnerable code, and we wanted to scan whole repositories without naming a CWE first.
 
 *** GLM-5.3: host-driven agentic review
 
-Next we tested GLM-5.3 over Fireworks as a general-purpose agentic challenger inside the same harness.
+Next we tested GLM-5.3 over Fireworks in the same harness.
 
 The model never got a shell. A host orchestrator ran the conversation loop and exposed only three read-only tools: a bounded file listing, a literal search, and a 200-line file read. Every tool call ran in a fresh, read-only, capability-dropped ~network=none~ container from a digest-pinned Python image, with no shell, no credentials, no Git history, and no Docker socket.
 
@@ -41,15 +41,15 @@ Instead of asking for one sweeping pass, GLM ran six independent blind conversat
 - *Mobile apps:* exported components and IPC, keychain/keystore storage, transport security overrides, WebViews and deep links, side channels like logs and pasteboard.
 - *API specifications:* per-operation auth and scopes, internal surface leakage, missing tenant bindings, sensitive fields in examples, unbounded inputs.
 
-Matching the profile to the repository mattered: running the service profile over an OpenAPI specification spends six passes asking YAML about SSRF. We also kept hallucinations in check at the harness boundary. A review could not submit findings until at least one ~read_file~ call succeeded, and the validator hashed the exact unclipped lines returned earlier, rejecting any range the model had not actually read intact.
+Matching the profile to the repository mattered: running the service profile over an OpenAPI specification spends six passes asking YAML about SSRF. A review could not submit findings until at least one ~read_file~ call succeeded, and the validator hashed the exact unclipped lines returned earlier, rejecting any range the model had not actually read intact.
 
-GLM surfaced useful candidate findings across our repositories, and the host-driven loop stayed easy to contain. Two limits pushed us further: humans still had to triage and verify every candidate by hand, and the newer agentic security tools expected a real shell, not three read-only functions.
+GLM found useful candidates across our repositories, and the host-driven loop was easy to contain. We still had to triage and verify every candidate by hand, and newer agentic security tools needed a shell.
 
 *** Claude and Cloudflare's security-audit skill: moving to microVMs
 
 [[https://github.com/cloudflare/security-audit-skill][Cloudflare's security-audit skill]] drives Claude Code through a multi-phase hunt-and-validate audit, including building and testing target code. Once an agent gets bash, a ~network=none~ tool container around a host loop no longer covers the boundary.
 
-So we drew a clean line. Host-driven runners that never hand the model a shell stay in ~network=none~ containers. Any stage that gives an agent a shell runs in its own [[https://github.com/smol-machines/smolvm][smolvm]] microVM on a nested-virtualization Intel EC2 runner (~m8i~ or ~m7i~, since EC2 nested virtualization is limited to Intel 7i and 8i families). Inside the guest, target-controlled commands run under a ~bubblewrap~ wrapper (~audit-sandbox~) with no network namespace, a cleared environment, a read-only root, a scratch-only write mount, resource limits, and a hard timeout.
+Host-driven runners that never hand the model a shell stay in ~network=none~ containers. Any stage that gives an agent a shell runs in its own [[https://github.com/smol-machines/smolvm][smolvm]] microVM on a nested-virtualization Intel EC2 runner (~m8i~ or ~m7i~, since EC2 nested virtualization is limited to Intel 7i and 8i families). Inside the guest, target-controlled commands run under a ~bubblewrap~ wrapper (~audit-sandbox~) with no network namespace, a cleared environment, a read-only root, a scratch-only write mount, resource limits, and a hard timeout.
 
 We structured the VM boundary around Anthropic's Cyber Verification Program (CVP) agent-containment checklist:
 
@@ -63,15 +63,15 @@ We structured the VM boundary around Anthropic's Cyber Verification Program (CVP
 
 At the same time, we wanted vendor scanner output, including OpenAI's Codex Security diff scans, in the same workflow instead of maintaining one triage queue per tool.
 
-Codex Security exported findings as a CSV from its UI rather than a documented REST API, and each row carried file paths and a prose summary without line numbers or CWEs. That forced a good simplification: we defined one scanner-neutral record format, *Candidate v1*.
+Codex Security exported findings as a CSV from its UI rather than a documented REST API, and each row carried file paths and a prose summary without line numbers or CWEs. We defined one record format for all scanners: *Candidate v1*.
 
 Every scanner adapter (GLM, Claude's audit skill, Codex Security, and Deepsec) emits Candidate v1 JSONL. Each record carries the scanner provenance, exact repository and commit SHA, claimed severity, optional CWE and confidence, repository-relative locations, narrative fields, and attributed cost. Evidence excerpts and line ranges are optional so path-only exports fit cleanly; when an excerpt is present, the schema requires its SHA-256 digest to match. For Codex Security, the importer keys every row on the vendor's native finding ID so re-imports stay stable, and infers a coarse weakness family from the title and summary.
 
 ** Now: Deepsec inside a locked-down microVM
 
-Our current live scanning work centers on [[https://github.com/vercel-labs/deepsec][Deepsec]], Vercel Labs' open-source agentic security harness. We pin the exact upstream commit, Node runtime, pnpm version, and [[https://pi.dev][pi]] agent SDK, install dependencies with a frozen lockfile and lifecycle scripts disabled, and run Deepsec with the read-only ~pi~ agent rather than permissive bash defaults.
+We now run scans with [[https://github.com/vercel-labs/deepsec][Deepsec]], Vercel Labs' open-source agentic security harness. We pin the exact upstream commit, Node runtime, pnpm version, and [[https://pi.dev][pi]] agent SDK, install dependencies with a frozen lockfile and lifecycle scripts disabled, and run Deepsec with the read-only ~pi~ agent rather than permissive bash defaults.
 
-Reading the pinned upstream source before running a single scan saved us from several surprises:
+We found four limits in the pinned upstream source before running a scan:
 
 - Default ~init~ and ~--through coverage~ are not free preflights. Both run install steps and paid AI threat-modeling and matcher-proposal phases before stopping. Only ~init --scaffold-only~ skips AI work.
 - ~--max-cost-usd~ exists only on ~init~ and ~setup~, not ~process~. Even there it is a soft check after completed batches: it misses earlier phases, misses concurrent batches already in flight, and resets to zero on restart.
@@ -125,11 +125,11 @@ To close that gap, ~isolate-host.sh~ runs as root before any VM starts:
 2. *Run VMs as an unprivileged user.* It creates a no-login, no-sudo ~scanvm~ system account and adds it to ~/dev/kvm~'s owning group (a filesystem ACL set at startup disappeared minutes later on EC2).
 3. *Firewall loopback by UID.* Because ~smolvm~ opens host-side connections as the user running it, a per-UID ~iptables~ and ~ip6tables~ ~OUTPUT~ chain on ~lo~ lets ~scanvm~ open new TCP connections only to ~127.0.0.1~ on the preflight canary port and the broker port. Everything else resets, and IPv6 loopback is refused outright, leaving the runner agent's own traffic untouched.
 
-The collector stays as the runner user and crosses into ~scanvm~ through ~sudo runuser~ with an empty environment. The scan VM receives two read-only mounts (the target snapshot and a host-generated profile) and no writable host mount at all. Target config files, ~.env~, hooks, MCP definitions, and ~AGENTS.md~ are never copied into the snapshot. The guest disk is capped with explicit storage, CPU, and memory bounds, and the image itself stays trimmed under ~smolvm~'s 8 GiB archive limit.
+The collector stays as the runner user and crosses into ~scanvm~ through ~sudo runuser~ with an empty environment. The scan VM receives two read-only mounts (the target snapshot and a host-generated profile) and no writable host mount at all. Target config files, ~.env~, hooks, MCP definitions, and ~AGENTS.md~ are never copied into the snapshot. We cap the guest disk, CPU, and memory explicitly, and keep the image trimmed under ~smolvm~'s 8 GiB archive limit.
 
 *** In-process host TLS broker
 
-Direct Anthropic API routes require HTTPS, and we refused to disable certificate checks or pass API keys into the guest.
+Direct Anthropic API routes require HTTPS. We keep certificate checks enabled and API keys outside the guest.
 
 The collector runs an in-process TLS broker on host loopback using a per-trial certificate valid for the literal gateway IP. Only the public certificate enters the guest via ~NODE_EXTRA_CA_CERTS~. The guest receives a fixed placeholder key; the collector strips the real key from its own environment before spawning any child process.
 
@@ -152,7 +152,7 @@ Before running Deepsec on a single real file, we added a hostile synthetic stage
 
 *** Zero-plaintext CMS-encrypted immutable archive
 
-Security findings are an exploit backlog if they leak. Raw reports, model transcripts, egress logs, preflight summaries, and Candidate v1 records never hit workflow logs or ordinary CI artifacts.
+Raw reports, model transcripts, egress logs, preflight summaries, and Candidate v1 records never hit workflow logs or ordinary CI artifacts.
 
 The collector ingests report bytes only after confirming the scan VM has been deleted. It bundles the bounded outputs and seals them with OpenSSL into a DER CMS (~pkcs7~) envelope encrypted to a pinned public certificate whose private key lives off CI. Even failed runs seal failure evidence rather than dropping logs or inventing empty clean reports.
 
@@ -166,13 +166,13 @@ Per-run broker caps stop one runaway scan. They do not stop several scanners or 
 
 We designed a shared admission ledger backed by one canonical, versioned S3 JSON object, serialized across hosts and scanners with S3 conditional ~PutObject~ (~IfMatch~) compare-and-swap. All amounts are integer micro-USD checked against a fixed monthly UTC cap.
 
-Before a billable runner even allocates, a controller reserves the full inference ceiling plus the conservative worst-case runner cost for the entire allocation lifetime. Execution splits into two one-use atomic claims (~runner~, then ~broker~) so retries or lost acknowledgements never re-grant authority or double-spend. There are no refunds, releases, or TTLs: failed, canceled, timed-out, and crashed runs keep their full reservation. Deliberately leaving headroom unused is safer than guessing spend after a crash.
+Before allocating a billable runner, a controller reserves the full inference ceiling plus a conservative worst-case runner cost for the entire allocation lifetime. Execution splits into two one-use atomic claims (~runner~, then ~broker~) so retries or lost acknowledgements never re-grant authority or double-spend. There are no refunds, releases, or TTLs: failed, canceled, timed-out, and crashed runs keep their full reservation. Deliberately leaving headroom unused is safer than guessing spend after a crash.
 
-The ledger and its read-only publication verifier are implemented and tested against an in-process CAS server; bootstrapping the live canonical object and wiring every scanner through it is part of the rollout ahead.
+We implemented the ledger and its read-only publication verifier and tested them against an in-process CAS server. We still need to create the live canonical S3 object and connect every scanner to it.
 
 ** Working towards: end-to-end verification across all our repositories
 
-Scanning is only half the pipeline. Even when Deepsec or Claude's audit skill labels a finding ~confirmed~ or ~true-positive~, our adapters keep its verification status as unverified. Filing raw scanner output floods teams with false positives and teaches engineers to ignore security alerts.
+Even when Deepsec or Claude's audit skill labels a finding ~confirmed~ or ~true-positive~, our adapters keep its verification status as unverified. Filing raw scanner output floods teams with false positives and teaches engineers to ignore security alerts.
 
 The full pipeline we are wiring across all our repositories turns raw candidates from any scanner into evidence-backed verdicts:
 
@@ -230,12 +230,10 @@ Every verification tier emits *Verdict v1*, and the schema enforces the rules in
 | ~needs-dynamic~  | ~static~      | Concrete PoC plan                                 |
 | ~inconclusive~   | any           | Explicit reason code (~needs-t2~, ~budget~, ...)  |
 
-Each tier is bound to its target environment: static to a source snapshot, T1 to an ephemeral stack, and T2 to staging or sandbox. Production is absent from the schema's environment list, so a verdict cannot even represent a production reproduction.
+Each tier binds to one target environment: static to a source snapshot, T1 to an ephemeral stack, and T2 to staging or sandbox. The schema omits production from its environment list, so a verdict cannot even represent a production reproduction.
 
 ** Where this leaves us
 
-Today the containment foundation is live: nested-virt runners, ~smolvm~ under ~scanvm~ with ~isolate-host.sh~, per-run escape preflight, the in-process TLS broker with fail-closed caps, zero-plaintext CMS archiving to immutable S3, and our first end-to-end Deepsec runs through the whole stack.
+What runs today: nested-virt EC2 runners, ~smolvm~ under ~scanvm~ with ~isolate-host.sh~, per-run escape preflight, the in-process TLS broker with fail-closed caps, zero-plaintext CMS archiving to immutable S3, and our first end-to-end Deepsec runs through the full stack.
 
-Next is finishing the glue across all our repositories: multi-repo Deepsec snapshots, live cutover to the shared monthly S3 budget ledger, landing candidate clustering and Codex Security imports alongside Deepsec, and wiring the static, T1, and T2 verifiers end to end.
-
-Models are getting cheap and capable enough to audit entire organizations on a schedule. The real engineering work is keeping them boxed in while they run, and making them prove what they claim before an engineer ever sees a ticket.
+What is left: multi-repo Deepsec snapshots, live cutover to the shared monthly S3 budget ledger, candidate clustering and Codex Security imports alongside Deepsec, and connecting the static, T1, and T2 verifiers across all our repositories.
