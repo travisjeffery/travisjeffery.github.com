@@ -2,7 +2,28 @@ baseURL = 'https://travisjeffery.com/'
 languageCode = 'en-us'
 title = 'travis jeffery'
 
-outputs = { home = ["HTML", "RSS", "JSON"] }
+[mediaTypes]
+  [mediaTypes."text/markdown"]
+    suffixes = ["md"]
+
+[outputFormats]
+  [outputFormats.Markdown]
+    mediaType = "text/markdown"
+    baseName = "index"
+    isPlainText = true
+    notAlternative = false
+  [outputFormats.LLMS]
+    mediaType = "text/plain"
+    baseName = "llms"
+    isPlainText = true
+    notAlternative = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON", "Markdown", "LLMS"]
+  page = ["HTML", "Markdown"]
+  section = ["HTML", "RSS", "Markdown"]
+  taxonomy = ["HTML", "RSS", "Markdown"]
+  term = ["HTML", "RSS", "Markdown"]
 
 [permalinks]
 posts = '/:title/'

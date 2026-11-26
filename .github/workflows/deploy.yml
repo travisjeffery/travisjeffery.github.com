@@ -55,6 +55,9 @@ jobs:
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
 
+      - name: Finalize Markdown outputs
+        run: python3 scripts/finalize-markdown.py public
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

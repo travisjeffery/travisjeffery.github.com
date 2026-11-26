@@ -9,6 +9,10 @@
     <link rel="alternate" hreflang="en-us" href="{{ .Permalink }}">
 
     <link rel="alternate" type="application/rss+xml" title="Travis Jeffery's Blog Feed" href="https://travisjeffery.com/rss.xml">
+    {{ with .OutputFormats.Get "markdown" -}}
+    <link rel="alternate" type="text/markdown" title="{{ if $.IsHome }}{{ $.Site.Title }}{{ else }}{{ $.Title }}{{ end }}" href="{{ .Permalink }}">
+    {{ end -}}
+    <link rel="alternate" type="text/plain" title="LLMs Index" href="/llms.txt">
     {{ if .IsHome }}
     <meta property="og:type" content="website">
     <meta property="og:title" content="Travis Jeffery's Homepage">
