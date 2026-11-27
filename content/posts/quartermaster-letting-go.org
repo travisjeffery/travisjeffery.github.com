@@ -1,0 +1,114 @@
+#+TITLE: Quartermaster: teaching agents when not to ask
+#+DATE: 2026-11-03
+#+DRAFT: true
+#+TAGS[]: ai tools
+#+CATEGORIES[]: tech
+
+Six weeks ago I wrote about [[/quartermaster-one-conversation-many-agents/][quartermaster]], the tool I use to run many coding agents from one conversation. One coordinator plans. A worker per task does the work. A background ticker checks every thread and pulls me in only when someone needs me.
+
+It worked. Then I became the bottleneck. In those six weeks, at Oscilar and on my own projects, about 420 tasks got a worker of their own. The ticker followed 472 PRs to merge, told workers about 217 failing checks and 570 rounds of review, and prompted agents almost a thousand times. It wrote over 7,000 events to the coordinator's inbox. And 254 of those tasks stopped to wait on me, most of them more than once.
+
+Mostly I said yes. Yes, merge it, it's approved and green. Yes, go to step two, step one verified. Yes, apply it, the preview only adds things. Yes, ~git push~ to your own branch. On one staged rollout last month I was the gate at almost every step, and almost every answer was the one the worker had already recommended.
+
+Since then I have taught the agents which questions not to ask me, and which to keep asking.
+
+** Autonomous beads
+
+A bead labeled ~autonomous~ gets a standing grant written into its worker's brief. Where the worker would stop for me, it takes its own recommendation instead:
+
+- a decision it already has a recommendation for,
+- the next step of a staged rollout, once the last step verified,
+- merging its own PR once it's approved and the checks are green,
+- an infrastructure apply whose preview passes a mechanical check.
+
+Each of those leaves an ~AUTO:~ note on the bead saying what the worker did and why, like ~AUTO: chose canary first, recommended; alternatives were all regions or skip~. The hourly digest lists them, and the daily report has a section called "Done without you". I read them afterwards.
+
+It still stops for me, always, for:
+
+- any delete or destroy, including replacing a stateful resource,
+- anything irreversible,
+- anything that costs money,
+- messages to people outside the team,
+- anything it isn't sure about.
+
+Workers treat uncertainty as critical and stop for me.
+
+Two bans have no exception. An autonomous worker never approves a PR. Required review stays human. It never answers its own agent's permission prompts or works around its safety classifier. Those exist to stop the agent, so the agent cannot override them.
+
+** Where the grant lives
+
+The easy version would let the ticker type "go ahead and merge" into a worker when its PR goes green. But every ticker message says it's automated and approves nothing. If a message could grant permission, then anything that can get text in front of a worker could too: a PR comment, a log line, a branch name.
+
+So I put the grant in the brief, and I start the brief by dispatching the bead. Before each step it takes on its own, the worker runs ~quartermaster autonomy check <bead> --action merge~ (or ~decide~, or ~apply~), and goes ahead only if it passes. The check reads the bead's labels and my config, so I have three ways to stop it, at three speeds:
+
+- ~quartermaster autonomy off~ stops every bead at once,
+- removing the label, or adding ~supervised~, stops one bead,
+- turning a kind of step off in the config stops, say, applies everywhere.
+
+I can change my mind mid-thread, too. ~quartermaster autonomy grant~ and ~revoke~ flip the labels and tell the worker, but only once it's idle, and a revoke waits while the worker is asking me something, so it can never be mistaken for my answer. The labels decide. The message only tells the worker.
+
+For applies, I didn't want to trust the agent's reading of a plan. ~quartermaster gate plan~ reads the machine-readable preview from Pulumi or OpenTofu and passes only if every step creates, updates or reads. A delete fails it. A replace fails it. An operation it doesn't recognise fails it. A plan it can't parse fails it. The worker also writes down the change it expects before the preview, and ~--expect create=2,update=1~ fails if the counts don't match. An agent can argue that a replace is fine. The gate still fails it.
+
+#+begin_example
+$ quartermaster gate plan preview.json
+plan: pulumi, 1 create-replacement, 1 delete, 1 delete-replaced, 1 replace, 1 update
+BLOCKED: stop for TJ (CRITICAL: delete/replace)
+- replace aws:rds/instance:Instance main (stateful)
+- create-replacement aws:rds/instance:Instance main (stateful)
+- delete-replaced aws:rds/instance:Instance main (stateful)
+- delete aws:sns/topic:Topic alerts
+quartermaster: gate: plan blocked
+#+end_example
+
+** Answering the easy prompts, safely
+
+I also kept saying yes to permission prompts. A worker wants to delete a scratch directory inside its own worktree, or commit to its own branch, and stops to ask. Multiply that by a dozen workers and it's most of my interruptions.
+
+The coordinator can answer some of those now, in a few narrow categories I wrote down: removing files inside the worker's own worktree or a scratch directory, ~git add~, ~commit~ and ~push~ to its own branch, starting a read-only research subagent. Everything else still comes to me: anything touching production, cloud, IAM, secrets or someone else's resources, and every prompt from the safety classifier.
+
+The bug I had to fix was a race. The coordinator reads the worker's screen, decides, and sends a keypress. By the time the key lands, the prompt might have timed out and been replaced by a different one, and "1" means yes to whatever is showing now.
+
+I added a hash to identify the prompt. The ticker reads the prompt off the worker's screen into the inbox with a short hash of its text: the command, the options, any auto-deny countdown. Answering takes the hash:
+
+#+begin_src sh
+quartermaster answer app-k2m 1 --expect bff9292a
+#+end_src
+
+~answer~ reads the screen again, refuses if the hash is different, sends the key, waits for the prompt to clear, and notes on the bead what was answered and by whom. The hash leaves out the cursor and the countdown, so the same prompt keeps the same hash while it's showing. I tested it against real prompts captured from Claude Code, and then against a live worker with the wrong hash first.
+
+** Noticing what's already done
+
+Some tasks were finished but still open in beads. The PR merged while the worker was gone. Someone else fixed the bug. Someone closed the Linear issue in a meeting.
+
+Every hour the ticker looks at beads nobody has touched in a few days and checks for evidence they're done: the issue is closed, every linked PR merged, a merged PR mentions it, or the code a bug report quoted is gone from the main branch. Strong evidence closes the bead with a reason that cites it. Weaker evidence becomes an inbox item for the coordinator, which asks me. The ticker never closes a bead that's rolling out, waiting on me, or has open children.
+
+I had to limit GitHub API use. The limit is shared with every agent on my account, so a pass that burns it starves the workers. Each pass now starts with one Linear query, one GraphQL query and a ~git fetch~ per repo, rebuilds only beads whose inputs changed, and skips itself entirely when fewer than a thousand points are left for the hour.
+
+The ticker also writes an hourly digest of every open bead, grouped by what it needs, with what changed since the last one. It reads live state with no model involved, takes a few seconds, and only notifies me when something changed or needs me.
+
+** More agents, more kinds
+
+Workers used to be Claude or Codex. Now they can be Muse too, and ~worker_agent = "auto"~ picks Claude or Codex by whichever has more quota left.
+
+Each new agent showed me something a worker needs. Muse's sandbox runs commands without your environment, so the worker can't see its bead database and ~gh~ isn't logged in. The sandbox kept workers from updating beads or opening PRs, so quartermaster starts Muse without it. Muse also reads ~AGENTS.md~ instead of ~CLAUDE.md~ and has its own hooks, so the brief now tells every worker to load the bead workflow itself rather than relying on a hook only one agent runs.
+
+I don't route autonomous work to Muse to avoid Claude Code's classifier. That would be a way around the check. The critical list applies to every agent.
+
+Different models are also good at checking each other. Every PR a worker opens at Oscilar goes through [[https://github.com/travisjeffery/radar][Radar]], the reviewer I built, which sends each review to both Claude and Codex and shows where they agreed.
+
+** What parallel work breaks
+
+- *Shared resources don't know about your threads.* Two workers each dispatched a production deploy for their own change. The deploy workflow shares one concurrency group and keeps only one pending job, so the dispatches cancelled each other. I added a rule: one worker dispatches, the others wait. That lesson lives in beads' memory now, so every agent that starts sees it.
+- *Your tracker is a lock.* Every ~bd~ call costs about a second of database startup, and calls serialize. Four at once took six seconds; eight took fifteen. The board used to make three in a row and took three seconds to open. Now it paints from the last load in 34 milliseconds and refreshes in the background with a single call. When a dozen agents share one tool, its slowest path is everyone's.
+
+** It installs itself
+
+I now use quartermaster threads to build most quartermaster changes. An autonomous bead in quartermaster's own repo can go one step further: once its PR merges, the worker pulls the main checkout, builds the binary, restarts the ticker and smoke-tests it. The tool ships its own updates, and I find out from the digest.
+
+That's still a little unnerving, which is probably the right amount. The ticker that just restarted is the one that will tell me if something's wrong.
+
+** Where it is now
+
+It's early. Autonomy shipped a week ago, and so far exactly two beads carry the label. The next step is labeling more of them, starting with the kind of work where I've never once said no.
+
+Quartermaster is on GitHub at [[https://github.com/travisjeffery/herdr-quartermaster][travisjeffery/herdr-quartermaster]]. Autonomy is off until you label a bead, and the [[https://github.com/travisjeffery/herdr-quartermaster/blob/main/docs/design/autonomous-mode.md][design note]] has the full list of what it will and won't do.
