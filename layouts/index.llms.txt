@@ -1,0 +1,28 @@
+# {{ .Site.Title }}
+
+> {{ .Site.Params.description }} Personal blog of {{ .Site.Params.author }}, infrastructure engineer and author of Distributed Services with Go.
+
+Every published post is available in Markdown by appending `index.md` to its URL.
+
+Search for Agents API: `GET https://travisjeffery.com/.well-known/search?q={query}` returns relevant content across this site in Markdown (documentation: https://developers.cloudflare.com/ai-search/how-to/search-for-agents/).
+
+## Site
+
+- [Homepage (Markdown)]({{ with .OutputFormats.Get "markdown" }}{{ .Permalink }}{{ else }}{{ "index.md" | absURL }}{{ end }}): Bio and chronological index of published posts.
+- [Homepage (HTML)]({{ .Permalink }}): Main website.
+- [RSS Feed]({{ "index.xml" | absURL }}): Full post feed in RSS/XML.
+- [JSON Feed]({{ "index.json" | absURL }}): Recent posts metadata in JSON.
+
+## Posts
+{{ range (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+{{- $md := .OutputFormats.Get "markdown" -}}
+{{- $target := .Permalink -}}
+{{- with $md }}{{ $target = .Permalink }}{{ end -}}
+{{- $summary := .Summary | plainify | htmlUnescape | replaceRE "\\s+" " " | strings.TrimSpace -}}
+{{- if and (eq $summary "") .Params.externalURL -}}
+  {{- $summary = printf "External post: %s" .Params.externalURL -}}
+{{- else if $summary -}}
+  {{- $summary = $summary | truncate 200 | htmlUnescape -}}
+{{- end }}
+- [{{ .Title }}]({{ $target }}) ({{ .Date.Format "2006-01-02" }}){{ if $summary }}: {{ $summary }}{{ end }}
+{{- end }}
